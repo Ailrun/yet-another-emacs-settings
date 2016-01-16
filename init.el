@@ -1,6 +1,15 @@
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+(when (>= emacs-major-version 24)
+  (load-file "~/.emacs.d/packages.el"))
+
+;;lazy loading for jade-mode (but have some error)
+;;(autoload 'jade-mode "jade-mode" "Jade Mode." t)
+;;(add-to-list 'auto-mode-alist '("\\.jade\\'" . jade-mode))
+
+(global-set-key (kbd "C-<f1>")
+		(lambda ()
+		  (interactive)
+		  (load-file "~/.emacs.d/init.el")))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
