@@ -2,8 +2,17 @@
   (load-file "~/.emacs.d/packages.el"))
 
 ;;lazy loading for jade-mode (but have some error)
-;;(autoload 'jade-mode "jade-mode" "Jade Mode." t)
-;;(add-to-list 'auto-mode-alist '("\\.jade\\'" . jade-mode))
+(autoload 'jade-mode "jade-mode" "Jade Mode." t)
+(add-to-list 'auto-mode-alist '("\\.jade\\'" . jade-mode))
+
+(require 'less-css-mode)
+
+(require 'company)
+(require 'company-web)
+(add-to-list 'company-backends 'company-web-html)
+(add-to-list 'company-backends 'company-web-jade)
+(add-to-list 'company-backends 'company-web-slim)
+
 
 (global-set-key (kbd "C-<f1>")
 		(lambda ()
