@@ -1,4 +1,7 @@
 
 auto-save-list/
 elpa/
+url/
+var/
 *~
+*.html
