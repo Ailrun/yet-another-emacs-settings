@@ -6,6 +6,8 @@
 			     typescript-mode ;;packages for typescript
 			     json-mode ;;packages for json
 
+			     nodejs-repl ;;packages for node
+
 			     emacsql-mysql ;;packages for mysql
 
 			     hindent
@@ -13,7 +15,11 @@
 
 			     haskell-emacs ;;packages for emacs
 
-			     rainbow-delimiters smartparens how-many-lines-in-project;;common packages
+
+			     markdown-mode+ markdown-preview-eww markdown-preview-mode gh-md;;pacakges for markdown
+			     
+			     projectile how-many-lines-in-project egg gh;;packages for project managing
+			     rainbow-delimiters smartparens;;common packages
 			     ))
 
 (require 'package)
