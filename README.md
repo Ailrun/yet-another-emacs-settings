@@ -24,8 +24,9 @@ To Alpha
 - [ ] package selection for Java
 - [ ] ~~package selection for Android (Is this really needed?)~~
 - [ ] package selection for Python
+- [ ] package selection for sql
 - [ ] package selection for JavaScript
-- [ ] package selection for other scripts
+- [ ] package selection for other scripts (TypeScript, CoffeeScript)
 - [x] package selection for Node.js
 - [ ] package selection for HTML
 - [x] package selection for HTML Template Engines (Jade)
