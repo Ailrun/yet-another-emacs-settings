@@ -26,4 +26,5 @@
 	     (require package))))
 
 (install-first-require-package 'use-package)
-(use-package req-package)
+(use-package req-package
+  :ensure t)

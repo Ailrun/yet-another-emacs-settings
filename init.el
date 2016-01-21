@@ -37,6 +37,8 @@
 ;; Custom Key settings
 ;;
 
+(load-file "~/.emacs.d/yaes/yaes-init.el")
+
 (global-set-key (kbd "C-<f1>")
 		(lambda ()
 		  (interactive)
