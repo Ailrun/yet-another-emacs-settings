@@ -1,8 +1,8 @@
 ;; httprepl
 
 (req-package httprepl
-  :require s dash
-  :commands httprepl)
+  :require (s dash)
+  :commands (httprepl))
 
 
 ;; restclient
@@ -11,8 +11,8 @@
   :mode ("\\.rest\\'" . restclient-mode))
 
 (req-package company-restclient
-  :require restclient company
-  :config (add-to-list 'company-backends 'company-restclient))
+  :require (restclient company)
+  :config ((add-to-list 'company-backends 'company-restclient)))
 
 
 ;; html
@@ -28,7 +28,7 @@
 
 (req-package css-mode
   :mode ("\\.css\\'" . css-mode)
-  :config (setq css-indent-offset 2))
+  :config ((setq css-indent-offset 2)))
 
 
 ;; less
@@ -41,7 +41,7 @@
 ;; web aid
 
 (req-package company-web
-  :require company dash web-completion-data
+  :require (company dash web-completion-data)
   :config ((add-to-list 'company-backends 'company-web-html)
 	   (add-to-list 'company-backends 'company-web-jade)
 	   (add-to-list 'company-backends 'company-web-slim)))
