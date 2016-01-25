@@ -46,3 +46,5 @@
   :commands (eldoc-mode)
   :init (progn (req-package-hooks-add-execute 'emacs-lisp-mode (lambda () (eldoc-mode 1)))
 	       (req-package-hooks-add-execute 'lisp-interaction-mode (lambda () (eldoc-mode 1)))))
+
+(provide 'yaes-elisp)
