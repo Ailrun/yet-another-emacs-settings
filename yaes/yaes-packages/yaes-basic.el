@@ -1,3 +1,5 @@
+(require 'req-package)
+
 (req-package smartparens
   :require (dash)
   :config (smartparens-global-mode t))

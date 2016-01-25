@@ -1,3 +1,5 @@
+(require 'req-package)
+
 ;; httprepl
 
 (req-package httprepl

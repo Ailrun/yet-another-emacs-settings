@@ -1,3 +1,5 @@
+(require 'req-package)
+
 (req-package lisp-mode
   :require flycheck
   :commands lisp-mode

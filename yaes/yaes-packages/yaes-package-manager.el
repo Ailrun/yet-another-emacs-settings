@@ -1,3 +1,5 @@
+(require 'req-package)
+
 (req-package paradox
-  :conifg ((paradox-github-token t)
-	   ()))
+  :require (req let-alist spinner hydra)
+  :conifg ((paradox-github-token t)))
