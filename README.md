@@ -18,11 +18,44 @@ There are **Yet Another Emacs Settings** you should try.
 
 To Alpha
 
-- [ ] package selection for package managing
+- [ ] package bootstrapping using f, s, dash, use-package, req-package
+- [ ] Android package default setting
+- [ ] C/C++ package default setting
+- [ ] C# package default setting
+- [ ] CoffeeScript package default setting
+- [ ] Database package default setting
+- [ ] Elisp package default setting
+- [ ] F# package default setting
+- [ ] Git/GitHub package default setting
+- [ ] Go package default setting
+- [ ] Haskell package default setting
+- [ ] Java package default setting
+- [ ] JavaScript package default setting
+- [ ] LaTeX package default setting
+- [ ] Lisp package default setting
+- [ ] Markdown package default setting
+- [ ] Node.js package default setting
+- [ ] Obj-C package default setting
+- [ ] OCaml package default setting
+- [ ] Org package default setting
+- [ ] PHP package default setting
+- [ ] Prolog package default setting
+- [ ] Python package default setting
+- [ ] R package default setting
+- [ ] Ruby package default setting
+- [ ] Rust package default setting
+- [ ] Scala package default setting
+- [ ] Scheme package default setting
+- [ ] Shell script package default setting
+- [ ] Swift package default setting
+- [ ] TypeScript package default setting
+- [ ] web package default setting
+
+~~- [ ] package selection for package managing
 - [ ] package selection for C
 - [ ] package selection for C++
 - [ ] package selection for Java
-- [ ] ~~package selection for Android (Is this really needed?)~~
+- [ ] package selection for Android (Is this really needed?)
 - [ ] package selection for Python
 - [ ] package selection for sql
 - [ ] package selection for JavaScript
@@ -37,7 +70,7 @@ To Alpha
 - [x] package selection for Haskell
 - [ ] package selection for common editing
 - [ ] package selection for project managing
-- [ ] properly activate all these packages
+- [ ] properly activate all these packages~~
 
 ## Author ##
 Junyoung Clare Jang ( Github : Ailrun@github.com, Email : jjc9310@gmail.com )
