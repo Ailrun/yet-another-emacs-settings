@@ -2,9 +2,20 @@
 
 There are **Yet Another Emacs Settings** you should try.
 
+## Contents ##
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+
+- [Yet Another Emacs Settings](#yet-another-emacs-settings)
+    - [Version](#version)
+    - [Description](#description)
+    - [Status](#status)
+    - [Author](#author)
+
+<!-- markdown-toc end -->
+
 ## Version ##
-![](https://img.shields.io/badge/Emacs->24.1-green.svg?style=plastic)
-![](https://img.shields.io/badge/Version-0.0.0a-lightgrey.svg?style=plastic)
+![](https://img.shields.io/badge/Emacs->24.3-green.svg?style=plastic)
+![](https://img.shields.io/badge/Version-0.00.00b-lightgrey.svg?style=plastic)
 ![](https://img.shields.io/badge/Status-Pre--Alpha-yellow.svg?style=plastic)
 
 *THIS REPO IS PRE-ALPHA. EVEN IF YOU WANT TO USE THIS, WAIT FOR A MOMENT PLEASE.*
@@ -24,7 +35,7 @@ To Alpha
 - [ ] C# package default setting
 - [ ] CoffeeScript package default setting
 - [ ] Database package default setting
-- [ ] Elisp package default setting
+- [x] Elisp package default setting
 - [ ] F# package default setting
 - [ ] Git/GitHub package default setting
 - [ ] Go package default setting
@@ -33,7 +44,7 @@ To Alpha
 - [ ] JavaScript package default setting
 - [ ] LaTeX package default setting
 - [ ] Lisp package default setting
-- [ ] Markdown package default setting
+- [x] Markdown package default setting
 - [ ] Node.js package default setting
 - [ ] Obj-C package default setting
 - [ ] OCaml package default setting
@@ -50,27 +61,6 @@ To Alpha
 - [ ] Swift package default setting
 - [ ] TypeScript package default setting
 - [ ] web package default setting
-
-~~- [ ] package selection for package managing
-- [ ] package selection for C
-- [ ] package selection for C++
-- [ ] package selection for Java
-- [ ] package selection for Android (Is this really needed?)
-- [ ] package selection for Python
-- [ ] package selection for sql
-- [ ] package selection for JavaScript
-- [ ] package selection for other scripts (TypeScript, CoffeeScript)
-- [x] package selection for Node.js
-- [ ] package selection for HTML
-- [x] package selection for HTML Template Engines (Jade)
-- [ ] package selection for CSS
-- [x] package selection for other style sheet languages (Less)
-- [x] package selection for MarkDown
-- [ ] package selection for elisp
-- [x] package selection for Haskell
-- [ ] package selection for common editing
-- [ ] package selection for project managing
-- [ ] properly activate all these packages~~
 
 ## Author ##
 Junyoung Clare Jang ( Github : Ailrun@github.com, Email : jjc9310@gmail.com )

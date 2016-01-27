@@ -1,5 +1,5 @@
 ;; list the packages to install
-(setq install-package-list '(
+(defconst install-package-list '(
 			     ;;packages for package managing
 			     package-utils
 			     use-package
@@ -96,7 +96,7 @@
 			     js2-highlight-vars angular-mode
 			     ;;conkeror-minor-mode
 			     import-js
-			     js-comint
+			     ;;js-comint
 			     js-doc
 			     js2-closure
 			     js2-refactor
@@ -218,10 +218,10 @@
 				  (progn (package-refresh-contents)
 					 package-archive-contents)
 				package-archive-contents))
-		    (AVAIl (assoc package ARCHIVES)))
+		    (AVAIL (assoc package ARCHIVES)))
 	       (if AVAIL
 		   (package-install package)))
-	     (require pacakge))))
+	     (require package))))
 
 (install-package 'use-package)
 (require 'use-package)

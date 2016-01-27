@@ -1,8 +1,8 @@
 (require 'req-package)
 
 (req-package lisp-mode
-  :require flycheck
-  :commands lisp-mode
+  :require (flycheck)
+  :commands (lisp-mode)
   :config (req-package-hooks-add-execute 'emacs-lisp-mode
 	    (lambda () (add-to-list 'flycheck-disabled-checkers 'emacs-lisp-checkdoc))))
 
