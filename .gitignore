@@ -3,5 +3,6 @@ auto-save-list/
 elpa/
 url/
 var/
+tutorial/
 *~
 *.html
