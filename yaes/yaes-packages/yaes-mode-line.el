@@ -8,22 +8,24 @@
     (setq sml/shorten-modes t)
     (setq sml/shorten-directory t)
     (setq sml/name-width 20)
-    (setq sml/hidden-modes nil)
     (setq sml/theme nil)
-    (add-to-list 'sml/hidden-modes " Anzu")
-    (add-to-list 'sml/hidden-modes " SliNav")
-    (add-to-list 'sml/hidden-modes " :")
-    (add-to-list 'sml/hidden-modes " yas")
-    (add-to-list 'sml/hidden-modes " Undo-Tree")
-    (add-to-list 'sml/hidden-modes " hl-p")
-    (add-to-list 'sml/hidden-modes " company-dabbrev")
-    (add-to-list 'sml/hidden-modes " company-capf")
-    (add-to-list 'sml/hidden-modes " company-<dabbrev-code>")
-    (add-to-list 'sml/hidden-modes " SP")
-    (add-to-list 'sml/hidden-modes " ElDoc")
-    (add-to-list 'sml/hidden-modes " overseer")
-    (add-to-list 'sml/hidden-modes " company")
     (sml/setup)))
+
+(req-package rich-minority
+  :config
+  (rich-minority-mode 1)
+  (setq rm-blacklist (mapconcat 'identity '(" :"
+					    " Anzu"
+					    " company.*"
+					    " ElDoc"
+					    " hl-p"
+					    " js2r"
+					    " overseer"
+					    " SliNav"
+					    " SP"
+					    " Undo-Tree"
+					    " vars"
+					    " yas") "\\|")))
 
 (req-package anzu
   :require (smart-mode-line)
