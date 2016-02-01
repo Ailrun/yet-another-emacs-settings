@@ -11,4 +11,7 @@
   :require (diff))
 
 (req-package magit
-  :require (dash with-editor))
+  :require (dash with-editor ssh-agency)
+  :config
+  (setenv "GIT_ASKPASS" "git-gui--askpass")
+  (setenv "SSH_ASKPASS" "git-gui--askpass"))
