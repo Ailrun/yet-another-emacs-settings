@@ -3,6 +3,7 @@
 (defconst package-archives-list
   '(("marmalade" . "https://marmalade-repo.org/packages/")
     ("melpa" . "https://melpa.org/packages/")
+    ("melpa-stable" . "https://stable.melpa.org/packages/")
     ("elpa" . "http://tromey.com/elpa/")
     ("org" . "http://orgmode.org/elpa/")
     ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
@@ -42,8 +43,9 @@
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq package-enable-at-startup nil)
+(windmove-default-keybindings)
 
-;;Load a file for pre-package functions.
+;;;;Load a file for pre-package functions.
 ;;(load-file yaes-package-el)
 
 ;;Load all files in the packages directory
