@@ -29,7 +29,7 @@ There are **Yet Another Emacs Settings** you should try.
 
 To Alpha
 
-- [ ] package bootstrapping using f, s, dash, use-package, req-package
+- [x] package bootstrapping using f, s, dash, use-package, req-package
 - [ ] Android package default setting
 - [ ] C/C++ package default setting
 - [ ] C# package default setting
@@ -37,15 +37,15 @@ To Alpha
 - [ ] Database package default setting
 - [x] Elisp package default setting
 - [ ] F# package default setting
-- [ ] Git/GitHub package default setting
+- [x] Git/GitHub package default setting
 - [ ] Go package default setting
 - [ ] Haskell package default setting
 - [ ] Java package default setting
 - [ ] JavaScript package default setting
-- [ ] LaTeX package default setting
+- [x] LaTeX package default setting
 - [ ] Lisp package default setting
 - [x] Markdown package default setting
-- [ ] Node.js package default setting
+- [x] Node.js package default setting
 - [ ] Obj-C package default setting
 - [ ] OCaml package default setting
 - [ ] Org package default setting
@@ -60,7 +60,7 @@ To Alpha
 - [ ] Shell script package default setting
 - [ ] Swift package default setting
 - [ ] TypeScript package default setting
-- [ ] web package default setting
+- [x] web package default setting
 
 ## Author ##
 Junyoung Clare Jang ( Github : Ailrun@github.com, Email : jjc9310@gmail.com )
