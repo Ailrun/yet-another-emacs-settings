@@ -43,8 +43,8 @@
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq package-enable-at-startup nil)
+(setq tab-width 4)
 (windmove-default-keybindings)
-
 ;;;;Load a file for pre-package functions.
 ;;(load-file yaes-package-el)
 

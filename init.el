@@ -15,7 +15,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "8577da1641ed4bdf255341ca92e3d0e49c9f4d574458f09ce78159690442cade" default)))
+	("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "8577da1641ed4bdf255341ca92e3d0e49c9f4d574458f09ce78159690442cade" default)))
  '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
