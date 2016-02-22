@@ -41,12 +41,12 @@
 (defconst yaes-packages-dir (f-join  yaes-dir "yaes-packages"))
 
 (add-to-list 'load-path 'yaes-dir)
-
+(set-language-environment "Korean")
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq package-enable-at-startup nil)
+(setq-default tab-width 4)
 (windmove-default-keybindings)
-
 ;;;;Load a file for pre-package functions.
 ;;(load-file yaes-package-el)
 
