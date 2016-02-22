@@ -10,7 +10,8 @@
 (req-package company-math)
 
 (req-package auctex
-  :mode ("\\.tex\\'" . LaTeX-mode))
+  :mode ("\\.tex\\'" . LaTeX-mode)
+  :config (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8))
 
 (req-package latex-extra
   :require (auctex)
