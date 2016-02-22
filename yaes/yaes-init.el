@@ -40,6 +40,8 @@
 ;;(defconst yaes-package-el (expand-file-name "yaes-package.el" yaes-dir))
 (defconst yaes-packages-dir (f-join  yaes-dir "yaes-packages"))
 
+(add-to-list 'load-path 'yaes-dir)
+
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq package-enable-at-startup nil)
