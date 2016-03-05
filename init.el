@@ -1,3 +1,5 @@
+(load "~/.emacs.d/PG/generic/proof-site")
+
 (load-file "~/.emacs.d/yaes/yaes-init.el")
 (require 'f)
 
