@@ -20,8 +20,8 @@
 ;; html
 
 (req-package tagedit
-  :config (progn (req-package-hooks-add-execute 'html-mode 'tagedit-mode)
-		 (req-package-hooks-add-execute 'web-mode 'tagedit-mode)
+  :config (progn ;;(req-package-hooks-add-execute 'html-mode 'tagedit-mode)
+		 ;;(req-package-hooks-add-execute 'web-mode 'tagedit-mode)
 		 (tagedit-add-experimental-features)))
 
 
