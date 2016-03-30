@@ -2,7 +2,7 @@
 
 (req-package browse-at-remote
   :require (f s)
-  :command (browse-at-remote))
+  :commands (browse-at-remote))
 
 (req-package diff-git
   :require (diff))

@@ -70,6 +70,6 @@ See `imenu-create-index-function' and `imenu--index-alist' for details."
   :commands (html-to-markdown html-to-markdown-string))
 
 ;;(req-package gh-md
-;;  :command (gh-md-render-region gh-md-render-buffer))
+;;  :commands (gh-md-render-region gh-md-render-buffer))
 
 (provide 'yaes-markdown)

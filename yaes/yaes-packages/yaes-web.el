@@ -54,7 +54,7 @@
   :mode ("\\.html?\\'" . web-mode))
 
 (req-package show-css
-  :require (cl-lib dom s))
+  :require (cl-lib doom s))
 
 (req-package company-web
   :require (company dash web-completion-data)
