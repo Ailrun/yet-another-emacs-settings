@@ -23,4 +23,5 @@
 (req-package latex-preview-pane
   :config
   (req-package-hooks-add-execute 'LaTeX-mode-hook 'latex-preview-pane-mode)
-  (req-package-hooks-add-execute 'latex-mode-hook 'latex-preview-pane-mode))
+  (req-package-hooks-add-execute 'latex-mode-hook 'latex-preview-pane-mode)
+  (setq pdf-latex-command "xelatex"))

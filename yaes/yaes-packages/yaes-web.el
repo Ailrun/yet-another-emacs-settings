@@ -62,4 +62,8 @@
 		 (add-to-list 'company-backends 'company-web-jade)
 		 (add-to-list 'company-backends 'company-web-slim)))
 
+(req-package ac-html-angular
+  :require (company-web)
+  :config (progn (add-to-list 'company-backends 'company-web-angular1+)))
+
 (provide 'yaes-web)
