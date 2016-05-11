@@ -41,7 +41,8 @@
 (defconst yaes-packages-dir (f-join  yaes-dir "yaes-packages"))
 
 (add-to-list 'load-path 'yaes-dir)
-(set-language-environment "UTF-8")
+(set-language-environment "Korean")
+(prefer-coding-system 'utf-8)
 (global-set-key (kbd "S-SPC") 'toggle-korean-input-method)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
