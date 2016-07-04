@@ -9,7 +9,8 @@
 ;;(req-package markdown-preview-eww) ;;What is command for?
 (req-package markdown-preview-mode
   :require (websocket markdown-mode)
-  :config (req-package-hooks-add-execute 'markdown-mode 'markdown-preview-mode))
+  :config (progn (req-package-hooks-add-execute 'markdown-mode 'markdown-preview-mode)
+				 (setq markdown-preview-style "http://thomasf.github.io/solarized-css/solarized-light.min.css")))
 
 (req-package mkdown
   :require (markdown-mode)

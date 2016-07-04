@@ -40,6 +40,12 @@
 ;;(defconst yaes-package-el (expand-file-name "yaes-package.el" yaes-dir))
 (defconst yaes-packages-dir (f-join  yaes-dir "yaes-packages"))
 
+(if (eq system-type 'windows-nt)
+	(progn (setq-default default-directory
+						 (concat (getenv "USERPROFILE") "\\Documents/"))
+		   (setq default-directory
+				 (concat (getenv "USERPROFILE") "\\Documents/"))))
+
 (add-to-list 'load-path 'yaes-dir)
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)

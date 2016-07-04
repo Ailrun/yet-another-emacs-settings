@@ -20,9 +20,12 @@
 (req-package smartparens
   :require (dash)
   :config (progn (smartparens-global-mode t)
-		 (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)))
+				 (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+				 (sp-local-pair 'coq-mode "'" nil :actions nil)))
 
 (req-package undo-tree
   :config (global-undo-tree-mode t))
+
+(req-package list-processes+)
 
 (provide 'yaes-basic)
