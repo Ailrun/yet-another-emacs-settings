@@ -64,6 +64,6 @@
 
 (req-package ac-html-angular
   :require (company-web)
-  :config (progn (add-to-list 'company-backends 'company-web-angular1+)))
+  :config (req-package-hooks-add-execute 'web-mode 'company-web-angular+))
 
 (provide 'yaes-web)

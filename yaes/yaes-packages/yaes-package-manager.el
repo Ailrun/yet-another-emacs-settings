@@ -1,7 +1,9 @@
 (require 'req-package)
 
 (req-package paradox
-  :require (req let-alist spinner hydra)
+  :require (seq let-alist spinner hydra)
   :config (paradox-github-token t))
+
+(req-package el-get)
 
 (provide 'yaes-package-manager)

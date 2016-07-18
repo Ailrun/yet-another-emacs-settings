@@ -15,13 +15,15 @@
 
 (req-package latex-extra
   :require (auctex)
-  :config (req-package-hooks-add-execute 'LaTeX-mode-hook 'latex-extra-mode))
+  :config (progn
+			(req-package-hooks-add-execute 'latex-mode 'latex-extra-mode)
+			(req-package-hooks-add-execute 'latex-mode 'latex-extra-mode)))
 
 (req-package latex-pretty-symbols
   :require (auctex))
 
 (req-package latex-preview-pane
-  :config
-  (req-package-hooks-add-execute 'LaTeX-mode-hook 'latex-preview-pane-mode)
-  (req-package-hooks-add-execute 'latex-mode-hook 'latex-preview-pane-mode)
-  (setq pdf-latex-command "xelatex"))
+  :config (progn
+			(req-package-hooks-add-execute 'LaTeX-mode 'latex-preview-pane-mode)
+			(req-package-hooks-add-execute 'latex-mode 'latex-preview-pane-mode)
+			(setq pdf-latex-command "xelatex")))

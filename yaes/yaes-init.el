@@ -14,7 +14,7 @@
    '("gnu" . "https://elpa.gnu.org/packages/")))
 
 (mapc (lambda (item)
-	  (add-to-list 'package-archives item)) package-archives-list)
+		(add-to-list 'package-archives item)) package-archives-list)
 
 (package-initialize)
 
@@ -22,23 +22,24 @@
   "install and require for new package, and only require for old package"
   (if (null (require package nil t))
       (progn (let* ((ARCHIVES (if (null package-archive-contents)
-				  (progn (package-refresh-contents)
-					 package-archive-contents)
-				package-archive-contents))
-		    (AVAIL (assoc package ARCHIVES)))
-	       (if AVAIL
-		   (package-install package)))
-	     (require package))))
+								  (progn (package-refresh-contents)
+										 package-archive-contents)
+								package-archive-contents))
+					(AVAIL (assoc package ARCHIVES)))
+			   (if AVAIL
+				   (package-install package)))
+			 (require package))))
+
 
 (install-first-require-package 'req-package)
-(require 'req-package) ;; only for removing fly error
+(require 'req-package) ;; only for removing fly error. not necessary one.
 
 (install-first-require-package 'f)
-(require 'f) ;; only for removing fly error
+(require 'f) ;; only for removing fly error. not necessary one.
 
 (defconst yaes-dir (f-dirname (f-this-file)))
 ;;(defconst yaes-package-el (expand-file-name "yaes-package.el" yaes-dir))
-(defconst yaes-packages-dir (f-join  yaes-dir "yaes-packages"))
+(defconst yaes-packages-dir (f-join yaes-dir "yaes-packages"))
 
 (if (eq system-type 'windows-nt)
 	(progn (setq-default default-directory
@@ -47,6 +48,7 @@
 				 (concat (getenv "USERPROFILE") "\\Documents/"))))
 
 (add-to-list 'load-path 'yaes-dir)
+;; Set language convention.
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
 (global-set-key (kbd "S-SPC") 'toggle-korean-input-method)

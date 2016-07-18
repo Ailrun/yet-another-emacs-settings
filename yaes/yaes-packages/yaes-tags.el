@@ -6,4 +6,4 @@
 				 (global-set-key (kbd "M-.")  'ctags-search)))
 
 (req-package ggtags
-  :require cl-lib-0.5)
+  :require cl-lib)

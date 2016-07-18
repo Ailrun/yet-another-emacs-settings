@@ -1,6 +1,7 @@
 (load "~/.emacs.d/PG/generic/proof-site")
 
 (load-file "~/.emacs.d/yaes/yaes-init.el")
+(load "~/.emacs.d/coq-commenter/coq-commenter.el")
 (require 'f)
 
 (defconst init-file-path (f-this-file))

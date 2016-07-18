@@ -13,6 +13,6 @@
 (req-package flycheck-pos-tip
   :require (flycheck)
   :commands (flycheck-pos-tip-error-messages)
-  :init (setq flycheck-dispaly-errors-function 'flycheck-poss-tip-error-messages))
+  :init (setq flycheck-dispaly-errors-function 'flycheck-pos-tip-error-messages))
 
 (provide 'yaes-fly)
