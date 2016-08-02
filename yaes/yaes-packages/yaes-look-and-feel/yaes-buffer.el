@@ -1,9 +1,11 @@
 (require 'req-package)
 
+;; Line numbering
 (req-package linum
+  ;; required emacs version : any
+  :require (hlinum)
   :config (progn (global-linum-mode t)
 				 (setq linum-format "%4d")
-
 				 (defcustom linum-disabled-modes-list '(eshell-mode shell-mode dired-mode doc-view-mode)
 				   "List of modes disabled when global linum mode is on"
 				   :type '(repeat (sexp :tag "Major mode"))
@@ -13,19 +15,13 @@
 				   "When linum is running globally, disable line number in modes defined in `linum-disabled-modes-list'. Changed by linum-off."
 				   (unless (or
 							(minibufferp)
-							(member major-mode linum-disabled-modes-list)
-							)
-					 (linum-mode 1)))))
+							(member major-mode linum-disabled-modes-list))
+					 (linum-mode t)))))
 
-(req-package smartparens
-  :require (dash)
-  :config (progn (smartparens-global-mode t)
-				 (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-				 (sp-local-pair 'coq-mode "'" nil :actions nil)))
+;; Line numbering with highlight current line
+(req-package hlinum
+  ;; required emacs version : ???
+  :require (cl-lib)
+  :config (hlinum-activate))
 
-(req-package undo-tree
-  :config (global-undo-tree-mode t))
-
-(req-package list-processes+)
-
-(provide 'yaes-basic)
+(provide 'yaes-buffer)

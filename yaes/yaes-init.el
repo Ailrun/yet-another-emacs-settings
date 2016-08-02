@@ -8,10 +8,10 @@
     ("org" . "http://orgmode.org/elpa/")
     ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
 
-(when (< emacs-major-version 24)
-  (add-to-list
-   'package-archives
-   '("gnu" . "https://elpa.gnu.org/packages/")))
+;; (when (< emacs-major-version 24)
+;;   (add-to-list
+;;    'package-archives
+;;    '("gnu" . "https://elpa.gnu.org/packages/")))
 
 (mapc (lambda (item)
 	  (add-to-list 'package-archives item)) package-archives-list)
@@ -37,9 +37,10 @@
 (require 'f) ;; only for removing fly error
 
 (defconst yaes-dir (f-dirname (f-this-file)))
-;;(defconst yaes-package-el (expand-file-name "yaes-package.el" yaes-dir))
+(defconst yaes-develope-dir (f-join  yaes-dir "yaes-develope"))
 (defconst yaes-packages-dir (f-join  yaes-dir "yaes-packages"))
 
+;; Setting for windows
 (if (eq system-type 'windows-nt)
 	(progn (setq-default default-directory
 						 (concat (getenv "USERPROFILE") "\\Documents/"))
@@ -60,15 +61,20 @@
 
 ;;Load all files in the packages directory
 (req-package-force load-dir
-  :defer 1
-  :init
-  (setq force-load-messages nil)
-  (setq load-dir-debug nil)
-  (setq load-dir-recursive t)
-  :config
-  (load-dir-one yaes-packages-dir)
-  (req-package-finish))
+  :defer t
+  :init (progn
+		  (setq force-load-messages nil)
+		  (setq load-dir-debug nil)
+		  (setq load-dir-recursive t))
+  :config (progn
+			(load-dir-one yaes-develope-dir)
+			(load-dir-one yaes-packages-dir)
+			(req-package-finish)))
 
+(if (require 'yasnippet nil t)
+	(progn
+	  (yas-recompile-all)
+	  (yas-reload-all)))
 
 ;;Function for unbound symbols
 (mapatoms (lambda (symbol)
