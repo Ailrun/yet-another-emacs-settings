@@ -54,6 +54,7 @@
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq package-enable-at-startup nil)
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (windmove-default-keybindings)
 ;;;;Load a file for pre-package functions.
