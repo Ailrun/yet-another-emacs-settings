@@ -46,7 +46,7 @@
 ;; Use command "marmalade-upload"
 (req-package marmalade-client
   ;; required emacs version : ???
-  :require (web kv time-stamp gh gh-issues))
+  :require (web kv time-stamp gh))
 
 ;; Make namespaces and skip it
 (req-package names

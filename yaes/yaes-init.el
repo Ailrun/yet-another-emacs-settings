@@ -92,3 +92,4 @@
 ;; (fmakunbound makunbound-all)
 
 (provide 'yaes-init)
+;;; yaes-init.el ends here

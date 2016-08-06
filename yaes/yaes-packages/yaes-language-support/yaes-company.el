@@ -11,10 +11,10 @@
 			(global-set-key (kbd "C-c C-y") 'company-yasnippet)))
 
 ;; Help autocomplete using pos-tip message
-(req-package company-quickhelp
-  ;; required emacs version : >= 24.4
-  :require (company pos-tip)
-  :commands (company-quickhelp-mode)
-  :config (add-hook-exec 'company-mode #'company-quickhelp-mode))
+;; (req-package company-quickhelp
+;;   ;; required emacs version : >= 24.4
+;;   :require (company pos-tip)
+;;   :commands (company-quickhelp-mode)
+;;   :config (add-hook-exec 'company-mode #'company-quickhelp-mode))
 
 (provide 'yaes-company)

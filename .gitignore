@@ -1,11 +1,24 @@
-
-auto-save-list/
+# installed package
 elpa/
+
 eshell/
 url/
 server/
 var/
 tutorial/
+
+# emacs temp files
+auto-save-list/
 *~
+
 *.html
+
+# projectile project list files
+projectile-bookmarks.eld
+
+# for package??
 .litable-lists.el
+
+# Originally, for abbrev mode.
+# However, in here, for yasnippet??
+abbrev_defs

@@ -1,3 +1,8 @@
+;;; yaes-haskell --- haskell support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Mode for Haskell
@@ -19,7 +24,7 @@
   ;; required emacs version : ???
   :require (haskell-mode)
   :commands (turn-on-hi2)
-  :init (add-hook-exec 'haskell-mode-hook 'turn-on-hi2))
+  :init (add-hook-exec 'haskell-mode-hook #'turn-on-hi2))
 
 ;; Emacs binding for ghc-mod program
 ;; Must install ghc-mod using "cabal install ghc-mod"
@@ -40,7 +45,7 @@
 (req-package company-ghc
   ;; required emacs version : >= 24
   :require (cl-lib company ghc)
-  :config (add-to-list 'company-backends #'company-ghc))
+  :config (add-to-list 'company-backends 'company-ghc))
 
 ;; Plugin for yasnippet with haskell mode
 (req-package haskell-snippets
@@ -48,3 +53,4 @@
   :require (yasnippet))
 
 (provide 'yaes-haskell)
+;;; yaes-haskell ends here
