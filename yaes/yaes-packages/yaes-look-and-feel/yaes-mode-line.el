@@ -8,7 +8,7 @@
 ;; More delicate mode line
 (req-package smart-mode-line
   ;; required emacs version : >= 24.3
-  :require (rich-minority-mode)
+  :require (rich-minority)
   :config (progn
 			(line-number-mode t)
 			(column-number-mode t)

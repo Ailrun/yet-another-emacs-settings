@@ -37,9 +37,7 @@
 ;; Plugin for flycheck using ghc-mod
 (req-package flycheck-ghcmod
  ;; required emacs version : ???
- :require (flycheck dash haskell-mode)
- :commands (flycheck-ghcmod)
- :init (add-hook-exec 'flycheck-mode #'flycheck-ghcmod))
+ :require (flycheck dash haskell-mode))
 
 ;; Backend plugin for company using ghc-mod
 (req-package company-ghc
