@@ -52,11 +52,20 @@
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
 (global-set-key (kbd "S-SPC") 'toggle-korean-input-method)
+;; Set miscellaneous settings
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
 (setq package-enable-at-startup nil)
 (setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
 (windmove-default-keybindings)
+;; Set force backups and other backups settings
+(setq vc-make-backup-files t
+	  version-control t
+	  kept-new-versions 5
+	  backup-by-copying t
+	  delete-old-versions t
+	  backup-directory-alist `((".*" . ,(f-join yaes-dir "../backup"))))
 ;;;;Load a file for pre-package functions.
 ;;(load-file yaes-package-el)
 

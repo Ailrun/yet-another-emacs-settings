@@ -30,6 +30,9 @@
 (req-package jade-mode
   :mode ("\\.jade\\'" . jade-mode))
 
+(req-package pug-mode
+  :mode ("\\.pug\\'" . pug-mode))
+
 
 ;; css
 

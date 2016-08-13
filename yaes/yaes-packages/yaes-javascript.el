@@ -1,8 +1,11 @@
 (require 'req-package)
 
 (req-package js2-mode
-  :mode ("\\.js\\'" . js2-mode)
-  :config  (js2-include-node-externs t))
+  :mode (("\\.js\\'" . js2-mode)
+		 ("\\.json\\'" . js2-mode))
+  :config  (progn
+			 (js2-include-node-externs t)
+			 (js2-basic-offset 2)))
 
 ;;;; Conflict with company package
 ;; (req-package js2-highlight-vars
