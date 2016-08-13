@@ -65,7 +65,8 @@ To Alpha~Beta
   - [x] Default package bootstrapping using f, use-package, req-package
   - [x] Elisp package default setting
 - High Priority
-  - [ ] Bash Shell script package default setting
+  - [x] Bash Shell script package default setting
+  - [ ] Batch script package default setting
   - [ ] C/C++ package default setting
   - [x] Fish Shell script package default setting
   - [x] Git/GitHub package default setting
@@ -76,7 +77,7 @@ To Alpha~Beta
   - [x] Markdown package default setting
   - [ ] Node.js package default setting
   - [ ] PHP package default setting
-  - [ ] Project support default seeting
+  - [x] Project support default seeting
   - [ ] Python package default setting
   - [ ] web package default setting
 - Middle Priority
@@ -85,11 +86,9 @@ To Alpha~Beta
   - [ ] Go package default setting
   - [x] OCaml package default setting
   - [ ] Org package default setting
-  - [ ] R package default setting
-  - [ ] Ruby package default setting
   - [x] Rust package default setting
-  - [ ] Scala package default setting
-  - [ ] Scheme package default setting
+  - [x] Scala package default setting
+  - [x] Scheme package default setting
   - [ ] TypeScript package default setting
 - Low Priority
   - [ ] Android package default setting
@@ -99,6 +98,8 @@ To Alpha~Beta
   - [ ] Lisp package default setting
   - [ ] Obj-C package default setting
   - [ ] Prolog package default setting
+  - [ ] R package default setting
+  - [ ] Ruby package default setting
   - [ ] Swift package default setting
 
 ## Author ##
