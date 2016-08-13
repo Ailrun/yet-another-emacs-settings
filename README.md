@@ -93,8 +93,7 @@ To Alpha~Beta
 - Low Priority
   - [ ] Android package default setting
   - [ ] C# package default setting
-  - [ ] F# package default setting
-  - [ ] F* package default setting
+  - [x] F# package default setting
   - [ ] Lisp package default setting
   - [ ] Obj-C package default setting
   - [ ] Prolog package default setting
