@@ -1,10 +1,11 @@
-*
+/*
 
 # yaes package
-!yaes/
+!/yaes/
+!/yaes/yaes-packages/yaes-language-support/yaes-fish.el
 
 # default init file
-!init.el
+!/init.el
 
 # Makefile
 !Makefile

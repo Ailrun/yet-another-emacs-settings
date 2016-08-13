@@ -1,3 +1,8 @@
+;;; yaes-init --- init file of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'package)
 
 (defconst package-archives-list
@@ -71,10 +76,11 @@
 			(load-dir-one yaes-packages-dir)
 			(req-package-finish)))
 
-(if (require 'yasnippet nil t)
-	(progn
-	  (yas-recompile-all)
-	  (yas-reload-all)))
+(require 'yasnippet)
+
+(progn
+  (yas-recompile-all)
+  (yas-reload-all))
 
 ;;Function for unbound symbols
 (mapatoms (lambda (symbol)
@@ -92,3 +98,4 @@
 ;; (fmakunbound makunbound-all)
 
 (provide 'yaes-init)
+;;; yaes-init.el ends here
