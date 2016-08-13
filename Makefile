@@ -1,0 +1,16 @@
+ED_PROOF_GENERAL = external/ProofGeneral
+
+EXTERNAL_DIR = external
+EXTERNAL_PACKAGES = $(ED_PROOF_GENERAL)
+
+.PHONY: EP_PROOF_GENERAL
+
+all: $(EXTERNAL_DIR) $(EXTERNAL_PACKAGES)
+
+$(EXTERNAL_DIR):
+	-mkdir $(EXTERNAL_DIR)
+
+$(ED_PROOF_GENERAL): $(EXTERNAL_DIR)
+	git clone https://github.com/ProofGeneral/PG $(ED_PROOF_GENERAL)
+	$(MAKE) -C $(ED_PROOF_GENERAL)
+

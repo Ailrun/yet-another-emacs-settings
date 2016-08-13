@@ -7,7 +7,7 @@
 !init.el
 
 # Makefile
-Makefile
+!Makefile
 
 # emacs temp files
 *~
