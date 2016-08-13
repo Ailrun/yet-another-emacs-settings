@@ -87,7 +87,7 @@ To Alpha~Beta
   - [ ] Org package default setting
   - [ ] R package default setting
   - [ ] Ruby package default setting
-  - [ ] Rust package default setting
+  - [x] Rust package default setting
   - [ ] Scala package default setting
   - [ ] Scheme package default setting
   - [ ] TypeScript package default setting
