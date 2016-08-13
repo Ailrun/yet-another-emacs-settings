@@ -10,7 +10,7 @@
   ;; required emacs version : >= 24.3
   :require (cl-lib)
   ;; How about .lhs??
-  :mode ("\\.hs\\'" . haskell-mode))
+  :mode ("\\.l?hs\\'" . haskell-mode))
 
 ;; ;; Plugin for flycheck with Haskell
 ;; (req-package flycheck-haskell
