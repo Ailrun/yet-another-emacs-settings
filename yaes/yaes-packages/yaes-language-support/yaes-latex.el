@@ -1,3 +1,8 @@
+;;; yaes-latex --- LaTeX support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Backend plugin for company with math symbols of latex
@@ -52,3 +57,4 @@
 			(setq pdf-latex-command "xelatex")))
 
 (provide 'yaes-latex)
+;;; yaes-latex.el ends here

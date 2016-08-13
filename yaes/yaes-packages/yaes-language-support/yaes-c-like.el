@@ -1,3 +1,8 @@
+;;; yaes-c-like --- c-like language support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Find header from source, source from header
@@ -34,3 +39,4 @@
 			(semantic-mode t)))
 
 (provide 'yaes-c-like)
+;;; yaes-c-like.el ends here

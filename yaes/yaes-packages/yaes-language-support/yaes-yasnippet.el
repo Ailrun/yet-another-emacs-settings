@@ -1,3 +1,8 @@
+;;; yaes-yasnippet --- yasnippet support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Snippet providing package
@@ -11,3 +16,4 @@
 												 yas-completing-prompt))))
 
 (provide 'yaes-yasnippet)
+;;; yaes-yasnippet.el ends here

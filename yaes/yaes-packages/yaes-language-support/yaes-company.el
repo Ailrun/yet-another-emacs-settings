@@ -1,3 +1,8 @@
+;;; yaes-company --- company support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Autocomplete frameworks
@@ -20,3 +25,4 @@
   :config (add-hook-exec 'company-mode #'company-quickhelp-mode))
 
 (provide 'yaes-company)
+;;; yaes-company.el ends here

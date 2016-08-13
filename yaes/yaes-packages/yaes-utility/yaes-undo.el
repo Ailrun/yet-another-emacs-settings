@@ -1,3 +1,8 @@
+;;; yaes-undo --- undo support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Tree like undo map supporter
@@ -7,3 +12,4 @@
 			(global-undo-tree-mode t)))
 
 (provide 'yaes-undo)
+;;; yaes-undo.el ends here

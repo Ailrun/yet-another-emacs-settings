@@ -1,7 +1,12 @@
+;;; yaes-project --- project configuration support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Using Gnu Global for tagging about 50 languages
-;; Needs to install Gnu Global
+;; Needs to install Gnu Global and exuberant-ctags and pytment
 (req-package ggtags
   ;; required emacs version : >= 24
   :require (cl-lib)
@@ -29,3 +34,4 @@
   :require (cl-lib projectile perspective))
 
 (provide 'yaes-project)
+;;; yaes-project.el ends here

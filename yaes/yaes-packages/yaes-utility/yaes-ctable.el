@@ -1,3 +1,11 @@
+;;; yaes-ctable --- ctable support of yaes
+;;;
+;;; Commentary:
+
+;; is this really useful?
+
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; ;; Table making tool
@@ -7,3 +15,4 @@
 ;;   )
 
 (provide 'yaes-ctable)
+;;; yaes-ctable.el ends here

@@ -1,3 +1,11 @@
+;;; yaes-miscellaneous --- miscellaneous supports of yaes
+;;;
+;;; Commentary:
+
+;; is there no file for this?
+
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Powerful package for search and replace
@@ -10,3 +18,4 @@
 			(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)))
 
 (provide 'yaes-miscellaneous)
+;;; yaes-miscellaneous.el ends here

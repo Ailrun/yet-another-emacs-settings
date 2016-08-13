@@ -1,3 +1,8 @@
+;;; yaes-git --- git support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Supporting tool for magit
@@ -14,3 +19,4 @@
 			(setenv "SSH_ASKPASS" "git-gui--askpass")))
 
 (provide 'yaes-git)
+;;; yaes-git.el ends here

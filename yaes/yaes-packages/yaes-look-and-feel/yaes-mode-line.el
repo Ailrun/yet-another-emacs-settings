@@ -1,3 +1,8 @@
+;;; yaes-mode-line --- mode-line look-and-feel of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; More delicate mode line
@@ -34,3 +39,4 @@
 													  " yas") "\\|"))))
 
 (provide 'yaes-mode-line)
+;;; yaes-mode-line.el ends here

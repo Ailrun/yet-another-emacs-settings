@@ -1,3 +1,8 @@
+;;; yaes-elisp --- elisp support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Convert elisp commentary section to markdown
@@ -61,3 +66,4 @@
 		  (add-hook-exec 'lisp-interaction-mode #'eldoc-mode)))
 
 (provide 'yaes-elisp)
+;;; yaes-elisp.el ends here

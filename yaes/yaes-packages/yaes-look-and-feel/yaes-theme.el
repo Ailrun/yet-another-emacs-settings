@@ -1,3 +1,8 @@
+;;; yaes-theme --- theme setting of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; ;; Dracula theme
@@ -14,3 +19,4 @@
 
 
 (provide 'yaes-theme)
+;;; yaes-theme.el ends here

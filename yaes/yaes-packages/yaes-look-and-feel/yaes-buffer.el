@@ -1,3 +1,8 @@
+;;; yaes-buffer --- in buffer look-and-feel of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Line numbering
@@ -25,3 +30,4 @@
   :config (hlinum-activate))
 
 (provide 'yaes-buffer)
+;;; yaes-buffer.el ends here

@@ -1,3 +1,8 @@
+;;; yaes-flycheck --- on-the-fly syntax checking support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; On-the-fly syntax checker
@@ -19,3 +24,4 @@
 ;;   :init (add-hook-exec 'flycheck-mode))
 
 (provide 'yaes-flycheck)
+;;; yaes-flycheck.el ends here

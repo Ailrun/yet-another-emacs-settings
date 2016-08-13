@@ -1,5 +1,11 @@
+;;; yaes-parenthesis --- parenthesis-related functions of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
+;; Parenthesis pair completion package
 (req-package smartparens
   ;; required emacs version : ???
   :require (dash cl-lib)
@@ -10,3 +16,4 @@
 				 (sp-local-pair 'haskell-mode "'" nil :actions nil)))
 
 (provide 'yaes-parenthesis)
+;;; yaes-parenthesis.el ends here
