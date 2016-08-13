@@ -1,11 +1,23 @@
-
+# auto-saved files
 auto-save-list/
+
+# packages
 elpa/
+
+# tramp setting
+tramp
+
+# eshell
 eshell/
+
+
 url/
 server/
 var/
 tutorial/
-*~
 *.html
 .litable-lists.el
+abbrev_defs
+
+# emacs temp files
+*~
