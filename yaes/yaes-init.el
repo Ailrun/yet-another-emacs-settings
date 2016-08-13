@@ -64,7 +64,7 @@
   :defer t
   :init (progn
 		  (setq force-load-messages nil)
-		  (setq load-dir-debug nil)
+		  (setq load-dir-debug t)
 		  (setq load-dir-recursive t))
   :config (progn
 			(load-dir-one yaes-develope-dir)

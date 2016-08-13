@@ -1,11 +1,10 @@
+*
 
-auto-save-list/
-elpa/
-eshell/
-url/
-server/
-var/
-tutorial/
+# yaes package
+!yaes/
+
+# default init file
+!init.el
+
+# emacs temp files
 *~
-*.html
-.litable-lists.el

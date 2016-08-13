@@ -1,3 +1,8 @@
+;;; yaes-haskell --- haskell support of yaes
+;;;
+;;; Commentary:
+;;;
+;;; Code:
 (require 'req-package)
 
 ;; Mode for Haskell
@@ -31,10 +36,10 @@
 
 ;; Plugin for flycheck using ghc-mod
 (req-package flycheck-ghcmod
-  ;; required emacs version : ???
-  :require (flycheck dash haskell-mode)
-  :commands (flycheck-ghcmod)
-  :init (add-hook-exec 'flycheck-mode #'flycheck-ghcmod))
+ ;; required emacs version : ???
+ :require (flycheck dash haskell-mode)
+ :commands (flycheck-ghcmod)
+ :init (add-hook-exec 'flycheck-mode #'flycheck-ghcmod))
 
 ;; Backend plugin for company using ghc-mod
 (req-package company-ghc
@@ -48,3 +53,4 @@
   :require (yasnippet))
 
 (provide 'yaes-haskell)
+;;; yaes-haskell.el ends here
