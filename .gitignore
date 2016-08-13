@@ -6,5 +6,8 @@
 # default init file
 !init.el
 
+# Makefile
+Makefile
+
 # emacs temp files
 *~

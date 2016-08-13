@@ -1,4 +1,9 @@
-(load "~/.emacs.d/PG/generic/proof-site")
+;;; init --- init file for clare
+;;;
+;;; Commentary:
+;;;
+;;; Code:
+(load "~/.emacs.d/external/ProofGeneral/generic/proof-site")
 
 (load-file "~/.emacs.d/yaes/yaes-init.el")
 (require 'f)
@@ -25,3 +30,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; ;; There is no needs for providing init
+;; (provide 'init)
+;;; init.el ends here
