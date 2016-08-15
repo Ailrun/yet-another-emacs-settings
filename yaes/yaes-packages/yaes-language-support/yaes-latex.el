@@ -37,15 +37,16 @@
   :commands (latex-extra-mode)
   :init (add-hook 'LaTeX-mode #'latex-extra-mode))
 
-;; LaTeX math symbol preview
-(req-package latex-math-preview
-  ;; required emacs version : ???
-  :commands (latex-math-preview-expression
-			latex-math-preview-insert-symbol
-			latex-math-preview-insert-mathematical-symbol
-			latex-math-preview-insert-text-symbol
-			latex-math-preview-save-image-file
-			latex-math-preview-reload-usepackage))
+;; ;; LaTeX math symbol preview
+;; ;; This won't work since this package use deprecated function.
+;; (req-package latex-math-preview
+;;   ;; required emacs version : ???
+;;   :commands (latex-math-preview-expression
+;; 			latex-math-preview-insert-symbol
+;; 			latex-math-preview-insert-mathematical-symbol
+;; 			latex-math-preview-insert-text-symbol
+;; 			latex-math-preview-save-image-file
+;; 			latex-math-preview-reload-usepackage))
 
 ;; Package providing LaTeX preview
 (req-package latex-preview-pane
