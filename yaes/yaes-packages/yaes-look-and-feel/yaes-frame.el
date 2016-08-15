@@ -8,7 +8,7 @@
 ;; Package for tool-bar
 (req-package tool-bar
   ;; required emacs version : any
-  :config (tool-bar-mode nil))
+  :config (tool-bar-mode -1))
 
 ;; speedbar in this frame
 (req-package sr-speedbar
