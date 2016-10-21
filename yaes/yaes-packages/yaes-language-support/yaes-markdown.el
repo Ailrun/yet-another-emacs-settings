@@ -80,7 +80,8 @@ See `imenu-create-index-function' and `imenu--index-alist' for details."
 			(setcdr sibling-alist alist)
 			(setq cur-alist alist))
 		      (setq cur-level level))))))
-	      (cdr root)))))
+	      (cdr root))))
+  :config (setq 'markdown-toc-header-toc-title "## Table of Contents ##"))
 
 (provide 'yaes-markdown)
 ;;; yaes-markdown.el ends here
