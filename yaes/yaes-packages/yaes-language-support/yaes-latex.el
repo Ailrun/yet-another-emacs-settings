@@ -51,11 +51,9 @@
 ;; Package providing LaTeX preview
 (req-package latex-preview-pane
   ;; required emacs version : >= 24
-  :commands (latex-preview-pane-mode)
+  :commands (latex-preview-pane-mode latex-preview-pane-update)
   :config (progn
-			(add-hook-exec 'LaTeX-mode #'latex-preview-pane-mode)
-			(add-hook-exec 'latex-mode #'latex-preview-pane-mode)
-			(setq pdf-latex-command "xelatex")))
+		    (setq pdf-latex-command "xelatex")))
 
 (provide 'yaes-latex)
 ;;; yaes-latex.el ends here
