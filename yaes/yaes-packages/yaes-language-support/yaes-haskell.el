@@ -12,19 +12,19 @@
   ;; How about .lhs??
   :mode ("\\.l?hs\\'" . haskell-mode))
 
-;; ;; Plugin for flycheck with Haskell
-;; (req-package flycheck-haskell
-;;   ;; required emacs version : >= 24.3
-;;   :require (flycheck haskell-mode dash seq let-alist)
-;;   :commands (flycheck-haskell-setup)
-;;   :init (add-hook-exec 'flycheck-mode #'flycheck-haskell-setup))
+;; Plugin for flycheck with Haskell
+(req-package flycheck-haskell
+  ;; required emacs version : >= 24.3
+  :require (flycheck haskell-mode dash seq let-alist)
+  :commands (flycheck-haskell-setup)
+  :init (add-hook-exec 'flycheck-mode #'flycheck-haskell-setup))
 
-;; Indentation support for haskell mode
-(req-package hi2
-  ;; required emacs version : ???
-  :require (haskell-mode)
-  :commands (turn-on-hi2)
-  :init (add-hook-exec 'haskell-mode-hook 'turn-on-hi2))
+;; ;; Indentation support for haskell mode
+;; (req-package hi2
+;;   ;; required emacs version : ???
+;;   :require (haskell-mode)
+;;   :commands (turn-on-hi2)
+;;   :init (add-hook-exec 'haskell-mode #'turn-on-hi2))
 
 ;; Emacs binding for ghc-mod program
 ;; Must install ghc-mod using "cabal install ghc-mod"
@@ -34,10 +34,10 @@
   :commands (ghc-init ghc-debug)
   :init (add-hook-exec 'haskell-mode #'ghc-init))
 
-;; Plugin for flycheck using ghc-mod
-(req-package flycheck-ghcmod
- ;; required emacs version : ???
- :require (flycheck dash haskell-mode))
+;; ;; Plugin for flycheck using ghc-mod
+;; (req-package flycheck-ghcmod
+;;  ;; required emacs version : ???
+;;  :require (flycheck dash haskell-mode))
 
 ;; Backend plugin for company using ghc-mod
 (req-package company-ghc
