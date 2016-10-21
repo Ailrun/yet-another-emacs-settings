@@ -52,7 +52,7 @@
 		   (setq default-directory
 				 (concat (getenv "USERPROFILE") "\\Documents/"))))
 
-(add-to-list 'load-path 'yaes-dir)
+(add-to-list 'load-path yaes-dir)
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
 (global-set-key (kbd "S-SPC") 'toggle-korean-input-method)
