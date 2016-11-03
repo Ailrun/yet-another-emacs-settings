@@ -5,6 +5,11 @@
 ;;; Code:
 (require 'req-package)
 
+(req-package cc-mode
+  ;; required emacs version : any
+  :mode (("\\.\\(c|h\\)\\'" . c-mode)
+         ("\\.\\(cpp|cxx|H|hpp\\)\\'" . c++-mode)))
+
 ;; Find header from source, source from header
 (req-package cff
   ;; required emacs version : >= 24
