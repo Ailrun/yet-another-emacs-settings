@@ -19,7 +19,7 @@
 ;;    '("gnu" . "https://elpa.gnu.org/packages/")))
 
 (mapc (lambda (item)
-	  (add-to-list 'package-archives item)) package-archives-list)
+      (add-to-list 'package-archives item)) package-archives-list)
 
 (package-initialize)
 
@@ -27,13 +27,13 @@
   "install and require for new package, and only require for old package"
   (if (null (require package nil t))
       (progn (let* ((ARCHIVES (if (null package-archive-contents)
-				  (progn (package-refresh-contents)
-					 package-archive-contents)
-				package-archive-contents))
-		    (AVAIL (assoc package ARCHIVES)))
-	       (if AVAIL
-		   (package-install package)))
-	     (require package))))
+                  (progn (package-refresh-contents)
+                     package-archive-contents)
+                package-archive-contents))
+            (AVAIL (assoc package ARCHIVES)))
+           (if AVAIL
+           (package-install package)))
+         (require package))))
 
 (install-first-require-package 'req-package)
 (require 'req-package) ;; only for removing fly error
@@ -47,10 +47,10 @@
 
 ;; Setting for windows
 (if (eq system-type 'windows-nt)
-	(progn (setq-default default-directory
-						 (concat (getenv "USERPROFILE") "\\Documents/"))
-		   (setq default-directory
-				 (concat (getenv "USERPROFILE") "\\Documents/"))))
+    (progn (setq-default default-directory
+                         (concat (getenv "USERPROFILE") "\\Documents/"))
+           (setq default-directory
+                 (concat (getenv "USERPROFILE") "\\Documents/"))))
 
 (add-to-list 'load-path yaes-dir)
 (set-language-environment "Korean")
@@ -69,13 +69,13 @@
 (req-package-force load-dir
   :defer t
   :init (progn
-		  (setq force-load-messages nil)
-		  (setq load-dir-debug t)
-		  (setq load-dir-recursive t))
+          (setq force-load-messages nil)
+          (setq load-dir-debug t)
+          (setq load-dir-recursive t))
   :config (progn
-			(load-dir-one yaes-develope-dir)
-			(load-dir-one yaes-packages-dir)
-			(req-package-finish)))
+            (load-dir-one yaes-develope-dir)
+            (load-dir-one yaes-packages-dir)
+            (req-package-finish)))
 
 (require 'yasnippet)
 
@@ -85,8 +85,8 @@
 
 ;;Function for unbound symbols
 (mapatoms (lambda (symbol)
-	    (if (string-prefix-p "yaes-" (symbol-name symbol))
-		(unintern symbol nil))))
+        (if (string-prefix-p "yaes-" (symbol-name symbol))
+        (unintern symbol nil))))
 
 
 ;;;;Obsoleted Version of unbound symbols

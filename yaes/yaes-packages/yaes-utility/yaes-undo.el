@@ -9,7 +9,7 @@
 (req-package undo-tree
   ;; required emacs version : ???
   :config (progn
-			(global-undo-tree-mode t)))
+            (global-undo-tree-mode t)))
 
 (provide 'yaes-undo)
 ;;; yaes-undo.el ends here
