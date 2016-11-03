@@ -15,7 +15,8 @@
   ;; required emacs version : ???
   :require (company dash cl-lib)
   :config (progn
-            (add-to-list 'company-backends '(company-shell company-fish-shell))))
+            (add-to-list 'company-backends
+                         '(company-shell company-fish-shell))))
 
 (provide 'yaes-fish)
 ;;; yaes-fish.el ends here

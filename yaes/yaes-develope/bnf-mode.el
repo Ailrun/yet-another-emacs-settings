@@ -1,4 +1,3 @@
-
 ;; BNF based syntax checker, version v.0042
 ;; By Jeppe Welling Hansen
 ;; u061245@cs.au.dk
@@ -33,7 +32,7 @@
   (list 'bnf-mode-true))
 
 (defun bnf-mode-is-true? (v)
-  (and 
+  (and
    (consp v)
    (eq (car v) 'bnf-mode-true)))
 
@@ -94,18 +93,18 @@
 ;; The group name without < >
 (defun bnf-mode-strip-arrows (group-name)
   (make-symbol
-   (replace-regexp-in-string 
+   (replace-regexp-in-string
     "[<>]" ""
     (symbol-name group-name))))
 
 ;; string helpers
 (defun bnf-mode-trim-string (string)
-    "Removes starting and trainling whitespace."
-    (if (null string)
-	nil
-      (replace-regexp-in-string 
-       "\\`[ \t\n]*" "" 
-       (replace-regexp-in-string "[ \t\n]*\\'" "" string))))
+  "Removes starting and trainling whitespace."
+  (if (null string)
+      nil
+    (replace-regexp-in-string
+     "\\`[ \t\n]*" ""
+     (replace-regexp-in-string "[ \t\n]*\\'" "" string))))
 
 (provide 'string-functions);; String predicates
 
@@ -147,24 +146,24 @@
 ;; constant.
 ;; http://emacswiki.org/emacs/RegularExpression
 (defun bnf-mode-is-str-constant? (v)
-  (and 
-    (not (= (length v) 0))
-    (let ((i (string-match "^[^])}[{(\s\n\t]+$" v)))
-      (if i
-	  (= 0 i)
-	i))))
+  (and
+   (not (= (length v) 0))
+   (let ((i (string-match "^[^])}[{(\s\n\t]+$" v)))
+     (if i
+         (= 0 i)
+       i))))
 
 
 
 
 ;; For the bnf parsing < and > are not constants
 (defun bnf-mode-is-str-bnf-constant? (v)
-  (and 
-    (not (= (length v) 0))
-    (let ((i (string-match "^[^])}[{(\s\n\t><\+*]+$" v)))
-      (if i
-	  (= 0 i)
-	i))))
+  (and
+   (not (= (length v) 0))
+   (let ((i (string-match "^[^])}[{(\s\n\t><\+*]+$" v)))
+     (if i
+         (= 0 i)
+       i))))
 
 
 (defun bnf-mode-is-str-star? (v)
@@ -211,7 +210,7 @@
 
 ;; str -> paren-type
 (defun bnf-mode-derive-paren-type (str)
-  (cond 
+  (cond
    ((string= str "{") (bnf-mode-make-paren-type-curl))
    ((string= str "(") (bnf-mode-make-paren-type-c))
    ((string= str "[") (bnf-mode-make-paren-type-sqr))
@@ -221,38 +220,38 @@
 
 
 (defun bnf-mode-is-str-string? (v)
-  (if (or (not (string= "\"" (car v))) 
-	  (null v))
+  (if (or (not (string= "\"" (car v)))
+          (null v))
       nil
     (let* ((saw-quote nil) (r (bnf-mode-fold-left-break-after
-	       (cdr v)
-	       (lambda (bnf-mode-x rest)
-		 (if (bnf-mode-is-str-double-quote? bnf-mode-x)
-		     (setq saw-quote t))
-		  
-		 (bnf-mode-make-parse-remainder
-		  (concat (bnf-mode-parse-remainder-1 rest) bnf-mode-x)
-		  (cdr (bnf-mode-parse-remainder-2 rest))
-		  (+ 1 (bnf-mode-parse-remainder-3 rest))))
+                               (cdr v)
+                               (lambda (bnf-mode-x rest)
+                                 (if (bnf-mode-is-str-double-quote? bnf-mode-x)
+                                     (setq saw-quote t))
 
-	       (lambda () (bnf-mode-make-parse-remainder
-			   (car v)
-			   (cdr v)
-			   1))
-	       (lambda (bnf-mode-x rest) 
-		 (bnf-mode-is-str-double-quote? bnf-mode-x))
-	       )))
+                                 (bnf-mode-make-parse-remainder
+                                  (concat (bnf-mode-parse-remainder-1 rest) bnf-mode-x)
+                                  (cdr (bnf-mode-parse-remainder-2 rest))
+                                  (+ 1 (bnf-mode-parse-remainder-3 rest))))
+
+                               (lambda () (bnf-mode-make-parse-remainder
+                                           (car v)
+                                           (cdr v)
+                                           1))
+                               (lambda (bnf-mode-x rest)
+                                 (bnf-mode-is-str-double-quote? bnf-mode-x))
+                               )))
 
       (cond
 
        ((not saw-quote)
-	nil)
+        nil)
 
        ((= 0 (length (bnf-mode-parse-remainder-1 r)))
-	nil)
-       
+        nil)
+
        (t
-	r)))))
+        r)))))
 
 (provide 'string-predicates)
 
@@ -274,10 +273,10 @@
 
 
 (defun bnf-mode-file-string (file)
-    "Read the contents of a file and return as a string."
-    (with-temp-buffer
-      (insert-file-contents file)
-      (buffer-string)))
+  "Read the contents of a file and return as a string."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (buffer-string)))
 
 ;; move to util file
 (defun bnf-mode-n-first-of-list (n v)
@@ -305,15 +304,15 @@
    (lambda (bnf-mode-x i rest)
      (= n i))))
 
- ;; (bnf-mode-n-last-of-list 3 '(1 2 3))
- ;; (bnf-mode-n-last-of-list 0 '(1 2 3))
+;; (bnf-mode-n-last-of-list 3 '(1 2 3))
+;; (bnf-mode-n-last-of-list 0 '(1 2 3))
 
 ;; move to util file
 (defun bnf-mode-remove-first-n-last-m (n m v)
   (let ((first-removed (nthcdr n v)))
-  (bnf-mode-n-first-of-list 
-   (- (length first-removed) m)
-   first-removed)))
+    (bnf-mode-n-first-of-list
+     (- (length first-removed) m)
+     first-removed)))
 
 
 (defun bnf-mode-bnf-mode-string-to-list (str)
@@ -338,10 +337,10 @@
 str while passing the previous str to the next function
 application."
   (if list
-    (bnf-mode-mapstr
-     f 
-     (funcall f (car list) str) 
-     (cdr list))
+      (bnf-mode-mapstr
+       f
+       (funcall f (car list) str)
+       (cdr list))
     str))
 
 ;; A library for recursive paradigmes in a none recursive world
@@ -355,7 +354,7 @@ application."
       (setq m (append m (list (funcall f-ind (car lst)))))
       (setq lst (cdr lst)))
     m))
-;(bnf-mode-map-list '(1 2 3 4 5 6) (lambda (bnf-mode-x) (+ 1 bnf-mode-x)))
+;; (bnf-mode-map-list '(1 2 3 4 5 6) (lambda (bnf-mode-x) (+ 1 bnf-mode-x)))
 
 ;; A none recursive bnf-mode-fold-right for lists
 ;; O(2n)
@@ -370,7 +369,11 @@ application."
       (setq m (cdr m)))
     res))
 
-;; (fold-list '(0 1 2 3) (lambda (bnf-mode-x rest) (cons bnf-mode-x rest)) (lambda () '()))
+;; (fold-list '(0 1 2 3)
+;;            (lambda (bnf-mode-x rest)
+;;              (cons bnf-mode-x rest))
+;;            (lambda ()
+;;              '()))
 
 
 (defun bnf-mode-fold-right-break-before (lst f-ind f-null f-break)
@@ -381,10 +384,10 @@ application."
     (setq res (funcall f-null))
     (while m
       (if (funcall f-break (car m) res)
-	  (setq m nil)
-	(progn
-	  (setq res (funcall f-ind (car m) res))
-	  (setq m (cdr m)))))
+          (setq m nil)
+        (progn
+          (setq res (funcall f-ind (car m) res))
+          (setq m (cdr m)))))
     res))
 
 (defun bnf-mode-fold-right-break-at (lst f-ind f-null f-break)
@@ -395,12 +398,12 @@ application."
     (setq res (funcall f-null))
     (while m
       (if (funcall f-break (car m) res)
-	  (progn
-	    (setq res (funcall f-ind (car m) res))
-	    (setq m nil))
-	(progn
-	  (setq res (funcall f-ind (car m) res))
-	  (setq m (cdr m)))))
+          (progn
+            (setq res (funcall f-ind (car m) res))
+            (setq m nil))
+        (progn
+          (setq res (funcall f-ind (car m) res))
+          (setq m (cdr m)))))
     res))
 
 
@@ -413,11 +416,11 @@ application."
     (setq res (funcall f-null))
     (while m
       (if (funcall f-break (car m) i res)
-	  (setq m nil)
-	(progn
-	  (setq res (funcall f-ind (car m) i res))
-	  (setq i (+ i 1))
-	  (setq m (cdr m)))))
+          (setq m nil)
+        (progn
+          (setq res (funcall f-ind (car m) i res))
+          (setq i (+ i 1))
+          (setq m (cdr m)))))
     res
     ))
 
@@ -435,11 +438,16 @@ application."
     res
     ))
 
-;; (bnf-mode-fold-left '(1 2 1 1) (lambda (bnf-mode-x rest) (+ bnf-mode-x rest)) (lambda () 0))
-;; (bnf-mode-fold-left '(501 2 101 3) (lambda (bnf-mode-x rest) 
-;; 			   (if (> bnf-mode-x rest) 
-;; 			       bnf-mode-x 
-;; 			     rest)) (lambda () 0))
+;; (bnf-mode-fold-left '(1 2 1 1)
+;;                     (lambda (bnf-mode-x rest)
+;;                       (+ bnf-mode-x rest))
+;;                     (lambda ()
+;;                       0))
+;; (bnf-mode-fold-left '(501 2 101 3)
+;;                     (lambda (bnf-mode-x rest)
+;;                       (if (> bnf-mode-x rest)
+;;                           bnf-mode-x
+;;                         rest)) (lambda () 0))
 
 
 
@@ -450,12 +458,12 @@ application."
     (setq res (funcall f-null))
     (while lst
       (if (funcall f-break (car lst) res)
-	  (progn
-	    (setq res (funcall f-ind (car lst) res))
-	    (setq lst nil))
-	(progn
-	  (setq res (funcall f-ind (car lst) res))
-	  (setq lst (cdr lst)))))
+          (progn
+            (setq res (funcall f-ind (car lst) res))
+            (setq lst nil))
+        (progn
+          (setq res (funcall f-ind (car lst) res))
+          (setq lst (cdr lst)))))
     res
     ))
 
@@ -469,8 +477,8 @@ application."
     (while lst
       (setq res (funcall f-ind (car lst) res))
       (if (funcall f-break (car lst) res)
-	  (setq lst nil)
-	(setq lst (cdr lst))))
+          (setq lst nil)
+        (setq lst (cdr lst))))
     res
     ))
 
@@ -488,19 +496,21 @@ application."
     (setq res (funcall f-null))
     (while lst
       (if (funcall f-break (car lst) res)
-	  (setq lst nil)
-	(progn
-	  (setq res (funcall f-ind (car lst) res))
-	  (setq lst (cdr lst)))))
+          (setq lst nil)
+        (progn
+          (setq res (funcall f-ind (car lst) res))
+          (setq lst (cdr lst)))))
     res
     ))
 
 
- ;; (fold-left-break '(1 2 3 4) 
- ;; 		  (lambda (bnf-mode-x rest) bnf-mode-x)
- ;; 		  (lambda () 0)
- ;; 		  (lambda (bnf-mode-x rest) 
- ;; 		    (= 2 bnf-mode-x)))
+;; (fold-left-break '(1 2 3 4)
+;;                  (lambda (bnf-mode-x rest)
+;;                    bnf-mode-x)
+;;                  (lambda ()
+;;                    0)
+;;                  (lambda (bnf-mode-x rest)
+;;                    (= 2 bnf-mode-x)))
 
 
 
@@ -509,11 +519,11 @@ application."
     (setq res (funcall f-null))
     (while lst
       (if (funcall f-break (car lst) i res)
-	  (setq lst nil)
-	(progn
-	  (setq res (funcall f-ind (car lst) i res))
-	  (setq i (+ i 1))
-	  (setq lst (cdr lst)))))
+          (setq lst nil)
+        (progn
+          (setq res (funcall f-ind (car lst) i res))
+          (setq i (+ i 1))
+          (setq lst (cdr lst)))))
     res
     ))
 
@@ -567,16 +577,17 @@ application."
 (defun bnf-mode-is-value-list? (v)
   (and (not (null v))
        (not (bnf-mode-is-constructor? v))
-       ;; Just check the bnf-mode-first element, assume rest is also constructor types
+       ;; Just check the bnf-mode-first element,
+       ;; assume rest is also constructor types
        (bnf-mode-is-constructor? (car v))))
 
 (defun bnf-mode-is-syntax-value? (v)
   (and (not (null v))
        (or (bnf-mode-is-constant? v)
-	   (bnf-mode-is-syntax-quote? v)
-	   (bnf-mode-is-syntax-comma? v)
-	   (bnf-mode-is-syntax-backward-quote? v)
-	   (bnf-mode-is-syntax-paren? v))))
+           (bnf-mode-is-syntax-quote? v)
+           (bnf-mode-is-syntax-comma? v)
+           (bnf-mode-is-syntax-backward-quote? v)
+           (bnf-mode-is-syntax-paren? v))))
 
 (defun bnf-mode-is-syntax-value-list? (v)
   (cond
@@ -590,13 +601,13 @@ application."
    ;; Assume that the rest of the elements are all syntax values
    (t
     (bnf-mode-is-syntax-value? (car v)))))
-  
+
 
 (defun bnf-mode-first (v)
   "First value in a constructor excluding the location"
   (nth 2 v))
 
-(bnf-mode-first 
+(bnf-mode-first;
  '(a b c))
 
 
@@ -631,14 +642,14 @@ application."
 
 
 (defun bnf-mode-bnf-location-from-error (e)
-  (nth 1 e))      
+  (nth 1 e))
 
 (defun bnf-mode-bnf-location-from-value (v)
   (cond
    ((bnf-mode-is-constructor? v)
-    (if (or (bnf-mode-is-bnf-location? (nth 1 v)) 
-	    (bnf-mode-is-syntax-location? (nth 1 v)))
-	(nth 1 v)
+    (if (or (bnf-mode-is-bnf-location? (nth 1 v))
+            (bnf-mode-is-syntax-location? (nth 1 v)))
+        (nth 1 v)
       (error "Value had no bnf location: %s" v)))
 
    (t
@@ -713,10 +724,10 @@ application."
 
 (defun bnf-mode-make-member (loc v)
   "location value"
-  (list 'member loc 
-	(if (bnf-mode-is-constructor? v)
-	    (list v)
-	  v)))
+  (list 'member loc
+        (if (bnf-mode-is-constructor? v)
+            (list v)
+          v)))
 
 (defun bnf-mode-is-member? (v)
   (bnf-mode-base-predicate v 3 'member))
@@ -857,13 +868,13 @@ application."
 
 (defun bnf-mode-syntax-location-from-value (v)
   (cond
-   
+
    ((null v)
     (error "value is null"))
 
    ((bnf-mode-is-syntax-value? v)
     (if (bnf-mode-is-syntax-location? (nth 1 v))
-	(nth 1 v)
+        (nth 1 v)
       (error "value did not have a syntax location")))
 
    ;; Merge the location of the bnf-mode-first and the last value in the list
@@ -991,7 +1002,7 @@ application."
 (defun bnf-mode-reference-not-found-1 (v)
   (nth 1 v))
 
-;;; 
+;;;
 
 (defun bnf-mode-make-reference-found (v)
   (list 'reference-found v))
@@ -1021,8 +1032,8 @@ application."
 ;; arity-match, indicates if the arity of the matched was ok
 ;; constant-match, indicates if the constant(s) of the matched was ok.
 (defun bnf-mode-make-remainder (res v arity-match constant-match paren-match)
-  (if (and (bnf-mode-boolean? res) 
-	   (not (bnf-mode-is-remainder? v)))
+  (if (and (bnf-mode-boolean? res)
+           (not (bnf-mode-is-remainder? v)))
       (list 'remainder res v arity-match constant-match paren-match)
     (error "make-remainder, bnf-mode-first arg: result; bnf-mode-second arg: remainder, user input, got: %s %s" res v)))
 
@@ -1065,7 +1076,10 @@ application."
       (bnf-mode-is-error-group-ref-not-found? v)))
 ;;;
 
-(defun bnf-mode-make-error-arity-with-multiplier (v bnf-location min-length actual-length)
+(defun bnf-mode-make-error-arity-with-multiplier (v
+                                                  bnf-location
+                                                  min-length
+                                                  actual-length)
   (list 'error-arity-with-multiplier bnf-location v min-length actual-length))
 
 
@@ -1163,7 +1177,9 @@ application."
 
 ;;;
 
-(defun bnf-mode-make-error-group-ref-expected-buildin (v bnf-location buildin-error)
+(defun bnf-mode-make-error-group-ref-expected-buildin (v
+                                                       bnf-location
+                                                       buildin-error)
   (list 'error-group-ref-expected-buildin bnf-location v buildin-error))
 
 (defun bnf-mode-is-error-group-ref-expected-buildin? (v)
@@ -1175,8 +1191,13 @@ application."
 
 ;;;
 
-(defun bnf-mode-make-error-group-ref-expected-reference-nested (v bnf-location reference-error)
-  (list 'error-group-ref-expected-reference-nested bnf-location v reference-error))
+(defun bnf-mode-make-error-group-ref-expected-reference-nested (v
+                                                                bnf-location
+                                                                reference-error)
+  (list 'error-group-ref-expected-reference-nested
+        bnf-location
+        v
+        reference-error))
 
 (defun bnf-mode-is-error-group-ref-expected-reference-nested? (v)
   (bnf-mode-base-predicate v 4 'error-group-ref-expected-reference-nested))
@@ -1260,20 +1281,20 @@ application."
     (while (bnf-mode-is-str-white-space? (car v))
       (setq c (+ c 1))
       (setq v (cdr v)))
-  c))
+    c))
 
-;(bnf-mode-strip-prefix-whitespace-count '(" " " " "\n" "a"))
+;; (bnf-mode-strip-prefix-whitespace-count '(" " " " "\n" "a"))
 
 (defun bnf-mode-combine-acc-and-value (acc v)
   (cond
-   
+
    ((or (bnf-mode-is-syntax-paren? acc)
-	(bnf-mode-is-constant? acc)
-	(bnf-mode-is-syntax-quote? acc)
-	(bnf-mode-is-syntax-backward-quote? acc)
-	(bnf-mode-is-syntax-comma? acc))
+        (bnf-mode-is-constant? acc)
+        (bnf-mode-is-syntax-quote? acc)
+        (bnf-mode-is-syntax-backward-quote? acc)
+        (bnf-mode-is-syntax-comma? acc))
     (append (list acc) (list v)))
-   
+
    ((consp acc)
     (append acc (list v)))
 
@@ -1284,14 +1305,14 @@ application."
 
 (defun bnf-mode-sexp-handle-constant (acc constant column-number)
   (if (> (length constant) 0)
-      (bnf-mode-combine-acc-and-value 
-       acc 
-       (bnf-mode-make-constant 
-	(bnf-mode-make-syntax-location 
-	 (- column-number (length constant)) 
-	 column-number)
-	(intern (bnf-mode-trim-string constant))
-	))
+      (bnf-mode-combine-acc-and-value
+       acc
+       (bnf-mode-make-constant
+        (bnf-mode-make-syntax-location
+         (- column-number (length constant))
+         column-number)
+        (intern (bnf-mode-trim-string constant))
+        ))
     acc))
 
 
@@ -1310,10 +1331,10 @@ application."
       (setq v (cdr v))
       (setq count (+ 1 count)))
     (if (string= "\n" (car v))
-	(progn
-	  (setq v (cdr v))
-	  (setq count (+ 1 count))))
-    (bnf-mode-make-comment-remainder 
+        (progn
+          (setq v (cdr v))
+          (setq count (+ 1 count))))
+    (bnf-mode-make-comment-remainder
      v
      count)))
 
@@ -1360,7 +1381,7 @@ application."
 (defun bnf-mode-quote-context-remainder-3 (v)
   (nth 3 v))
 
-;;;	    
+;;;
 
 (defun bnf-mode-handle-quote-context (v column-number f)
   (cond
@@ -1369,68 +1390,78 @@ application."
     (bnf-mode-make-quote-context-remainder
      nil
      (funcall f
-;     (bnf-mode-make-syntax-quote
-      (bnf-mode-make-syntax-location
-       column-number
-       (+ 1 column-number))
-      nil)
+              ;; (bnf-mode-make-syntax-quote
+              (bnf-mode-make-syntax-location
+               column-number
+               (+ 1 column-number))
+              nil)
      (+ 1 column-number)))
-     
 
-   ((or (bnf-mode-is-str-quote? (car v)) 
-	(bnf-mode-is-str-comma? (car v)))
+
+   ((or (bnf-mode-is-str-quote? (car v))
+        (bnf-mode-is-str-comma? (car v)))
     (let ((res (bnf-mode-handle-quote-context (cdr v) (+ 1 column-number) f)))
       (bnf-mode-make-quote-context-remainder
        (bnf-mode-quote-context-remainder-1 res)
-       ;(bnf-mode-make-syntax-quote
-       (funcall 
-	f
-	(bnf-mode-make-syntax-location
-	 column-number
-	 (bnf-mode-syntax-location-2 
-	  (bnf-mode-syntax-location-from-value (bnf-mode-quote-context-remainder-2 res))))
-	(bnf-mode-quote-context-remainder-2 res))
-       (bnf-mode-syntax-location-2 
-	  (bnf-mode-syntax-location-from-value (bnf-mode-quote-context-remainder-2 res))))))
-	
-	
+       ;; (bnf-mode-make-syntax-quote
+       (funcall
+        f
+        (bnf-mode-make-syntax-location
+         column-number
+         (bnf-mode-syntax-location-2
+          (bnf-mode-syntax-location-from-value
+           (bnf-mode-quote-context-remainder-2 res))))
+        (bnf-mode-quote-context-remainder-2 res))
+       (bnf-mode-syntax-location-2
+        (bnf-mode-syntax-location-from-value
+         (bnf-mode-quote-context-remainder-2 res))))))
+
+
 
    ((bnf-mode-is-str-constant? (car v))
     (let ((right-const (bnf-mode-retrieve-constant v)))
       (bnf-mode-make-quote-context-remainder
        (bnf-mode-constant-remainder-1 right-const)
-       
-       ;(bnf-mode-make-syntax-quote
-       (funcall 
-	f
-	(bnf-mode-make-syntax-location 
-	 column-number
-	 (+ 1 column-number (bnf-mode-constant-remainder-2 right-const)))
-	(bnf-mode-make-constant 
-	 (bnf-mode-make-syntax-location
-	  (+ 1 column-number) 
-	  (+ (+ 1 column-number) (length (bnf-mode-constant-remainder-3 right-const))))
-	 (intern (bnf-mode-trim-string (bnf-mode-constant-remainder-3 right-const)))))
+
+                                        ;(bnf-mode-make-syntax-quote
+       (funcall
+        f
+        (bnf-mode-make-syntax-location
+         column-number
+         (+ 1 column-number (bnf-mode-constant-remainder-2 right-const)))
+        (bnf-mode-make-constant
+         (bnf-mode-make-syntax-location
+          (+ 1 column-number)
+          (+ (+ 1 column-number)
+             (length (bnf-mode-constant-remainder-3 right-const))))
+         (intern (bnf-mode-trim-string
+                  (bnf-mode-constant-remainder-3 right-const)))))
        (+ 1 column-number (bnf-mode-constant-remainder-2 right-const)))))
 
    ((bnf-mode-is-str-paren-begin? (car v))
-    (let* ((result (bnf-mode-sexp-parse (cdr v) (+ 2 column-number) (+ 1 column-number) 0))
-	   (paren (bnf-mode-make-syntax-paren
-		   (bnf-mode-syntax-location-from-helper-1 (bnf-mode-parse-remainder-1 result))
-		   (bnf-mode-derive-paren-type (car v))
-		   (bnf-mode-paren-2 (bnf-mode-parse-remainder-1 result))
-		   (bnf-mode-paren-1 (bnf-mode-parse-remainder-1 result))
-		   )))
+    (let* ((result (bnf-mode-sexp-parse
+                    (cdr v)
+                    (+ 2 column-number)
+                    (+ 1 column-number) 0))
+           (paren (bnf-mode-make-syntax-paren
+                   (bnf-mode-syntax-location-from-helper-1
+                    (bnf-mode-parse-remainder-1 result))
+                   (bnf-mode-derive-paren-type (car v))
+                   (bnf-mode-paren-2 (bnf-mode-parse-remainder-1 result))
+                   (bnf-mode-paren-1 (bnf-mode-parse-remainder-1 result))
+                   )))
       (bnf-mode-make-quote-context-remainder
        (bnf-mode-parse-remainder-2 result)
-       ;(bnf-mode-make-syntax-quote 
-       (funcall 
-	f
-	(bnf-mode-make-syntax-location
-	 column-number
-	 (bnf-mode-syntax-location-2 (bnf-mode-syntax-location-from-value paren)))
-	paren)
-       (bnf-mode-syntax-location-2 (bnf-mode-syntax-location-from-helper-1 (bnf-mode-parse-remainder-1 result))))))
+                                        ;(bnf-mode-make-syntax-quote
+       (funcall
+        f
+        (bnf-mode-make-syntax-location
+         column-number
+         (bnf-mode-syntax-location-2 (bnf-mode-syntax-location-from-value paren)))
+        paren)
+       (bnf-mode-syntax-location-2
+        (bnf-mode-syntax-location-from-helper-1
+         (bnf-mode-parse-remainder-1 result))))))
 
    (t
     (bnf-mode-make-quote-context-remainder v nil column-number))))
@@ -1444,135 +1475,156 @@ application."
 
 (defun bnf-mode-sexp-parse-main (str)
   (bnf-mode-sexp-replace-quotes
-   (bnf-mode-parse-remainder-1 
+   (bnf-mode-parse-remainder-1
     (bnf-mode-sexp-parse (split-string str "" t) 0 0 0))))
 
 (defun bnf-mode-sexp-parse (v  column-number_  paren-column-number-begin cnt)
   (let ((acc nil)
-	(constant "")
-	(r nil)
-	(column-number column-number_))
+        (constant "")
+        (r nil)
+        (column-number column-number_))
     (while v
       (cond
 
        ((bnf-mode-is-str-comment? (car v))
-	(setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-	(setq constant "")
-	(let ((comment-res (bnf-mode-sexp-handle-comment v)))
-	  (setq v (bnf-mode-comment-remainder-1 comment-res))
-	  (setq column-number (+ column-number (bnf-mode-comment-remainder-2 comment-res)))))
+        (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+        (setq constant "")
+        (let ((comment-res (bnf-mode-sexp-handle-comment v)))
+          (setq v (bnf-mode-comment-remainder-1 comment-res))
+          (setq column-number (+ column-number
+                                 (bnf-mode-comment-remainder-2 comment-res)))))
 
        ((bnf-mode-is-str-string? v)
-	(setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-	(setq constant "")
-       	(let ((r (bnf-mode-is-str-string? v)))
-	  (setq column-number (+ column-number (bnf-mode-parse-remainder-3 r)))
-	  (setq acc (bnf-mode-sexp-handle-constant 
-		     acc 
-		     (bnf-mode-parse-remainder-1 r) 
-		     column-number))
-	  (setq v (bnf-mode-parse-remainder-2 r))))
+        (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+        (setq constant "")
+        (let ((r (bnf-mode-is-str-string? v)))
+          (setq column-number (+ column-number (bnf-mode-parse-remainder-3 r)))
+          (setq acc (bnf-mode-sexp-handle-constant
+                     acc
+                     (bnf-mode-parse-remainder-1 r)
+                     column-number))
+          (setq v (bnf-mode-parse-remainder-2 r))))
 
-       
+
        ((bnf-mode-is-str-quote? (car v))
-       	(setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-	(setq constant "")
-       	(let ((quote-res (bnf-mode-handle-quote-context 
-			  (bnf-mode-strip-prefix-whitespace (cdr v))
-			  (+ (bnf-mode-strip-prefix-whitespace-count (cdr v)) column-number)
-			  'bnf-mode-make-syntax-quote)))
-       	  (setq v (bnf-mode-quote-context-remainder-1 quote-res))
-       	  (setq acc (bnf-mode-combine-acc-and-value acc (bnf-mode-quote-context-remainder-2 quote-res)))
-       	  (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
+        (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+        (setq constant "")
+        (let ((quote-res (bnf-mode-handle-quote-context
+                          (bnf-mode-strip-prefix-whitespace (cdr v))
+                          (+ (bnf-mode-strip-prefix-whitespace-count (cdr v))
+                             column-number)
+                          'bnf-mode-make-syntax-quote)))
+          (setq v (bnf-mode-quote-context-remainder-1 quote-res))
+          (setq acc (bnf-mode-combine-acc-and-value
+                     acc
+                     (bnf-mode-quote-context-remainder-2 quote-res)))
+          (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
 
        ((bnf-mode-is-str-comma? (car v))
-       	(setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-       	(setq constant "")
-       	(let ((quote-res (bnf-mode-handle-quote-context 
-			  (bnf-mode-strip-prefix-whitespace (cdr v))
-			  (+ (bnf-mode-strip-prefix-whitespace-count (cdr v)) column-number)
-			  'bnf-mode-make-syntax-comma)))
-       	  (setq v (bnf-mode-quote-context-remainder-1 quote-res))
-       	  (setq acc (bnf-mode-combine-acc-and-value acc (bnf-mode-quote-context-remainder-2 quote-res)))
-       	  (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
+        (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+        (setq constant "")
+        (let ((quote-res (bnf-mode-handle-quote-context
+                          (bnf-mode-strip-prefix-whitespace (cdr v))
+                          (+
+                           (bnf-mode-strip-prefix-whitespace-count (cdr v))
+                           column-number)
+                          'bnf-mode-make-syntax-comma)))
+          (setq v (bnf-mode-quote-context-remainder-1 quote-res))
+          (setq acc (bnf-mode-combine-acc-and-value
+                     acc
+                     (bnf-mode-quote-context-remainder-2 quote-res)))
+          (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
 
 
 
        ((bnf-mode-is-str-backward-quote? (car v))
-       	(setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-       	(setq constant "")
-       	(let ((quote-res (bnf-mode-handle-quote-context 
-			  (bnf-mode-strip-prefix-whitespace (cdr v))
-			  (+ (bnf-mode-strip-prefix-whitespace-count (cdr v)) column-number)
-			  'bnf-mode-make-syntax-backward-quote)))
-       	  (setq v (bnf-mode-quote-context-remainder-1 quote-res))
-       	  (setq acc (bnf-mode-combine-acc-and-value acc (bnf-mode-quote-context-remainder-2 quote-res)))
-       	  (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
+        (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+        (setq constant "")
+        (let ((quote-res (bnf-mode-handle-quote-context
+                          (bnf-mode-strip-prefix-whitespace (cdr v))
+                          (+
+                           (bnf-mode-strip-prefix-whitespace-count (cdr v))
+                           column-number)
+                          'bnf-mode-make-syntax-backward-quote)))
+          (setq v (bnf-mode-quote-context-remainder-1 quote-res))
+          (setq acc (bnf-mode-combine-acc-and-value
+                     acc
+                     (bnf-mode-quote-context-remainder-2 quote-res)))
+          (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
 
 
        ((bnf-mode-is-str-new-line? (car v))
-	(setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-	(setq constant "")
-	(setq column-number (+ 1 column-number))
-	(setq v (cdr v)))
+        (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+        (setq constant "")
+        (setq column-number (+ 1 column-number))
+        (setq v (cdr v)))
 
        ((bnf-mode-is-str-constant? (car v))
-	(if (null (cdr v))
-	    (progn
-	      (setq acc (bnf-mode-sexp-handle-constant 
-			 acc 
-			 (concat constant (car v))
-			 (+ 1 column-number)))
-	      (setq constant ""))
-	  (setq constant (concat constant (car v))))
-	(setq column-number (+ 1 column-number))
-	(setq v (cdr v)))
-       
+        (if (null (cdr v))
+            (progn
+              (setq acc (bnf-mode-sexp-handle-constant
+                         acc
+                         (concat constant (car v))
+                         (+ 1 column-number)))
+              (setq constant ""))
+          (setq constant (concat constant (car v))))
+        (setq column-number (+ 1 column-number))
+        (setq v (cdr v)))
+
        ((bnf-mode-is-str-white-space? (car v))
-	(setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-	(setq constant "")
-	(setq column-number (+ 1 column-number))
-	(setq v (cdr v)))
-       
+        (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+        (setq constant "")
+        (setq column-number (+ 1 column-number))
+        (setq v (cdr v)))
+
        ((bnf-mode-is-str-paren-begin? (car v))
-	(setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-	(setq constant "")
-	(let* ((result (bnf-mode-sexp-parse (cdr v) (+ 1 column-number) column-number (+ 1 cnt)))
-	       (paren (bnf-mode-make-syntax-paren
-		       (bnf-mode-syntax-location-from-helper-1 (bnf-mode-parse-remainder-1 result))
-		       (bnf-mode-derive-paren-type (car v))
-		       (bnf-mode-paren-2 (bnf-mode-parse-remainder-1 result))
-		       (bnf-mode-paren-1 (bnf-mode-parse-remainder-1 result))
-		       )))
-	  (setq acc (bnf-mode-combine-acc-and-value acc paren))
-	  (setq v (bnf-mode-parse-remainder-2 result))
-	  (setq column-number 
-		(bnf-mode-syntax-location-2 
-		 (bnf-mode-syntax-location-from-helper-1 (bnf-mode-parse-remainder-1 result))))))
+        (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+        (setq constant "")
+        (let* ((result (bnf-mode-sexp-parse
+                        (cdr v)
+                        (+ 1 column-number)
+                        column-number (+ 1 cnt)))
+               (paren (bnf-mode-make-syntax-paren
+                       (bnf-mode-syntax-location-from-helper-1
+                        (bnf-mode-parse-remainder-1 result))
+                       (bnf-mode-derive-paren-type (car v))
+                       (bnf-mode-paren-2 (bnf-mode-parse-remainder-1 result))
+                       (bnf-mode-paren-1 (bnf-mode-parse-remainder-1 result))
+                       )))
+          (setq acc (bnf-mode-combine-acc-and-value acc paren))
+          (setq v (bnf-mode-parse-remainder-2 result))
+          (setq column-number
+                (bnf-mode-syntax-location-2
+                 (bnf-mode-syntax-location-from-helper-1
+                  (bnf-mode-parse-remainder-1 result))))))
 
 
        ((bnf-mode-is-str-paren-end? (car v))
-	(if (and (> (length constant) 0) (not (bnf-mode-is-str-white-space? constant)))
-	    (progn
-	      (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-	      (setq constant "")))
-	(setq r (bnf-mode-make-parse-remainder 
-		 (bnf-mode-make-syntax-paren-helper
-		  (bnf-mode-make-syntax-location 
-		   paren-column-number-begin 
-		   (+ 1 column-number))
-		  (bnf-mode-derive-paren-type (car v))
-		  acc)
-		 (cdr v)
-		 (+ 1 column-number)))
-	(setq v nil))
+        (if (and (> (length constant) 0)
+                 (not
+                  (bnf-mode-is-str-white-space? constant)))
+            (progn
+              (setq acc (bnf-mode-sexp-handle-constant
+                         acc
+                         constant column-number))
+              (setq constant "")))
+        (setq r (bnf-mode-make-parse-remainder
+                 (bnf-mode-make-syntax-paren-helper
+                  (bnf-mode-make-syntax-location
+                   paren-column-number-begin
+                   (+ 1 column-number))
+                  (bnf-mode-derive-paren-type (car v))
+                  acc)
+                 (cdr v)
+                 (+ 1 column-number)))
+        (setq v nil))
 
        ))
 
     (if (null r)
-	(progn
-	  (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
-	  (bnf-mode-make-parse-remainder acc v -1))
+        (progn
+          (setq acc (bnf-mode-sexp-handle-constant acc constant column-number))
+          (bnf-mode-make-parse-remainder acc v -1))
       r)))
 
 
@@ -1603,7 +1655,7 @@ application."
      (bnf-mode-syntax-location-from-value v)
      'unquote
      (bnf-mode-syntax-comma-1 v)))
-   
+
    ((bnf-mode-is-syntax-quote? v)
     (bnf-mode-make-syntax-paren-with-constant
      (bnf-mode-syntax-location-from-value v)
@@ -1623,9 +1675,9 @@ application."
     (bnf-mode-fold-left
      v
      (lambda (bnf-mode-x rest)
-       (append 
-	rest
-	(list (bnf-mode-sexp-replace-quotes bnf-mode-x))))
+       (append
+        rest
+        (list (bnf-mode-sexp-replace-quotes bnf-mode-x))))
      (lambda () '())))))
 
 
@@ -1642,7 +1694,7 @@ application."
 
 ;; Helpers
 (defun bnf-mode-length-of-sexp-value (v)
-  (cond 
+  (cond
    ((null v)
     0)
 
@@ -1666,7 +1718,7 @@ application."
 
 
 (defun bnf-mode-nested-length-of-sexp-value (v)
-  (cond 
+  (cond
    ((null v)
     0)
 
@@ -1674,23 +1726,38 @@ application."
     1)
 
    ((bnf-mode-is-syntax-quote? v)
-    (+ 1 (bnf-mode-nested-length-of-sexp-value (bnf-mode-syntax-quote-1 v))))
+    (+
+     1
+     (bnf-mode-nested-length-of-sexp-value
+      (bnf-mode-syntax-quote-1 v))))
 
    ((bnf-mode-is-syntax-comma? v)
-    (+ 1 (bnf-mode-nested-length-of-sexp-value (bnf-mode-syntax-comma-1 v))))
+    (+
+     1
+     (bnf-mode-nested-length-of-sexp-value
+      (bnf-mode-syntax-comma-1 v))))
 
    ((bnf-mode-is-syntax-backward-quote? v)
-    (+ 1 (bnf-mode-nested-length-of-sexp-value (bnf-mode-syntax-backward-quote-1 v))))
+    (+
+     1
+     (bnf-mode-nested-length-of-sexp-value
+      (bnf-mode-syntax-backward-quote-1 v))))
 
    ((bnf-mode-is-syntax-paren? v)
-    (+ 1 (bnf-mode-nested-length-of-sexp-value (bnf-mode-syntax-paren-2 v))))
+    (+
+     1
+     (bnf-mode-nested-length-of-sexp-value
+      (bnf-mode-syntax-paren-2 v))))
 
    ((bnf-mode-is-value-list? v)
     (bnf-mode-fold-left
      v
      (lambda (bnf-mode-x rest)
-       (+ (bnf-mode-nested-length-of-sexp-value bnf-mode-x) rest))
-     (lambda () 0)))))
+       (+
+        (bnf-mode-nested-length-of-sexp-value bnf-mode-x)
+        rest))
+     (lambda ()
+       0)))))
 
 
 
@@ -1709,7 +1776,7 @@ application."
     v)
 
    ((bnf-mode-is-syntax-paren? v)
-    v)    
+    v)
 
    ((bnf-mode-is-value-list? v)
     (car v))
@@ -1740,10 +1807,10 @@ application."
 
    ((bnf-mode-is-value-list? v)
     (if (null (cdr (cdr v)))
-	(car (cdr v))
+        (car (cdr v))
       (cdr v)))
 
-   (t 
+   (t
     nil)))
 
 
@@ -1778,92 +1845,98 @@ application."
 
 
 ;; If the bnf-mode-first of the list is optional white space
-;; followed by a group-name, such as: <abc>, return the 
+;; followed by a group-name, such as: <abc>, return the
 ;; group-name, the remainder and the column-offset
 (defun bnf-mode-str-group-name (v)
   (let ((r nil) (cn 0) (group-name "") (group-begin-cn -1))
     (while v
       (cond
 
-       ((or (bnf-mode-is-str-white-space? (car v)) (bnf-mode-is-str-new-line? (car v)))
-	(if (and (> group-begin-cn -1) (> (length group-name) 0))
-	    (progn
-	      (setq v nil)
-	      (setq r nil))
-	  (progn
-	    (setq v (cdr v))
-	    (setq cn (+ 1 cn)))))
+       ((or (bnf-mode-is-str-white-space? (car v))
+            (bnf-mode-is-str-new-line? (car v)))
+        (if (and (> group-begin-cn -1) (> (length group-name) 0))
+            (progn
+              (setq v nil)
+              (setq r nil))
+          (progn
+            (setq v (cdr v))
+            (setq cn (+ 1 cn)))))
 
        ((bnf-mode-is-str-arrow-begin? (car v))
-	(if (> (length group-name) 0)
-	    (progn
-	      (setq r nil)
-	      (setq v nil))
-	  (progn
-	    (setq group-begin-cn cn)
-	    (setq v (cdr v))
-	    (setq cn (+ 1 cn)))))
+        (if (> (length group-name) 0)
+            (progn
+              (setq r nil)
+              (setq v nil))
+          (progn
+            (setq group-begin-cn cn)
+            (setq v (cdr v))
+            (setq cn (+ 1 cn)))))
 
        ((bnf-mode-is-str-bnf-constant? (car v))
-	(setq group-name (concat group-name (car v)))
-	(setq v (cdr v))
-	(setq cn (+ 1 cn)))
+        (setq group-name (concat group-name (car v)))
+        (setq v (cdr v))
+        (setq cn (+ 1 cn)))
 
        ((bnf-mode-is-str-arrow-end? (car v))
-	(setq r (bnf-mode-make-bnf-parse-remainder (concat "<" group-name ">") (cdr v) group-begin-cn (+ 1 cn)))
-	(setq v nil))
+        (setq r (bnf-mode-make-bnf-parse-remainder
+                 (concat "<" group-name ">")
+                 (cdr v) group-begin-cn (+ 1 cn)))
+        (setq v nil))
 
        (t
-	(setq v nil))
+        (setq v nil))
 
        ))
     (if r
-	r
+        r
       nil)))
 
 (defun bnf-mode-str-define (v)
   (let ((r nil) (cn 0) (vv v))
     (while vv
       (cond
-     
-       ((or (bnf-mode-is-str-white-space? (car vv)) (bnf-mode-is-str-new-line? (car vv)))
-	(setq vv (cdr vv))
-	(setq cn (+ 1 cn)))
-     
+
+       ((or (bnf-mode-is-str-white-space? (car vv))
+            (bnf-mode-is-str-new-line? (car vv)))
+        (setq vv (cdr vv))
+        (setq cn (+ 1 cn)))
+
        (t
-	(setq v vv)
-	(setq vv nil))
-     
+        (setq v vv)
+        (setq vv nil))
+
        ))
     (if (and
-	 (string= (nth 0 v) ":")
-	 (string= (nth 1 v) ":")
-	 (string= (nth 2 v) "="))
-	(bnf-mode-make-bnf-parse-remainder "::=" (nthcdr 3 v) cn (+ cn 3))
+         (string= (nth 0 v) ":")
+         (string= (nth 1 v) ":")
+         (string= (nth 2 v) "="))
+        (bnf-mode-make-bnf-parse-remainder "::=" (nthcdr 3 v) cn (+ cn 3))
       nil)))
 
 
 ;; (bnf-mode-str-group-name '(" " "\n" " " "<" "a" ">" ""))
 
 ;; (bnf-mode-str-define
-;;  (bnf-mode-bnf-parse-remainder-2 
-;;   (bnf-mode-str-group-name '(" " " " " " "<" "a" "b" ">" " " " " "\n" " " " " ":" ":" "="))))
+;;  (bnf-mode-bnf-parse-remainder-2
+;;   (bnf-mode-str-group-name
+;;    '(" " " " " " "<" "a" "b" ">" " " " " "\n" " " " " ":" ":" "="))))
 
 ;; (bnf-mode-str-define '(" " " " " " " " ":" ":" "="))
 
 (defun bnf-mode-is-str-define? (v cn)
   (let ((group (bnf-mode-str-group-name v)))
     (if group
-	(let ((define (bnf-mode-str-define (bnf-mode-bnf-parse-remainder-2 group))))
-	  (if define
-	      (bnf-mode-make-bnf-parse-remainder
-	       (bnf-mode-bnf-parse-remainder-1 group)
-	       (bnf-mode-bnf-parse-remainder-2 define)
-	       (+ cn (bnf-mode-bnf-parse-remainder-3 group))
-	       (+ cn 
-		  (bnf-mode-bnf-parse-remainder-4 group)
-		  (bnf-mode-bnf-parse-remainder-4 define)))
-	    nil))
+        (let ((define (bnf-mode-str-define
+                       (bnf-mode-bnf-parse-remainder-2 group))))
+          (if define
+              (bnf-mode-make-bnf-parse-remainder
+               (bnf-mode-bnf-parse-remainder-1 group)
+               (bnf-mode-bnf-parse-remainder-2 define)
+               (+ cn (bnf-mode-bnf-parse-remainder-3 group))
+               (+ cn
+                  (bnf-mode-bnf-parse-remainder-4 group)
+                  (bnf-mode-bnf-parse-remainder-4 define)))
+            nil))
       nil)))
 
 
@@ -1887,7 +1960,7 @@ application."
        (not (bnf-mode-is-constructor? v))
        (bnf-mode-is-constructor? (car v))))
 ;; Assumption: If 1 is a constructor, then so is 2 ... n.
-  
+
 
 
 (defun bnf-mode-last-element-of-list (v)
@@ -1905,24 +1978,24 @@ application."
   (cond
 
 
-   ((bnf-mode-is-constant? acc) 
+   ((bnf-mode-is-constant? acc)
     (bnf-mode-make-constant (bnf-mode-extend-bnf-location-end
-		    (bnf-mode-bnf-location-from-value acc)
-		    1)
-		   (intern
-		    (concat 
-		     (symbol-name (bnf-mode-constant-1 acc))
-		     (if (equal f-cons 'bnf-mode-make-star)
-			 "*"
-		       "+")))))
+                             (bnf-mode-bnf-location-from-value acc)
+                             1)
+                            (intern
+                             (concat
+                              (symbol-name (bnf-mode-constant-1 acc))
+                              (if (equal f-cons 'bnf-mode-make-star)
+                                  "*"
+                                "+")))))
 
    ((or (bnf-mode-is-group-ref? acc)
-	(bnf-mode-is-paren? acc))
+        (bnf-mode-is-paren? acc))
     (funcall f-cons
-	     (bnf-mode-extend-bnf-location-end
-	      (bnf-mode-bnf-location-from-value acc)
-	      1)
-	     (list acc)))
+             (bnf-mode-extend-bnf-location-end
+              (bnf-mode-bnf-location-from-value acc)
+              1)
+             (list acc)))
 
 
    ((bnf-mode-is-member? acc)
@@ -1930,29 +2003,29 @@ application."
     (let ((last-elm (bnf-mode-last-element-of-list (bnf-mode-member-1 acc))))
       (bnf-mode-make-member
        (bnf-mode-extend-bnf-location-end
-	(bnf-mode-bnf-location-from-value acc) 1)
+        (bnf-mode-bnf-location-from-value acc) 1)
        (append
-	(bnf-mode-remove-last-element-of-list (bnf-mode-member-1 acc))
-	(list
-	 (funcall f-cons
-		 (bnf-mode-extend-bnf-location-end
-		  (bnf-mode-bnf-location-from-value last-elm) 1)
-		 (list last-elm)))))))
+        (bnf-mode-remove-last-element-of-list (bnf-mode-member-1 acc))
+        (list
+         (funcall f-cons
+                  (bnf-mode-extend-bnf-location-end
+                   (bnf-mode-bnf-location-from-value last-elm) 1)
+                  (list last-elm)))))))
 
-   
+
    ((bnf-mode-is-value-list? acc)
     (let ((last (bnf-mode-last-element-of-list acc)))
       (append
        (bnf-mode-remove-last-element-of-list acc)
        (funcall f-cons
-		(bnf-mode-extend-bnf-location-end
-		 (bnf-mode-bnf-location-from-value last) 1)
-		last))))
-	
+                (bnf-mode-extend-bnf-location-end
+                 (bnf-mode-bnf-location-from-value last) 1)
+                last))))
+
 
    (t
     (error "extend-parsed-star: unhandled case: %s " acc ))))
-    
+
 
 (defun bnf-mode-extend-bnf-location-end (bnf-loc offset)
   "Given the bnf-loc, adds the offset to the end of the bnf-loc"
@@ -1966,42 +2039,42 @@ application."
 
 (defun bnf-mode-extend-parsed (acc v)
   (cond
-   
+
    ((null acc)
-    (bnf-mode-make-member 
+    (bnf-mode-make-member
      (bnf-mode-bnf-location-from-value v)
      (list v)))
 
-   ((and (bnf-mode-is-value? acc) 
-	 (bnf-mode-is-value? v))
-    (bnf-mode-make-member 
+   ((and (bnf-mode-is-value? acc)
+         (bnf-mode-is-value? v))
+    (bnf-mode-make-member
      (bnf-mode-extend-bnf-location
       (bnf-mode-bnf-location-from-value acc)
       (bnf-mode-bnf-location-from-value v))
      (append
       (list acc)
       (list v))))
-    
+
 
    ((and (null acc) (bnf-mode-is-value? v))
-    (bnf-mode-make-member 
+    (bnf-mode-make-member
      (bnf-mode-bnf-location-from-value v)
      (list v)))
 
    ;; (m (a)) + b --> (m (a b))
    ((and (bnf-mode-is-member? acc)
-	 (bnf-mode-is-value? v))
+         (bnf-mode-is-value? v))
     (bnf-mode-make-member
-     (bnf-mode-extend-bnf-location 
+     (bnf-mode-extend-bnf-location
       (bnf-mode-bnf-location-from-value acc)
       (bnf-mode-bnf-location-from-value v))
-     (append 
+     (append
       (bnf-mode-member-1 acc)
       (list v))))
 
 
    ((and (bnf-mode-is-value-list? acc)
-	 (bnf-mode-is-value? v))
+         (bnf-mode-is-value? v))
     (append
      acc
      (list v)))
@@ -2013,14 +2086,14 @@ application."
 
 
 (defun bnf-mode-combine-two-groups (a b)
-  (cond 
+  (cond
 
    ((and (null a) (bnf-mode-is-group? b))
     (list b))
 
    ((and (consp a) (bnf-mode-is-group? b))
     (append a (list b)))))
-     
+
 
 (defun bnf-mode-extend-parsed-with-constant (acc v)
   (cond
@@ -2029,13 +2102,13 @@ application."
     v)
 
    ((and (bnf-mode-is-value-list? acc)
-	 (bnf-mode-is-value? v))
+         (bnf-mode-is-value? v))
     (append
      acc
      (list v)))
 
-   ((and (bnf-mode-is-value? acc) 
-	 (bnf-mode-is-value? v))
+   ((and (bnf-mode-is-value? acc)
+         (bnf-mode-is-value? v))
     (list acc v))
 
    ((bnf-mode-is-member? acc)
@@ -2044,7 +2117,7 @@ application."
    (t
     (error "extend-parsed-with-constant unhandled case: %s %s" acc v))
 
-))
+   ))
 
 
 
@@ -2053,84 +2126,86 @@ application."
   (cond
 
    ((and (null a)
-	 (bnf-mode-is-value? b))
+         (bnf-mode-is-value? b))
     (bnf-mode-make-members
      (bnf-mode-bnf-location-from-value b)
      (list (bnf-mode-make-member
-	    (bnf-mode-bnf-location-from-value b)
-	    (list b)))))
+            (bnf-mode-bnf-location-from-value b)
+            (list b)))))
 
    ((and (null a)
-	 (bnf-mode-is-value-list? b))
+         (bnf-mode-is-value-list? b))
     (let ((bnf-loc (bnf-mode-extend-bnf-location
-		    (bnf-mode-bnf-location-from-value (car b))
-		    (bnf-mode-bnf-location-from-value (bnf-mode-last-element-of-list b)))))
-    (bnf-mode-make-members
-     bnf-loc
-     (list (bnf-mode-make-member
-	    bnf-loc
-	    b)))))
+                    (bnf-mode-bnf-location-from-value
+                     (car b))
+                    (bnf-mode-bnf-location-from-value
+                     (bnf-mode-last-element-of-list b)))))
+      (bnf-mode-make-members
+       bnf-loc
+       (list (bnf-mode-make-member
+              bnf-loc
+              b)))))
 
 
    ((and (null a)
-	 (bnf-mode-is-member? b))
+         (bnf-mode-is-member? b))
     (bnf-mode-make-members
      (bnf-mode-bnf-location-from-value b)
      (list b)))
 
    ((and (bnf-mode-is-member? a)
-	 (null b))
+         (null b))
     (bnf-mode-make-members
      (bnf-mode-bnf-location-from-value a)
      (list a)))
 
    ((and (bnf-mode-is-member? a)
-	 (bnf-mode-is-member? b))
+         (bnf-mode-is-member? b))
     (bnf-mode-make-members
      (bnf-mode-extend-bnf-location
       (bnf-mode-bnf-location-from-value a)
       (bnf-mode-bnf-location-from-value b))
-      (list a b)))
+     (list a b)))
 
    ((and (bnf-mode-is-members? a)
-	 (bnf-mode-is-member? b))
+         (bnf-mode-is-member? b))
     (bnf-mode-make-members
      (bnf-mode-extend-bnf-location
       (bnf-mode-bnf-location-from-value a)
       (bnf-mode-bnf-location-from-value b))
      (append (bnf-mode-members-1 a)
-	     (list b))))
+             (list b))))
 
    ((and (bnf-mode-is-members? a)
-	 (bnf-mode-is-value? b))
+         (bnf-mode-is-value? b))
     (bnf-mode-make-members
      (bnf-mode-extend-bnf-location
       (bnf-mode-bnf-location-from-value a)
       (bnf-mode-bnf-location-from-value b))
      (append (bnf-mode-members-1 a)
-	     (list 
-	      (bnf-mode-make-member 
-	       (bnf-mode-bnf-location-from-value b)
-	       (list b))))))
+             (list
+              (bnf-mode-make-member
+               (bnf-mode-bnf-location-from-value b)
+               (list b))))))
 
 
    ((and (bnf-mode-is-members? a)
-	 (bnf-mode-is-value-list? b))
+         (bnf-mode-is-value-list? b))
     (bnf-mode-make-members
      (bnf-mode-extend-bnf-location
       (bnf-mode-bnf-location-from-value a)
       (bnf-mode-bnf-location-from-value b))
      (append (bnf-mode-members-1 a)
-	     (list 
-	      (bnf-mode-make-member 
-	       (bnf-mode-bnf-location-from-value b)
-	       b)))))
+             (list
+              (bnf-mode-make-member
+               (bnf-mode-bnf-location-from-value b)
+               b)))))
 
 
 
    (t
     (error "combine-two-members: %s %s" a b))
-))
+   ))
 
 
 
@@ -2140,20 +2215,25 @@ application."
     (while v
       (cond
        ((bnf-mode-is-str-bnf-constant? (car v))
-	(progn
-	  (setq constant (concat constant (car v)))
-	  (setq v (cdr v))))
+        (progn
+          (setq constant (concat constant (car v)))
+          (setq v (cdr v))))
 
        ((bnf-mode-is-str-arrow-end? (car v))
-	(progn
-	  (setq r (bnf-mode-make-parse-remainder constant (cdr v) (+ column-number (length constant))))
-	  (setq v nil)))
+        (progn
+          (setq r (bnf-mode-make-parse-remainder
+                   constant
+                   (cdr v)
+                   (+
+                    column-number
+                    (length constant))))
+          (setq v nil)))
 
        (t
-	(error "Wrong BNF-syntax: %s" v))))
+        (error "Wrong BNF-syntax: %s" v))))
 
     (if (null r)
-	(error "Missing end arrow \">\"")
+        (error "Missing end arrow \">\"")
       r)))
 
 
@@ -2163,33 +2243,38 @@ application."
       (cond
 
        ((bnf-mode-is-str-arrow-begin? (car v))
-	(setq v (cdr v))
-	(setq start-arr t))
+        (setq v (cdr v))
+        (setq start-arr t))
 
        ((bnf-mode-is-str-bnf-constant? (car v))
-	(if (not start-arr)
-	    (progn
-	      (setq r nil)
-	      (setq v nil))
-	  (progn
-	    (setq constant (concat constant (car v)))
-	    (setq v (cdr v)))))
+        (if (not start-arr)
+            (progn
+              (setq r nil)
+              (setq v nil))
+          (progn
+            (setq constant (concat constant (car v)))
+            (setq v (cdr v)))))
 
        ((bnf-mode-is-str-arrow-end? (car v))
-	(if (and start-arr (< 0 (length constant)))
-	  (progn
-	    (setq r (bnf-mode-make-parse-remainder constant (cdr v) (+ column-number (length constant))))
-	    (setq v nil))
-	  (progn
-	    (setq v nil)
-	    (setq r nil))))
+        (if (and start-arr (< 0 (length constant)))
+            (progn
+              (setq r (bnf-mode-make-parse-remainder
+                       constant
+                       (cdr v)
+                       (+
+                        column-number
+                        (length constant))))
+              (setq v nil))
+          (progn
+            (setq v nil)
+            (setq r nil))))
 
 
        (t
-	(setq v nil)
-	nil)))
+        (setq v nil)
+        nil)))
     r))
-    
+
 
 
 ;; (bnf-mode-bnf-parse-group-name-context '("a" "b" "c" ">" "s") 0)
@@ -2202,24 +2287,24 @@ application."
 
 
 (defun bnf-mode-is-member-context-end? (v member-context)
-  (and member-context 
-;       (or (bnf-mode-is-str-define? v)
-	   (null v)))
-  
+  (and member-context
+                                        ;       (or (bnf-mode-is-str-define? v)
+       (null v)))
+
 
 (defun bnf-mode-bnf-parse-main (str)
   (let* ((result (bnf-mode-bnf-parse (split-string str "" t) 0 nil nil))
-	 (outer-loc (bnf-mode-make-bnf-location
-		     0
-		     (bnf-mode-bnf-parse-remainder-4 result))))
+         (outer-loc (bnf-mode-make-bnf-location
+                     0
+                     (bnf-mode-bnf-parse-remainder-4 result))))
     (if (not (null (bnf-mode-bnf-parse-remainder-2 result)))
-	(error "Bnf not fully parsed: %s" result)
-      (bnf-mode-bnf-replace-desugar 
+        (error "Bnf not fully parsed: %s" result)
+      (bnf-mode-bnf-replace-desugar
        (bnf-mode-make-bnf
-	outer-loc
-	(bnf-mode-make-groups
-	 outer-loc
-	 (bnf-mode-bnf-parse-remainder-1 result)))))))
+        outer-loc
+        (bnf-mode-make-groups
+         outer-loc
+         (bnf-mode-bnf-parse-remainder-1 result)))))))
 
 
 ;; builds a round parenthesis with the constant and the input:
@@ -2238,30 +2323,36 @@ application."
 ;; Replacements for Scheme syntactic sugar.
 (defun bnf-mode-bnf-replace-desugar (v)
   (cond
-   
+
    ((bnf-mode-is-constant? v)
     v)
 
-   ((bnf-mode-is-quote? v)       ;; 'a ==> (quote a) ==> (paren c (constant quote) (constant a))
-    (bnf-mode-make-paren-with-constant 
+   ((bnf-mode-is-quote? v)
+    ;; 'a ==> (quote a) ==>
+    ;; (paren c (constant quote) (constant a))
+    (bnf-mode-make-paren-with-constant
      (bnf-mode-bnf-location-from-value v)
-     'quote 
+     'quote
      (bnf-mode-bnf-replace-desugar (bnf-mode-quote-1 v))))
 
-   ((bnf-mode-is-comma? v)       ;; ,a ==> (unquote a) ==> (paren c (constant unqoute) (constant a))
-    (bnf-mode-make-paren-with-constant 
+   ((bnf-mode-is-comma? v)
+    ;; ,a ==> (unquote a) ==>
+    ;; (paren c (constant unqoute) (constant a))
+    (bnf-mode-make-paren-with-constant
      (bnf-mode-bnf-location-from-value v)
-     'unquote 
+     'unquote
      (bnf-mode-bnf-replace-desugar (bnf-mode-comma-1 v))))
 
 
-   ((bnf-mode-is-backward-quote? v) ;; `a ==> (backward-quote a) ==> (paren c (constant backward-quote) (constant a))
-    (bnf-mode-make-paren-with-constant 
+   ((bnf-mode-is-backward-quote? v)
+    ;; `a ==> (backward-quote a) ==>
+    ;; (paren c (constant backward-quote) (constant a))
+    (bnf-mode-make-paren-with-constant
      (bnf-mode-bnf-location-from-value v)
      'quasiquote
      (bnf-mode-bnf-replace-desugar (bnf-mode-backward-quote-1 v))))
-  
-   
+
+
    ((bnf-mode-is-paren? v)
     (bnf-mode-make-paren
      (bnf-mode-bnf-location-from-value v)
@@ -2311,13 +2402,13 @@ application."
     (bnf-mode-fold-left
      v
      (lambda (bnf-mode-x rest)
-       (append 
-	rest
-	(list (bnf-mode-bnf-replace-desugar bnf-mode-x))))
+       (append
+        rest
+        (list (bnf-mode-bnf-replace-desugar bnf-mode-x))))
      (lambda () '())))
 
    ))
-     
+
 
 
 
@@ -2327,36 +2418,45 @@ application."
   (cond
 
    ((bnf-mode-is-str-quote? (car v))
-    (let ((res (bnf-mode-handle-bnf-quote-context (cdr v) (+ 1 column-number) f)))
+    (let ((res (bnf-mode-handle-bnf-quote-context
+                (cdr v)
+                (+ 1 column-number) f)))
       (bnf-mode-make-quote-context-remainder
        (bnf-mode-quote-context-remainder-1 res)
        (funcall f
-       ;(bnf-mode-make-quote
-	(bnf-mode-make-bnf-location
-	 column-number
-	 (bnf-mode-bnf-location-2 
-	  (bnf-mode-bnf-location-from-value (bnf-mode-quote-context-remainder-2 res))))
-	(bnf-mode-quote-context-remainder-2 res))
-       (bnf-mode-bnf-location-2 
-	  (bnf-mode-bnf-location-from-value (bnf-mode-quote-context-remainder-2 res))))))
+                                        ;(bnf-mode-make-quote
+                (bnf-mode-make-bnf-location
+                 column-number
+                 (bnf-mode-bnf-location-2
+                  (bnf-mode-bnf-location-from-value
+                   (bnf-mode-quote-context-remainder-2 res))))
+                (bnf-mode-quote-context-remainder-2 res))
+       (bnf-mode-bnf-location-2
+        (bnf-mode-bnf-location-from-value
+         (bnf-mode-quote-context-remainder-2 res))))))
 
    ((bnf-mode-is-str-arrow-begin? (car v))
-    (let* ((group-name (bnf-mode-bnf-parse-group-name-context (cdr v) column-number))
-	   (group-constant (concat "<" (bnf-mode-parse-remainder-1 group-name) ">")))
+    (let* ((group-name (bnf-mode-bnf-parse-group-name-context
+                        (cdr v)
+                        column-number))
+           (group-constant (concat
+                            "<"
+                            (bnf-mode-parse-remainder-1 group-name)
+                            ">")))
       (bnf-mode-make-quote-context-remainder
        (bnf-mode-parse-remainder-2 group-name)
        (funcall f
-       ;(bnf-mode-make-quote
-	(bnf-mode-make-bnf-location
-	 column-number	 
-	 (+ 3 (bnf-mode-parse-remainder-3 group-name)))
-	(bnf-mode-make-group-ref
-	 (bnf-mode-make-bnf-location
-	  (+ 1 column-number)
-	  (+ 3 (bnf-mode-parse-remainder-3 group-name)))
-	 (intern group-constant)))
+                                        ;(bnf-mode-make-quote
+                (bnf-mode-make-bnf-location
+                 column-number
+                 (+ 3 (bnf-mode-parse-remainder-3 group-name)))
+                (bnf-mode-make-group-ref
+                 (bnf-mode-make-bnf-location
+                  (+ 1 column-number)
+                  (+ 3 (bnf-mode-parse-remainder-3 group-name)))
+                 (intern group-constant)))
        (+ 3 (bnf-mode-parse-remainder-3 group-name)))))
-			    
+
 
 
    ((bnf-mode-is-str-constant? (car v))
@@ -2364,41 +2464,49 @@ application."
       (bnf-mode-make-quote-context-remainder
        (bnf-mode-constant-remainder-1 right-const)
        (funcall f
-       ;(bnf-mode-make-quote
-	(bnf-mode-make-bnf-location
-	 column-number
-	 (+ 1 column-number (bnf-mode-constant-remainder-2 right-const)))
-	(bnf-mode-make-constant 
-	 (bnf-mode-make-bnf-location
-	  (+ 1 column-number) 
-	  (+ (+ 1 column-number) (length (bnf-mode-constant-remainder-3 right-const))))
-	 (intern (bnf-mode-trim-string (bnf-mode-constant-remainder-3 right-const)))))
+                                        ;(bnf-mode-make-quote
+                (bnf-mode-make-bnf-location
+                 column-number
+                 (+ 1 column-number (bnf-mode-constant-remainder-2 right-const)))
+                (bnf-mode-make-constant
+                 (bnf-mode-make-bnf-location
+                  (+ 1 column-number)
+                  (+
+                   (+ 1 column-number)
+                   (length
+                    (bnf-mode-constant-remainder-3
+                     right-const))))
+                 (intern (bnf-mode-trim-string
+                          (bnf-mode-constant-remainder-3
+                           right-const)))))
        (+ column-number (length (bnf-mode-constant-remainder-3 right-const))))))
 
    ((bnf-mode-is-str-paren-begin? (car v))
     (let* ((paren-type (bnf-mode-derive-paren-type (car v)))
-	   (inner (bnf-mode-bnf-parse (cdr v)
-			     (+ 2 column-number)
-			     t
-			     paren-type))
-	   (inner-value (if (bnf-mode-is-member? (bnf-mode-bnf-parse-remainder-1 inner))
-			    (bnf-mode-member-1 (bnf-mode-bnf-parse-remainder-1 inner))
-			  (bnf-mode-bnf-parse-remainder-1 inner))))
+           (inner (bnf-mode-bnf-parse (cdr v)
+                                      (+ 2 column-number)
+                                      t
+                                      paren-type))
+           (inner-value (if (bnf-mode-is-member?
+                             (bnf-mode-bnf-parse-remainder-1 inner))
+                            (bnf-mode-member-1
+                             (bnf-mode-bnf-parse-remainder-1 inner))
+                          (bnf-mode-bnf-parse-remainder-1 inner))))
 
       (bnf-mode-make-quote-context-remainder
        (bnf-mode-bnf-parse-remainder-2 inner)
        (funcall f
-       ;(bnf-mode-make-quote 
-	(bnf-mode-make-bnf-location
-	 column-number
-	 (bnf-mode-bnf-parse-remainder-4 inner))
-	(bnf-mode-make-paren
-	 (bnf-mode-make-bnf-location
-	  (+ 1 column-number)
-	  (bnf-mode-bnf-parse-remainder-4 inner))
-	 (bnf-mode-derive-paren-type (car v))
-	 inner-value))
-	(bnf-mode-bnf-parse-remainder-4 inner))))
+                                        ;(bnf-mode-make-quote
+                (bnf-mode-make-bnf-location
+                 column-number
+                 (bnf-mode-bnf-parse-remainder-4 inner))
+                (bnf-mode-make-paren
+                 (bnf-mode-make-bnf-location
+                  (+ 1 column-number)
+                  (bnf-mode-bnf-parse-remainder-4 inner))
+                 (bnf-mode-derive-paren-type (car v))
+                 inner-value))
+       (bnf-mode-bnf-parse-remainder-4 inner))))
 
    (t
     (bnf-mode-make-quote-context-remainder v nil column-number))))
@@ -2446,7 +2554,7 @@ application."
 
 (defun bnf-mode-looking-for-independent-multiplier-2 (v)
   (nth 2 v))
-  
+
 
 ;;;
 
@@ -2505,55 +2613,80 @@ application."
      (cond
 
 
-     ;; "a" "*" "a"
+      ;; "a" "*" "a"
       ((and (bnf-mode-is-str-constant? bnf-mode-x)
-	    (or (bnf-mode-is-str-star? (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))) 
-		(bnf-mode-is-str-plus? (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))))
-	    (bnf-mode-is-str-constant? (car (cdr (cdr (bnf-mode-looking-for-independent-multiplier-1 rest))))))
+            (or (bnf-mode-is-str-star?
+                 (car
+                  (cdr
+                   (bnf-mode-looking-for-independent-multiplier-1 rest))))
+                (bnf-mode-is-str-plus?
+                 (car
+                  (cdr
+                   (bnf-mode-looking-for-independent-multiplier-1 rest)))))
+            (bnf-mode-is-str-constant?
+             (car
+              (cdr
+               (cdr
+                (bnf-mode-looking-for-independent-multiplier-1 rest))))))
        (bnf-mode-make-multiplier-with-left-right-constant
-	(bnf-mode-looking-for-independent-multiplier-1 rest)
-	(+ 1 (bnf-mode-looking-for-independent-multiplier-2 rest))
-	(car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))))
+        (bnf-mode-looking-for-independent-multiplier-1 rest)
+        (+ 1 (bnf-mode-looking-for-independent-multiplier-2 rest))
+        (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))))
 
 
       ;; "*" "a"
-      ((and (or (bnf-mode-is-str-star? bnf-mode-x) 
-		(bnf-mode-is-str-plus? bnf-mode-x))
-	    (bnf-mode-is-str-constant? (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))))
+      ((and (or (bnf-mode-is-str-star? bnf-mode-x)
+                (bnf-mode-is-str-plus? bnf-mode-x))
+            (bnf-mode-is-str-constant?
+             (car
+              (cdr
+               (bnf-mode-looking-for-independent-multiplier-1 rest)))))
        (bnf-mode-make-multiplier-with-right-constant
-	(cdr (bnf-mode-independent-multiplier-1 rest))
-	(+ 1 (bnf-mode-independent-multiplier-2 rest))
-	bnf-mode-x))
+        (cdr (bnf-mode-independent-multiplier-1 rest))
+        (+ 1 (bnf-mode-independent-multiplier-2 rest))
+        bnf-mode-x))
 
       ;; "a" "*"
-      ((and (or (bnf-mode-is-str-star? (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))) 
-		(bnf-mode-is-str-plus? (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))))
-	    (bnf-mode-is-str-constant? bnf-mode-x))
+      ((and (or (bnf-mode-is-str-star?
+                 (car
+                  (cdr
+                   (bnf-mode-looking-for-independent-multiplier-1 rest))))
+                (bnf-mode-is-str-plus?
+                 (car
+                  (cdr
+                   (bnf-mode-looking-for-independent-multiplier-1 rest)))))
+            (bnf-mode-is-str-constant? bnf-mode-x))
        (bnf-mode-make-multiplier-with-left-constant
-	(bnf-mode-independent-multiplier-1 rest)
-	(+ 1 (bnf-mode-independent-multiplier-2 rest))
-	(car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))))
+        (bnf-mode-independent-multiplier-1 rest)
+        (+ 1 (bnf-mode-independent-multiplier-2 rest))
+        (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest)))))
 
 
 
       ;; "*" or "*" " "
-      ((and (or (bnf-mode-is-str-star? bnf-mode-x) 
-		(bnf-mode-is-str-plus? bnf-mode-x))
-	    (or (null (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest))))
-		(bnf-mode-is-str-white-space? (car (cdr (bnf-mode-looking-for-independent-multiplier-1 rest))))))
+      ((and (or (bnf-mode-is-str-star? bnf-mode-x)
+                (bnf-mode-is-str-plus? bnf-mode-x))
+            (or (null
+                 (car
+                  (cdr
+                   (bnf-mode-looking-for-independent-multiplier-1 rest))))
+                (bnf-mode-is-str-white-space?
+                 (car
+                  (cdr
+                   (bnf-mode-looking-for-independent-multiplier-1 rest))))))
        (bnf-mode-make-independent-multiplier
-	(cdr (bnf-mode-independent-multiplier-1 rest))
-	(+ 1 (bnf-mode-independent-multiplier-2 rest))
-	bnf-mode-x))
+        (cdr (bnf-mode-independent-multiplier-1 rest))
+        (+ 1 (bnf-mode-independent-multiplier-2 rest))
+        bnf-mode-x))
 
       ;; " " "*"
       ((bnf-mode-is-str-white-space? bnf-mode-x)
        (if (bnf-mode-is-looking-for-independent-multiplier? rest)
-	   (bnf-mode-make-looking-for-independent-multiplier
-	    (cdr (bnf-mode-looking-for-independent-multiplier-1 rest))
-	    (+ 1 (bnf-mode-looking-for-independent-multiplier-2 rest)))
-	 rest))
-      
+           (bnf-mode-make-looking-for-independent-multiplier
+            (cdr (bnf-mode-looking-for-independent-multiplier-1 rest))
+            (+ 1 (bnf-mode-looking-for-independent-multiplier-2 rest)))
+         rest))
+
 
       (t
        (bnf-mode-make-non-independent-multiplier))))
@@ -2561,10 +2694,10 @@ application."
    (lambda () (bnf-mode-make-looking-for-independent-multiplier v -1))
    (lambda (bnf-mode-x rest)
      (or (bnf-mode-is-non-independent-multiplier? rest)
-	 (bnf-mode-is-independent-multiplier? rest)
-	 (bnf-mode-is-multiplier-with-right-constant? rest)
-	 (bnf-mode-is-multiplier-with-left-constant? rest)
-	 (bnf-mode-is-multiplier-with-left-right-constant? rest)))))
+         (bnf-mode-is-independent-multiplier? rest)
+         (bnf-mode-is-multiplier-with-right-constant? rest)
+         (bnf-mode-is-multiplier-with-left-constant? rest)
+         (bnf-mode-is-multiplier-with-left-right-constant? rest)))))
 
 
 
@@ -2580,356 +2713,426 @@ application."
 (defun bnf-mode-is-str-constant-multiplier? (v)
   (let ((r (bnf-mode-is-str-independent-multiplier? v)))
     (if (and (not (bnf-mode-is-non-independent-multiplier? r))
-	     (not (bnf-mode-is-looking-for-independent-multiplier? r)))
-	r
+             (not (bnf-mode-is-looking-for-independent-multiplier? r)))
+        r
       nil)))
 
 (bnf-mode-is-str-constant-multiplier?
  '("a" "a" "*"))
-  
+
 (bnf-mode-is-str-constant-multiplier?
  '("a" "*"))
 
 
-(bnf-mode-is-str-independent-multiplier? 
+(bnf-mode-is-str-independent-multiplier?
  '("a" "*" "a"))
 
-(bnf-mode-is-str-independent-multiplier? 
+(bnf-mode-is-str-independent-multiplier?
  '("*"))
 
 
 (defun bnf-mode-bnf-handle-constant-acc (acc constant column-number)
   (if (> (length constant) 0)
       (setq acc (bnf-mode-extend-parsed-with-constant
-		 acc
-		 (bnf-mode-make-constant
-		  (bnf-mode-make-bnf-location
-		   (- column-number (length constant))
-		   column-number)
-		  (intern (bnf-mode-trim-string constant)))))
+                 acc
+                 (bnf-mode-make-constant
+                  (bnf-mode-make-bnf-location
+                   (- column-number (length constant))
+                   column-number)
+                  (intern (bnf-mode-trim-string constant)))))
     acc))
 
 
 (defun bnf-mode-bnf-parse (v column-number_ member-context paren-type)
   (let ((acc '())
-	(members '())
-	(r nil)
-	(constant "")
-	(group-constant "")
-	(r nil)
-	(column-number-group-begin 0)
-	(column-number column-number_))
-      (while v
-	(cond
-	   
+        (members '())
+        (r nil)
+        (constant "")
+        (group-constant "")
+        (r nil)
+        (column-number-group-begin 0)
+        (column-number column-number_))
+    (while v
+      (cond
 
-	 ;; <a> ::= a | b
-	 ;; <b> ::= c
-	 ((bnf-mode-is-str-define? v column-number) 
-	  (let ((define-group (bnf-mode-is-str-define? v column-number)))
-	    ;; At the end of a set of members (when the next group is detected)
-	    (if member-context
-		(progn
-		  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-		  (setq constant "")
 
-		  (setq members (bnf-mode-combine-two-members members acc))
-		  (setq r (bnf-mode-make-bnf-parse-remainder 
-			   members 
-			   v 
-			   (bnf-mode-bnf-location-2 (bnf-mode-bnf-location-from-value members))
-			   column-number))
-		  (setq v nil)
-		  (setq acc nil))
+       ;; <a> ::= a | b
+       ;; <b> ::= c
+       ((bnf-mode-is-str-define? v column-number)
+        (let ((define-group (bnf-mode-is-str-define? v column-number)))
+          ;; At the end of a set of members (when the next group is detected)
+          (if member-context
+              (progn
+                (setq acc (bnf-mode-bnf-handle-constant-acc
+                           acc
+                           constant
+                           column-number))
+                (setq constant "")
 
-	      ;; type-of members: bnf-parse-remainder
-	      (let ((members (bnf-mode-bnf-parse 
-			      (bnf-mode-bnf-parse-remainder-2 define-group) 
-			      (bnf-mode-bnf-parse-remainder-4 define-group)
-			      t
-			      paren-type)))
+                (setq members (bnf-mode-combine-two-members members acc))
+                (setq r (bnf-mode-make-bnf-parse-remainder
+                         members
+                         v
+                         (bnf-mode-bnf-location-2
+                          (bnf-mode-bnf-location-from-value members))
+                         column-number))
+                (setq v nil)
+                (setq acc nil))
 
-		(setq acc (bnf-mode-combine-two-groups
-			   acc 
-			   (bnf-mode-make-group
-			    (bnf-mode-make-bnf-location
-			     (bnf-mode-bnf-parse-remainder-3 define-group)
-			     (bnf-mode-bnf-location-2 
-			      (bnf-mode-bnf-location-from-value
-			       (bnf-mode-bnf-parse-remainder-1 members))))
-			    (intern (bnf-mode-bnf-parse-remainder-1 define-group))
-			    (bnf-mode-bnf-parse-remainder-1 members)
-			    )))
+            ;; type-of members: bnf-parse-remainder
+            (let ((members (bnf-mode-bnf-parse
+                            (bnf-mode-bnf-parse-remainder-2 define-group)
+                            (bnf-mode-bnf-parse-remainder-4 define-group)
+                            t
+                            paren-type)))
 
-		(setq constant "")
-		(setq column-number (bnf-mode-bnf-parse-remainder-4 members))
-		(setq v (bnf-mode-bnf-parse-remainder-2 members))))))
+              (setq acc (bnf-mode-combine-two-groups
+                         acc
+                         (bnf-mode-make-group
+                          (bnf-mode-make-bnf-location
+                           (bnf-mode-bnf-parse-remainder-3 define-group)
+                           (bnf-mode-bnf-location-2
+                            (bnf-mode-bnf-location-from-value
+                             (bnf-mode-bnf-parse-remainder-1 members))))
+                          (intern (bnf-mode-bnf-parse-remainder-1 define-group))
+                          (bnf-mode-bnf-parse-remainder-1 members)
+                          )))
+
+              (setq constant "")
+              (setq column-number (bnf-mode-bnf-parse-remainder-4 members))
+              (setq v (bnf-mode-bnf-parse-remainder-2 members))))))
 
 
        ((bnf-mode-is-str-comment? (car v))
-	(setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	(setq constant "")
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
 
-	(let ((comment-res (bnf-mode-sexp-handle-comment v)))
-	  (setq v (bnf-mode-comment-remainder-1 comment-res))
-	  (setq column-number (+ column-number (bnf-mode-comment-remainder-2 comment-res)))))
+        (let ((comment-res (bnf-mode-sexp-handle-comment v)))
+          (setq v (bnf-mode-comment-remainder-1 comment-res))
+          (setq column-number
+                (+
+                 column-number
+                 (bnf-mode-comment-remainder-2 comment-res)))))
 
        ;; ((bnf-mode-is-str-quote? (car v))
-       ;; 	(handle-constant)
-       ;; 	(setq column-number (+ 1 column-number))
-       ;; 	(setq constant (car v))
-       ;; 	(handle-constant)
-       ;; 	(setq v (cdr v)))
-       
+       ;;   (handle-constant)
+       ;;   (setq column-number (+ 1 column-number))
+       ;;   (setq constant (car v))
+       ;;   (handle-constant)
+       ;;   (setq v (cdr v)))
 
-       
+
+
        ((bnf-mode-is-str-string? v)
-	(setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	(setq constant "")
-       	(let ((r (bnf-mode-is-str-string? v)))
-	  (setq column-number (+ column-number (bnf-mode-parse-remainder-3 r)))
-	  (setq acc (bnf-mode-bnf-handle-constant-acc
-		     acc
-		     (bnf-mode-parse-remainder-1 r)
-		     column-number))
-	  (setq v (bnf-mode-parse-remainder-2 r))))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+        (let ((r (bnf-mode-is-str-string? v)))
+          (setq column-number (+ column-number (bnf-mode-parse-remainder-3 r)))
+          (setq acc (bnf-mode-bnf-handle-constant-acc
+                     acc
+                     (bnf-mode-parse-remainder-1 r)
+                     column-number))
+          (setq v (bnf-mode-parse-remainder-2 r))))
 
 
        ((bnf-mode-is-str-quote? (car v))
-	(setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	(setq constant "")
-	
-       	(let ((quote-res (bnf-mode-handle-bnf-quote-context (cdr v) column-number 'bnf-mode-make-quote)))
-       	  (setq v (bnf-mode-quote-context-remainder-1 quote-res))
-       	  (setq acc (bnf-mode-extend-parsed acc (bnf-mode-quote-context-remainder-2 quote-res)))
-       	  (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (let ((quote-res (bnf-mode-handle-bnf-quote-context
+                          (cdr v)
+                          column-number
+                          'bnf-mode-make-quote)))
+          (setq v (bnf-mode-quote-context-remainder-1 quote-res))
+          (setq acc (bnf-mode-extend-parsed
+                     acc
+                     (bnf-mode-quote-context-remainder-2 quote-res)))
+          (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
 
 
        ((bnf-mode-is-str-comma? (car v))
-       	(setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-       	(setq constant "")
-	
-       	(let ((quote-res (bnf-mode-handle-bnf-quote-context (cdr v) column-number 'bnf-mode-make-comma)))
-       	  (setq v (bnf-mode-quote-context-remainder-1 quote-res))
-       	  (setq acc (bnf-mode-extend-parsed acc (bnf-mode-quote-context-remainder-2 quote-res)))
-       	  (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (let ((quote-res (bnf-mode-handle-bnf-quote-context
+                          (cdr v)
+                          column-number
+                          'bnf-mode-make-comma)))
+          (setq v (bnf-mode-quote-context-remainder-1 quote-res))
+          (setq acc (bnf-mode-extend-parsed
+                     acc
+                     (bnf-mode-quote-context-remainder-2 quote-res)))
+          (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
 
 
        ((bnf-mode-is-str-backward-quote? (car v))
-       	(setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-       	(setq constant "")
-	
-       	(let ((quote-res (bnf-mode-handle-bnf-quote-context (cdr v) column-number 'bnf-mode-make-backward-quote)))
-       	  (setq v (bnf-mode-quote-context-remainder-1 quote-res))
-       	  (setq acc (bnf-mode-extend-parsed acc (bnf-mode-quote-context-remainder-2 quote-res)))
-       	  (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (let ((quote-res (bnf-mode-handle-bnf-quote-context
+                          (cdr v)
+                          column-number
+                          'bnf-mode-make-backward-quote)))
+          (setq v (bnf-mode-quote-context-remainder-1 quote-res))
+          (setq acc (bnf-mode-extend-parsed
+                     acc
+                     (bnf-mode-quote-context-remainder-2 quote-res)))
+          (setq column-number (bnf-mode-quote-context-remainder-3 quote-res))))
 
 
-	 ((bnf-mode-is-str-member? (car v))
-	  (setq column-number (+ 1 column-number))
-	  (setq members (bnf-mode-combine-two-members 
-			 members 
-			 acc))
-	  (setq acc nil)
-	  (setq constant "")
-	  (setq v (cdr v)))
+       ((bnf-mode-is-str-member? (car v))
+        (setq column-number (+ 1 column-number))
+        (setq members (bnf-mode-combine-two-members
+                       members
+                       acc))
+        (setq acc nil)
+        (setq constant "")
+        (setq v (cdr v)))
 
-	 ;; Determins if the star is independent, i.e. stands alone or not
-	 ((and (bnf-mode-is-str-constant-multiplier? v)
-	       (or (null acc)
-		   (bnf-mode-is-constant? acc)))
+       ;; Determins if the star is independent, i.e. stands alone or not
+       ((and (bnf-mode-is-str-constant-multiplier? v)
+             (or (null acc)
+                 (bnf-mode-is-constant? acc)))
 
-	  (let ((r (bnf-mode-is-str-constant-multiplier? v)))
-	    (cond
-	     
-	     ((bnf-mode-is-multiplier-with-left-constant? r)
-	      (setq constant 
-		    (concat constant 
-			    (car (bnf-mode-multiplier-with-left-constant-1 r))
-			    (bnf-mode-multiplier-type-1 r)))
-	      (setq v (cdr (cdr (bnf-mode-multiplier-with-left-constant-1 r))))
-	      (setq column-number (+ 2 column-number (bnf-mode-multiplier-with-left-constant-2 r))))
+        (let ((r (bnf-mode-is-str-constant-multiplier? v)))
+          (cond
 
-	     ((bnf-mode-is-independent-multiplier? r)
-	      (setq constant 
-		    (concat constant 
-			    (bnf-mode-multiplier-type-1 r)))
-	      (setq v (bnf-mode-independent-multiplier-1 r))
-	      (setq column-number (+ 1 column-number (bnf-mode-independent-multiplier-2 r))))
-	      
-	     ((bnf-mode-is-multiplier-with-right-constant? r)
-	      (setq constant 
-		    (concat constant 
-			    (bnf-mode-multiplier-type-1 r)
-			    (car (bnf-mode-multiplier-with-right-constant-1 r))))
-	      (setq v (cdr (bnf-mode-multiplier-with-right-constant-1 r)))
+           ((bnf-mode-is-multiplier-with-left-constant? r)
+            (setq constant
+                  (concat constant
+                          (car (bnf-mode-multiplier-with-left-constant-1 r))
+                          (bnf-mode-multiplier-type-1 r)))
+            (setq v (cdr (cdr (bnf-mode-multiplier-with-left-constant-1 r))))
+            (setq column-number (+
+                                 2
+                                 column-number
+                                 (bnf-mode-multiplier-with-left-constant-2 r))))
 
-	      (setq column-number (+ 2 column-number (bnf-mode-multiplier-with-right-constant-2 r))))
+           ((bnf-mode-is-independent-multiplier? r)
+            (setq constant
+                  (concat constant
+                          (bnf-mode-multiplier-type-1 r)))
+            (setq v (bnf-mode-independent-multiplier-1 r))
+            (setq column-number (+
+                                 1
+                                 column-number
+                                 (bnf-mode-independent-multiplier-2 r))))
 
-	     ((bnf-mode-is-multiplier-with-left-right-constant? r)
-	      (setq constant 
-		    (concat constant 
-			    (car (bnf-mode-multiplier-with-left-right-constant-1 r))
-			    (bnf-mode-multiplier-type-1 r)
-			    (car (cdr (cdr (bnf-mode-multiplier-with-left-right-constant-1 r))))))
-	      (setq v (cdr (cdr (cdr (bnf-mode-multiplier-with-left-right-constant-1 r)))))
-	      (setq column-number (+ 3 column-number (bnf-mode-multiplier-with-left-right-constant-2 r)))))))
+           ((bnf-mode-is-multiplier-with-right-constant? r)
+            (setq constant
+                  (concat constant
+                          (bnf-mode-multiplier-type-1 r)
+                          (car (bnf-mode-multiplier-with-right-constant-1 r))))
+            (setq v (cdr (bnf-mode-multiplier-with-right-constant-1 r)))
 
+            (setq column-number (+
+                                 2
+                                 column-number
+                                 (bnf-mode-multiplier-with-right-constant-2 r))))
 
-
-
-	 ((bnf-mode-is-str-star? (car v))
-	  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	  (setq constant "")
-
-	  (setq acc (bnf-mode-extend-parsed-star-plus acc 'bnf-mode-make-star))
-	  (setq column-number (+ 1 column-number))
-	  (setq v (cdr v)))
-	    
-
-	 ((bnf-mode-is-str-plus? (car v))
-	  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	  (setq constant "")
-
-	  (setq acc (bnf-mode-extend-parsed-star-plus acc 'bnf-mode-make-plus))
-	  (setq column-number (+ 1 column-number))
-	  (setq v (cdr v)))
-
-
-	 ((bnf-mode-is-str-new-line? (car v))
-	  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	  (setq constant "")
-
-	  (setq column-number (+ 1 column-number))
-	  (setq v (cdr v)))
-
-	 ((bnf-mode-is-str-paren-begin? (car v))
-	  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	  (setq constant "")
-
-	  (let* ((paren-type (bnf-mode-derive-paren-type (car v)))
-		 (inner (bnf-mode-bnf-parse (cdr v)
-				   (+ 1 column-number)
-				   t
-				   paren-type))
-		 (inner-value (if (bnf-mode-is-member? (bnf-mode-bnf-parse-remainder-1 inner))
-				  (bnf-mode-member-1 (bnf-mode-bnf-parse-remainder-1 inner))
-				(bnf-mode-bnf-parse-remainder-1 inner))))
-	    (setq acc (bnf-mode-extend-parsed 
-		       acc 
-		       (bnf-mode-make-paren
-			(bnf-mode-make-bnf-location
-			 column-number
-			 (bnf-mode-bnf-parse-remainder-4 inner))
-			(bnf-mode-derive-paren-type (car v))
-			inner-value)))
-	    (setq v (bnf-mode-bnf-parse-remainder-2 inner))
-	    (setq column-number (bnf-mode-bnf-parse-remainder-4 inner))
-	    ))
+           ((bnf-mode-is-multiplier-with-left-right-constant? r)
+            (setq constant
+                  (concat
+                   constant
+                   (car
+                    (bnf-mode-multiplier-with-left-right-constant-1r))
+                   (bnf-mode-multiplier-type-1 r)
+                   (car
+                    (cdr
+                     (cdr
+                      (bnf-mode-multiplier-with-left-right-constant-1 r))))))
+            (setq v
+                  (cdr
+                   (cdr
+                    (cdr
+                     (bnf-mode-multiplier-with-left-right-constant-1 r)))))
+            (setq column-number
+                  (+
+                   3
+                   column-number
+                   (bnf-mode-multiplier-with-left-right-constant-2 r)))))))
 
 
-	 ((bnf-mode-is-str-paren-end? (car v))	
-	  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	  (setq constant "")
-
-	  (if (not (equal (bnf-mode-derive-paren-type (car v)) paren-type))
-	      (error "BNF error, open and close parenthese must be the same: %s %s" (car v) paren-type))
-	  (if (bnf-mode-is-value? acc)
-	      (setq r (bnf-mode-make-bnf-parse-remainder (list acc) (cdr v) -1 (+ 1 column-number)))
-	    (setq r (bnf-mode-make-bnf-parse-remainder acc (cdr v) -1 (+ 1 column-number))))
-	  (setq v nil))
-
-	 ((bnf-mode-is-group-name-ref? v column-number)
-	  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	  (setq constant "")
-
-	  (let ((group-name (bnf-mode-is-group-name-ref? v column-number)))
-	    (setq group-constant (concat "<" (bnf-mode-parse-remainder-1 group-name) ">"))
-	    (if member-context
-		(setq acc (bnf-mode-extend-parsed
-			   acc
-			   (bnf-mode-make-group-ref
-			    (bnf-mode-make-bnf-location
-			     column-number
-			     (+ 2 (bnf-mode-parse-remainder-3 group-name)))
-			    (intern group-constant)))))
-			    
-
-	    (setq column-number-group-begin column-number)
-	    (setq column-number (+ 2 (bnf-mode-parse-remainder-3 group-name)))
-	    (setq v (bnf-mode-parse-remainder-2 group-name))
-	    ))	 
-
-	 ((bnf-mode-is-str-arrow-begin? (car v))
-	  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	  (setq constant "")
-
-	  (setq column-number (+ 1 column-number))
-	  (setq constant (concat constant (car v)))
-	  (setq v (cdr v)))
 
 
-	  
+       ((bnf-mode-is-str-star? (car v))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
 
-	 ;; ((bnf-mode-is-str-arrow-begin? (car v))
-	 ;;  (handle-constant)
-	 ;;  (let ((group-name (bnf-mode-bnf-parse-group-name-context (cdr v) column-number)))
-	 ;;    (setq group-constant (concat "<" (bnf-mode-parse-remainder-1 group-name) ">"))
-	 ;;    (if member-context
-	 ;; 	(setq acc (bnf-mode-extend-parsed
-	 ;; 		   acc
-	 ;; 		   (bnf-mode-make-group-ref
-	 ;; 		    (bnf-mode-make-bnf-location
-	 ;; 		     column-number
-	 ;; 		     (+ 2 (bnf-mode-parse-remainder-3 group-name)))
-	 ;; 		    (intern group-constant)))))
-			    
-
-	 ;;    (setq column-number-group-begin column-number)
-	 ;;    (setq column-number (+ 2 (bnf-mode-parse-remainder-3 group-name)))
-	 ;;    (setq v (bnf-mode-parse-remainder-2 group-name))
-	 ;;    ))
-
-	 
+        (setq acc (bnf-mode-extend-parsed-star-plus acc 'bnf-mode-make-star))
+        (setq column-number (+ 1 column-number))
+        (setq v (cdr v)))
 
 
-	 ((bnf-mode-is-str-constant? (car v))
-	  (setq column-number (+ 1 column-number))
-	  (setq constant (concat constant (car v)))
-	  (setq v (cdr v)))
+       ((bnf-mode-is-str-plus? (car v))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
 
-	 ((bnf-mode-is-str-white-space? (car v))
-	  (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-	  (setq constant "")
+        (setq acc (bnf-mode-extend-parsed-star-plus acc 'bnf-mode-make-plus))
+        (setq column-number (+ 1 column-number))
+        (setq v (cdr v)))
 
-	  (setq constant "")
-	  (setq column-number (+ 1 column-number))
-	  (setq v (cdr v)))))
 
-      (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
-      (setq constant "")
-      
-      (if (null r)
-	  (if member-context
-	      (let ((res (bnf-mode-combine-two-members members acc)))
-		(bnf-mode-make-bnf-parse-remainder 
-		 res 
-		 v 
-		 (bnf-mode-bnf-location-2 
-		  (bnf-mode-bnf-location-from-value res)) 
-		 column-number))
-	    (bnf-mode-make-bnf-parse-remainder 
-	     acc 
-	     v 
-	     (bnf-mode-bnf-location-2 
-	      (bnf-mode-bnf-location-from-value acc)) 
-	     column-number))
-      	r)))
+       ((bnf-mode-is-str-new-line? (car v))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (setq column-number (+ 1 column-number))
+        (setq v (cdr v)))
+
+       ((bnf-mode-is-str-paren-begin? (car v))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (let* ((paren-type (bnf-mode-derive-paren-type (car v)))
+               (inner (bnf-mode-bnf-parse (cdr v)
+                                          (+ 1 column-number)
+                                          t
+                                          paren-type))
+               (inner-value
+                (if (bnf-mode-is-member?
+                     (bnf-mode-bnf-parse-remainder-1 inner))
+                    (bnf-mode-member-1 (bnf-mode-bnf-parse-remainder-1 inner))
+                  (bnf-mode-bnf-parse-remainder-1 inner))))
+          (setq acc (bnf-mode-extend-parsed
+                     acc
+                     (bnf-mode-make-paren
+                      (bnf-mode-make-bnf-location
+                       column-number
+                       (bnf-mode-bnf-parse-remainder-4 inner))
+                      (bnf-mode-derive-paren-type (car v))
+                      inner-value)))
+          (setq v (bnf-mode-bnf-parse-remainder-2 inner))
+          (setq column-number (bnf-mode-bnf-parse-remainder-4 inner))
+          ))
+
+
+       ((bnf-mode-is-str-paren-end? (car v))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (if (not
+             (equal
+              (bnf-mode-derive-paren-type (car v))
+              paren-type))
+            (error "BNF error, open and close parenthese must be the same: %s %s" (car v) paren-type))
+        (if (bnf-mode-is-value? acc)
+            (setq r
+                  (bnf-mode-make-bnf-parse-remainder
+                   (list acc)
+                   (cdr v)
+                   -1
+                   (+ 1 column-number)))
+          (setq r
+                (bnf-mode-make-bnf-parse-remainder
+                 acc
+                 (cdr v)
+                 -1
+                 (+ 1 column-number))))
+        (setq v nil))
+
+       ((bnf-mode-is-group-name-ref? v column-number)
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (let ((group-name (bnf-mode-is-group-name-ref? v column-number)))
+          (setq group-constant
+                (concat
+                 "<"
+                 (bnf-mode-parse-remainder-1 group-name)
+                 ">"))
+          (if member-context
+              (setq acc (bnf-mode-extend-parsed
+                         acc
+                         (bnf-mode-make-group-ref
+                          (bnf-mode-make-bnf-location
+                           column-number
+                           (+ 2 (bnf-mode-parse-remainder-3 group-name)))
+                          (intern group-constant)))))
+
+
+          (setq column-number-group-begin column-number)
+          (setq column-number (+ 2 (bnf-mode-parse-remainder-3 group-name)))
+          (setq v (bnf-mode-parse-remainder-2 group-name))
+          ))
+
+       ((bnf-mode-is-str-arrow-begin? (car v))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (setq column-number (+ 1 column-number))
+        (setq constant (concat constant (car v)))
+        (setq v (cdr v)))
+
+
+
+
+       ;; ((bnf-mode-is-str-arrow-begin? (car v))
+       ;;  (handle-constant)
+       ;;  (let ((group-name
+       ;;         (bnf-mode-bnf-parse-group-name-context
+       ;;          (cdr v)
+       ;;          column-number)))
+       ;;    (setq group-constant
+       ;;          (concat
+       ;;           "<"
+       ;;           (bnf-mode-parse-remainder-1 group-name)
+       ;;           ">"))
+       ;;    (if member-context
+       ;;        (setq acc (bnf-mode-extend-parsed
+       ;;                   acc
+       ;;                   (bnf-mode-make-group-ref
+       ;;                    (bnf-mode-make-bnf-location
+       ;;                     column-number
+       ;;                     (+ 2 (bnf-mode-parse-remainder-3 group-name)))
+       ;;                    (intern group-constant)))))
+
+
+       ;;    (setq column-number-group-begin column-number)
+       ;;    (setq column-number (+ 2 (bnf-mode-parse-remainder-3 group-name)))
+       ;;    (setq v (bnf-mode-parse-remainder-2 group-name))
+       ;;    ))
+
+
+
+
+       ((bnf-mode-is-str-constant? (car v))
+        (setq column-number (+ 1 column-number))
+        (setq constant (concat constant (car v)))
+        (setq v (cdr v)))
+
+       ((bnf-mode-is-str-white-space? (car v))
+        (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+        (setq constant "")
+
+        (setq constant "")
+        (setq column-number (+ 1 column-number))
+        (setq v (cdr v)))))
+
+    (setq acc (bnf-mode-bnf-handle-constant-acc acc constant column-number))
+    (setq constant "")
+
+    (if (null r)
+        (if member-context
+            (let ((res (bnf-mode-combine-two-members members acc)))
+              (bnf-mode-make-bnf-parse-remainder
+               res
+               v
+               (bnf-mode-bnf-location-2
+                (bnf-mode-bnf-location-from-value res))
+               column-number))
+          (bnf-mode-make-bnf-parse-remainder
+           acc
+           v
+           (bnf-mode-bnf-location-2
+            (bnf-mode-bnf-location-from-value acc))
+           column-number))
+      r)))
 
 
 (defun bnf-mode-length-of-bnf-value (v)
   (cond
-   
+
    ((null v)
     0)
 
@@ -2939,7 +3142,7 @@ application."
    ((bnf-mode-is-member? v)
     (length (bnf-mode-member-1 v)))
 
-   (t 
+   (t
     (length v))
    ))
 
@@ -2958,21 +3161,21 @@ application."
 
 ;;; The "normal" predicates only takes a sexp-value as input.
 (defun bnf-mode-normal-buildin-productions ()
-  '(; (<boolean> bnf-mode-bi-is-boolean?) boolean IS scheme-boolean
-    (<boolean> bnf-mode-bi-is-scheme-boolean?) 
-    (<scheme-boolean> bnf-mode-bi-is-scheme-boolean?) 
+  '(;; (<boolean> bnf-mode-bi-is-boolean?) boolean IS scheme-boolean
+    (<boolean> bnf-mode-bi-is-scheme-boolean?)
+    (<scheme-boolean> bnf-mode-bi-is-scheme-boolean?)
     (<integer> bnf-mode-bi-is-integer?)
     (<number> bnf-mode-bi-is-number?)
     (<natural-number> bnf-mode-bi-is-natural-number?)
     (<character> bnf-mode-bi-is-scheme-character?)
-;    (<character> bnf-mode-bi-is-character?)
-;    (<scheme-character> bnf-mode-bi-is-scheme-character?)
-; For now character IS scheme-character
+    ;; (<character> bnf-mode-bi-is-character?)
+    ;; (<scheme-character> bnf-mode-bi-is-scheme-character?)
+    ;; For now character IS scheme-character
     (<string> bnf-mode-bi-is-string?)
-    (<symbol> bnf-mode-bi-is-symbol?)		
+    (<symbol> bnf-mode-bi-is-symbol?)
     (<identifier> bnf-mode-bi-is-identifier?)
     (<nothing> bnf-mode-bi-is-nothing?)
-))
+    ))
 
 (defun bnf-mode-is-reference-build-in-nothing? (ref)
   (equal '<nothing> (bnf-mode-group-ref-1 ref)))
@@ -3022,14 +3225,14 @@ application."
 ;;;
 
 
-;; Used for lookup in a production list: 
+;; Used for lookup in a production list:
 ;;list of list of group-ref * func of one arg
 (defun bnf-mode-lookup-production (ps p)
   (bnf-mode-fold-left-break-at
    ps
    (lambda (bnf-mode-x rest)
      (if (equal (car bnf-mode-x) p)
-	 bnf-mode-x
+         bnf-mode-x
        rest))
    (lambda () nil)
    (lambda (bnf-mode-x rest)
@@ -3037,27 +3240,27 @@ application."
 
 
 ;; Assumes that the given value is a group-ref
-(defun bnf-mode-is-build-in-production? (group-ref) 
+(defun bnf-mode-is-build-in-production? (group-ref)
   (let* ((look-up-normal-buildin
-	 (bnf-mode-lookup-production 
-	  (bnf-mode-normal-buildin-productions) 
-	  group-ref))
+          (bnf-mode-lookup-production
+           (bnf-mode-normal-buildin-productions)
+           group-ref))
 
-	(lookup-keyword-list-buildin
-	 (if look-up-normal-buildin
-	     nil
-	   (bnf-mode-lookup-production
-	    (bnf-mode-keyword-list-buildin-productions)
-	    group-ref))))
+         (lookup-keyword-list-buildin
+          (if look-up-normal-buildin
+              nil
+            (bnf-mode-lookup-production
+             (bnf-mode-keyword-list-buildin-productions)
+             group-ref))))
 
     (cond
      (look-up-normal-buildin
-      (bnf-mode-make-normal-buildin 
+      (bnf-mode-make-normal-buildin
        (nth 0 look-up-normal-buildin)
        (nth 1 look-up-normal-buildin)))
-     
+
      (lookup-keyword-list-buildin
-      (bnf-mode-make-keyword-list-buildin 
+      (bnf-mode-make-keyword-list-buildin
        (nth 0 lookup-keyword-list-buildin)
        (nth 1 lookup-keyword-list-buildin)))
 
@@ -3182,25 +3385,25 @@ application."
 
 
 (defun bnf-mode-bi-is-nothing? (v)
-  (bnf-mode-boolean2boolean 
+  (bnf-mode-boolean2boolean
    (null v)
    (bnf-mode-make-error-build-in-nothing v)))
-  
+
 
 ;; <boolean> ::= bnf-mode-true | bnf-mode-false
 (defun bnf-mode-bi-is-boolean? (v)
-  (bnf-mode-boolean2boolean 
-   (and (not (null v)) 
-	(bnf-mode-is-constant? v) 
-	(member (bnf-mode-constant-1 v) '(bnf-mode-true bnf-mode-false)))
+  (bnf-mode-boolean2boolean
+   (and (not (null v))
+        (bnf-mode-is-constant? v)
+        (member (bnf-mode-constant-1 v) '(bnf-mode-true bnf-mode-false)))
    (bnf-mode-make-error-build-in-boolean v)))
 
 
 (defun bnf-mode-bi-is-scheme-boolean? (v)
-  (bnf-mode-boolean2boolean 
-   (and (not (null v)) 
-	(bnf-mode-is-constant? v) 
-	(member (bnf-mode-constant-1 v) '(\#t \#f)))
+  (bnf-mode-boolean2boolean
+   (and (not (null v))
+        (bnf-mode-is-constant? v)
+        (member (bnf-mode-constant-1 v) '(\#t \#f)))
    (bnf-mode-make-error-build-in-boolean v)))
 
 
@@ -3211,11 +3414,11 @@ application."
   (let ((lst (string-to-list str)) (r t))
     (while lst
       (if (and (<= (car lst) 57)
-	       (>= (car lst) 48))
-	  (setq lst (cdr lst))
-	(progn
-	  (setq r nil)
-	  (setq lst nil))))
+               (>= (car lst) 48))
+          (setq lst (cdr lst))
+        (progn
+          (setq r nil)
+          (setq lst nil))))
     r))
 
 (bnf-mode-str-is-numeric? "false")
@@ -3232,46 +3435,46 @@ application."
 
 
 (defun bnf-mode-is-constant-integer? (v)
-  (bnf-mode-str-is-numeric? 
-   (symbol-name 
+  (bnf-mode-str-is-numeric?
+   (symbol-name
     (bnf-mode-constant-1 v))))
 
 (defun bnf-mode-bi-is-integer? (v)
-  (bnf-mode-boolean2boolean 
+  (bnf-mode-boolean2boolean
    (and (not (null v))
-	(bnf-mode-is-constant? v) 
-	(bnf-mode-is-constant-integer? v))
+        (bnf-mode-is-constant? v)
+        (bnf-mode-is-constant-integer? v))
    (bnf-mode-make-error-build-in-integer v)))
 
 ;; <natural-number> ::= 0 | 1 | 2 | 3 | 4 ...
 (defun bnf-mode-bi-is-natural-number? (v)
   (bnf-mode-boolean2boolean
    (and (not (null v))
-	(bnf-mode-is-constant? v)
-	(bnf-mode-is-true? (bnf-mode-bi-is-integer? v))
-	(>= (bnf-mode-constant-to-integer v) 0))
+        (bnf-mode-is-constant? v)
+        (bnf-mode-is-true? (bnf-mode-bi-is-integer? v))
+        (>= (bnf-mode-constant-to-integer v) 0))
    (bnf-mode-make-error-build-in-natural-number v)))
 
 ;; Like integer
 (defun bnf-mode-bi-is-number? (v)
   (bnf-mode-boolean2boolean
    (and (not (null v))
-	(bnf-mode-is-constant? v) 
-	(bnf-mode-is-constant-integer? v))
+        (bnf-mode-is-constant? v)
+        (bnf-mode-is-constant-integer? v))
    (bnf-mode-make-error-build-in-number v)))
 
 ;; <character> ::= 0 | 1 | 2 ... | a | b | c ... ê¶§ | ê¸— | ê¸˜
 (defun bnf-mode-bi-is-character? (v)
   (cond
-   ((and (bnf-mode-is-constant? v) 
-	 (= 1 (length (bnf-mode-constant-to-string v))))
+   ((and (bnf-mode-is-constant? v)
+         (= 1 (length (bnf-mode-constant-to-string v))))
     (bnf-mode-boolean2boolean
      (characterp (string-to-char (bnf-mode-constant-to-string v)))
      (bnf-mode-make-error-build-in-character v)))
 
-   ((and (bnf-mode-is-constant? v) 
-	 (> (length (bnf-mode-constant-to-string v)) 1))
-    (bnf-mode-false 
+   ((and (bnf-mode-is-constant? v)
+         (> (length (bnf-mode-constant-to-string v)) 1))
+    (bnf-mode-false
      (bnf-mode-make-error-build-in-character-too-long v)))
 
    (t
@@ -3289,21 +3492,21 @@ application."
 
        ;; default case #\a
        ((= 3 (length char-str))
-	(bnf-mode-boolean2boolean
-	 (and (equal (substring char-str 0 1) "#")
-	      (equal (substring char-str 1 2) "\\"))
-	 (bnf-mode-make-error-build-in-scheme-character v)))
+        (bnf-mode-boolean2boolean
+         (and (equal (substring char-str 0 1) "#")
+              (equal (substring char-str 1 2) "\\"))
+         (bnf-mode-make-error-build-in-scheme-character v)))
 
        ;; special case for space.
        ;; #\space
        ((= 7 (length char-str))
-	(bnf-mode-boolean2boolean
-	 (equal char-str  "#\\space")
-	 (bnf-mode-make-error-build-in-scheme-character v)))
-	
-     (t
-      (bnf-mode-false
-       (bnf-mode-make-error-build-in-scheme-character v)))))))
+        (bnf-mode-boolean2boolean
+         (equal char-str  "#\\space")
+         (bnf-mode-make-error-build-in-scheme-character v)))
+
+       (t
+        (bnf-mode-false
+         (bnf-mode-make-error-build-in-scheme-character v)))))))
 
 
 ;; An identifier is written with letters, digits, and most funky
@@ -3313,22 +3516,22 @@ application."
 ;; level of detail wonâ€™t be at the exam.
 ;; (defun bnf-mode-bi-is-identifier? (v)
 ;;   (if (bnf-mode-is-constant? v)
-;;       (let ((str (bnf-mode-constant-to-string v)) 
-;; 	    (illegal-chars "[\"Â´,]"))
-;; 	(bnf-mode-boolean2boolean
-;; 	 (and (not (string-match illegal-chars str))
-;; 	      (not (string= "#" (substring str 0 1))))
-;; 	 (bnf-mode-make-error-build-in-identifier v)))
+;;       (let ((str (bnf-mode-constant-to-string v))
+;;      (illegal-chars "[\"Â´,]"))
+;;  (bnf-mode-boolean2boolean
+;;   (and (not (string-match illegal-chars str))
+;;        (not (string= "#" (substring str 0 1))))
+;;   (bnf-mode-make-error-build-in-identifier v)))
 ;;     (bnf-mode-false (bnf-mode-make-error-build-in-identifier v))))
-;; 
+;;
 (defun bnf-mode-bi-is-identifier? (v)
   (bnf-mode-bi-is-identifier-or-symbol?
-   v 
+   v
    (bnf-mode-make-error-build-in-identifier v)))
 
 (defun bnf-mode-bi-is-symbol? (v)
-  (bnf-mode-bi-is-identifier-or-symbol? 
-   v 
+  (bnf-mode-bi-is-identifier-or-symbol?
+   v
    (bnf-mode-make-error-build-in-symbol v)))
 
 
@@ -3336,12 +3539,12 @@ application."
 ;; be reported.
 (defun bnf-mode-bi-is-identifier-or-symbol? (v error)
   (if (bnf-mode-is-constant? v)
-      (let ((str (bnf-mode-constant-to-string v)) 
-	    (illegal-chars "[\"`,]"))
-	(bnf-mode-boolean2boolean
-	 (and (not (string-match illegal-chars str))
-	      (not (string= "#" (substring str 0 1))))
-	 error))
+      (let ((str (bnf-mode-constant-to-string v))
+            (illegal-chars "[\"`,]"))
+        (bnf-mode-boolean2boolean
+         (and (not (string-match illegal-chars str))
+              (not (string= "#" (substring str 0 1))))
+         error))
     (bnf-mode-false error)))
 
 
@@ -3351,7 +3554,7 @@ application."
   (if (bnf-mode-is-constant? v)
       (bnf-mode-boolean2boolean
        (and (not (member (bnf-mode-constant-1 v) bnf-keywords))
-	    (bnf-mode-is-true? (bnf-mode-bi-is-identifier? v)))
+            (bnf-mode-is-true? (bnf-mode-bi-is-identifier? v)))
        (bnf-mode-make-error-build-in-variable v))
     (bnf-mode-false (bnf-mode-make-error-build-in-variable v))))
 
@@ -3361,11 +3564,11 @@ application."
 (defun bnf-mode-bi-is-string? (v)
   (if (bnf-mode-is-constant? v)
       (let ((str (bnf-mode-constant-to-string v)))
-	(bnf-mode-boolean2boolean
-	 (and (<= 2 (length str))
-	      (equal "\"" (substring str 0 1))
-	      (equal "\"" (substring str (- (length str) 1))))
-	 (bnf-mode-make-error-build-in-string v)))
+        (bnf-mode-boolean2boolean
+         (and (<= 2 (length str))
+              (equal "\"" (substring str 0 1))
+              (equal "\"" (substring str (- (length str) 1))))
+         (bnf-mode-make-error-build-in-string v)))
     (bnf-mode-false (bnf-mode-make-error-build-in-string v))))
 
 
@@ -3389,17 +3592,17 @@ application."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  / BUILD INS  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; A cache for the bnf keywords
- (defvar bnf-mode-key-words nil)
+(defvar bnf-mode-key-words nil)
 
 ;; (bnf-mode-reset-bnf-key-words (bnf-mode-bnf-parse-main "<a> ::= (one tow)"))
 (defun bnf-mode-reset-bnf-key-words (bnf)
-  (setq bnf-mode-key-words 
-	(bnf-mode-key-words-list-from-bnf-cps-tramp-defunc-main bnf)))
+  (setq bnf-mode-key-words
+        (bnf-mode-key-words-list-from-bnf-cps-tramp-defunc-main bnf)))
 
 
 ;; (defun bnf-mode-reset-bnf-key-words (bnf)
-;;   (setq bnf-mode-key-words 
-;; 	(bnf-mode-key-words-list-from-bnf bnf '())))
+;;   (setq bnf-mode-key-words
+;;  (bnf-mode-key-words-list-from-bnf bnf '())))
 
 
 
@@ -3408,22 +3611,23 @@ application."
 ;; (defun bnf-mode-key-words-list-from-bnf-main (bnf)
 ;;   (if bnf-mode-key-words
 ;;       bnf-mode-key-words
-;;     (let ((kw 
-;; 	   (bnf-mode-key-words-list-from-bnf bnf  '())))
+;;     (let ((kw
+;;     (bnf-mode-key-words-list-from-bnf bnf  '())))
 ;;       (setq bnf-mode-key-words kw)
 ;;       kw)))
 
 
-;; (bnf-mode-key-words-list-from-bnf-main (bnf-mode-bnf-parse-main "<a> ::= (one two)"))
+;; (bnf-mode-key-words-list-from-bnf-main
+;;  (bnf-mode-bnf-parse-main "<a> ::= (one two)"))
 (defun bnf-mode-key-words-list-from-bnf-main (bnf)
   (if bnf-mode-key-words
       bnf-mode-key-words
-    (let ((kw 
-	   (bnf-mode-key-words-list-from-bnf-cps-tramp-defunc-main bnf)))
+    (let ((kw
+           (bnf-mode-key-words-list-from-bnf-cps-tramp-defunc-main bnf)))
       (setq bnf-mode-key-words kw)
       kw)))
 
-;; CPS + tramp + defunc transformed verson 
+;; CPS + tramp + defunc transformed verson
 
 (defun bnf-mode-array-base-predicate (v len name)
   (and (eq (aref v 0) name)
@@ -3575,7 +3779,7 @@ application."
 ;; Used to apply the defunctionalized continuations
 (defun bnf-mode-apply_cont (v bnf-mode-x)
   (cond
-   
+
    ((bnf-mode-C0? v)
     (bnf-mode-trampoline-stop bnf-mode-x))
 
@@ -3585,12 +3789,12 @@ application."
 
    ((bnf-mode-C8? v)
     (if (bnf-mode-C8-1 v)
-	(bnf-mode-trampoline-continue
-	 (bnf-mode-T6 (bnf-mode-C8-1 v) (bnf-mode-C8-2 v) bnf-mode-x))
+        (bnf-mode-trampoline-continue
+         (bnf-mode-T6 (bnf-mode-C8-1 v) (bnf-mode-C8-2 v) bnf-mode-x))
       (bnf-mode-trampoline-continue
        (bnf-mode-T7 (bnf-mode-C8-2 v) bnf-mode-x))))
 
-))
+   ))
 
 ;; Used to apply the defunctionalized thunks
 (defun bnf-mode-apply_trampoline_thunk (v)
@@ -3598,7 +3802,7 @@ application."
 
    ((bnf-mode-T1? v)
     (bnf-mode-apply_cont
-     (bnf-mode-T1-1 v) 
+     (bnf-mode-T1-1 v)
      (list (bnf-mode-constant-1 (bnf-mode-T1-2 v)))))
 
    ((bnf-mode-T2? v)
@@ -3610,9 +3814,9 @@ application."
      (bnf-mode-T3-2 v)))
 
    ((bnf-mode-T4? v)
-     (bnf-mode-apply_cont 
-      (bnf-mode-T4-1 v)
-      (bnf-mode-set-append (bnf-mode-T4-2 v) (bnf-mode-T4-3 v))))
+    (bnf-mode-apply_cont
+     (bnf-mode-T4-1 v)
+     (bnf-mode-set-append (bnf-mode-T4-2 v) (bnf-mode-T4-3 v))))
 
    ((bnf-mode-T6? v)
     (bnf-mode-key-words-list-from-bnf-cps-tramp-defunc
@@ -3620,8 +3824,8 @@ application."
      (bnf-mode-C5 (bnf-mode-T6-2 v) (bnf-mode-T6-3 v))))
 
    ((bnf-mode-T7? v)
-    (bnf-mode-apply_cont 
-     (bnf-mode-T7-1 v) 
+    (bnf-mode-apply_cont
+     (bnf-mode-T7-1 v)
      (bnf-mode-T7-2 v)))
 
    ((bnf-mode-T9? v)
@@ -3629,7 +3833,7 @@ application."
      (bnf-mode-T9-1 v)
      (bnf-mode-C8 (bnf-mode-T9-2 v) (bnf-mode-T9-3 v))))
 
-))
+   ))
 
 
 
@@ -3651,23 +3855,23 @@ application."
    ((bnf-mode-is-groups? bnf)
     (bnf-mode-trampoline-continue
      (bnf-mode-T3 (bnf-mode-groups-1 bnf) f)))
- 
+
    ((bnf-mode-is-group? bnf)
     (bnf-mode-trampoline-continue
      (bnf-mode-T3 (bnf-mode-group-2 bnf) f)))
-   
+
    ((bnf-mode-is-members? bnf)
     (bnf-mode-trampoline-continue
      (bnf-mode-T3 (bnf-mode-members-1 bnf) f)))
-   
+
    ((bnf-mode-is-member? bnf)
     (bnf-mode-trampoline-continue
      (bnf-mode-T3 (bnf-mode-member-1 bnf) f)))
 
    ((bnf-mode-is-paren? bnf)
     (if (bnf-mode-paren-2 bnf)
-	(bnf-mode-trampoline-continue
-	 (bnf-mode-T3 (bnf-mode-paren-2 bnf) f))
+        (bnf-mode-trampoline-continue
+         (bnf-mode-T3 (bnf-mode-paren-2 bnf) f))
       (bnf-mode-trampoline-continue
        (bnf-mode-T2 f))))
 
@@ -3682,8 +3886,8 @@ application."
    ((bnf-mode-is-value-list? bnf)
     (bnf-mode-trampoline-continue
      (bnf-mode-T9 (car bnf) (cdr bnf) f)))
-      
-))
+
+   ))
 
 
 
@@ -3694,9 +3898,11 @@ application."
     (bnf-mode-trampoline-stop-1 v))
 
    ((bnf-mode-is-trampoline-continue? v)
-    (setq res (bnf-mode-apply_trampoline_thunk (bnf-mode-trampoline-continue-1 v)))
+    (setq res (bnf-mode-apply_trampoline_thunk
+               (bnf-mode-trampoline-continue-1 v)))
     (while (not (bnf-mode-is-trampoline-stop? res))
-      (setq res (bnf-mode-apply_trampoline_thunk (bnf-mode-trampoline-continue-1 res))))
+      (setq res (bnf-mode-apply_trampoline_thunk
+                 (bnf-mode-trampoline-continue-1 res))))
     (bnf-mode-trampoline-stop-1 res))))
 
 
@@ -3739,7 +3945,7 @@ application."
 
 ;; (defun bnf-mode-key-words-list-from-bnf (bnf acc)
 ;;   (cond
-   
+
 ;;    ((bnf-mode-is-bnf? bnf)
 ;;     (bnf-mode-key-words-list-from-bnf (bnf-mode-bnf-1 bnf) acc))
 
@@ -3747,7 +3953,9 @@ application."
 ;;     (bnf-mode-fold-left
 ;;      (bnf-mode-groups-1 bnf)
 ;;      (lambda (bnf-mode-x rest)
-;;        (bnf-mode-append-key-word-list rest (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
+;;        (bnf-mode-append-key-word-list
+;;         rest
+;;         (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
 ;;      (lambda () nil)))
 
 ;;    ((bnf-mode-is-group? bnf)
@@ -3757,7 +3965,9 @@ application."
 ;;     (bnf-mode-fold-left
 ;;      (bnf-mode-members-1 bnf)
 ;;      (lambda (bnf-mode-x rest)
-;;        (bnf-mode-append-key-word-list rest (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
+;;        (bnf-mode-append-key-word-list
+;;         rest
+;;         (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
 ;;      (lambda () nil)))
 
 
@@ -3765,7 +3975,9 @@ application."
 ;;     (bnf-mode-fold-left
 ;;      (bnf-mode-members-1 bnf)
 ;;      (lambda (bnf-mode-x rest)
-;;        (bnf-mode-append-key-word-list rest (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
+;;        (bnf-mode-append-key-word-list
+;;         rest
+;;         (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
 ;;      (lambda () nil)))
 
 ;;    ((bnf-mode-is-constant? bnf)
@@ -3775,7 +3987,9 @@ application."
 ;;     (bnf-mode-fold-left
 ;;      (bnf-mode-paren-2 bnf)
 ;;      (lambda (bnf-mode-x rest)
-;;        (bnf-mode-append-key-word-list rest (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
+;;        (bnf-mode-append-key-word-list
+;;         rest
+;;         (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
 ;;      (lambda () nil)))
 
 
@@ -3783,7 +3997,9 @@ application."
 ;;     (bnf-mode-fold-left
 ;;      (bnf-mode-star-1 bnf)
 ;;      (lambda (bnf-mode-x rest)
-;;        (bnf-mode-append-key-word-list rest (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
+;;        (bnf-mode-append-key-word-list
+;;         rest
+;;         (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
 ;;      (lambda () nil)))
 
 
@@ -3792,7 +4008,9 @@ application."
 ;;     (bnf-mode-fold-left
 ;;      (bnf-mode-plus-1 bnf)
 ;;      (lambda (bnf-mode-x rest)
-;;        (bnf-mode-append-key-word-list rest (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
+;;        (bnf-mode-append-key-word-list
+;;         rest
+;;         (bnf-mode-key-words-list-from-bnf bnf-mode-x acc)))
 ;;      (lambda () nil)))
 
 ;;    (t acc)))
@@ -3811,38 +4029,38 @@ application."
 ;;;;;;;;;;;;;;;;;;; Check functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun bnf-mode-check-arity (member-list v)
   (if (equal (bnf-mode-length-of-bnf-value member-list)
-	     (bnf-mode-length-of-sexp-value v))
+             (bnf-mode-length-of-sexp-value v))
       (bnf-mode-true)
-    (bnf-mode-false 
+    (bnf-mode-false
      (bnf-mode-make-error-arity
       ;; If the bnf-member-list is longer than the input,
       ;; point to the end of the bnf-member-list where input is missing.
       (if (> (bnf-mode-length-of-bnf-value member-list)
-	     (bnf-mode-length-of-sexp-value v))
-	  (bnf-mode-n-last-of-list
-	   (- (bnf-mode-length-of-bnf-value member-list)
-	      (bnf-mode-length-of-sexp-value v))
-	   v)
-	v)
- 
+             (bnf-mode-length-of-sexp-value v))
+          (bnf-mode-n-last-of-list
+           (- (bnf-mode-length-of-bnf-value member-list)
+              (bnf-mode-length-of-sexp-value v))
+           v)
+        v)
+
       ;; bnf location
       (if (> (bnf-mode-length-of-bnf-value member-list)
-	     (bnf-mode-length-of-sexp-value v))
-	  (let ((lst 
-		 (bnf-mode-n-last-of-list
-		  (- (bnf-mode-length-of-bnf-value member-list)
-		     (bnf-mode-length-of-sexp-value v))
-		  member-list)))
-	    (bnf-mode-extend-bnf-location 
-	     (bnf-mode-bnf-location-from-value (car lst))
-	     (bnf-mode-bnf-location-from-value (bnf-mode-last-element-of-list lst))))
-	     
-	(bnf-mode-extend-bnf-location
-	 (bnf-mode-bnf-location-from-value 
-	  (car member-list))
-	 (bnf-mode-bnf-location-from-value 
-	  (bnf-mode-last-element-of-list member-list))))
-      
+             (bnf-mode-length-of-sexp-value v))
+          (let ((lst
+                 (bnf-mode-n-last-of-list
+                  (- (bnf-mode-length-of-bnf-value member-list)
+                     (bnf-mode-length-of-sexp-value v))
+                  member-list)))
+            (bnf-mode-extend-bnf-location
+             (bnf-mode-bnf-location-from-value (car lst))
+             (bnf-mode-bnf-location-from-value (bnf-mode-last-element-of-list lst))))
+
+        (bnf-mode-extend-bnf-location
+         (bnf-mode-bnf-location-from-value
+          (car member-list))
+         (bnf-mode-bnf-location-from-value
+          (bnf-mode-last-element-of-list member-list))))
+
       (bnf-mode-length-of-bnf-value member-list)
       (bnf-mode-length-of-sexp-value v)))))
 
@@ -3863,49 +4081,62 @@ application."
 
 (defun bnf-mode-check-arity-with-multiplier (member-list v)
   (if (<= (bnf-mode-shortest-bnf-length member-list)
-	  (bnf-mode-length-of-sexp-value v))
+          (bnf-mode-length-of-sexp-value v))
       (bnf-mode-true)
-    (bnf-mode-false 
+    (bnf-mode-false
      (bnf-mode-make-error-arity-with-multiplier
       v
-      (bnf-mode-bnf-location-from-value 
+      (bnf-mode-bnf-location-from-value
        (car member-list))
       (bnf-mode-shortest-bnf-length member-list)
       (bnf-mode-length-of-sexp-value v)))))
-   	      
+
 
 
 (defun bnf-mode-check-paren-exists (bnf-paren v)
   (if (bnf-mode-is-syntax-paren? v)
       (bnf-mode-true)
     (bnf-mode-false
-     (bnf-mode-make-error-missing-paren v (bnf-mode-bnf-location-from-value bnf-paren)))))
+     (bnf-mode-make-error-missing-paren
+      v
+      (bnf-mode-bnf-location-from-value bnf-paren)))))
 
 (defun bnf-mode-check-paren-type (bnf-paren v)
   (cond
    ((and (not (equal (bnf-mode-syntax-paren-1 v) (bnf-mode-paren-1 bnf-paren)))
-	 (not (equal (bnf-mode-syntax-paren-3 v) (bnf-mode-paren-1 bnf-paren))))
-    (bnf-mode-false (bnf-mode-make-error-wrong-paren-type v (bnf-mode-bnf-location-from-value bnf-paren))))
-   
+         (not (equal (bnf-mode-syntax-paren-3 v) (bnf-mode-paren-1 bnf-paren))))
+    (bnf-mode-false
+     (bnf-mode-make-error-wrong-paren-type
+      v
+      (bnf-mode-bnf-location-from-value bnf-paren))))
+
    ((not (equal (bnf-mode-syntax-paren-1 v) (bnf-mode-paren-1 bnf-paren)))
-    (bnf-mode-false 
-     (bnf-mode-make-error-paren-type-mismatch-left 
-      v 
+    (bnf-mode-false
+     (bnf-mode-make-error-paren-type-mismatch-left
+      v
       (bnf-mode-make-bnf-location
-       (bnf-mode-bnf-location-1 (bnf-mode-bnf-location-from-value bnf-paren))
-       (+ 1 (bnf-mode-bnf-location-1 (bnf-mode-bnf-location-from-value bnf-paren)))))))
+       (bnf-mode-bnf-location-1
+        (bnf-mode-bnf-location-from-value bnf-paren))
+       (+
+        1
+        (bnf-mode-bnf-location-1
+         (bnf-mode-bnf-location-from-value bnf-paren)))))))
 
    ((not (equal (bnf-mode-syntax-paren-3 v) (bnf-mode-paren-1 bnf-paren)))
     (bnf-mode-false
-     (bnf-mode-make-error-paren-type-mismatch-right 
-      v 
+     (bnf-mode-make-error-paren-type-mismatch-right
+      v
       (bnf-mode-make-bnf-location
-       (- (bnf-mode-bnf-location-2 (bnf-mode-bnf-location-from-value bnf-paren)) 1)
-       (bnf-mode-bnf-location-2 (bnf-mode-bnf-location-from-value bnf-paren))))))
+       (-
+        (bnf-mode-bnf-location-2
+         (bnf-mode-bnf-location-from-value bnf-paren))
+        1)
+       (bnf-mode-bnf-location-2
+        (bnf-mode-bnf-location-from-value bnf-paren))))))
 
    (t
     (bnf-mode-true))))
-  
+
 (defun bnf-mode-check-paren (bnf-paren v)
   (bnf-mode-boolean-and
    (bnf-mode-check-paren-exists bnf-paren v)
@@ -3919,7 +4150,7 @@ application."
 
 (defun bnf-mode-check-constant (bnf-constant v)
   (if  (equal (bnf-mode-constant-1 bnf-constant)
-	      (bnf-mode-constant-1 v))
+              (bnf-mode-constant-1 v))
       (bnf-mode-true)
     (bnf-mode-false
      (bnf-mode-make-error-constant
@@ -3932,144 +4163,160 @@ application."
   (and (bnf-mode-is-syntax-constant? (car v))
        (bnf-mode-is-constant? (car bnf-list))
        (equal (bnf-mode-syntax-constant-1 (car v))
-	      (bnf-mode-constant-1 (car bnf-list)))))
+              (bnf-mode-constant-1 (car bnf-list)))))
 
 ;; bnf, bnf constructor
 ;; v, list of values
-(defun bnf-mode-check-value-bnf (bnf v v-previous reference-bnf constant-context star-context)
+(defun bnf-mode-check-value-bnf (bnf
+                                 v
+                                 v-previous
+                                 reference-bnf
+                                 constant-context
+                                 star-context)
   (cond
 
    ((bnf-mode-is-paren? bnf)
     (if (bnf-mode-is-paren-type-curl? (bnf-mode-paren-1 bnf))
-	(bnf-mode-handle-paren
-	 (bnf-mode-paren-2 bnf)
-	 v
-	 reference-bnf
-	 star-context)
+        (bnf-mode-handle-paren
+         (bnf-mode-paren-2 bnf)
+         v
+         reference-bnf
+         star-context)
       (let ((check (bnf-mode-check-paren bnf (bnf-mode-ui-car v))))
-	(cond
+        (cond
 
-	 ;; 3.08.2013: So the parenthesis does not match, but if there
-	 ;; is a constant inside the parenthesis, the error location
-	 ;; in the BNF is enhanced.
-	 ((bnf-mode-is-false? check)
-	  (let ((inner-constant 
-		 (bnf-mode-has-left-most-constnat?
-		  (bnf-mode-paren-2 bnf)
-		  (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v)))))
-	    ;(message "error in paren: %s\n%s\n%s\n%s\n\n" inner-res (bnf-mode-paren-2 bnf) (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v)) v)
-	  (bnf-mode-make-remainder
-	   check
-	   v
-	   nil
-	   (if inner-constant
-	       inner-constant
-	     constant-context)
-	   nil)))
+         ;; 3.08.2013: So the parenthesis does not match, but if there
+         ;; is a constant inside the parenthesis, the error location
+         ;; in the BNF is enhanced.
+         ((bnf-mode-is-false? check)
+          (let ((inner-constant
+                 (bnf-mode-has-left-most-constnat?
+                  (bnf-mode-paren-2 bnf)
+                  (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v)))))
+            ;; (message "error in paren: %s\n%s\n%s\n%s\n\n" inner-res (bnf-mode-paren-2 bnf) (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v)) v)
+            (bnf-mode-make-remainder
+             check
+             v
+             nil
+             (if inner-constant
+                 inner-constant
+               constant-context)
+             nil)))
 
-	 ;; If the BNF paren is empty, return
-	 ((null (bnf-mode-paren-2 bnf))
-	  (bnf-mode-make-remainder
-	   check
-	   (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v))
-	   nil
-	   constant-context
-	   nil))
+         ;; If the BNF paren is empty, return
+         ((null (bnf-mode-paren-2 bnf))
+          (bnf-mode-make-remainder
+           check
+           (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v))
+           nil
+           constant-context
+           nil))
 
-	 (t
-	  (let ((inner 
-		 (bnf-mode-add-arity-to-remainder
-		  (bnf-mode-add-paren-to-remainder
-		   (bnf-mode-handle-paren
-		    (bnf-mode-paren-2 bnf)
-		    (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v))
-		    reference-bnf
-		    star-context))
-		  (bnf-mode-is-true? (bnf-mode-check-arity (bnf-mode-paren-2 bnf) (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v)))))))
-	    (cond
-	     ;; If the inner was matched, continue on the rest
-	     ((bnf-mode-is-remainder-match? inner)
-	      (bnf-mode-make-remainder
-	       (bnf-mode-true)
-	       (bnf-mode-ui-cdr v)
-	       nil
-	       nil
-	       nil))
+         (t
+          (let ((inner
+                 (bnf-mode-add-arity-to-remainder
+                  (bnf-mode-add-paren-to-remainder
+                   (bnf-mode-handle-paren
+                    (bnf-mode-paren-2 bnf)
+                    (bnf-mode-syntax-paren-2 (bnf-mode-ui-car v))
+                    reference-bnf
+                    star-context))
+                  (bnf-mode-is-true?
+                   (bnf-mode-check-arity
+                    (bnf-mode-paren-2 bnf)
+                    (bnf-mode-syntax-paren-2
+                     (bnf-mode-ui-car v)))))))
+            (cond
+             ;; If the inner was matched, continue on the rest
+             ((bnf-mode-is-remainder-match? inner)
+              (bnf-mode-make-remainder
+               (bnf-mode-true)
+               (bnf-mode-ui-cdr v)
+               nil
+               nil
+               nil))
 
-	     ;; No all input was matched inside the paren
-	     ((bnf-mode-is-remainder-true? inner)
-	      (bnf-mode-update-remainder-with-new-error
-	       inner
-	       (bnf-mode-make-error-unmatched-input
-		(bnf-mode-remainder-2 inner)
-		(bnf-mode-bnf-location-from-value bnf))))
-		
+             ;; No all input was matched inside the paren
+             ((bnf-mode-is-remainder-true? inner)
+              (bnf-mode-update-remainder-with-new-error
+               inner
+               (bnf-mode-make-error-unmatched-input
+                (bnf-mode-remainder-2 inner)
+                (bnf-mode-bnf-location-from-value bnf))))
 
 
-	     (t
-	      (bnf-mode-add-context-value-if-missing inner v)))))))))
-	       
+
+             (t
+              (bnf-mode-add-context-value-if-missing inner v)))))))))
+
 
 
    ((bnf-mode-is-constant? bnf)
     (let ((check-const (bnf-mode-check-constant bnf (bnf-mode-ui-car v))))
       (let ((const-rem (bnf-mode-make-remainder
-			check-const
-			(if (bnf-mode-is-true? check-const) 
-			    (bnf-mode-ui-cdr v)
-			  v)
-			(bnf-mode-is-true? check-const) ;; arity match, if the const is bnf-mode-true
-			(bnf-mode-is-true? check-const) ;; const match
-			nil)))                 ;; paren match
-	const-rem)))
-     
+                        check-const
+                        (if (bnf-mode-is-true? check-const)
+                            (bnf-mode-ui-cdr v)
+                          v)
+                        ;; arity match, if the const is bnf-mode-true
+                        (bnf-mode-is-true? check-const)
+                        ;; const match
+                        (bnf-mode-is-true? check-const)
+                        ;; paren match
+                        nil)))
+        const-rem)))
+
 
    ;; ((bnf-mode-is-quote? bnf)
-   ;;  (let ((bnf-mode-check-quote (bnf-mode-check-quote (bnf-mode-quote-1 bnf) (bnf-mode-ui-car v))))
+   ;;  (let ((bnf-mode-check-quote
+   ;;         (bnf-mode-check-quote
+   ;;          (bnf-mode-quote-1 bnf)
+   ;;          (bnf-mode-ui-car v))))
    ;;    (if (bnf-mode-is-true? bnf-mode-check-quote)
-   ;; 	  (bnf-mode-check-value-bnf 
-   ;; 	   (bnf-mode-quote-1 bnf) 
-   ;; 	   (bnf-mode-syntax-quote-1 (bnf-mode-ui-car v))
-   ;; 	   v-previous 
-   ;; 	   reference-bnf 
-   ;; 	   constant-context 
-   ;; 	   star-context)
-   ;; 	(bnf-mode-make-remainder
-   ;; 	 bnf-mode-check-quote
-   ;; 	 v
-   ;; 	 nil
-   ;; 	 nil
-   ;; 	 nil))))
+   ;;     (bnf-mode-check-value-bnf
+   ;;      (bnf-mode-quote-1 bnf)
+   ;;      (bnf-mode-syntax-quote-1 (bnf-mode-ui-car v))
+   ;;      v-previous
+   ;;      reference-bnf
+   ;;      constant-context
+   ;;      star-context)
+   ;;   (bnf-mode-make-remainder
+   ;;    bnf-mode-check-quote
+   ;;    v
+   ;;    nil
+   ;;    nil
+   ;;    nil))))
 
 
    ((bnf-mode-is-group-ref? bnf)
     (let ((group-ref-result (bnf-mode-check-reference
-			     bnf
-			     (bnf-mode-ui-car v)
-			     reference-bnf
-			     constant-context
-			     (bnf-mode-key-words-list-from-bnf-main reference-bnf))))
+                             bnf
+                             (bnf-mode-ui-car v)
+                             reference-bnf
+                             constant-context
+                             (bnf-mode-key-words-list-from-bnf-main
+                              reference-bnf))))
       (cond
 
        ((bnf-mode-is-remainder-match? group-ref-result)
-	(bnf-mode-make-remainder
-	 (bnf-mode-remainder-1 group-ref-result)
-	 (bnf-mode-ui-cdr v)
-	 (bnf-mode-remainder-3 group-ref-result)
-	 (bnf-mode-remainder-4 group-ref-result)
-	 (bnf-mode-remainder-5 group-ref-result)))
-       
+        (bnf-mode-make-remainder
+         (bnf-mode-remainder-1 group-ref-result)
+         (bnf-mode-ui-cdr v)
+         (bnf-mode-remainder-3 group-ref-result)
+         (bnf-mode-remainder-4 group-ref-result)
+         (bnf-mode-remainder-5 group-ref-result)))
+
        (t
-	group-ref-result))))
+        group-ref-result))))
 
    ((bnf-mode-is-plus? bnf)
     (cond
      ((null v)
-      (bnf-mode-make-remainder 
+      (bnf-mode-make-remainder
        (bnf-mode-false
-	(bnf-mode-make-error-plus-at-least-one-match
-	 v-previous
-	 (bnf-mode-bnf-location-from-value bnf)))
+        (bnf-mode-make-error-plus-at-least-one-match
+         v-previous
+         (bnf-mode-bnf-location-from-value bnf)))
        nil
        nil
        nil
@@ -4096,25 +4343,25 @@ application."
        v
        reference-bnf
        constant-context))
-	))
+     ))
 
-       
-       
+
+
    (t
     (error "No match: member-values=%s\nv=%s" bnf v))))
-  
+
 ;;;
 
 
 
 (defun bnf-mode-handle-multiplier (bnf inner-bnf v reference-bnf constant-context)
   (let ((iter (bnf-mode-check-value-bnf
-	       inner-bnf
-	       v
-	       v
-	       reference-bnf
-	       constant-context
-	       t)))
+               inner-bnf
+               v
+               v
+               reference-bnf
+               constant-context
+               t)))
 
     (cond
      ((bnf-mode-is-remainder-match? iter)
@@ -4126,12 +4373,12 @@ application."
      ((bnf-mode-is-remainder-true? iter)
       (bnf-mode-make-updated-remainder
        (bnf-mode-check-value-bnf
-	bnf
-	(bnf-mode-remainder-2 iter)
-	(bnf-mode-remainder-2 iter)
-	reference-bnf
-	constant-context
-	t)
+        bnf
+        (bnf-mode-remainder-2 iter)
+        (bnf-mode-remainder-2 iter)
+        reference-bnf
+        constant-context
+        t)
        iter))
 
      (t
@@ -4142,7 +4389,7 @@ application."
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun bnf-mode-is-bnf-match? (member-values v)
   (and (null member-values)
@@ -4152,35 +4399,35 @@ application."
   (and (null member-values)
        (not (null v))))
 
-;;;;;;;;;;;;;;;;;;;;;;; Look up ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;; Look up ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun bnf-mode-look-up-reference (bnf ref-name)
   (let ((res (bnf-mode-fold-left
-	      (bnf-mode-groups-1 (bnf-mode-bnf-1 bnf))	      
-	      (lambda (bnf-mode-x rest)
-		(cond
-		 (rest
-		  rest)
-		 
-		 ((equal (bnf-mode-group-1 bnf-mode-x) ref-name)
-		  (bnf-mode-group-2 bnf-mode-x))
-		 
-		 (t 
-		  nil)))
-	      (lambda () nil))))
+              (bnf-mode-groups-1 (bnf-mode-bnf-1 bnf))
+              (lambda (bnf-mode-x rest)
+                (cond
+                 (rest
+                  rest)
+
+                 ((equal (bnf-mode-group-1 bnf-mode-x) ref-name)
+                  (bnf-mode-group-2 bnf-mode-x))
+
+                 (t
+                  nil)))
+              (lambda () nil))))
 
     (if res
-	(bnf-mode-make-reference-found res)
+        (bnf-mode-make-reference-found res)
       (let ((buildin (bnf-mode-is-build-in-production? ref-name)))
-	(cond
-	 ((bnf-mode-is-normal-buildin? buildin)
-	  (bnf-mode-make-reference-buildin buildin))
+        (cond
+         ((bnf-mode-is-normal-buildin? buildin)
+          (bnf-mode-make-reference-buildin buildin))
 
-	 ((bnf-mode-is-keyword-list-buildin? buildin)
-	  (bnf-mode-make-reference-buildin buildin))
+         ((bnf-mode-is-keyword-list-buildin? buildin)
+          (bnf-mode-make-reference-buildin buildin))
 
-	 ((bnf-mode-is-non-buildin? buildin)
-	  (bnf-mode-make-reference-not-found ref-name)))))))
+         ((bnf-mode-is-non-buildin? buildin)
+          (bnf-mode-make-reference-not-found ref-name)))))))
 
 ;; Spelled built-in!
 (defun bnf-mode-handle-buildin-reference (result v_ group-ref)
@@ -4188,24 +4435,24 @@ application."
       (cond
 
        ((bnf-mode-is-reference-build-in-nothing? group-ref)
-	(bnf-mode-make-remainder
-	 (bnf-mode-true)
-	 v_
-	 nil
-	 nil
-	 nil))
+        (bnf-mode-make-remainder
+         (bnf-mode-true)
+         v_
+         nil
+         nil
+         nil))
 
        (t
-	(bnf-mode-make-remainder
-	 (bnf-mode-false
-	  (bnf-mode-make-error-group-ref-expected-buildin 
-	   v_
-	   (bnf-mode-bnf-location-from-value group-ref)
-	   (bnf-mode-false-1 result)))
-	 v_
-	 nil
-	 nil
-	 nil)))
+        (bnf-mode-make-remainder
+         (bnf-mode-false
+          (bnf-mode-make-error-group-ref-expected-buildin
+           v_
+           (bnf-mode-bnf-location-from-value group-ref)
+           (bnf-mode-false-1 result)))
+         v_
+         nil
+         nil
+         nil)))
     (bnf-mode-make-remainder
      result
      nil
@@ -4214,13 +4461,17 @@ application."
      nil)))
 
 
-(defun bnf-mode-check-reference (group-ref v_ reference-bnf constant-context key-words-list)
+(defun bnf-mode-check-reference (group-ref
+                                 v_
+                                 reference-bnf
+                                 constant-context
+                                 key-words-list)
   "group-ref sexp reference-bnf"
-  (let ((lookup (bnf-mode-look-up-reference 
-		 reference-bnf 
-		 (bnf-mode-group-ref-1 group-ref))))
- 
-    (cond 
+  (let ((lookup (bnf-mode-look-up-reference
+                 reference-bnf
+                 (bnf-mode-group-ref-1 group-ref))))
+
+    (cond
 
      ((bnf-mode-is-reference-found? lookup)
       (bnf-mode-handle-members-lookup
@@ -4232,44 +4483,51 @@ application."
 
      ((bnf-mode-is-reference-buildin? lookup)
       (cond
-       
-       ((bnf-mode-is-normal-buildin? (bnf-mode-reference-buildin-1 lookup))
-	(bnf-mode-handle-buildin-reference 
-	 (funcall 
-	  (bnf-mode-normal-buildin-2 (bnf-mode-reference-buildin-1 lookup))
-	  v_)
-	 v_ 
-	 group-ref))
 
-       ((bnf-mode-is-keyword-list-buildin? (bnf-mode-reference-buildin-1 lookup))
-	(bnf-mode-handle-buildin-reference 
-	 (funcall 
-	  (bnf-mode-keyword-list-buildin-2 (bnf-mode-reference-buildin-1 lookup))
-	  v_
-	  key-words-list)
-	 v_ 
-	 group-ref))))
-			    
+       ((bnf-mode-is-normal-buildin? (bnf-mode-reference-buildin-1 lookup))
+        (bnf-mode-handle-buildin-reference
+         (funcall
+          (bnf-mode-normal-buildin-2 (bnf-mode-reference-buildin-1 lookup))
+          v_)
+         v_
+         group-ref))
+
+       ((bnf-mode-is-keyword-list-buildin?
+         (bnf-mode-reference-buildin-1 lookup))
+        (bnf-mode-handle-buildin-reference
+         (funcall
+          (bnf-mode-keyword-list-buildin-2
+           (bnf-mode-reference-buildin-1 lookup))
+          v_
+          key-words-list)
+         v_
+         group-ref))))
+
 
      ((bnf-mode-is-reference-not-found? lookup)
       (bnf-mode-make-remainder
        (bnf-mode-false
-	(bnf-mode-make-error-group-ref-not-found
-	 v_
-	 (bnf-mode-bnf-location-from-value group-ref)
-	 (bnf-mode-group-ref-1 group-ref)))
+        (bnf-mode-make-error-group-ref-not-found
+         v_
+         (bnf-mode-bnf-location-from-value group-ref)
+         (bnf-mode-group-ref-1 group-ref)))
        v_
        nil
        nil
        nil)))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defun bnf-mode-handle-paren (bnf v reference-bnf star-context)
   (if (bnf-mode-has-member-multiplier? bnf)
       (bnf-mode-handle-member-with-multiplier bnf v reference-bnf)
-    (bnf-mode-handle-member-without-multiplier bnf v reference-bnf star-context nil)))
+    (bnf-mode-handle-member-without-multiplier
+     bnf
+     v
+     reference-bnf
+     star-context
+     nil)))
 
 (defun bnf-mode-relevant-value (v1 v2)
   (if (null v1)
@@ -4277,15 +4535,23 @@ application."
     v1))
 
 ;; Checks the values,v, against the bnf-list, iteratively left to right
-(defun bnf-mode-check-value-iter (bnf-list v v-previous reference-bnf previous-bnf arity-match constant-context)
+(defun bnf-mode-check-value-iter (bnf-list
+                                  v
+                                  v-previous
+                                  reference-bnf
+                                  previous-bnf
+                                  arity-match
+                                  constant-context)
   (cond
 
-   ;;; Terminate with error, if the input is null but there are still members left
-   ;;; to be matched
+   ;;; Terminate with error, if the input is null but there are still
+   ;;; members left to be matched
    ((bnf-mode-is-bnf-non-match? bnf-list v)
     (bnf-mode-make-remainder
      (bnf-mode-false
-      (bnf-mode-make-error-unmatched-input v (bnf-mode-bnf-location-from-value previous-bnf)))
+      (bnf-mode-make-error-unmatched-input
+       v
+       (bnf-mode-bnf-location-from-value previous-bnf)))
      v
      nil
      nil
@@ -4294,7 +4560,7 @@ application."
    ;; Terminate with true, if the input is empty and there are no
    ;; members to match against.
    ((bnf-mode-is-bnf-match? bnf-list v)
-    (bnf-mode-make-remainder 
+    (bnf-mode-make-remainder
      (bnf-mode-true)
      nil
      nil
@@ -4302,107 +4568,136 @@ application."
      nil))
 
    (t
-    (let ((iter-res 
-	   (bnf-mode-fold-left
-	    bnf-list
-	    (lambda (bnf rest)
-	      (cond
-	
-	       ((and (bnf-mode-is-remainder-false? rest)
-		     (not (bnf-mode-is-worst-possible-error? (bnf-mode-false-1 (bnf-mode-remainder-1 rest)))))
-		rest)
+    (let ((iter-res
+           (bnf-mode-fold-left
+            bnf-list
+            (lambda (bnf rest)
+              (cond
 
-	       (t
-		(let* ((new-match 
-		       (bnf-mode-check-value-bnf
-			bnf
-			(bnf-mode-remainder-2 rest)
-			v-previous
-			reference-bnf
-			(bnf-mode-remainder-4 rest)
-			nil))
-		       (better-err
-			(bnf-mode-ensure-error-has-value-context
-			 (bnf-mode-ensure-progress
-			  (bnf-mode-make-updated-remainder new-match rest) 
-			  rest
-			  bnf)
-			 v
-			 bnf
-			 (bnf-mode-remainder-4 rest)
-			 (bnf-mode-remainder-4 new-match))))
+               ((and (bnf-mode-is-remainder-false? rest)
+                     (not
+                      (bnf-mode-is-worst-possible-error?
+                       (bnf-mode-false-1
+                        (bnf-mode-remainder-1 rest)))))
+                rest)
 
-		  (cond
-		   ((and (bnf-mode-is-group-ref? bnf)
-			 (bnf-mode-is-remainder-false? new-match))
+               (t
+                (let* ((new-match
+                        (bnf-mode-check-value-bnf
+                         bnf
+                         (bnf-mode-remainder-2 rest)
+                         v-previous
+                         reference-bnf
+                         (bnf-mode-remainder-4 rest)
+                         nil))
+                       (better-err
+                        (bnf-mode-ensure-error-has-value-context
+                         (bnf-mode-ensure-progress
+                          (bnf-mode-make-updated-remainder new-match rest)
+                          rest
+                          bnf)
+                         v
+                         bnf
+                         (bnf-mode-remainder-4 rest)
+                         (bnf-mode-remainder-4 new-match))))
 
-		    (bnf-mode-make-updated-remainder
-		     (bnf-mode-ensure-error-has-value-context
-		      new-match
-		      v
-		      bnf
-		      (bnf-mode-remainder-4 rest)
-		      (bnf-mode-remainder-4 new-match))
-		     rest))
+                  (cond
+                   ((and (bnf-mode-is-group-ref? bnf)
+                         (bnf-mode-is-remainder-false? new-match))
 
-		   ((bnf-mode-is-remainder-match? new-match)
-		    (bnf-mode-make-updated-remainder new-match rest))
+                    (bnf-mode-make-updated-remainder
+                     (bnf-mode-ensure-error-has-value-context
+                      new-match
+                      v
+                      bnf
+                      (bnf-mode-remainder-4 rest)
+                      (bnf-mode-remainder-4 new-match))
+                     rest))
 
-		   (t
-		    better-err))))))
-	   
-	    (lambda () 
-	      (bnf-mode-make-remainder
-	       (bnf-mode-false (bnf-mode-make-worst-possible-error))
-	       v
-	       nil
-	       constant-context
-	       nil)))))
+                   ((bnf-mode-is-remainder-match? new-match)
+                    (bnf-mode-make-updated-remainder new-match rest))
+
+                   (t
+                    better-err))))))
+
+            (lambda ()
+              (bnf-mode-make-remainder
+               (bnf-mode-false (bnf-mode-make-worst-possible-error))
+               v
+               nil
+               constant-context
+               nil)))))
 
       iter-res))))
 
 
 ;; Adds value and bnf location to an error iff it is missing a value
 ;; context.
-(defun bnf-mode-ensure-error-has-value-context 
-  (r v bnf constant-context-current constant-context-inner)
-  (if (not (null (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+(defun bnf-mode-ensure-error-has-value-context
+    (r v bnf constant-context-current constant-context-inner)
+  (if (not
+       (null
+        (bnf-mode-value-from-error
+         (bnf-mode-false-1
+          (bnf-mode-remainder-1 r)))))
       r
     (cond
      ((bnf-mode-is-remainder-true? r)
       r)
 
      ((and (bnf-mode-is-group-ref? bnf)
-	   (bnf-mode-is-remainder-false? r)
-	   (bnf-mode-is-error-no-match-in-reference? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	   constant-context-current
-	   constant-context-inner)
+           (bnf-mode-is-remainder-false? r)
+           (bnf-mode-is-error-no-match-in-reference?
+            (bnf-mode-false-1
+             (bnf-mode-remainder-1 r)))
+           constant-context-current
+           constant-context-inner)
       (bnf-mode-make-remainder
        (bnf-mode-false
-	(bnf-mode-make-error-no-match-in-reference
-	 (if (bnf-mode-inner-most-value (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
-	     (bnf-mode-inner-most-value (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
-	   (bnf-mode-inner-most-value v))
-	 (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	 (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+        (bnf-mode-make-error-no-match-in-reference
+         (if (bnf-mode-inner-most-value
+              (bnf-mode-value-from-error
+               (bnf-mode-false-1
+                (bnf-mode-remainder-1 r))))
+             (bnf-mode-inner-most-value
+              (bnf-mode-value-from-error
+               (bnf-mode-false-1
+                (bnf-mode-remainder-1 r))))
+           (bnf-mode-inner-most-value v))
+         (bnf-mode-bnf-location-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 r)))
+         (bnf-mode-error-no-match-in-reference-1
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 r)))))
        (bnf-mode-remainder-2 r)
        (bnf-mode-remainder-3 r)
        (bnf-mode-remainder-4 r)
        (bnf-mode-remainder-5 r)))
 
      ((and (bnf-mode-is-group-ref? bnf)
-	   (bnf-mode-is-remainder-false? r)
-	   (bnf-mode-is-error-no-match-in-reference? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	   constant-context-inner)
+           (bnf-mode-is-remainder-false? r)
+           (bnf-mode-is-error-no-match-in-reference?
+            (bnf-mode-false-1
+             (bnf-mode-remainder-1 r)))
+           constant-context-inner)
       (bnf-mode-make-remainder
        (bnf-mode-false
-	(bnf-mode-make-error-no-match-in-reference
-	 (if (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	     (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	   (bnf-mode-inner-most-value v))
-	   
-	 (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	 (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+        (bnf-mode-make-error-no-match-in-reference
+         (if (bnf-mode-value-from-error
+              (bnf-mode-false-1
+               (bnf-mode-remainder-1 r)))
+             (bnf-mode-value-from-error
+              (bnf-mode-false-1
+               (bnf-mode-remainder-1 r)))
+           (bnf-mode-inner-most-value v))
+
+         (bnf-mode-bnf-location-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 r)))
+         (bnf-mode-error-no-match-in-reference-1
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 r)))))
        (bnf-mode-remainder-2 r)
        (bnf-mode-remainder-3 r)
        (bnf-mode-remainder-4 r)
@@ -4411,35 +4706,46 @@ application."
 
 
      ((and (bnf-mode-is-group-ref? bnf)
-	   (bnf-mode-is-remainder-false? r)
-	   (bnf-mode-is-error-no-match-in-reference? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	   constant-context-current)
+           (bnf-mode-is-remainder-false? r)
+           (bnf-mode-is-error-no-match-in-reference?
+            (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
+           constant-context-current)
       (let ((r (bnf-mode-make-remainder
-		(bnf-mode-false
-		 (bnf-mode-make-error-no-match-in-reference
-		  (if (bnf-mode-remainder-2 r)
-		      (bnf-mode-remainder-2 r)
-		    (bnf-mode-inner-most-value v))
-		  (bnf-mode-bnf-location-from-value bnf)
-		  (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
-		(bnf-mode-remainder-2 r)
-		(bnf-mode-remainder-3 r)
-		(bnf-mode-remainder-4 r)
-		(bnf-mode-remainder-5 r))))
-	r))
+                (bnf-mode-false
+                 (bnf-mode-make-error-no-match-in-reference
+                  (if (bnf-mode-remainder-2 r)
+                      (bnf-mode-remainder-2 r)
+                    (bnf-mode-inner-most-value v))
+                  (bnf-mode-bnf-location-from-value bnf)
+                  (bnf-mode-error-no-match-in-reference-1
+                   (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+                (bnf-mode-remainder-2 r)
+                (bnf-mode-remainder-3 r)
+                (bnf-mode-remainder-4 r)
+                (bnf-mode-remainder-5 r))))
+        r))
 
 
      ((and (bnf-mode-is-group-ref? bnf)
-	   (bnf-mode-is-remainder-false? r)
-	   (bnf-mode-is-error-no-match-in-reference? (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
+           (bnf-mode-is-remainder-false? r)
+           (bnf-mode-is-error-no-match-in-reference?
+            (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
       (bnf-mode-make-remainder
        (bnf-mode-false
-	(bnf-mode-make-error-no-match-in-reference
-	 (if (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	     (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	   (bnf-mode-inner-most-value v))
-	 (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	 (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+        (bnf-mode-make-error-no-match-in-reference
+         (if (bnf-mode-value-from-error
+              (bnf-mode-false-1
+               (bnf-mode-remainder-1 r)))
+             (bnf-mode-value-from-error
+              (bnf-mode-false-1
+               (bnf-mode-remainder-1 r)))
+           (bnf-mode-inner-most-value v))
+         (bnf-mode-bnf-location-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 r)))
+         (bnf-mode-error-no-match-in-reference-1
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 r)))))
        (bnf-mode-remainder-2 r)
        (bnf-mode-remainder-3 r)
        (bnf-mode-remainder-4 r)
@@ -4447,10 +4753,10 @@ application."
 
      (t
       r))))
-     
- 
 
- 
+
+
+
 
 (defun bnf-mode-ensure-progress (a b bnf)
   (cond
@@ -4458,7 +4764,7 @@ application."
    ;; If the new error is false, and the previous was true,
    ;; obviously report the new error
    ((and (bnf-mode-is-remainder-false? a)
-	 (bnf-mode-is-remainder-true? b))
+         (bnf-mode-is-remainder-true? b))
     a)
 
    ((bnf-mode-is-remainder-match? a)
@@ -4467,19 +4773,19 @@ application."
    ((bnf-mode-is-remainder-match? b)
     b)
 
-   
+
    ((bnf-mode-is-remainder-true? a)
     a)
 
    ((and (bnf-mode-is-remainder-true? a)
-	 (bnf-mode-is-remainder-true? b))
+         (bnf-mode-is-remainder-true? b))
     (bnf-mode-select-shortest-remainder a b))
 
    (t
     (bnf-mode-select-better-error a b ))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;; Error selection  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; Error selection  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Remainder context predicates
 (defun bnf-mode-has-none? (r)
@@ -4541,54 +4847,58 @@ application."
    (list 'er1 'er2 'er2 'er1 'er1 'len 'er1 'er2) ; pa
    (list 'er2 'er2 'er2 'er2 'er2 'er2 'len 'er2) ; cpa
    (list 'er1 'er1 'er1 'er1 'er1 'er1 'er1 'len) ; none
-  ))
+   ))
 
 
 ;; todo ugly as hell, should be cleaned up
 (defun bnf-mode-select-better-error (a b)
-  (cond 
+  (cond
 
    ((and (bnf-mode-is-remainder-false? a)
-	 (bnf-mode-is-worst-possible-error? (bnf-mode-false-1 (bnf-mode-remainder-1 a))))
+         (bnf-mode-is-worst-possible-error?
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 a))))
     b)
 
    ((and (bnf-mode-is-remainder-false? b)
-	 (bnf-mode-is-worst-possible-error? (bnf-mode-false-1 (bnf-mode-remainder-1 b))))
+         (bnf-mode-is-worst-possible-error?
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 b))))
     a)
 
    (t
 
-    
 
-  ;; 'er1 is a
-  ;; 'len is a.length <= b.length, return a, else b
-  ;; 'er2 is b
+
+    ;; 'er1 is a
+    ;; 'len is a.length <= b.length, return a, else b
+    ;; 'er2 is b
     (let* ((tbl (bnf-mode-make-error-cmp-table))
-	   (res (nth (bnf-mode-remainder-state-index a) 
-		     (nth (bnf-mode-remainder-state-index b) tbl))))
+           (res (nth (bnf-mode-remainder-state-index a)
+                     (nth (bnf-mode-remainder-state-index b) tbl))))
       (cond
-      
+
 
        ((bnf-mode-is-remainder-match? a)
-	a)
+        a)
 
        ((bnf-mode-is-remainder-match? b)
-	b)
+        b)
 
        ((equal res 'er1) a)
        ((equal res 'er2) b)
        ((equal res 'len)
-	(bnf-mode-select-shortest-remainder a b))
+        (bnf-mode-select-shortest-remainder a b))
 
        (t
-	(error "select-better-error unahendled case: %s %s" a b))
+        (error "select-better-error unahendled case: %s %s" a b))
 
        )))))
 
 
 (defun bnf-mode-select-shortest-remainder (a b)
   (if (<= (bnf-mode-nested-length-of-sexp-value (bnf-mode-remainder-2 a))
-	  (bnf-mode-nested-length-of-sexp-value (bnf-mode-remainder-2 b)))
+          (bnf-mode-nested-length-of-sexp-value (bnf-mode-remainder-2 b)))
       a
     b))
 
@@ -4638,7 +4948,7 @@ application."
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun bnf-mode-is-multiplier? (v)
   (or (bnf-mode-is-star? v)
@@ -4648,13 +4958,13 @@ application."
 (defun bnf-mode-has-member-multiplier? (v)
   (bnf-mode-fold-left-break-at
    v
-   (lambda (bnf-mode-x rest) 
+   (lambda (bnf-mode-x rest)
      (bnf-mode-is-multiplier? bnf-mode-x))
    (lambda () nil)
-   (lambda (bnf-mode-x rest) 
+   (lambda (bnf-mode-x rest)
      (bnf-mode-is-multiplier? bnf-mode-x))))
 
-;;;;;;;;;;; helpers for remainder inner values ;;;;;;;;;;;;;;
+;;;;;;;;;;; helpers for remainder inner values ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun bnf-mode-is-remainder-true? (v)
   (bnf-mode-is-true? (bnf-mode-remainder-1 v)))
@@ -4678,40 +4988,44 @@ application."
    (bnf-mode-error-arity-1 (bnf-mode-false-1 arity))
    (bnf-mode-error-arity-2 (bnf-mode-false-1 arity))))
 
-   
-   
+
+
 
 
 ;; m, is the member.
 ;; v, is the input value.
 ;; reference-bnf, is the full bnf AST.
-(defun bnf-mode-handle-member-without-multiplier (member-list v reference-bnf star-context constant-context)
-  
+(defun bnf-mode-handle-member-without-multiplier (member-list
+                                                  v
+                                                  reference-bnf
+                                                  star-context
+                                                  constant-context)
+
   (let* ((arity ;;(bnf-mode-true))
 
-	  (if star-context 
-	  	    (bnf-mode-true)
-	  	  (bnf-mode-check-arity member-list v)))
+          (if star-context
+              (bnf-mode-true)
+            (bnf-mode-check-arity member-list v)))
 
-	 (rest
-	   (bnf-mode-check-value-iter
-	    member-list
-	    v
-	    v
-	    reference-bnf
-	    member-list
-	    (bnf-mode-is-true? arity)
-	    constant-context)))
+         (rest
+          (bnf-mode-check-value-iter
+           member-list
+           v
+           v
+           reference-bnf
+           member-list
+           (bnf-mode-is-true? arity)
+           constant-context)))
 
 
     (cond
      ((bnf-mode-is-true? arity)
       (cond
        ((bnf-mode-is-remainder-match? rest)
-	rest)
-       
+        rest)
+
        (t
-	rest)
+        rest)
 
 
        ))
@@ -4719,71 +5033,73 @@ application."
      ((bnf-mode-is-false? arity)
       (cond
        ((not (bnf-mode-is-remainder-match? rest))
-	rest)
+        rest)
 
        ((bnf-mode-is-false? (bnf-mode-remainder-1 rest))
-	(bnf-mode-make-remainder
-	 (bnf-mode-false
-	  (bnf-mode-make-error-arity-nested 
-	   v 
-	   (bnf-mode-bnf-location-from-value (car member-list))
-	   (bnf-mode-false-1 arity)
-	   (bnf-mode-false-1 (bnf-mode-remainder-1 rest))))
-	 (bnf-mode-remainder-2 rest)
-	 (bnf-mode-remainder-3 rest)
-	 (bnf-mode-remainder-4 rest)
-	 (bnf-mode-remainder-5 rest)))
+        (bnf-mode-make-remainder
+         (bnf-mode-false
+          (bnf-mode-make-error-arity-nested
+           v
+           (bnf-mode-bnf-location-from-value (car member-list))
+           (bnf-mode-false-1 arity)
+           (bnf-mode-false-1 (bnf-mode-remainder-1 rest))))
+         (bnf-mode-remainder-2 rest)
+         (bnf-mode-remainder-3 rest)
+         (bnf-mode-remainder-4 rest)
+         (bnf-mode-remainder-5 rest)))
 
        ((bnf-mode-is-true? (bnf-mode-remainder-1 rest))
-	(cond
-	 ;; Too less input (i.e. some inner bnf construction could be of kleene star type)
-	 ;;
-	 ;; <a> ::= (a b c)
-	 ;; inp: (a b)	 
-	 ((bnf-mode-is-input-less-than-expected? arity)
-	  (cond
-	   ;; The arity check is allowed to fail, since in an expression
-	   ;; like (a <b> <b>) the <b> references might point to
-	   ;; something of type kleene star. If the rest part is a
-	   ;; complete match, all is good.
-	   ((bnf-mode-is-remainder-match? rest)
-	    rest)
+        (cond
+         ;; Too less input
+         ;; (i.e. some inner bnf construction could be of kleene star type)
+         ;;
+         ;; <a> ::= (a b c)
+         ;; inp: (a b)
+         ((bnf-mode-is-input-less-than-expected? arity)
+          (cond
+           ;; The arity check is allowed to fail, since in an expression
+           ;; like (a <b> <b>) the <b> references might point to
+           ;; something of type kleene star. If the rest part is a
+           ;; complete match, all is good.
+           ((bnf-mode-is-remainder-match? rest)
+            rest)
 
-	   (t
-	    (bnf-mode-make-remainder 
-	     arity
-	     (bnf-mode-remainder-2 rest)
-	     nil
-	     (bnf-mode-remainder-4 rest)
-	     (bnf-mode-remainder-5 rest)))))
+           (t
+            (bnf-mode-make-remainder
+             arity
+             (bnf-mode-remainder-2 rest)
+             nil
+             (bnf-mode-remainder-4 rest)
+             (bnf-mode-remainder-5 rest)))))
 
-	 ;; Too less input (i.e. some inner bnf construction could be of kleene star type)
-	 ;;
-	 ;; <a> ::= (a b)
-	 ;; inp: (a b c)	 
-	 ;; ((is-input-more-than-expected? arity)
-	 ;;  (bnf-mode-make-remainder 
-	 ;;   arity
-	 ;;   (bnf-mode-remainder-2 rest)
-	 ;;   nil
-	 ;;   (bnf-mode-remainder-4 rest)
-	 ;;   (bnf-mode-remainder-5 rest)))
+         ;; Too less input
+         ;; (i.e. some inner bnf construction could be of kleene star type)
+         ;;
+         ;; <a> ::= (a b)
+         ;; inp: (a b c)
+         ;; ((is-input-more-than-expected? arity)
+         ;;  (bnf-mode-make-remainder
+         ;;   arity
+         ;;   (bnf-mode-remainder-2 rest)
+         ;;   nil
+         ;;   (bnf-mode-remainder-4 rest)
+         ;;   (bnf-mode-remainder-5 rest)))
 
 
-	 (t
-	  rest)))
+         (t
+          rest)))
 
        (t
-	(bnf-mode-make-remainder
-	 arity
-	 v
-	 nil
-	 (bnf-mode-remainder-4 rest)
-	 (bnf-mode-remainder-5 rest)))
+        (bnf-mode-make-remainder
+         arity
+         v
+         nil
+         (bnf-mode-remainder-4 rest)
+         (bnf-mode-remainder-5 rest)))
 
 
 
-	))
+       ))
 
      (t
       (error "handle-member-without-multiplier, unhandled case: %s" arity)))))
@@ -4794,10 +5110,10 @@ application."
    v
    (lambda (bnf-mode-x rest)
      (if (bnf-mode-is-multiplier? bnf-mode-x)
-	 rest
-       (append 
-	rest
-	(list bnf-mode-x))))
+         rest
+       (append
+        rest
+        (list bnf-mode-x))))
    (lambda () '())
    (lambda (bnf-mode-x rest)
      (bnf-mode-is-multiplier? bnf-mode-x))))
@@ -4808,7 +5124,7 @@ application."
    v
    (lambda (bnf-mode-x rest)
      (if (bnf-mode-is-multiplier? bnf-mode-x)
-	 rest
+         rest
        (cons bnf-mode-x rest)))
    (lambda () '())
    (lambda (bnf-mode-x rest)
@@ -4823,79 +5139,79 @@ application."
 ;; (a*)
 (defun bnf-mode-handle-member-with-multiplier (member-list v reference-bnf)
   (let* ((first-n (bnf-mode-first-non-multiplier member-list))
-	(last-n (bnf-mode-last-non-multiplier member-list))
-	(middle-n (bnf-mode-remove-first-n-last-m 
-		   (length first-n)
-		   (length last-n)
-		   member-list)))
+         (last-n (bnf-mode-last-non-multiplier member-list))
+         (middle-n (bnf-mode-remove-first-n-last-m
+                    (length first-n)
+                    (length last-n)
+                    member-list)))
     (let ((left-res (if (< 0 (length first-n))
-			 (bnf-mode-handle-member-without-multiplier 
-			  first-n
-			  (bnf-mode-n-first-of-list (length first-n) v)
-			  reference-bnf
-			  nil
-			  nil)
-		       (bnf-mode-make-remainder 
-			(bnf-mode-true)
-			nil
-			nil
-			nil
-			nil))))
+                        (bnf-mode-handle-member-without-multiplier
+                         first-n
+                         (bnf-mode-n-first-of-list (length first-n) v)
+                         reference-bnf
+                         nil
+                         nil)
+                      (bnf-mode-make-remainder
+                       (bnf-mode-true)
+                       nil
+                       nil
+                       nil
+                       nil))))
       (if (bnf-mode-is-remainder-false? left-res)
-	  left-res
-	(let*
+          left-res
+        (let*
 
-	    ;; The (a*) case or a+
-	    ((middle-res (bnf-mode-check-value-iter
-			  middle-n
-			  (bnf-mode-remove-first-n-last-m
-			   (length first-n)
-			   (length last-n)
-			   v)
-			  v
-			  reference-bnf
-			  member-list
-			  t
-			  (bnf-mode-remainder-4 left-res)))
+            ;; The (a*) case or a+
+            ((middle-res (bnf-mode-check-value-iter
+                          middle-n
+                          (bnf-mode-remove-first-n-last-m
+                           (length first-n)
+                           (length last-n)
+                           v)
+                          v
+                          reference-bnf
+                          member-list
+                          t
+                          (bnf-mode-remainder-4 left-res)))
 
-	     (right-res (if (< 0 (length last-n))
-			    (bnf-mode-handle-member-without-multiplier 
-			     last-n
-			     (bnf-mode-n-last-of-list (length last-n) v)
-			     reference-bnf
-			     nil
-			     (bnf-mode-remainder-4 middle-res))
-			  (bnf-mode-make-remainder
-			   (bnf-mode-true)
-			   nil
-			   nil
-			   nil
-			   nil))))
+             (right-res (if (< 0 (length last-n))
+                            (bnf-mode-handle-member-without-multiplier
+                             last-n
+                             (bnf-mode-n-last-of-list (length last-n) v)
+                             reference-bnf
+                             nil
+                             (bnf-mode-remainder-4 middle-res))
+                          (bnf-mode-make-remainder
+                           (bnf-mode-true)
+                           nil
+                           nil
+                           nil
+                           nil))))
 
 
-	  (cond
-	   ((bnf-mode-is-remainder-false? left-res)
-	    left-res)
+          (cond
+           ((bnf-mode-is-remainder-false? left-res)
+            left-res)
 
-	   ((bnf-mode-is-remainder-false? middle-res)
-	    middle-res)
+           ((bnf-mode-is-remainder-false? middle-res)
+            middle-res)
 
-	   ((bnf-mode-is-remainder-false? right-res)
-	    right-res)
+           ((bnf-mode-is-remainder-false? right-res)
+            right-res)
 
-	   (t
-	    (bnf-mode-make-remainder 
-	     (bnf-mode-true) 
-	     nil 
-	     (or (bnf-mode-remainder-3 left-res)
-		 (bnf-mode-remainder-3 middle-res)
-		 (bnf-mode-remainder-3 right-res))
-	     (or (bnf-mode-remainder-4 left-res)
-		 (bnf-mode-remainder-4 middle-res)
-		 (bnf-mode-remainder-4 right-res))
-	     (or (bnf-mode-remainder-5 left-res)
-		 (bnf-mode-remainder-5 middle-res)
-		 (bnf-mode-remainder-5 right-res))))))))))
+           (t
+            (bnf-mode-make-remainder
+             (bnf-mode-true)
+             nil
+             (or (bnf-mode-remainder-3 left-res)
+                 (bnf-mode-remainder-3 middle-res)
+                 (bnf-mode-remainder-3 right-res))
+             (or (bnf-mode-remainder-4 left-res)
+                 (bnf-mode-remainder-4 middle-res)
+                 (bnf-mode-remainder-4 right-res))
+             (or (bnf-mode-remainder-5 left-res)
+                 (bnf-mode-remainder-5 middle-res)
+                 (bnf-mode-remainder-5 right-res))))))))))
 
 
 ;; Converts the final remainder to bnf-mode-true or an error.
@@ -4903,20 +5219,20 @@ application."
   (cond
    ((bnf-mode-is-remainder-match? match)
     (bnf-mode-true))
-   
+
    ((bnf-mode-is-remainder-false? match)
     (bnf-mode-remainder-1 match))
 
    ((bnf-mode-is-remainder-partly-match? match)
     (bnf-mode-false
-     (bnf-mode-make-error-unmatched-input 
+     (bnf-mode-make-error-unmatched-input
       (bnf-mode-remainder-2 match)
       (bnf-mode-extended-bnf-location-from-value bnf))))
 
    ((bnf-mode-is-remainder-group-ref? match)
     (bnf-mode-remainder-group-ref-1 match))
 
-   
+
    (t
     (error "handle-member-with-multiplier: %s" match))))
 
@@ -4929,54 +5245,59 @@ application."
    ((bnf-mode-is-remainder-false? r)
     ;; bnf-mode-remainder-4 is constant context of the inner
     (if (and constant-context
-	     (not (bnf-mode-remainder-4 r)))
-	(bnf-mode-update-remainder-with-new-error
-	 r
-	 (bnf-mode-add-bnf-location-and-context-value-to-error
-	  (bnf-mode-remainder-1 r)
-	  bnf-loc
-	  (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+             (not (bnf-mode-remainder-4 r)))
+        (bnf-mode-update-remainder-with-new-error
+         r
+         (bnf-mode-add-bnf-location-and-context-value-to-error
+          (bnf-mode-remainder-1 r)
+          bnf-loc
+          (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
       r))
 
    ((bnf-mode-is-remainder-true? r)
-      r)
+    r)
 
    (t
     (bnf-mode-make-remainder
      (if (null (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
-	 (bnf-mode-add-context-value-to-error (bnf-mode-remainder-1 r) v)
+         (bnf-mode-add-context-value-to-error (bnf-mode-remainder-1 r) v)
        (bnf-mode-remainder-1 r))
-      (bnf-mode-remainder-2 r)
-      (bnf-mode-remainder-3 r)
-      (bnf-mode-remainder-4 r)
-      (bnf-mode-remainder-5 r)))))
+     (bnf-mode-remainder-2 r)
+     (bnf-mode-remainder-3 r)
+     (bnf-mode-remainder-4 r)
+     (bnf-mode-remainder-5 r)))))
 
 
 (defun bnf-mode-inner-most-value (v)
   v)
-  ;; (cond
-  ;;  ((bnf-mode-is-constant? v)
-  ;;   v)
+;; (cond
+;;  ((bnf-mode-is-constant? v)
+;;   v)
 
-  ;;  ((bnf-mode-is-syntax-paren? v)
-  ;;   (bnf-mode-last-element-of-list
-  ;;    (bnf-mode-syntax-paren-2 v)))
+;;  ((bnf-mode-is-syntax-paren? v)
+;;   (bnf-mode-last-element-of-list
+;;    (bnf-mode-syntax-paren-2 v)))
 
-  ;;  (t
-  ;;   (bnf-mode-last-element-of-list v))))
+;;  (t
+;;   (bnf-mode-last-element-of-list v))))
 
 (defun bnf-mode-update-remainder-with-inner-error (r v v-remainder bnf-location)
-  "Returns a remainder with a the inner error bnf-mode-update if missing value context: remainder value bnf-location"
-  (let* ((inner-error 
-	 (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
-	 (new-err-value
-	  (if (null v-remainder)
-	      (bnf-mode-inner-most-value v)
-	    v-remainder)))
+  "Returns a remainder with a the inner error bnf-mode-update
+ if missing value context: remainder value bnf-location."
+  (let* ((inner-error
+          (bnf-mode-error-no-match-in-reference-1
+           (bnf-mode-false-1
+            (bnf-mode-remainder-1 r))))
+         (new-err-value
+          (if (null v-remainder)
+              (bnf-mode-inner-most-value v)
+            v-remainder)))
     (bnf-mode-make-remainder
      (bnf-mode-false
-      (bnf-mode-update-error 
-       (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
+      (bnf-mode-update-error
+       (bnf-mode-error-no-match-in-reference-1
+        (bnf-mode-false-1
+         (bnf-mode-remainder-1 r)))
        new-err-value
        bnf-location))
      (bnf-mode-remainder-2 r)
@@ -4986,7 +5307,8 @@ application."
 
 
 (defun bnf-mode-update-remainder-with-missing-syntax-error (r v bnf-location)
-  "Returns a remainder with a missing syntax error: remainder value bnf-location"
+  "Returns a remainder with a missing syntax error:
+ remainder value bnf-location."
   (bnf-mode-make-remainder
    (bnf-mode-false
     (bnf-mode-make-error-missing-syntax
@@ -4998,10 +5320,16 @@ application."
    (bnf-mode-remainder-5 r)))
 
 
-(defun bnf-mode-add-bnf-location-and-context-value-to-remainder-and-error (r bnf-loc v)
+(defun bnf-mode-add-bnf-location-and-context-value-to-remainder-and-error
+    (r
+     bnf-loc
+     v)
   (bnf-mode-make-remainder
    (bnf-mode-false
-    (bnf-mode-add-bnf-location-and-context-value-to-error (bnf-mode-remainder-1 r) bnf-loc v))
+    (bnf-mode-add-bnf-location-and-context-value-to-error
+     (bnf-mode-remainder-1 r)
+     bnf-loc
+     v))
    (bnf-mode-extract-nested-value-if-necessary r v)
    (bnf-mode-remainder-3 r)
    (bnf-mode-remainder-4 r)
@@ -5009,16 +5337,23 @@ application."
 
 
 (defun bnf-mode-extract-nested-value-if-necessary (r v)
-  (cond 
+  (cond
    ((bnf-mode-is-remainder-false? r)
     (if (null v)
-	(cond
-	 
-	 ((bnf-mode-is-error-no-match-in-reference? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	  (bnf-mode-value-from-error (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+        (cond
 
-	 (t
-	  (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+         ((bnf-mode-is-error-no-match-in-reference?
+           (bnf-mode-false-1
+            (bnf-mode-remainder-1 r)))
+          (bnf-mode-value-from-error
+           (bnf-mode-error-no-match-in-reference-1
+            (bnf-mode-false-1
+             (bnf-mode-remainder-1 r)))))
+
+         (t
+          (bnf-mode-value-from-error
+           (bnf-mode-false-1
+            (bnf-mode-remainder-1 r)))))
       v))
 
    (t
@@ -5028,12 +5363,14 @@ application."
 (defun bnf-mode-extract-nested-bnf-if-necessary (r bnf-reference)
   (cond
    ((bnf-mode-has-constant? r)
-    (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
+    (bnf-mode-bnf-location-from-error
+     (bnf-mode-false-1
+      (bnf-mode-remainder-1 r))))
 
    (t
     (bnf-mode-bnf-location-from-value bnf-reference))))
-    
-	  
+
+
 ;; boolean * bnf-location * sexp-value --> error
 (defun bnf-mode-add-bnf-location-and-context-value-to-error (e bnf-loc v)
   (cond
@@ -5045,17 +5382,21 @@ application."
 
     (cond
 
-     ((bnf-mode-is-error-no-match-in-reference? (bnf-mode-false-1 e))
+     ((bnf-mode-is-error-no-match-in-reference?
+       (bnf-mode-false-1 e))
       (bnf-mode-false-1 e))
-   
 
-     ((bnf-mode-is-error-arity? (bnf-mode-false-1 e))
+
+     ((bnf-mode-is-error-arity?
+       (bnf-mode-false-1 e))
       (bnf-mode-make-error-arity
        v
        bnf-loc
-       (bnf-mode-error-arity-1 (bnf-mode-false-1 e))
-       (bnf-mode-error-arity-2 (bnf-mode-false-1 e))))
-     
+       (bnf-mode-error-arity-1
+        (bnf-mode-false-1 e))
+       (bnf-mode-error-arity-2
+        (bnf-mode-false-1 e))))
+
      (t
       (bnf-mode-update-error (bnf-mode-false-1 e) v bnf-loc))))
 
@@ -5072,19 +5413,22 @@ application."
 
    (t
     (bnf-mode-update-error-value e v))
-     
-))     
+
+   ))
 
 
 (defun bnf-mode-has-unmatched? (r)
-  (< 0 (bnf-mode-nested-length-of-sexp-value 
-	(bnf-mode-remainder-2 r))))
+  (< 0 (bnf-mode-nested-length-of-sexp-value
+        (bnf-mode-remainder-2 r))))
 
 
 
 (defun bnf-mode-is-remainder-unmatched-input? (r)
-  (and (bnf-mode-is-remainder-false? r)
-       (bnf-mode-is-error-unmatched-input? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))))
+  (and
+   (bnf-mode-is-remainder-false? r)
+   (bnf-mode-is-error-unmatched-input?
+    (bnf-mode-false-1
+     (bnf-mode-remainder-1 r)))))
 
 
 
@@ -5096,7 +5440,7 @@ application."
    ;; If the remainder's error is unmatched input, report the error at
    ;; "this" location
    ((bnf-mode-is-remainder-unmatched-input? r)
-     (bnf-mode-add-bnf-location-and-context-value-to-remainder-and-error
+    (bnf-mode-add-bnf-location-and-context-value-to-remainder-and-error
      r
      bnf-loc
      v))
@@ -5128,91 +5472,116 @@ application."
 
 
 
-;; bnf-location, location of the production under lookup	
-(defun bnf-mode-handle-members-lookup (bnf-reference member-list v reference-bnf constant-context)
-  (let ((member-match-result 
-	 (bnf-mode-fold-left
-	  member-list
-	  (lambda (bnf-mode-x rest) 
+;; bnf-location, location of the production under lookup
+(defun bnf-mode-handle-members-lookup (bnf-reference
+                                       member-list
+                                       v
+                                       reference-bnf
+                                       constant-context)
+  (let ((member-match-result
+         (bnf-mode-fold-left
+          member-list
+          (lambda (bnf-mode-x rest)
 
-	    (cond
-	     ((bnf-mode-has-constant? rest)
-	      rest)
+            (cond
+             ((bnf-mode-has-constant? rest)
+              rest)
 
-	     ((bnf-mode-is-remainder-match? rest)
-	      rest)
+             ((bnf-mode-is-remainder-match? rest)
+              rest)
 
-	     (t
-	      (let ((new-member-match
-		     (bnf-mode-check-bnf
-		      bnf-mode-x
-		      v 
-		      reference-bnf)))
+             (t
+              (let ((new-member-match
+                     (bnf-mode-check-bnf
+                      bnf-mode-x
+                      v
+                      reference-bnf)))
 
-		(bnf-mode-ensure-progress
-		 new-member-match 
-		 rest 
-		 bnf-mode-x)))))
-	  
+                (bnf-mode-ensure-progress
+                 new-member-match
+                 rest
+                 bnf-mode-x)))))
 
-	  
 
-	  (lambda () 
-	    (bnf-mode-make-remainder
-	     (bnf-mode-false (bnf-mode-make-worst-possible-error))
-	     v
-	     nil
-	     nil
-	     nil)))))
+
+
+          (lambda ()
+            (bnf-mode-make-remainder
+             (bnf-mode-false (bnf-mode-make-worst-possible-error))
+             v
+             nil
+             nil
+             nil)))))
 
     ;; if the error was in side a construct with a paren and a const,
     ;; point to that construct
 
-;;    (message "paren-type-mismatch: %s\n%s\n%s\n\n" bnf-reference v member-match-result)
-    (cond 
+    ;; (message
+    ;;  "paren-type-mismatch: %s\n%s\n%s\n\n"
+    ;;  bnf-reference
+    ;;  v
+    ;;  member-match-result)
+
+    (cond
 
      ;; If the the reference only has one member and the match failed
      ;; at that member, report the error at that location.
      ;; Added as of 30.08.2013
      ((and (bnf-mode-is-remainder-false? member-match-result)
-     	   (equal (length member-list) 1))
+           (equal (length member-list) 1))
       member-match-result)
 
      ;; Parenthesis are a bit special. It is ok to point out a
      ;; parenthesis error, before following other references.
      ((and (bnf-mode-is-remainder-false? member-match-result)
-	   (bnf-mode-is-error-paren-type-mismatch? (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	   (bnf-mode-remainder-4 member-match-result))  ;; Check that the constant matches
-;      (message "paren-type-mismatch: %s" member-match-result)
+           (bnf-mode-is-error-paren-type-mismatch?
+            (bnf-mode-false-1
+             (bnf-mode-remainder-1 member-match-result)))
+           ;; Check that the constant matches
+           (bnf-mode-remainder-4 member-match-result))
+      ;; (message "paren-type-mismatch: %s" member-match-result)
       member-match-result)
 
      ;; Missing syntax is a special case, indicating that some context
      ;; value and bnf location has to be injected
-     ((and (bnf-mode-is-remainder-false? member-match-result)
-	   (bnf-mode-is-error-missing-syntax? (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result))))
-      (bnf-mode-update-remainder-with-missing-syntax-error 
+     ((and
+       (bnf-mode-is-remainder-false? member-match-result)
+       (bnf-mode-is-error-missing-syntax?
+        (bnf-mode-false-1
+         (bnf-mode-remainder-1 member-match-result))))
+      (bnf-mode-update-remainder-with-missing-syntax-error
        member-match-result
        v
        (bnf-mode-bnf-location-from-value bnf-reference)))
 
 
-     ((and (bnf-mode-is-remainder-false? member-match-result)
-	   (bnf-mode-is-error-plus-at-least-one-match? (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result))))
+     ((and
+       (bnf-mode-is-remainder-false? member-match-result)
+       (bnf-mode-is-error-plus-at-least-one-match?
+        (bnf-mode-false-1
+         (bnf-mode-remainder-1 member-match-result))))
       (bnf-mode-make-remainder
        (bnf-mode-false
-	(bnf-mode-make-error-no-match-in-reference
-	 (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	 (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	 (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result))))
+        (bnf-mode-make-error-no-match-in-reference
+         (bnf-mode-value-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 member-match-result)))
+         (bnf-mode-bnf-location-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 member-match-result)))
+         (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result))))
        (bnf-mode-remainder-2 member-match-result)
        (bnf-mode-remainder-3 member-match-result)
        constant-context
        (bnf-mode-remainder-5 member-match-result)))
 
-     ((and (bnf-mode-is-remainder-false? member-match-result)
-     	   (bnf-mode-is-error-no-match-in-reference? (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-     	   constant-context
-     	   (bnf-mode-remainder-4 member-match-result))
+     ((and
+       (bnf-mode-is-remainder-false? member-match-result)
+       (bnf-mode-is-error-no-match-in-reference?
+        (bnf-mode-false-1
+         (bnf-mode-remainder-1 member-match-result)))
+       constant-context
+       (bnf-mode-remainder-4 member-match-result))
       member-match-result)
 
 
@@ -5221,80 +5590,104 @@ application."
      ;; error should be reported at a lower level if the needed
      ;; location information is present.
      ((and (bnf-mode-is-remainder-false? member-match-result)
-	   (bnf-mode-is-error-no-match-in-reference? (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	   constant-context)
-      (cond 
+           (bnf-mode-is-error-no-match-in-reference?
+            (bnf-mode-false-1
+             (bnf-mode-remainder-1 member-match-result)))
+           constant-context)
+      (cond
 
        ;; If no constant was matced in the inner paren, but a constant
        ;; missing error, report the inner most error.
-       ;; ((bnf-mode-is-error-constant? (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result))))
-       ;; 	member-match-result)
-       
+       ;; ((bnf-mode-is-error-constant?
+       ;;   (bnf-mode-error-no-match-in-reference-1
+       ;;    (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result))))
+       ;;   member-match-result)
+
 
        ;; The generic case: If no constant was matched in the inner
        ;; paren, report the error at the outer level.
        (t
-	(bnf-mode-make-remainder
-	 (bnf-mode-false
-	  (bnf-mode-make-error-no-match-in-reference
-	   (bnf-mode-inner-most-value v)
-;	   (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	   (bnf-mode-bnf-location-from-value bnf-reference)
-;	   (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	   (bnf-mode-error-no-match-in-reference-1 (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))))
-	 (bnf-mode-remainder-2 member-match-result)
-	 (bnf-mode-remainder-3 member-match-result)
-	 constant-context
-	 (bnf-mode-remainder-5 member-match-result)))))
+        (bnf-mode-make-remainder
+         (bnf-mode-false
+          (bnf-mode-make-error-no-match-in-reference
+           (bnf-mode-inner-most-value v)
+           ;; (bnf-mode-value-from-error
+           ;;  (bnf-mode-false-1
+           ;;   (bnf-mode-remainder-1 member-match-result)))
+           (bnf-mode-bnf-location-from-value bnf-reference)
+           ;; (bnf-mode-bnf-location-from-error
+           ;;  (bnf-mode-false-1
+           ;;   (bnf-mode-remainder-1 member-match-result)))
+           (bnf-mode-error-no-match-in-reference-1
+            (bnf-mode-false-1
+             (bnf-mode-remainder-1 member-match-result)))))
+         (bnf-mode-remainder-2 member-match-result)
+         (bnf-mode-remainder-3 member-match-result)
+         constant-context
+         (bnf-mode-remainder-5 member-match-result)))))
 
 
 
      ((bnf-mode-is-remainder-false? member-match-result)
       (cond
-     
+
        ((and constant-context
-	     (bnf-mode-remainder-4 member-match-result))
-	(bnf-mode-wrap-in-error-no-match-in-reference
-	 member-match-result
-	 (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	 (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))))
-       
+             (bnf-mode-remainder-4 member-match-result))
+        (bnf-mode-wrap-in-error-no-match-in-reference
+         member-match-result
+         (bnf-mode-value-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 member-match-result)))
+         (bnf-mode-bnf-location-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 member-match-result)))))
+
        ((and (not constant-context)
-	     (bnf-mode-remainder-4 member-match-result))
-	(bnf-mode-wrap-in-error-no-match-in-reference
-	 member-match-result
-	 (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	 (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))))
+             (bnf-mode-remainder-4 member-match-result))
+        (bnf-mode-wrap-in-error-no-match-in-reference
+         member-match-result
+         (bnf-mode-value-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 member-match-result)))
+         (bnf-mode-bnf-location-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 member-match-result)))))
 
 
-       
+
        ((and constant-context
-	     (not (bnf-mode-remainder-4 member-match-result)))
-	(bnf-mode-wrap-in-error-no-match-in-reference
-	 member-match-result
-	 v
-	 (bnf-mode-bnf-location-from-value bnf-reference)))
+             (not (bnf-mode-remainder-4 member-match-result)))
+        (bnf-mode-wrap-in-error-no-match-in-reference
+         member-match-result
+         v
+         (bnf-mode-bnf-location-from-value bnf-reference)))
 
 
        ;; Point at the upper level bnf, but at the lower level syntax
        ((and (not constant-context)
-	     (not (bnf-mode-remainder-4 member-match-result)))
-	(bnf-mode-wrap-in-error-no-match-in-reference
-	 member-match-result
-	 (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	 (bnf-mode-bnf-location-from-value bnf-reference))
-	
+             (not (bnf-mode-remainder-4 member-match-result)))
+        (bnf-mode-wrap-in-error-no-match-in-reference
+         member-match-result
+         (bnf-mode-value-from-error
+          (bnf-mode-false-1
+           (bnf-mode-remainder-1 member-match-result)))
+         (bnf-mode-bnf-location-from-value bnf-reference))
 
-	;; (bnf-mode-wrap-in-error-no-match-in-reference
-	;;  member-match-result
-	;;  (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result)))
-	;;  (bnf-mode-bnf-location-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 member-match-result))))
 
-	)))
+        ;; (bnf-mode-wrap-in-error-no-match-in-reference
+        ;;  member-match-result
+        ;;  (bnf-mode-value-from-error
+        ;;   (bnf-mode-false-1
+        ;;    (bnf-mode-remainder-1 member-match-result)))
+        ;;  (bnf-mode-bnf-location-from-error
+        ;;   (bnf-mode-false-1
+        ;;    (bnf-mode-remainder-1 member-match-result))))
 
-	   
+        )))
+
+
      ((bnf-mode-is-remainder-match? member-match-result)
-      (bnf-mode-add-context-value-if-missing 
+      (bnf-mode-add-context-value-if-missing
        member-match-result
        v))
 
@@ -5304,7 +5697,7 @@ application."
        (bnf-mode-bnf-location-from-value bnf-reference)
        v))
 
-          
+
      ((bnf-mode-has-arity-and-constant? member-match-result)
       (bnf-mode-maybe-append-context-value-and-bnf-loc
        member-match-result
@@ -5312,21 +5705,21 @@ application."
        v))
 
      ((bnf-mode-has-paren-and-constant? member-match-result)
-      (bnf-mode-add-context-value-if-missing 
+      (bnf-mode-add-context-value-if-missing
        (bnf-mode-handle-possible-error
-	member-match-result
-	bnf-reference
-	constant-context)
+        member-match-result
+        bnf-reference
+        constant-context)
        v))
-      
+
      ((bnf-mode-has-constant? member-match-result)
-      (bnf-mode-add-context-value-if-missing 
+      (bnf-mode-add-context-value-if-missing
        (bnf-mode-handle-possible-error
-	member-match-result
-	bnf-reference
-	constant-context)
+        member-match-result
+        bnf-reference
+        constant-context)
        v))
-      
+
      (t
       member-match-result))))
 
@@ -5338,16 +5731,20 @@ application."
 
    ((bnf-mode-is-remainder-false? r)
     (cond
-     ((null (bnf-mode-value-from-error (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
+     ((null
+       (bnf-mode-value-from-error
+        (bnf-mode-false-1
+         (bnf-mode-remainder-1 r))))
       (bnf-mode-update-remainder-with-new-error
        r
-       (bnf-mode-update-error-value 
-	(bnf-mode-false-1 (bnf-mode-remainder-1 r))
-	v)))
+       (bnf-mode-update-error-value
+        (bnf-mode-false-1
+         (bnf-mode-remainder-1 r))
+        v)))
 
      (t
       r)))))
-       
+
 
 ;; Use this to bnf-mode-update remainders with new errors
 (defun bnf-mode-update-remainder-with-new-error (r e-new)
@@ -5415,7 +5812,7 @@ application."
 
    ((bnf-mode-is-worst-possible-error? e)
     e)
-   
+
 
    ((bnf-mode-is-error-missing-paren? e)
     (bnf-mode-make-error-missing-paren
@@ -5430,8 +5827,8 @@ application."
 
    ;; (t
    ;;  e)
-   
-   (t 
+
+   (t
     (error "update-error: TODO implement rest: %s %s %s" e v bnf-loc))
    ))
 
@@ -5439,39 +5836,49 @@ application."
 (defun bnf-mode-handle-possible-error (r bnf-reference constant-context)
   (if (bnf-mode-is-remainder-true? r)
       r
-  (cond
+    (cond
 
-   ((or (bnf-mode-is-error-missing-paren? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	(bnf-mode-is-error-group-ref-expected-buildin? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	(bnf-mode-is-error-arity? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
-	)
+     ((or
+       (bnf-mode-is-error-missing-paren?
+        (bnf-mode-false-1
+         (bnf-mode-remainder-1 r)))
+       (bnf-mode-is-error-group-ref-expected-buildin?
+        (bnf-mode-false-1
+         (bnf-mode-remainder-1 r)))
+          (bnf-mode-is-error-arity? (bnf-mode-false-1 (bnf-mode-remainder-1 r)))
+          )
 
-    (let ((res
-	   (bnf-mode-make-remainder
-	    (bnf-mode-false
-	     (bnf-mode-make-error-no-match-in-reference
-	      (bnf-mode-extract-nested-value-if-necessary r (bnf-mode-remainder-2 r))
-	      (bnf-mode-extract-nested-bnf-if-necessary r bnf-reference)
-	      (bnf-mode-false-1 (bnf-mode-remainder-1 r))))
-	    (bnf-mode-remainder-2 r)
-	    (bnf-mode-remainder-3 r)
-	    (bnf-mode-remainder-4 r)
-	    (bnf-mode-remainder-5 r))))
+      (let ((res
+             (bnf-mode-make-remainder
+              (bnf-mode-false
+               (bnf-mode-make-error-no-match-in-reference
+                (bnf-mode-extract-nested-value-if-necessary
+                 r
+                 (bnf-mode-remainder-2 r))
+                (bnf-mode-extract-nested-bnf-if-necessary
+                 r
+                 bnf-reference)
+                (bnf-mode-false-1
+                 (bnf-mode-remainder-1 r))))
+              (bnf-mode-remainder-2 r)
+              (bnf-mode-remainder-3 r)
+              (bnf-mode-remainder-4 r)
+              (bnf-mode-remainder-5 r))))
 
-      res
-      ))
+        res
+        ))
 
-   (t
-    r)
+     (t
+      r)
 
-)))
+     )))
 
 
 ;; walks through the top members
 (defun bnf-mode-handle-members (member-list v reference-bnf)
   (bnf-mode-fold-left
    member-list
-   (lambda (bnf-mode-x rest) 
+   (lambda (bnf-mode-x rest)
      (cond
 
       ((bnf-mode-has-constant? rest)
@@ -5479,19 +5886,19 @@ application."
 
       ((bnf-mode-is-remainder-match? rest)
        rest)
-      
+
       (t
        (let ((new-member-match
-	      (bnf-mode-check-bnf 
-	       bnf-mode-x
-	       v 
-	       reference-bnf)))
-	 (bnf-mode-ensure-progress
-	  new-member-match 
-	  rest
-	  bnf-mode-x)))))
+              (bnf-mode-check-bnf
+               bnf-mode-x
+               v
+               reference-bnf)))
+         (bnf-mode-ensure-progress
+          new-member-match
+          rest
+          bnf-mode-x)))))
 
-   (lambda () 
+   (lambda ()
      (bnf-mode-make-remainder
       (bnf-mode-false (bnf-mode-make-worst-possible-error))
       v
@@ -5511,16 +5918,22 @@ application."
    ;; Check the content of a member's values for possible multipliers.
    ((bnf-mode-is-member? bnf)
     (let ((r
-	   (if (bnf-mode-has-member-multiplier? (bnf-mode-member-1 bnf))
-	       (bnf-mode-handle-member-with-multiplier (bnf-mode-member-1 bnf) v reference-bnf)
-	     (bnf-mode-handle-member-without-multiplier (bnf-mode-member-1 bnf) v reference-bnf nil nil))))
+           (if (bnf-mode-has-member-multiplier? (bnf-mode-member-1 bnf))
+               (bnf-mode-handle-member-with-multiplier
+                (bnf-mode-member-1 bnf)
+                v
+                reference-bnf)
+             (bnf-mode-handle-member-without-multiplier
+              (bnf-mode-member-1 bnf)
+              v
+              reference-bnf nil nil))))
       (if (bnf-mode-is-remainder-partly-match? r)
-	  (bnf-mode-update-remainder-with-new-error
-	   r
-	   (bnf-mode-make-error-unmatched-input 
-	    (bnf-mode-remainder-2 r)
-	    (bnf-mode-extended-bnf-location-from-value (bnf-mode-member-1 bnf))))
-	r)))
+          (bnf-mode-update-remainder-with-new-error
+           r
+           (bnf-mode-make-error-unmatched-input
+            (bnf-mode-remainder-2 r)
+            (bnf-mode-extended-bnf-location-from-value (bnf-mode-member-1 bnf))))
+        r)))
 
 
    ((bnf-mode-is-bnf-match? bnf v)
@@ -5535,10 +5948,10 @@ application."
   ;; Peel off the top layers and start from the bnf-mode-first group, which is
   ;; assumed to be the top level of the grammar.
   (bnf-mode-reset-bnf-key-words bnf)
-  (bnf-mode-remainder-1 
-   (bnf-mode-check-bnf 
+  (bnf-mode-remainder-1
+   (bnf-mode-check-bnf
     (bnf-mode-group-2 (car (bnf-mode-groups-1 (bnf-mode-bnf-1 bnf))))
-    v 
+    v
     bnf)))
 
 (defun bnf-mode-extended-bnf-location-from-value (v)
@@ -5557,21 +5970,21 @@ application."
 (defun bnf-mode-syntax-location-from-error (v)
   (cond
    ((bnf-mode-is-error-paren-type-mismatch-left? v)
-    (let ((left (bnf-mode-syntax-location-1 
-   		 (bnf-mode-syntax-location-from-value 
-   		  (bnf-mode-value-from-error v)))))
+    (let ((left (bnf-mode-syntax-location-1
+                 (bnf-mode-syntax-location-from-value
+                  (bnf-mode-value-from-error v)))))
       (bnf-mode-make-syntax-location
        left
        (+ 1 left))))
 
    ((bnf-mode-is-error-paren-type-mismatch-right? v)
     (let ((right (bnf-mode-syntax-location-2
-   		  (bnf-mode-syntax-location-from-value 
-   		   (bnf-mode-value-from-error v)))))
+                  (bnf-mode-syntax-location-from-value
+                   (bnf-mode-value-from-error v)))))
       (bnf-mode-make-syntax-location
        (- right 1)
        right)))
-     
+
 
    ((bnf-mode-is-build-in-error? v)
     (bnf-mode-syntax-location-from-value
@@ -5579,25 +5992,26 @@ application."
 
    ((bnf-mode-is-error-group-ref-expected-buildin? v)
     (if (bnf-mode-is-error? (bnf-mode-error-group-ref-expected-buildin-1 v))
-	(bnf-mode-syntax-location-from-error
-	 (bnf-mode-error-group-ref-expected-buildin-1 v))
+        (bnf-mode-syntax-location-from-error
+         (bnf-mode-error-group-ref-expected-buildin-1 v))
       (bnf-mode-syntax-location-from-error v)))
-   
+
    (t
     (let ((syntax (bnf-mode-value-from-error v)))
       (if (bnf-mode-is-constructor? syntax)
-	  (bnf-mode-syntax-location-from-value syntax)
-  
-	(if (< 1 (length syntax))
-	    (bnf-mode-extend-syntax-location
-	     (bnf-mode-syntax-location-from-value (car syntax))
-	     (bnf-mode-syntax-location-from-value (bnf-mode-last-element-of-list syntax)))
-	  (if (= 1 (length syntax))
-	      (bnf-mode-syntax-location-from-value (car syntax))
-	    (if (bnf-mode-is-error-no-match-in-reference? v)
-		(bnf-mode-syntax-location-from-error 
-		 (bnf-mode-error-no-match-in-reference-1 v))
-	      (message "missing input syntax")))))))))
+          (bnf-mode-syntax-location-from-value syntax)
+
+        (if (< 1 (length syntax))
+            (bnf-mode-extend-syntax-location
+             (bnf-mode-syntax-location-from-value (car syntax))
+             (bnf-mode-syntax-location-from-value
+              (bnf-mode-last-element-of-list syntax)))
+          (if (= 1 (length syntax))
+              (bnf-mode-syntax-location-from-value (car syntax))
+            (if (bnf-mode-is-error-no-match-in-reference? v)
+                (bnf-mode-syntax-location-from-error
+                 (bnf-mode-error-no-match-in-reference-1 v))
+              (message "missing input syntax")))))))))
 
 (defun bnf-mode-bnf-mode-read-buffer (buffer)
   (with-current-buffer buffer
@@ -5616,25 +6030,32 @@ application."
 (defun bnf-mode-bnf-mode-point-to-error (location buffer)
   (with-current-buffer buffer
     (let ((left (+ 1 (bnf-mode-syntax-location-1 location)))
-	  (right (+ 1 (bnf-mode-syntax-location-2 location))))
-      (add-text-properties  left right '(face ((:underline "#ff0000") bold)) buffer)
+          (right (+ 1 (bnf-mode-syntax-location-2 location))))
+      (add-text-properties
+       left
+       right
+       '(face ((:underline "#ff0000") bold))
+       buffer)
       )))
-  
+
 
 
 (defvar bnf-mode-buffers-initialized nil)
 (defun bnf-mode-setup-bnf-buffers ()
   (if (not bnf-mode-buffers-initialized)
       (let ((input-buf (current-buffer))
-	    (bnf-buf (get-buffer-create "*bnf-mode-bnf*")))	
-	(with-current-buffer bnf-buf
-	  (if (and (= 0 (length (buffer-string)))
-		   (car (file-expand-wildcards "*.bnf")))
-	      (insert (bnf-mode-file-string (car (file-expand-wildcards "*.bnf"))))))
-	(pop-to-buffer bnf-buf)
-	(pop-to-buffer input-buf)
-	(setq bnf-mode-buffers-initialized t)
-    )))
+            (bnf-buf (get-buffer-create "*bnf-mode-bnf*")))
+        (with-current-buffer bnf-buf
+          (if (and
+               (= 0 (length (buffer-string)))
+               (car (file-expand-wildcards "*.bnf")))
+              (insert
+               (bnf-mode-file-string
+                (car (file-expand-wildcards "*.bnf"))))))
+        (pop-to-buffer bnf-buf)
+        (pop-to-buffer input-buf)
+        (setq bnf-mode-buffers-initialized t)
+        )))
 
 
 
@@ -5649,35 +6070,45 @@ application."
   (interactive)
   (message "BNF: Analyzing...")
   (let* ((input-buf (get-buffer (current-buffer)))
-	(bnf-buf (get-buffer-create "*bnf-mode-bnf*"))
-	(input-parsed (bnf-mode-sexp-parse-main (bnf-mode-bnf-mode-read-buffer input-buf)))
-	(bnf-parsed (bnf-mode-bnf-parse-main (bnf-mode-bnf-mode-read-buffer bnf-buf))))
-    
-    (let ((res (bnf-mode-check-bnf-main
-		bnf-parsed
-		input-parsed)))
-      
-      (if (bnf-mode-is-false? res)
-	  (progn
+         (bnf-buf (get-buffer-create "*bnf-mode-bnf*"))
+         (input-parsed
+          (bnf-mode-sexp-parse-main
+           (bnf-mode-bnf-mode-read-buffer input-buf)))
+         (bnf-parsed
+          (bnf-mode-bnf-parse-main
+           (bnf-mode-bnf-mode-read-buffer bnf-buf))))
 
-	    (let ((input-location (bnf-mode-syntax-location-from-error (bnf-mode-false-1 res)))
-		  (bnf-location (bnf-mode-bnf-location-from-error (bnf-mode-false-1 res))))
-	      (message "BNF: Error in BNF at: %s" (bnf-mode-bnf-loc-to-text bnf-location bnf-buf))
-	      
-	    (if (not (null bnf-location))
-		(bnf-mode-handle-bnf-error-location 
-		 bnf-location 
-		 bnf-buf))
-	    (if (not (null input-location))
-		(bnf-mode-bnf-mode-point-to-error input-location input-buf))))
-	(message "BNF: Correct!")))))
+    (let ((res (bnf-mode-check-bnf-main
+                bnf-parsed
+                input-parsed)))
+
+      (if (bnf-mode-is-false? res)
+          (progn
+
+            (let ((input-location
+                   (bnf-mode-syntax-location-from-error
+                    (bnf-mode-false-1 res)))
+                  (bnf-location
+                   (bnf-mode-bnf-location-from-error
+                    (bnf-mode-false-1 res))))
+              (message
+               "BNF: Error in BNF at: %s"
+               (bnf-mode-bnf-loc-to-text bnf-location bnf-buf))
+
+              (if (not (null bnf-location))
+                  (bnf-mode-handle-bnf-error-location
+                   bnf-location
+                   bnf-buf))
+              (if (not (null input-location))
+                  (bnf-mode-bnf-mode-point-to-error input-location input-buf))))
+        (message "BNF: Correct!")))))
 
 
 
 
 
 (defun bnf-mode-underline-text (text syntax-location)
-  (add-text-properties 
+  (add-text-properties
    (bnf-mode-syntax-location-1 syntax-location)
    (bnf-mode-syntax-location-2 syntax-location)
    '(face ((:underline "#ff0000") bold)) text))
@@ -5686,24 +6117,34 @@ application."
   "Runs the grammar checker on the given sexp"
   (message "BNF: Analyzing...")
   (let* ((bnf-buf (get-buffer-create "*bnf-mode-bnf*"))
-	 (input-parsed (bnf-mode-sexp-parse-main sexp))
-	 (bnf-parsed (bnf-mode-bnf-parse-main (bnf-mode-bnf-mode-read-buffer bnf-buf))))
-    
+         (input-parsed (bnf-mode-sexp-parse-main sexp))
+         (bnf-parsed
+          (bnf-mode-bnf-parse-main
+           (bnf-mode-bnf-mode-read-buffer bnf-buf))))
+
     (let ((res (bnf-mode-check-bnf-main
-		bnf-parsed
-		input-parsed)))
-      ;(message "%s" res)
+                bnf-parsed
+                input-parsed)))
+                                        ;(message "%s" res)
       (if (bnf-mode-is-false? res)
-	  (let ((input-location (bnf-mode-syntax-location-from-error (bnf-mode-false-1 res)))
-		(bnf-location (bnf-mode-bnf-location-from-error (bnf-mode-false-1 res))))
-	    (message "BNF: Error in BNF at: %s" (bnf-mode-bnf-loc-to-text bnf-location bnf-buf))
-	    (if (not (null bnf-location))
-		(bnf-mode-handle-bnf-error-location 
-		 bnf-location 
-		 bnf-buf))
-	    (if (not (null input-location))
-		(bnf-mode-handle-syntax-error-location input-location (current-buffer) sexp)))
-	(message "BNF: Correct!"))
+          (let ((input-location
+                 (bnf-mode-syntax-location-from-error
+                  (bnf-mode-false-1 res)))
+                (bnf-location
+                 (bnf-mode-bnf-location-from-error
+                  (bnf-mode-false-1 res))))
+            (message
+             "BNF: Error in BNF at: %s"
+             (bnf-mode-bnf-loc-to-text bnf-location bnf-buf))
+            (if (not (null bnf-location))
+                (bnf-mode-handle-bnf-error-location
+                 bnf-location
+                 bnf-buf))
+            (if (not (null input-location))
+                (bnf-mode-handle-syntax-error-location
+                 input-location
+                 (current-buffer) sexp)))
+        (message "BNF: Correct!"))
       res)))
 
 
@@ -5714,7 +6155,7 @@ application."
 
 (defun bnf-mode-handle-syntax-error-location (loc syntax-buf sexp)
   (bnf-mode-underline-text sexp loc))
-  
+
 (defun bnf-mode-point-to-location (loc buf)
   (set-window-point
    (get-buffer-window buf)
@@ -5732,31 +6173,31 @@ application."
 (defun bnf-mode-bnf-check-region ()
   "temp function for testing what `thing-at-point' returns"
   (interactive)
-;  (end-of-line)
-  (search-backward-regexp "\\w\\|)") 
-      
- ; 
+                                        ;  (end-of-line)
+  (search-backward-regexp "\\w\\|)")
+
+                                        ;
   (let* ((myresult (thing-at-point 'sexp))
-	(region (bounds-of-thing-at-point 'sexp))
-	(cursor-point (point)))
-    
+         (region (bounds-of-thing-at-point 'sexp))
+         (cursor-point (point)))
+
     (if bnf-mode-analysis-active
-      (progn 
-	(setq bnf-mode-analysis-active nil)
-    	(bnf-mode))
-      (progn 
-	(if (bnf-mode-is-false? (bnf-mode-bnf-check-analysis-region myresult))
-	    (progn
-	      (bnf-fundamental-mode)
-	      (setq bnf-mode-analysis-active t)
-	
-	      (delete-region (car region) (cdr region))
-	      (goto-char (car region))
-;	      (insert-before-markers myresult)
-	      (insert myresult)
-	  
-	      (goto-char cursor-point)
-	      ))))
+        (progn
+          (setq bnf-mode-analysis-active nil)
+          (bnf-mode))
+      (progn
+        (if (bnf-mode-is-false? (bnf-mode-bnf-check-analysis-region myresult))
+            (progn
+              (bnf-fundamental-mode)
+              (setq bnf-mode-analysis-active t)
+
+              (delete-region (car region) (cdr region))
+              (goto-char (car region))
+                                        ;         (insert-before-markers myresult)
+              (insert myresult)
+
+              (goto-char cursor-point)
+              ))))
     (forward-char 1)
     ))
 
@@ -5764,32 +6205,38 @@ application."
 
 (define-derived-mode bnf-fundamental-mode
   fundamental-mode
-;  petite-chez-scheme-mode
-;  prog-mode
-;  sml-mode
-;  scheme-mode
+                                        ;  petite-chez-scheme-mode
+                                        ;  prog-mode
+                                        ;  sml-mode
+                                        ;  scheme-mode
   "BNF mode: Error Environment"
   "bnf mode for dProgSprog"
-  (define-key bnf-fundamental-mode-map (bnf-mode-bnf-mode-activation-key) 'bnf-mode-bnf-check-region))
+  (define-key bnf-fundamental-mode-map
+    (bnf-mode-bnf-mode-activation-key) 'bnf-mode-bnf-check-region))
 
 
 (define-derived-mode bnf-mode
-;  fundamental-mode 
-;  petite-chez-scheme-mode
-;  prog-mode
-;  sml-mode
+                                        ;  fundamental-mode
+                                        ;  petite-chez-scheme-mode
+                                        ;  prog-mode
+                                        ;  sml-mode
   scheme-mode
   "BNF mode: Scheme"
   "bnf mode for dProgSprog"
   (bnf-mode-clear-bnf-buffer-underlining)
-  (define-key bnf-mode-map (bnf-mode-bnf-mode-activation-key) 'bnf-mode-bnf-check-region)
+  (define-key bnf-mode-map
+    (bnf-mode-bnf-mode-activation-key) 'bnf-mode-bnf-check-region)
   (bnf-mode-setup-bnf-buffers))
 
 
 
 ;; Updates to the latest version, and loads the bnf-mode-update
 (defun bnf-mode-update ()
-  "Update the bnf mode to latest version. The bnf-mode.el file is placed at:  ~/.emacs.d/bnf-mode.el and loaded from there."
+  "Update the bnf mode to latest version. The bnf-mode.el file is placed at:
+  ~/.emacs.d/bnf-mode.el and loaded from there."
   (interactive)
-  (url-copy-file "http://users-cs.au.dk/u061245/thesis/latest/bnf-mode.el" "~/.emacs.d/bnf-mode.el" t)
+  (url-copy-file
+   "http://users-cs.au.dk/u061245/thesis/latest/bnf-mode.el"
+   "~/.emacs.d/bnf-mode.el"
+   t)
   (load-file "~/.emacs.d/bnf-mode.el"))

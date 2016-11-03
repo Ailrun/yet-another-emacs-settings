@@ -11,9 +11,10 @@
   :require (cl-lib ido)
   :config (progn
             (yas-global-mode t)
-            (setq-default yas-prompt-functions '(yas-ido-prompt
-                                                 yas-dropdown-prompt
-                                                 yas-completing-prompt))))
+            (setq-default yas-prompt-functions
+                          '(yas-ido-prompt
+                            yas-dropdown-prompt
+                            yas-completing-prompt))))
 
 (provide 'yaes-yasnippet)
 ;;; yaes-yasnippet.el ends here

@@ -28,8 +28,8 @@
   :require (eldoc etags thingatpt+)
   :commands (el-spice-mode)
   :init (progn
-          (add-hook-exec 'emacs-lisp-mode 'el-spice-mode)
-          (add-hook-exec 'lisp-interaction-mode 'el-spice-mode)))
+          (add-hook-exec 'emacs-lisp-mode #'el-spice-mode)
+          (add-hook-exec 'lisp-interaction-mode #'el-spice-mode)))
 
 ;; Elisp macro expanding package
 (req-package macrostep
@@ -37,7 +37,7 @@
   :require (pp ring cmacexp cl-lib)
   :commands (macrostep-expand)
   :init (progn
-          (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand)))
+          (define-key emacs-lisp-mode-map (kbd "C-c e") #'macrostep-expand)))
 
 
 ;; Elisp Package Repositories

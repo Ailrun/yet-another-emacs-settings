@@ -19,12 +19,13 @@
 ;;    '("gnu" . "https://elpa.gnu.org/packages/")))
 
 (mapc (lambda (item)
-      (add-to-list 'package-archives item)) package-archives-list)
+        (add-to-list 'package-archives item))
+      package-archives-list)
 
 (package-initialize)
 
 (defun install-first-require-package (package)
-  "install and require for new package, and only require for old package"
+  "Install and require for new PACKAGE, and only require for old PACKAGE."
   (if (null (require package nil t))
       (progn (let* ((ARCHIVES (if (null package-archive-contents)
                   (progn (package-refresh-contents)

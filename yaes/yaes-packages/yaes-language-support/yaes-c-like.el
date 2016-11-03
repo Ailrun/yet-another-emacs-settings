@@ -18,10 +18,12 @@
   :init (progn
           (add-hook-exec 'c++-mode
                          (lambda ()
-                           (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))
+                           (define-key c-mode-base-map
+                             (kbd "M-o") #'cff-find-other-file)))
           (add-hook-exec 'c-mode
                          (lambda ()
-                           (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))))
+                           (define-key c-mode-base-map
+                             (kbd "M-o") #'cff-find-other-file)))))
 
 ;; Backend plugin for company with C/C++
 (req-package company-c-headers

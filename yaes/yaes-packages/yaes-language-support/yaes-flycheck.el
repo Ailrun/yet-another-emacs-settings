@@ -14,7 +14,8 @@
 (req-package flycheck-pos-tip
   :require (flycheck)
   :commands (flycheck-pos-tip-error-messages)
-  :init (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+  :init (setq flycheck-display-errors-function
+              #'flycheck-pos-tip-error-messages))
 
 ;; ;; Error display at pos-tip
 ;; ;; Loaded by hook

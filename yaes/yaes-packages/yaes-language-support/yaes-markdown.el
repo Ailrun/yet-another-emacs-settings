@@ -15,8 +15,10 @@
 ;; ;; Do I really use this?
 ;; (req-package markdown-preview-mode
 ;;   :require (websocket markdown-mode)
-;;   :config (progn (req-package-hooks-add-execute 'markdown-mode 'markdown-preview-mode)
-;;               (setq markdown-preview-style "http://thomasf.github.io/solarized-css/solarized-light.min.css")))
+;;   :config (progn (req-package-hooks-add-execute 'markdown-mode
+;;                    'markdown-preview-mode)
+;;                  (setq markdown-preview-style
+;;                        "http://thomasf.github.io/solarized-css/solarized-light.min.css")))
 
 (req-package flymd
   ;; required emacs version : ???
