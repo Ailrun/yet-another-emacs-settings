@@ -3,6 +3,11 @@
 ;;; Commentary:
 ;;;
 ;;; Code:
+
+;; Emacs 25.1 adds this automatically.
+;; However, in this setting this is done by other file.
+;; (package-initialize)
+
 (load "~/.emacs.d/external/ProofGeneral/generic/proof-site")
 
 (load-file "~/.emacs.d/yaes/yaes-init.el")
