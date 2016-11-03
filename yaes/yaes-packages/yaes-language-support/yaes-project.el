@@ -12,9 +12,9 @@
   :require (cl-lib)
   :commands (ggtags-mode)
   :init (progn
-		  (add-hook-exec 'c-mode #'ggtags-mode)
-		  (add-hook-exec 'c++-mode #'ggtags-mode)
-		  (add-hook-exec 'java-mode #'ggtags-mode)))
+          (add-hook-exec 'c-mode #'ggtags-mode)
+          (add-hook-exec 'c++-mode #'ggtags-mode)
+          (add-hook-exec 'java-mode #'ggtags-mode)))
 
 ;; Project managing
 (req-package projectile

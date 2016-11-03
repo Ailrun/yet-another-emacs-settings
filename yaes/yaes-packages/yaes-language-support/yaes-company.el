@@ -12,9 +12,9 @@
   :loader :elpa
   :require (cl-lib yasnippet)
   :config (progn
-			(global-company-mode t)
-			(global-set-key (kbd "C-<tab>") 'company-complete)
-			(global-set-key (kbd "C-c C-y") 'company-yasnippet)))
+            (global-company-mode t)
+            (global-set-key (kbd "C-<tab>") 'company-complete)
+            (global-set-key (kbd "C-c C-y") 'company-yasnippet)))
 
 ;; Help autocomplete using pos-tip message
 (req-package company-quickhelp

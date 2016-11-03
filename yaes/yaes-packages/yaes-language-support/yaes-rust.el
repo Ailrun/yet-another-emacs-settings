@@ -15,20 +15,20 @@
   ;; required emacs version : >= 24.3
   :require (rust-mode)
   :commands (cargo-process-bench
-			 cargo-process-build
-			 cargo-process-clean
-			 cargo-process-doc
-			 cargo-process-new
-			 cargo-process-init
-			 cargo-process-run
-			 cargo-process-run-example
-			 cargo-process-search
-			 cargo-process-test
-			 cargo-process-update
-			 cargo-process-repeat
-			 cargo-process-current-test
-			 cargo-process-current-file-tests
-			 cargo-process-fmt))
+             cargo-process-build
+             cargo-process-clean
+             cargo-process-doc
+             cargo-process-new
+             cargo-process-init
+             cargo-process-run
+             cargo-process-run-example
+             cargo-process-search
+             cargo-process-test
+             cargo-process-update
+             cargo-process-repeat
+             cargo-process-current-test
+             cargo-process-current-file-tests
+             cargo-process-fmt))
 
 ;; Plugin for flycheck with rust
 (req-package flycheck-rust

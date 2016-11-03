@@ -11,12 +11,12 @@
   :require (cl-lib)
   :commands (cff-find-other-file)
   :init (progn
-		  (add-hook-exec 'c++-mode
-						 (lambda ()
-						   (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))
-		  (add-hook-exec 'c-mode
-						 (lambda ()
-						   (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))))
+          (add-hook-exec 'c++-mode
+                         (lambda ()
+                           (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))
+          (add-hook-exec 'c-mode
+                         (lambda ()
+                           (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))))
 
 ;; Backend plugin for company with C/C++
 (req-package company-c-headers
@@ -34,9 +34,9 @@
 
 (req-package semantic
   :config (progn
-			(global-semanticdb-minor-mode t)
-			(global-semantic-idle-scheduler-mode t)
-			(semantic-mode t)))
+            (global-semanticdb-minor-mode t)
+            (global-semantic-idle-scheduler-mode t)
+            (semantic-mode t)))
 
 (provide 'yaes-c-like)
 ;;; yaes-c-like.el ends here

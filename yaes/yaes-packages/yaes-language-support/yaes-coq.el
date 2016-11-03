@@ -10,8 +10,8 @@
   ;; required emacs version : ???
   :require (company-math company yasnippet dash cl-lib)
   :config (progn
-			(add-to-list 'company-coq-disabled-features 'prettify-symbols)
-			(add-hook-exec 'coq-mode #'company-coq-mode)))
+            (add-to-list 'company-coq-disabled-features 'prettify-symbols)
+            (add-hook-exec 'coq-mode #'company-coq-mode)))
 
 ;; Commenting support with coq
 (req-package coq-commenter
@@ -20,12 +20,12 @@
   :commands (coq-commenter-mode)
   :init (add-hook-exec 'coq-mode #'coq-commenter-mode)
   :config (progn
-			(define-key coq-commenter-mode-map
-			  (kbd "C-x C-;")
-			  #'coq-commenter-comment-proof-in-region)
-			(define-key coq-commenter-mode-map
-			  (kbd "C-x C-'")
-			  #'coq-commenter-uncomment-proof-in-buffer)))
+            (define-key coq-commenter-mode-map
+              (kbd "C-x C-;")
+              #'coq-commenter-comment-proof-in-region)
+            (define-key coq-commenter-mode-map
+              (kbd "C-x C-'")
+              #'coq-commenter-uncomment-proof-in-buffer)))
 
 (provide 'yaes-coq)
 ;;; yaes-coq.el ends here

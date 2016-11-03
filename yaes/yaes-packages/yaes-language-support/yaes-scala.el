@@ -16,9 +16,9 @@
   :pin melpa-stable
   :commands (sbt-start sbt-command)
   :config (substitute-key-definition
-		   'minibuffer-complete-word
-		   'self-insert-command
-		   minibuffer-local-completion-map))
+           'minibuffer-complete-word
+           'self-insert-command
+           minibuffer-local-completion-map))
 ;; Does this needs hydra support?
 
 ;; Source code analyzer

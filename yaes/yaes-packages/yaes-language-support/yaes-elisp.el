@@ -9,8 +9,8 @@
 (req-package el2markdown
   ;; required emacs version : ???
   :commands (el2markdown-view-buffer
-			 el2markdown-write-file
-			 el2markdown-write-readme))
+             el2markdown-write-file
+             el2markdown-write-readme))
 
 ;; ;; Is this required?
 ;; ;; Concurrency in emacs package
@@ -28,8 +28,8 @@
   :require (eldoc etags thingatpt+)
   :commands (el-spice-mode)
   :init (progn
-		  (add-hook-exec 'emacs-lisp-mode 'el-spice-mode)
-		  (add-hook-exec 'lisp-interaction-mode 'el-spice-mode)))
+          (add-hook-exec 'emacs-lisp-mode 'el-spice-mode)
+          (add-hook-exec 'lisp-interaction-mode 'el-spice-mode)))
 
 ;; Elisp macro expanding package
 (req-package macrostep
@@ -37,7 +37,7 @@
   :require (pp ring cmacexp cl-lib)
   :commands (macrostep-expand)
   :init (progn
-		  (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand)))
+          (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand)))
 
 
 ;; Elisp Package Repositories
@@ -62,8 +62,8 @@
 (req-package eldoc
   ;; required emacs version : any
   :init (progn
-		  (add-hook-exec 'emacs-lisp-mode #'eldoc-mode)
-		  (add-hook-exec 'lisp-interaction-mode #'eldoc-mode)))
+          (add-hook-exec 'emacs-lisp-mode #'eldoc-mode)
+          (add-hook-exec 'lisp-interaction-mode #'eldoc-mode)))
 
 (provide 'yaes-elisp)
 ;;; yaes-elisp.el ends here
