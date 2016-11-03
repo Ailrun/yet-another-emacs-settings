@@ -16,7 +16,8 @@
   :require (async dash with-editor git-commit magit-popup ssh-agency)
   :config (progn
             (setenv "GIT_ASKPASS" "git-gui--askpass")
-            (setenv "SSH_ASKPASS" "git-gui--askpass")))
+            (setenv "SSH_ASKPASS" "git-gui--askpass")
+            (global-set-key "\C-x v S" #'magit-status)))
 
 (provide 'yaes-git)
 ;;; yaes-git.el ends here
