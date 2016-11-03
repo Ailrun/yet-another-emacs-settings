@@ -60,6 +60,7 @@
 (setq inhibit-startup-message t)
 (setq package-enable-at-startup nil)
 (setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
 (windmove-default-keybindings)
 ;;;;Load a file for pre-package functions.
 ;;(load-file yaes-package-el)
