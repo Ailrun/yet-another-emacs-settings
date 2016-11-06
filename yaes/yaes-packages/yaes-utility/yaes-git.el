@@ -17,7 +17,7 @@
   :config (progn
             (setenv "GIT_ASKPASS" "git-gui--askpass")
             (setenv "SSH_ASKPASS" "git-gui--askpass")
-            (global-set-key "\C-x v S" #'magit-status)))
+            (global-set-key (kbd "C-x v S") #'magit-status)))
 
 (provide 'yaes-git)
 ;;; yaes-git.el ends here
