@@ -8,7 +8,12 @@
 (req-package whitespace
   ;; required emacs version : any
   :config (progn (setq whitespace-style '(face empty lines-tail trailing))
-                 (global-whitespace-mode t)))
+                 (setq whitespace-global-modes
+                       '(not
+                         LaTeX-mode
+                         latex-mode
+                         markdown-mode
+                         shell-mode))))
 
 ;; Line numbering
 (req-package linum
