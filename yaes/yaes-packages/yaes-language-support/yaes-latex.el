@@ -14,17 +14,19 @@
             (add-to-list 'company-backends 'company-math-symbols-latex)))
 
 ;; LaTeX mode
-(req-package auxtex
+(req-package auctex
   ;; required emacs version : >= 24.4
-  :mode ("\\.tex\\'" . LaTeX-mode)
+  :mode (("\\.tex\\'" . LaTeX-mode)
+         ("\\.sty\\'" . LaTeX-mode)
+         ("\\.misc\\'" . LaTeX-mode)
+         ("\\.tikz\\'" . LaTeX-mode))
   :init (progn
-          (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8)
-          (add-hook-exec 'LaTeX-mode #'prettify-symbols-mode)))
+          (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8)))
 
 ;; Environment insertion support for LaTeX
 (req-package cdlatex
   ;; required emacs version : ???
-  :require (auxtex)
+  :require (auctex)
   :commands (turn-on-cdlatex)
   :init (progn
             (add-hook-exec 'LaTeX-mode #'turn-on-cdlatex)
@@ -33,9 +35,13 @@
 ;; Additional support for LaTeX mode
 (req-package latex-extra
   ;; required emacs version : ???
-  :require (auxtex cl-lib)
+  :require (auctex cl-lib)
   :commands (latex-extra-mode)
   :init (add-hook 'LaTeX-mode #'latex-extra-mode))
+
+(req-package latex-pretty-symbols
+  ;; required emacs version : ???
+  :require (auctex))
 
 ;; ;; LaTeX math symbol preview
 ;; ;; This won't work since this package use deprecated function.
