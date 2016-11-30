@@ -63,10 +63,17 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (windmove-default-keybindings)
-;;;;Load a file for pre-package functions.
-;;(load-file yaes-package-el)
 
-;;Load all files in the packages directory
+(if (x-list-fonts "Consolas")
+    (set-face-attribute 'fixed-pitch t :family "Consolas"))
+(if (x-list-fonts "Anonymous Pro")
+    (set-face-attribute 'default t :family "Anonymous Pro" :height 110))
+
+
+;;;; Load a file for pre-package functions.
+;; (load-file yaes-package-el)
+
+;; Load all files in the packages directory
 (req-package-force load-dir
   :defer t
   :init (progn
@@ -84,13 +91,13 @@
   (yas-recompile-all)
   (yas-reload-all))
 
-;;Function for unbound symbols
+;; Function for unbound symbols
 (mapatoms (lambda (symbol)
         (if (string-prefix-p "yaes-" (symbol-name symbol))
         (unintern symbol nil))))
 
 
-;;;;Obsoleted Version of unbound symbols
+;;;; Obsoleted Version of unbound symbols
 ;; (defun makunbound-all (list)
 ;;   (when (> (safe-length list) 0)
 ;;     (makunbound (pop list))
