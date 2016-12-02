@@ -5,13 +5,14 @@
 ;;; Code:
 (require 'req-package)
 
-;; Backend plugin for company with math symbols of latex
-(req-package company-math
+;; Reference support
+(req-package reftex
   ;; required emacs version : ???
-  :require (company math-symbol-lists)
-  :config (progn
-            (add-to-list 'company-backends 'company-math-symbols-unicode)
-            (add-to-list 'company-backends 'company-math-symbols-latex)))
+  :require (auctex)
+  :commands (reftex-mode)
+  :init (progn
+          (add-hook-exec 'LaTeX-mode #'reftex-mode)
+          (add-hook-exec 'latex-mode #'reftex-mode)))
 
 ;; LaTeX mode
 (req-package auctex
@@ -22,6 +23,23 @@
          ("\\.tikz\\'" . LaTeX-mode))
   :init (progn
           (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8)))
+
+;; Backend plugin for company of LaTeX
+(req-package company-auctex
+  ;; required emacs version : ???
+  :require (auctex company yasnippet)
+  :commands (company-auctex-init)
+  :init (progn
+          (add-hook-exec 'LaTeX-mode #'company-auctex-init)
+          (add-hook-exec 'latex-mode #'company-auctex-init)))
+
+;; Backend plugin for company with math symbols of latex
+(req-package company-math
+  ;; required emacs version : ???
+  :require (company math-symbol-lists)
+  :config (progn
+            (add-to-list 'company-backends 'company-math-symbols-unicode)
+            (add-to-list 'company-backends 'company-math-symbols-latex)))
 
 ;; Environment insertion support for LaTeX
 (req-package cdlatex
