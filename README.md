@@ -19,11 +19,11 @@ There are **Yet Another Emacs Settings** you should try.
 <!-- markdown-toc end -->
 
 ## Version ##
-![](https://img.shields.io/badge/Emacs->24.3-green.svg?style=plastic)
-![](https://img.shields.io/badge/Version-0.00.10a-lightgrey.svg?style=plastic)
-![](https://img.shields.io/badge/Status-Pre--Alpha-yellow.svg?style=plastic)
+![](https://img.shields.io/badge/Emacs->24.5-green.svg?style=flat)
+![](https://img.shields.io/badge/Version-0.01.01-lightgrey.svg?style=flat)
+![](https://img.shields.io/badge/Status-Alpha-yellow.svg?style=flat)
 
-*THIS REPO IS PRE-ALPHA. EVEN IF YOU WANT TO USE THIS, WAIT FOR A MOMENT PLEASE.*
+*THIS REPO IS ON ALPHA. EVEN IF YOU USE THIS, THERE MIGHT BE SOME ISSUES.*
 
 ## Description ##
 *Emacs* has so many packages in it. Therefore new users of *Emacs* will be confused by mountain of packages and bury *Emacs* for good.
