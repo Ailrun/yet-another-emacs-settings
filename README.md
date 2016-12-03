@@ -23,7 +23,7 @@ There are **Yet Another Emacs Settings** you should try.
 ![](https://img.shields.io/badge/Version-0.01.01-lightgrey.svg?style=flat)
 ![](https://img.shields.io/badge/Status-Alpha-yellow.svg?style=flat)
 
-*THIS REPO IS ON ALPHA. EVEN IF YOU USE THIS, THERE MIGHT BE SOME ISSUES.*
+*THIS REPO IS ON ALPHA. IF YOU USE THIS, THERE MIGHT BE SOME ISSUES.*
 
 ## Description ##
 *Emacs* has so many packages in it. Therefore new users of *Emacs* will be confused by mountain of packages and bury *Emacs* for good.
