@@ -20,7 +20,9 @@
 (req-package projectile
   ;; required emacs version : ???
   :require (dash pkg-info)
-  :config (projectile-global-mode t))
+  :config (progn
+            (projectile-global-mode t)
+            (setq projectile-git-ignored-command "git ls-files -zco --exclude-standard")))
 
 ;; Buffer set (perspective) changer
 (req-package perspective
