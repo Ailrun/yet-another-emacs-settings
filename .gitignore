@@ -10,5 +10,8 @@
 # Makefile
 !Makefile
 
+# emacs binary compiled files
+*.elc
+
 # emacs temp files
 *~

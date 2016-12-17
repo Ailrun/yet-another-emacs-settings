@@ -65,9 +65,9 @@
 (windmove-default-keybindings)
 
 (if (x-list-fonts "Consolas")
-    (set-face-attribute 'fixed-pitch t :family "Consolas"))
+    (set-face-attribute 'fixed-pitch nil :font "Consolas"))
 (if (x-list-fonts "Anonymous Pro")
-    (set-face-attribute 'default t :family "Anonymous Pro" :height 110))
+    (set-face-attribute 'default nil :font "Anonymous Pro" :height 110))
 
 
 ;;;; Load a file for pre-package functions.
