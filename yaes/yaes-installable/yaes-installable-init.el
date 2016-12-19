@@ -29,10 +29,9 @@
 ;;;; Editing functionality extensions
 ;;;;
 ;;;; 1. Autocompletion
-;;;; 2. Spell Checker
-;;;; 3. Syntax Checker
-;;;; 4. Snippets
-;;;; 5. Misc (undo, parenthesis, ...)
+;;;; 2. Syntax Checker
+;;;; 3. Snippets
+;;;; 4. Misc (undo, parenthesis, ...)
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
