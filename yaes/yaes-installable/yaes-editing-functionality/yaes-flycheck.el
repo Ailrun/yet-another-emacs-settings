@@ -12,5 +12,11 @@
   :config
   (global-flycheck-mode t))
 
+(req-package flycheck-pos-tip
+  :if (version<= "24.1" emacs-version)
+  :require (flycheck pos-tip)
+  :config
+  (flycheck-pos-tip-mode t))
+
 (provide 'yaes-flycheck)
 ;;; yaes-flycheck.el ends here
