@@ -5,10 +5,8 @@
 ;;; Code:
 
 ;; Emacs 25.1 adds this automatically.
-;; However, in this setting this is done by other file.
+;; However, in this setting package initialization is done by other file.
 ;; (package-initialize)
-
-;; (load "~/.emacs.d/external/ProofGeneral/generic/proof-site")
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
