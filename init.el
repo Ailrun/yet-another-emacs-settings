@@ -1,4 +1,4 @@
-;;; init --- init file for clare
+;;; init --- init file of clare
 ;;;
 ;;; Commentary:
 ;;;
@@ -8,19 +8,21 @@
 ;; However, in this setting this is done by other file.
 ;; (package-initialize)
 
-(load "~/.emacs.d/external/ProofGeneral/generic/proof-site")
+;; (load "~/.emacs.d/external/ProofGeneral/generic/proof-site")
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 (defconst init-file-path (expand-file-name "init.el" user-emacs-directory))
-   (when (file-exists-p custom-file)
-       (load custom-file))
 
 (global-set-key (kbd "C-<f1>")
         (lambda ()
           (interactive)
           (load-file init-file-path)))
 
-(load-file "~/.emacs.d/yaes/yaes-init.el")
+(defconst yaes-init-path (expand-file-name "yaes/yaes-init.el" user-emacs-directory))
+(load yaes-init-path)
 
 ;; ;; There is no needs for providing init
 ;; (provide 'init)

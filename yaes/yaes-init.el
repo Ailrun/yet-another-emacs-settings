@@ -1,110 +1,182 @@
-;;; yaes-init --- init file of yaes
+;;; yaes-init --- initializations of yaes
 ;;;
 ;;; Commentary:
 ;;;
 ;;; Code:
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; Helper functions
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun yaes-min-version-do (version &rest body)
+  "If MAJOR.MINOR is smaller than Emacs version, do BODY."
+  (when (version<= version emacs-version)
+    body))
+
+(defun yaes-max-version-do (major minor &rest body)
+  "If MAJOR.MINOR is bigger than Emacs version, do BODY."
+  (when (version<= emacs-version version)
+    body))
+
+(defun yaes-os-windows-check (&rest body)
+  "If os is windows, do BODY."
+  (when (eq system-type 'windows-nt)
+    body))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; Package Initializations
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'package)
 
-(defconst package-archives-list
-  '(("marmalade" . "https://marmalade-repo.org/packages/")
-    ("melpa" . "https://melpa.org/packages/")
-    ("melpa-stable" . "https://stable.melpa.org/packages/")
-    ("elpa" . "http://tromey.com/elpa/")
-    ("org" . "http://orgmode.org/elpa/")
-    ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
+(nconc
+ package-archives
+ '(("marmalade" . "https://marmalade-repo.org/packages/")
+   ("melpa" . "https://melpa.org/packages/")
+   ("melpa-stable" . "https://stable.melpa.org/packages/")
+   ("elpa" . "http://tromey.com/elpa/")
+   ("org" . "http://orgmode.org/elpa/")
+   ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
 
-;; (when (< emacs-major-version 24)
-;;   (add-to-list
-;;    'package-archives
-;;    '("gnu" . "https://elpa.gnu.org/packages/")))
-
-(mapc (lambda (item)
-        (add-to-list 'package-archives item))
-      package-archives-list)
+;; ;;;; Do I really need to support emacs23?
+;; (yaes-max-version-do 24 -1
+;; 		     (add-to-list
+;; 		      'package-archives
+;; 		      '("gnu" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 
-(defun install-first-require-package (package)
+(defun yaes-install-required-package (package)
   "Install and require for new PACKAGE, and only require for old PACKAGE."
-  (if (null (require package nil t))
-      (progn (let* ((ARCHIVES (if (null package-archive-contents)
-                  (progn (package-refresh-contents)
-                     package-archive-contents)
-                package-archive-contents))
-            (AVAIL (assoc package ARCHIVES)))
-           (if AVAIL
-           (package-install package)))
-         (require package))))
+  (when (null (require package nil t))
+    (progn (let* ((ARCHIVES (if (null package-archive-contents)
+                                (progn (package-refresh-contents)
+                                       package-archive-contents)
+                              package-archive-contents))
+                  (AVAIL (assoc package ARCHIVES)))
+             (when AVAIL
+               (package-install package)))
+           (require package))))
 
-(install-first-require-package 'req-package)
+(yaes-install-required-package 'req-package)
+(require 'use-package)
 (require 'req-package) ;; only for removing fly error
 
-(install-first-require-package 'f)
+(setq use-package-always-ensure t)
+(setq use-package-always-pin ''melpa)
+
+(yaes-install-required-package 'f)
 (require 'f) ;; only for removing fly error
 
-(defconst yaes-dir (f-dirname (f-this-file)))
-(defconst yaes-develope-dir (f-join  yaes-dir "yaes-develope"))
-(defconst yaes-packages-dir (f-join  yaes-dir "yaes-packages"))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; Vanilla Emacs settings
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Setting for windows
-(if (eq system-type 'windows-nt)
-    (progn (setq-default default-directory
-                         (concat (getenv "USERPROFILE") "\\Documents/"))
-           (setq default-directory
-                 (concat (getenv "USERPROFILE") "\\Documents/"))))
-
-(add-to-list 'load-path yaes-dir)
+;;;; Language settings ( for Korean )
+;;;;
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
+;; For some -nix environment.
 (global-set-key (kbd "S-SPC") 'toggle-korean-input-method)
+
+;;;; Get rid of starting things
+;;;;
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
-(setq package-enable-at-startup nil)
+
+;;;; Default directory of windows
+;;;;
+(yaes-os-windows-check
+ (setq-default default-directory
+               (concat (getenv "USERPROFILE") "\\Documents/"))
+ (when (eq (buffer-name) "*scratch*")
+   (setq default-directory
+         (concat (getenv "USERPROFILE") "\\Documents/"))))
+
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (windmove-default-keybindings)
 
-(if (x-list-fonts "Consolas")
-    (set-face-attribute 'fixed-pitch nil :font "Consolas"))
-(if (x-list-fonts "Anonymous Pro")
-    (set-face-attribute 'default nil :font "Anonymous Pro" :height 110))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; YAES directory settings
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defconst yaes-dir
+  (f-dirname (f-this-file))
+  "YAES base directory.")
 
-;;;; Load a file for pre-package functions.
-;; (load-file yaes-package-el)
-
-;; Load all files in the packages directory
-(req-package-force load-dir
-  :defer t
+;;;; Load all files in the packages directory
+(req-package load-dir
+             :loader :elpa
+  :force t
   :init (progn
-          (setq force-load-messages nil)
           (setq load-dir-debug t)
-          (setq load-dir-recursive t))
-  :config (progn
-            (load-dir-one yaes-develope-dir)
-            (load-dir-one yaes-packages-dir)
-            (req-package-finish)))
+          (setq load-dir-recursive nil)
+          (setq load-dir-loaded '())))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; YAES developing package loading
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defconst yaes-developing-dir
+  (f-join yaes-dir "yaes-developing")
+  "YAES developing package directory.")
+
+(load-dir-one yaes-developing-dir)
+
+(unintern yaes-developing-dir)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; YAES installable package loading
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defconst yaes-installable-dir
+  (f-join yaes-dir "yaes-installable")
+  "YAES installable package directory.
+Those are installable via package manager.")
+
+(load-dir-one yaes-installable-dir)
+
+(unintern yaes-installable-dir)
+
+(req-package-finish)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; YAES external package loading
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defconst yaes-external-dir
+  (f-join yaes-dir "yaes-external")
+  "YAES external package directory.")
+
+(load-dir-one yaes-external-dir)
+
+(unintern yaes-external-dir)
 
 (require 'yasnippet)
 
 (progn
   (yas-recompile-all)
-  (yas-reload-all))
+(yas-reload-all))
 
 ;; Function for unbound symbols
 (mapatoms (lambda (symbol)
-        (if (string-prefix-p "yaes-" (symbol-name symbol))
-        (unintern symbol nil))))
-
-
-;;;; Obsoleted Version of unbound symbols
-;; (defun makunbound-all (list)
-;;   (when (> (safe-length list) 0)
-;;     (makunbound (pop list))
-;;     (makunbound-all list)))
-
-;; (makunbound-all '(yaes-dir yaes-package-el yaes-packages-dir))
-;; (fmakunbound makunbound-all)
+	    (if (string-prefix-p "yaes-" (symbol-name symbol))
+		(unintern symbol nil))))
 
 (provide 'yaes-init)
 ;;; yaes-init.el ends here
