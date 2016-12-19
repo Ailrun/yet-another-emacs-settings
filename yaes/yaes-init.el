@@ -126,7 +126,7 @@
 
 (load-dir-one yaes-developing-dir)
 
-(unintern yaes-developing-dir)
+(unintern yaes-developing-dir nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
@@ -141,7 +141,7 @@ Those are installable via package manager.")
 
 (load-dir-one yaes-installable-dir)
 
-(unintern yaes-installable-dir)
+(unintern yaes-installable-dir nil)
 
 (req-package-finish)
 
@@ -157,7 +157,7 @@ Those are installable via package manager.")
 
 (load-dir-one yaes-external-dir)
 
-(unintern yaes-external-dir)
+(unintern yaes-external-dir nil)
 
 (require 'yasnippet)
 
