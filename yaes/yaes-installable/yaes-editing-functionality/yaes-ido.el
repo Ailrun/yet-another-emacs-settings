@@ -8,7 +8,8 @@
 
 (req-package ido
   :config
-  (ido-mode t))
+  (ido-mode t)
+  (ido-everywhere))
 
 (req-package ido-completing-read+
   :if (version<= "24.1" emacs-version)
@@ -18,7 +19,15 @@
   :if (version<= "24.1" emacs-version)
   :require (ido-completing-read+ cl-lib)
   :config
-  (ido-everywhere))
+  (ido-ubiquitous-mode t))
+
+(req-package smex
+  :if (version<= "24" emacs-version)
+  :commands (smex smex-major-mode-commands)
+  :bind
+  ("M-x" . smex)
+  ("M-X" . smex-major-mode-commands)
+  ("C-c C-c M-x" . execute-extended-command))
 
 (provide 'yaes-ido)
 ;;; yaes-ido.el ends here
