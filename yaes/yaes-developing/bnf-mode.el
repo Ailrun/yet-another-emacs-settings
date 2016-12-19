@@ -911,7 +911,7 @@ application."
   (nth 3 v))
 
 
-;; Data structure for the syntax parenthese
+;; Data structure for the syntax parentheses
 (defun bnf-mode-make-syntax-paren (location type-left content type-right)
   "location type-left content type-right"
   (list 'syntax-paren location type-left content type-right))
@@ -2307,7 +2307,7 @@ application."
          (bnf-mode-bnf-parse-remainder-1 result)))))))
 
 
-;; builds a round parenthesis with the constant and the input:
+;; builds a round parentheses with the constant and the input:
 ;; '(a b) ==> (paren c (a b))
 (defun bnf-mode-make-paren-with-constant (bnf-location const content )
   (bnf-mode-make-paren
@@ -3015,7 +3015,7 @@ application."
              (equal
               (bnf-mode-derive-paren-type (car v))
               paren-type))
-            (error "BNF error, open and close parenthese must be the same: %s %s" (car v) paren-type))
+            (error "BNF error, open and close parentheses must be the same: %s %s" (car v) paren-type))
         (if (bnf-mode-is-value? acc)
             (setq r
                   (bnf-mode-make-bnf-parse-remainder
@@ -4185,8 +4185,8 @@ application."
       (let ((check (bnf-mode-check-paren bnf (bnf-mode-ui-car v))))
         (cond
 
-         ;; 3.08.2013: So the parenthesis does not match, but if there
-         ;; is a constant inside the parenthesis, the error location
+         ;; 3.08.2013: So the parentheses does not match, but if there
+         ;; is a constant inside the parentheses, the error location
          ;; in the BNF is enhanced.
          ((bnf-mode-is-false? check)
           (let ((inner-constant
@@ -5531,8 +5531,8 @@ application."
            (equal (length member-list) 1))
       member-match-result)
 
-     ;; Parenthesis are a bit special. It is ok to point out a
-     ;; parenthesis error, before following other references.
+     ;; Parentheses are a bit special. It is ok to point out a
+     ;; parentheses error, before following other references.
      ((and (bnf-mode-is-remainder-false? member-match-result)
            (bnf-mode-is-error-paren-type-mismatch?
             (bnf-mode-false-1

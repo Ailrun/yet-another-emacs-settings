@@ -31,7 +31,7 @@
 ;;;; 1. Autocompletion
 ;;;; 2. Syntax Checker
 ;;;; 3. Snippets
-;;;; 4. Misc (undo, parenthesis, ...)
+;;;; 4. Misc (undo, parentheses, ...)
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
