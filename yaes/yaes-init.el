@@ -10,16 +10,6 @@
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun yaes-min-version-do (version &rest body)
-  "If MAJOR.MINOR is smaller than Emacs version, do BODY."
-  (when (version<= version emacs-version)
-    body))
-
-(defun yaes-max-version-do (major minor &rest body)
-  "If MAJOR.MINOR is bigger than Emacs version, do BODY."
-  (when (version<= emacs-version version)
-    body))
-
 (defun yaes-os-windows-check (&rest body)
   "If os is windows, do BODY."
   (when (eq system-type 'windows-nt)
