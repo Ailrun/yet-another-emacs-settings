@@ -71,7 +71,7 @@
 
 ;;;; Default directory of windows
 ;;;;
-(yaes-os-windows-check
+(when (eq system-type 'windows-nt)
  (setq-default default-directory
                (concat (getenv "USERPROFILE") "\\Documents/"))
  (when (eq (buffer-name) "*scratch*")
