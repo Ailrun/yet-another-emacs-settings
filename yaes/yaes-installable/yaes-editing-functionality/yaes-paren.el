@@ -8,8 +8,8 @@
 
 (req-package smartparens
   :require (dash cl-lib)
+  :diminish smartparens-mode
   :config
-  (smartparens-global-mode t)
   (sp-with-modes '(emacs-lisp-mode lisp-mode)
                  (sp-local-pair "'" nil :actions nil)
                  (sp-local-pair "`" nil :actions nil))
@@ -20,11 +20,13 @@
   (sp-with-modes '(coq-mode)
                  (sp-local-pair "'" nil :actions nil))
   (sp-with-modes '(haskell-mode)
-                 (sp-local-pair "'" nil :actions nil)))
+                 (sp-local-pair "'" nil :actions nil))
+  (smartparens-global-mode t))
 
-(req-package mic-paren
+(req-package highlight-parentheses
+  :diminish highlight-parentheses-mode
   :config
-  (paren-activate))
+  (global-highlight-parentheses-mode t))
 
 (provide 'yaes-paren)
 ;;; yaes-paren.el ends here

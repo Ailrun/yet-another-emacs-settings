@@ -9,11 +9,12 @@
 (req-package anzu
   :if (version<= "24.3" emacs-version)
   :demand t
-  :config
-  (global-anzu-mode t)
+  :diminish anzu-mode
   :bind
   (("M-%" . anzu-query-replace)
-   ("C-M-%" . anzu-query-replace-regexp)))
+   ("C-M-%" . anzu-query-replace-regexp))
+  :config
+  (global-anzu-mode t))
 
 (provide 'yaes-anzu)
 ;;; yaes-anzu.el ends here

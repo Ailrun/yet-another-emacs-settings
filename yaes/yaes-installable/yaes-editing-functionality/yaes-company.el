@@ -8,11 +8,12 @@
 
 (req-package company
   :demand t
-  :config
-  (global-company-mode t)
+  :diminish company-mode
   :bind
   (:map company-mode-map
-        ("C-<tab>" . company-complete)))
+        ("C-<tab>" . company-complete))
+  :config
+  (global-company-mode t))
 
 (provide 'yaes-company)
 ;;; yaes-company.el ends here

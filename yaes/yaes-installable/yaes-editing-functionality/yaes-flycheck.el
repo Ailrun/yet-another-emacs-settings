@@ -15,6 +15,7 @@
 (req-package flycheck-pos-tip
   :if (version<= "24.1" emacs-version)
   :require (flycheck pos-tip)
+  :diminish flycheck-pos-tip-mode
   :config
   (flycheck-pos-tip-mode t))
 
