@@ -1,4 +1,4 @@
-;;; yaes-haskell --- haskell related package setting of yaes
+;;; yaes-haskell --- Haskell related package setting of yaes
 ;;;
 ;;; Commentary:
 ;;;

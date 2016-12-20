@@ -1,4 +1,4 @@
-;;; yaes-yaml --- yaml related package setting of yaes
+;;; yaes-yaml --- YAML related package setting of yaes
 ;;;
 ;;; Commentary:
 ;;;

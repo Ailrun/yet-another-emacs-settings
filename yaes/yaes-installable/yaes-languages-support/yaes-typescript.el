@@ -1,4 +1,4 @@
-;;; yaes-typescript --- typescript related package setting of yaes
+;;; yaes-typescript --- TypeScript related package setting of yaes
 ;;;
 ;;; Commentary:
 ;;;
