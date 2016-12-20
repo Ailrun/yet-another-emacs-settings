@@ -54,15 +54,13 @@
           (package-install package)))
       (require package))))
 
+(yaes-install-required-package 'use-package)
 (yaes-install-required-package 'req-package)
-(require 'use-package)
-(require 'req-package) ;; only for removing fly error
 
 (setq use-package-always-ensure t)
 (setq use-package-always-pin ''melpa)
 
 (yaes-install-required-package 'f)
-(require 'f) ;; only for removing fly error
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
@@ -110,8 +108,6 @@
              :loader :elpa
   :force t
   :init (progn
-          (setq load-dir-debug t)
-          (setq load-dir-recursive nil)
           (setq load-dir-loaded '())))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -125,8 +121,9 @@
   "YAES developing package directory.")
 
 (load-dir-one yaes-developing-dir)
+;;;; yaes-developing-dir is already deleted
 
-(unintern yaes-developing-dir nil)
+(unintern 'yaes-developing-dir nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
@@ -140,10 +137,9 @@
 Those are installable via package manager.")
 
 (load-dir-one yaes-installable-dir)
+;;;; yaes-installable-dir is already deleted
 
-(unintern yaes-installable-dir nil)
-
-(req-package-finish)
+(unintern 'yaes-installable-dir nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
@@ -156,14 +152,16 @@ Those are installable via package manager.")
   "YAES external package directory.")
 
 (load-dir-one yaes-external-dir)
+;;;; yaes-external-dir is already deleted
 
-(unintern yaes-external-dir nil)
+(unintern 'yaes-external-dir nil)
 
-(require 'yasnippet)
+(req-package-finish)
 
-(progn
-  (yas-recompile-all)
-(yas-reload-all))
+(if (require 'yasnippet nil t)
+    (progn
+      (yas-recompile-all)
+      (yas-reload-all)))
 
 ;; Function for unbound symbols
 (mapatoms (lambda (symbol)
