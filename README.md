@@ -85,7 +85,7 @@ To Alpha~Beta
   - [ ] Database package default setting
   - [ ] Go package default setting
   - [x] OCaml package default setting
-  - [ ] Org package default setting
+  - [x] Org package default setting
   - [x] Rust package default setting
   - [x] Scala package default setting
   - [x] Scheme package default setting
