@@ -10,7 +10,9 @@
   :mode ("\\.scala\\'" . scala-mode))
 
 (req-package sbt-mode
-  :if (version<= "24.4" emacs-version)
+  :if (and
+       (version<= "24.4" emacs-version)
+       (executable-find "sbt"))
   :config
   (substitute-key-definition
    'minibuffer-complete-word
