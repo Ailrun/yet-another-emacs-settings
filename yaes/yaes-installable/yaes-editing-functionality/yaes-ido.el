@@ -15,6 +15,11 @@
   :if (version<= "24.1" emacs-version)
   :require (cl-lib))
 
+(req-package ido-yes-or-no
+  :require (ido-completing-read+)
+  :config
+  (ido-yes-or-no-mode t))
+
 (req-package ido-ubiquitous
   :if (version<= "24.1" emacs-version)
   :require (ido-completing-read+ cl-lib)
