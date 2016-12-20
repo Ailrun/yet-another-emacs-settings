@@ -7,7 +7,8 @@
 (require 'req-package)
 
 (req-package typescript-mode
-  :mode ("\\.ts\\'" . typescript-mode))
+  :mode
+  ("\\.ts\\'" . typescript-mode))
 
 (req-package tide
   :if (executable-find "node")

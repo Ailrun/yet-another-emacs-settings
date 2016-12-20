@@ -7,7 +7,8 @@
 (require 'req-package)
 
 (req-package scala-mode
-  :mode ("\\.scala\\'" . scala-mode))
+  :mode
+  ("\\.scala\\'" . scala-mode))
 
 (req-package sbt-mode
   :if (and
