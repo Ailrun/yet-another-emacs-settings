@@ -78,7 +78,7 @@ To Alpha~Beta
   - [ ] Node.js package default setting
   - [ ] PHP package default setting
   - [x] Project support default seeting
-  - [ ] Python package default setting
+  - [x] Python package default setting
   - [ ] web package default setting
 - Middle Priority
   - [ ] CoffeeScript package default setting
