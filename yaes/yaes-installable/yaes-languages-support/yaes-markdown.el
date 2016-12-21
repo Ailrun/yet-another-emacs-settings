@@ -6,7 +6,7 @@
 
 (require 'req-package)
 
-(defvar-local yaes-markdown-command "markdown")
+(defconst yaes-markdown-command "markdown")
 
 (req-package markdown-mode
   :if (and
