@@ -1,4 +1,4 @@
-;;; yaes-package --- package manage related packages of yaes
+;;; yaes-package --- package manage related package setting of yaes
 ;;;
 ;;; Commentary:
 ;;;
