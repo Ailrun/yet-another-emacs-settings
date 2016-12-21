@@ -71,7 +71,7 @@ To Alpha~Beta
   - [x] Fish Shell script package default setting
   - [x] Git/GitHub package default setting
   - [x] Haskell package default setting
-  - [ ] Java package default setting
+  - [x] Java package default setting
   - [ ] JavaScript package default setting
   - [x] LaTeX package default setting
   - [x] Markdown package default setting
