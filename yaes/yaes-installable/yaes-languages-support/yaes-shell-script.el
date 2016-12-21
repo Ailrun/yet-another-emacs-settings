@@ -1,4 +1,4 @@
-;;; yaes-fish --- Fish shell related package setting of yaes
+;;; yaes-shell-script --- Shell Script related package setting of yaes
 ;;;
 ;;; Commentary:
 ;;;
@@ -21,7 +21,8 @@
     (setq-local company-backends
                 (append
                  '((company-shell company-fish-shell)))))
-  (add-hook 'fish-mode-hook yaes-company-shell-init))
+  (add-hook 'fish-mode-hook yaes-company-shell-init)
+  (add-hook 'sh-mode-hook yaes-company-shell-init))
 
-(provide 'yaes-fish)
-;;; yaes-fish.el ends here
+(provide 'yaes-shell-script)
+;;; yaes-shell-script.el ends here
