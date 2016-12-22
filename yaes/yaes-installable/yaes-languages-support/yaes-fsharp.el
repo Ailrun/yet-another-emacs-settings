@@ -1,4 +1,4 @@
-;;; yaes-fsharp --- fsharp related package setting of yaes
+;;; yaes-fsharp --- F# related package setting of yaes
 ;;;
 ;;; Commentary:
 ;;;

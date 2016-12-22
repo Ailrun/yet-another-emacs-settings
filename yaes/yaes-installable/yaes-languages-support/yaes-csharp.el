@@ -1,4 +1,4 @@
-;;; yaes-csharp --- csharp related package setting of yaes
+;;; yaes-csharp --- C# related package setting of yaes
 ;;;
 ;;; Commentary:
 ;;;
