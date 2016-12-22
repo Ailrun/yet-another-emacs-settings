@@ -6,6 +6,9 @@
 
 (require 'req-package)
 
+(req-package autorevert
+  :diminish t)
+
 (req-package magit-popup
   :if (version<= "24.4" emacs-version)
   :require (async dash))
