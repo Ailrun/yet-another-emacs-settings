@@ -92,7 +92,7 @@ To Alpha~Beta
   - [ ] TypeScript package default setting
 - Low Priority
   - [ ] Android package default setting
-  - [ ] C# package default setting
+  - [x] C# package default setting
   - [x] F# package default setting
   - [ ] Lisp package default setting
   - [ ] Obj-C package default setting
