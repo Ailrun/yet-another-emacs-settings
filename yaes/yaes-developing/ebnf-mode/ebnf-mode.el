@@ -22,7 +22,7 @@
 ;;; Commentary:
 
 ;; This major mode provides basic syntax highlighting for Extended
-;; Backus-Naur Form metasyntax texts. For more information on what
+;; Backus-Naur Form metasyntax texts.  For more information on what
 ;; EBNF is, consult Wikipedia:
 ;; <http://en.wikipedia.org/wiki/Extended_Backus-Naur_Form>
 
