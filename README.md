@@ -2,12 +2,10 @@
 
 There are **Yet Another Emacs Settings** you should try.
 
-## Contents ##
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
-**Table of Contents**
+## Table of Contents ##
 
 - [Yet Another Emacs Settings](#yet-another-emacs-settings)
-    - [Contents](#contents)
     - [Version](#version)
     - [Description](#description)
     - [Usage](#usage)
@@ -86,9 +84,9 @@ To Alpha~Beta
   - [ ] Go package default setting
   - [x] OCaml package default setting
   - [x] Org package default setting
-  - [x] Rust package default setting
+  - [ ] Rust package default setting
   - [x] Scala package default setting
-  - [x] Scheme package default setting
+  - [ ] Scheme package default setting
   - [ ] TypeScript package default setting
 - Low Priority
   - [ ] Android package default setting
