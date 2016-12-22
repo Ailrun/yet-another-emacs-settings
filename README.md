@@ -68,6 +68,7 @@ Listed in alpabetical order.
   - [x] Batch script package default setting
   - [ ] C/C++ package default setting
   - [ ] CSS package default setting
+  - [x] Elm package default setting
   - [x] Fish Shell script package default setting
   - [x] Git/GitHub package default setting
   - [x] Haskell package default setting
