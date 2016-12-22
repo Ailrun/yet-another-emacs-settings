@@ -63,7 +63,7 @@ To Alpha~Beta
   - [x] Elisp package default setting
 - High Priority
   - [x] Bash Shell script package default setting
-  - [ ] Batch script package default setting
+  - [x] Batch script package default setting
   - [ ] C/C++ package default setting
   - [x] Fish Shell script package default setting
   - [x] Git/GitHub package default setting
@@ -86,13 +86,13 @@ To Alpha~Beta
   - [ ] Rust package default setting
   - [x] Scala package default setting
   - [ ] Scheme package default setting
-  - [ ] TypeScript package default setting
+  - [x] TypeScript package default setting
 - Low Priority
   - [ ] Android package default setting
   - [x] C# package default setting
   - [x] F# package default setting
   - [ ] Lisp package default setting
-  - [ ] Obj-C package default setting
+  - [x] Obj-C package default setting
   - [ ] Prolog package default setting
   - [ ] R package default setting
   - [ ] Ruby package default setting
