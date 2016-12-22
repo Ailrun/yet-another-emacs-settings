@@ -56,7 +56,9 @@ Will be added ASAP.
 
 ## Status ##
 
-To Alpha~Beta
+Objects to Alpha~Beta.
+
+Listed in alpabetical order.
 
 - Necessary
   - [x] Default package bootstrapping using f, use-package, req-package
@@ -65,18 +67,22 @@ To Alpha~Beta
   - [x] Bash Shell script package default setting
   - [x] Batch script package default setting
   - [ ] C/C++ package default setting
+  - [ ] CSS package default setting
   - [x] Fish Shell script package default setting
   - [x] Git/GitHub package default setting
   - [x] Haskell package default setting
+  - [x] HTML-like package default setting
   - [x] Java package default setting
   - [ ] JavaScript package default setting
   - [x] LaTeX package default setting
+  - [ ] Less package default setting
   - [x] Markdown package default setting
   - [ ] Node.js package default setting
   - [ ] PHP package default setting
   - [x] Project support default seeting
   - [x] Python package default setting
-  - [ ] web package default setting
+  - [ ] Sass package default setting
+  - [ ] SCSS package default setting
 - Middle Priority
   - [ ] CoffeeScript package default setting
   - [ ] Database package default setting
