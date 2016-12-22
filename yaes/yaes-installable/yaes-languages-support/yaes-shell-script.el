@@ -12,7 +12,7 @@
   ("\\.fish\\'" . fish-mode))
 
 (req-package company-shell
-  :require (company dash cl-lib fish)
+  :require (company dash cl-lib fish-mode)
   :functions (yaes-company-shell-init)
   :commands (yaes-company-shell-init)
   :init
