@@ -30,7 +30,7 @@
     "Setup company-math."
     (setq-local company-backends
                 (append
-                 '((company-math-symbols-latex))
+                 '(company-math-symbols-latex)
                  company-backends)))
   (add-hook 'LaTeX-mode-hook #'yaes-company-math-setup)
   (add-hook 'latex-mode-hook #'yaes-company-math-setup))

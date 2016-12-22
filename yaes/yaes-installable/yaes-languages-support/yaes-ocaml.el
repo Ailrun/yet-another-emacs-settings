@@ -23,7 +23,7 @@
     "Merlin setup."
     (setq-local company-backends
                 (append
-                 '((merline-company-backend))
+                 '(merline-company-backend)
                  company-backends)))
   (add-hook 'tuareg-mode-hook #'merlin-mode)
   (add-hook 'caml-mode-hook #'merlin-mode))

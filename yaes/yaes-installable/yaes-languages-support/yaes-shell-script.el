@@ -11,18 +11,31 @@
   :mode
   ("\\.fish\\'" . fish-mode))
 
+(req-package sh-script
+  :mode
+  ("\\.\\(ba\\|t?c\\)sh\\'" . sh-mode))
+
 (req-package company-shell
-  :require (company dash cl-lib fish-mode)
-  :functions (yaes-company-shell-init)
-  :commands (yaes-company-shell-init)
+  :require (company dash cl-lib)
+  :functions (yaes-company-shell-fish-init
+              yaes-company-shell-sh-init)
+  :commands (yaes-company-shell-fish-init
+             yaes-company-shell-sh-init)
   :init
-  (defun yaes-company-shell-init ()
+  (defun yaes-company-shell-fish-init ()
     "Company-shell setup."
     (setq-local company-backends
                 (append
-                 '((company-shell company-fish-shell)))))
-  (add-hook 'fish-mode-hook yaes-company-shell-init)
-  (add-hook 'sh-mode-hook yaes-company-shell-init))
+                 '(company-shell company-fish-shell)
+                 company-backends)))
+  (defun yaes-company-shell-sh-init ()
+    "Company-shell setup."
+    (setq-local company-backends
+                (append
+                 '(company-shell)
+                 company-backends)))
+  (add-hook 'fish-mode-hook #'yaes-company-shell-fish-init)
+  (add-hook 'sh-mode-hook #'yaes-company-shell-sh-init))
 
 (provide 'yaes-shell-script)
 ;;; yaes-shell-script.el ends here

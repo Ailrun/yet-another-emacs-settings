@@ -29,7 +29,7 @@
     "Setup company-jedi."
     (setq-local company-backends
                 (append
-                 '((company-jedi company-files))
+                 '(company-jedi company-files)
                  company-backends)))
   (add-hook 'python-mode-hook #'yaes-company-jedi-setup))
 
