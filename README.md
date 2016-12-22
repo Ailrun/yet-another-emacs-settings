@@ -17,16 +17,15 @@ There are **Yet Another Emacs Settings** you should try.
 <!-- markdown-toc end -->
 
 ## Version ##
-![](https://img.shields.io/badge/Emacs->24.5-green.svg?style=flat)
-![](https://img.shields.io/badge/Version-0.01.01-lightgrey.svg?style=flat)
+![](https://img.shields.io/badge/Version-0.02.00-lightgrey.svg?style=flat)
 ![](https://img.shields.io/badge/Status-Alpha-yellow.svg?style=flat)
 
 *THIS REPO IS ON ALPHA. IF YOU USE THIS, THERE MIGHT BE SOME ISSUES.*
 
 ## Description ##
-*Emacs* has so many packages in it. Therefore new users of *Emacs* will be confused by mountain of packages and bury *Emacs* for good.
+*Emacs* (with *elpa*) has so many packages in it. Therefore new users of *Emacs* will be confused by mountain of packages and bury *Emacs* for good.
 
-**Yet Another Emacs Settings** (**YAES**) is a *Emacs* setting files to lighten those confusing.
+**Yet Another Emacs Settings** (**YAES**) is a *Emacs* setting files to lighten those confusion.
 
 ## Usage ##
 
