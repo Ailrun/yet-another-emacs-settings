@@ -33,20 +33,20 @@ There are **Yet Another Emacs Settings** you should try.
 ### How to Install ###
 First, find your default loading path of emacs.
 
-If you didn't use any tweak or `-u` option for emacs start-up, it is your home directory and you can move to there by following commands,
+If you didn't use any tweak and `-u` option for emacs start-up, it starts at your home directory.  
+You can move to there by following commands on -Nix and OSX.
 
 ```
 cd ~
 ```
 
-or, if you use windows, you can find home using emacs with commands, `C-x C-f ~/ <RET>`. (First line of the buffer is path of your home directory)
+If you use windows, you can find home at emacs using `C-x C-f ~/ <RET>` commands. (First line of the buffer is path of your home directory)
 
-In your home directory, what you needs to install are following.
+Open your home directory with git, what you needs to install are following.
 
 ```
 git clone https://github.com/Ailrun/yet-another-emacs-settings .emacs.d
 cd .emacs.d
-make
 ```
 
 If you don't have make command, install GNU make for your OS.
