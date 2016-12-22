@@ -7,7 +7,7 @@
 (require 'req-package)
 
 (req-package eldoc
-  :diminish t
+  :diminish eldoc-mode
   :commands (eldoc-mode)
   :init
   (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
@@ -17,7 +17,7 @@
 (req-package auto-compile
   :if (version<= "24.3" emacs-version)
   :require (dash packed)
-  :diminish t
+  :diminish auto-compile-on-save-mode
   :commands (auto-compile-on-save-mode)
   :init
   (add-hook 'emacs-lisp-mode-hook #'auto-compile-on-save-mode))

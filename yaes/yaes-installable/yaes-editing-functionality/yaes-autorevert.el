@@ -7,7 +7,7 @@
 (require 'req-package)
 
 (req-package autorevert
-  :diminish t
+  :diminish auto-revert-mode
   :config
   (global-auto-revert-mode t))
 
