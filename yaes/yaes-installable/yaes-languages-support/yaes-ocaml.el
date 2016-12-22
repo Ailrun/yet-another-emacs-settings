@@ -6,6 +6,9 @@
 
 (require 'req-package)
 
+(req-package caml
+  :defer t)
+
 (req-package tuareg
   :require (caml)
   :mode ("\\.ml[iylp]?\\'" . tuareg-mode))
@@ -13,6 +16,7 @@
 (req-package merline
   :if (executable-find "ocamlmerlin")
   :require (tuareg)
+  :functions (yaes-merline-setup)
   :commands (merlin-mode)
   :init
   (defun yaes-merline-setup ()
