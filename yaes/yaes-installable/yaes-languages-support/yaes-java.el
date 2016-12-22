@@ -20,5 +20,8 @@
   :if (executable-find "mvn")
   :commands (mvn mvn-compile mvn-clean mvn-test))
 
+(req-package java-snippets
+  :require (yasnippet))
+
 (provide 'yaes-java)
 ;;; yaes-java.el ends here
