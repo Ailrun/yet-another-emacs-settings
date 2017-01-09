@@ -13,17 +13,17 @@
   :require (caml)
   :mode ("\\.ml[iylp]?\\'" . tuareg-mode))
 
-(req-package merline
+(req-package merlin
   :if (executable-find "ocamlmerlin")
-  :require (tuareg)
-  :functions (yaes-merline-setup)
+  :require (tuareg iedit)
+  :functions (yaes-merlin-setup)
   :commands (merlin-mode)
   :init
-  (defun yaes-merline-setup ()
+  (defun yaes-merlin-setup ()
     "Merlin setup."
     (setq-local company-backends
                 (append
-                 '(merline-company-backend)
+                 '(merlin-company-backend)
                  company-backends)))
   (add-hook 'tuareg-mode-hook #'merlin-mode)
   (add-hook 'caml-mode-hook #'merlin-mode))
