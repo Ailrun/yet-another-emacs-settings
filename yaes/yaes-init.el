@@ -101,6 +101,21 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
+;;;; YAES external package loading
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defconst yaes-external-dir
+  (f-join yaes-dir "yaes-external")
+  "YAES external package directory.")
+
+(load-dir-one yaes-external-dir)
+;;;; yaes-external-dir is already deleted
+
+(unintern 'yaes-external-dir nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
 ;;;; YAES developing package loading
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -129,21 +144,6 @@ Those are installable via package manager.")
 ;;;; yaes-installable-dir is already deleted
 
 (unintern 'yaes-installable-dir nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;
-;;;; YAES external package loading
-;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defconst yaes-external-dir
-  (f-join yaes-dir "yaes-external")
-  "YAES external package directory.")
-
-(load-dir-one yaes-external-dir)
-;;;; yaes-external-dir is already deleted
-
-(unintern 'yaes-external-dir nil)
 
 (req-package-finish)
 
