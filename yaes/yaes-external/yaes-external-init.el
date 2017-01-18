@@ -8,7 +8,7 @@
 (defvar-local pg-clone-path (f-join (f-dirname (f-this-file)) "ProofGeneral"))
 (defvar-local pg-load-path (f-join pg-clone-path "generic/proof-site"))
 
-(if (null (file-directory-p pg-clone-path))
+(if (file-directory-p pg-clone-path)
     (load pg-load-path))
 
 (provide 'yaes-external-init)
