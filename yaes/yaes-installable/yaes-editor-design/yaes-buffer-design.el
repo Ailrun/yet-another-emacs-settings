@@ -13,7 +13,7 @@
   (global-linum-mode t)
   (setq linum-format "%4d")
   (defcustom linum-disabled-modes-list
-    '(eshell-mode shell-mode dired-mode doc-view-mode customize-mode)
+    '(eshell-mode shell-mode dired-mode doc-view-mode customize-mode epresent-mode)
     "List of modes disabled when global linum mode is on"
     :type '(repeat (sexp :tag "Major mode"))
     :tag "Major modes for linum disabling."
