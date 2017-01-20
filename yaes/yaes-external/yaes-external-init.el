@@ -19,7 +19,7 @@
     (add-to-list 'load-path yaes-pg-load-path))
 (if (require 'proof-site nil t)
     (setq proof-assistants '(coq))
-  (message "No Installed Proof General!"))
+  (message "Can't Find Installed Proof General!"))
 
 (provide 'yaes-external-init)
 ;;; yaes-external-init.el ends here
