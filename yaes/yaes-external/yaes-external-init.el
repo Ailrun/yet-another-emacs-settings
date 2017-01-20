@@ -5,11 +5,21 @@
 ;;; Code:
 (require 'f)
 
-(defvar-local pg-clone-path (f-join (f-dirname (f-this-file)) "ProofGeneral"))
-(defvar-local pg-load-path (f-join pg-clone-path "generic/proof-site"))
+(defconst yaes-external-dir
+  (f-dirname (f-this-file)))
 
-(if (null (file-directory-p pg-clone-path))
-    (load pg-load-path))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; Proof General
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defconst yaes-pg-load-path (f-join yaes-external-dir "ProofGeneral/generic"))
+
+(if (file-directory-p yaes-pg-load-path)
+    (add-to-list 'load-path yaes-pg-load-path))
+(if (require 'proof-site nil t)
+    (setq proof-assistants '(coq))
+  (message "No Installed Proof General!"))
 
 (provide 'yaes-external-init)
 ;;; yaes-external-init.el ends here
