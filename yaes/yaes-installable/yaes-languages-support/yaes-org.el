@@ -9,7 +9,9 @@
 (req-package org
   :require (outline)
   :mode
-  ("\\.org\\'" . org-mode))
+  ("\\.org\\'" . org-mode)
+  :init
+  (setq org-replace-disputed-keys t))
 
 (provide 'yaes-org)
 ;;; yaes-org.el ends here
