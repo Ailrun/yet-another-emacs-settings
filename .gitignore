@@ -12,6 +12,9 @@
 # emacs project
 !/.projectile
 
+# multicursor setting
+!/.mc-lists.el
+
 # emacs binary compiled files
 *.elc
 
