@@ -17,7 +17,7 @@
   (setenv "GIT_ASKPASS" "git-gui--askpass")
   (setenv "SSH_ASKPASS" "git-gui--askpass")
   :bind
-  ("C-x v S" . magit-status))
+  (("C-x v S" . magit-status)))
 
 (req-package ibuffer-git
   :require (ibuffer))

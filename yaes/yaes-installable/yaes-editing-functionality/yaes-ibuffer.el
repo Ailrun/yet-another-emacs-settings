@@ -10,7 +10,7 @@
   :config
   (setq ibuffer-use-other-window t)
   :bind
-  ("C-x C-b" . ibuffer))
+  (("C-x C-b" . ibuffer)))
 
 (provide 'yaes-ibuffer)
 ;;; yaes-ibuffer.el ends here
