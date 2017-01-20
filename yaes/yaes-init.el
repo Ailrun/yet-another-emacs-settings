@@ -155,7 +155,7 @@ Those are installable via package manager.")
 ;; Function for unbound symbols
 (mapatoms (lambda (symbol)
 	    (if (string-prefix-p "yaes-" (symbol-name symbol))
-		(unintern symbol nil))))
+            (unintern symbol nil))))
 
 (provide 'yaes-init)
 ;;; yaes-init.el ends here
