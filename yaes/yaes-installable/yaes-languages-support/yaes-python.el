@@ -7,7 +7,16 @@
 (require 'req-package)
 
 (req-package python
-  :if (executable-find "python"))
+  :if (executable-find "python")
+  :mode
+  ("\\.py[3w]?" . python-mode))
+
+(req-package python-environment
+  :require (python deferred))
+
+(req-package jedi-core
+  :if (version<= "24" emacs-version)
+  :require (epc python-environment cl-lib))
 
 (req-package jedi
   :if (version<= "24" emacs-version)
@@ -21,7 +30,7 @@
 
 (req-package company-jedi
   :if (version<= "24" emacs-version)
-  :require (cl-lib company jedi)
+  :require (cl-lib company jedi-core)
   :functions (yaes-comapny-jedi-setup)
   :commands (yaes-company-jedi-setup)
   :init
