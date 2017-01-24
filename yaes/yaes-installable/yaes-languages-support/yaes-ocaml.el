@@ -16,15 +16,8 @@
 (req-package merlin
   :if (executable-find "ocamlmerlin")
   :require (tuareg iedit)
-  :functions (yaes-merlin-setup)
   :commands (merlin-mode)
   :init
-  (defun yaes-merlin-setup ()
-    "Merlin setup."
-    (setq-local company-backends
-                (append
-                 '(merlin-company-backend)
-                 company-backends)))
   (add-hook 'tuareg-mode-hook #'merlin-mode)
   (add-hook 'caml-mode-hook #'merlin-mode))
 

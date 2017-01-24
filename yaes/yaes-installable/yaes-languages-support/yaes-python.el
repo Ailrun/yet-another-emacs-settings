@@ -31,16 +31,16 @@
 (req-package company-jedi
   :if (version<= "24" emacs-version)
   :require (cl-lib company jedi-core)
-  :functions (yaes-comapny-jedi-setup)
-  :commands (yaes-company-jedi-setup)
+  :functions (comapny-jedi-setup)
+  :commands (company-jedi-setup)
   :init
-  (defun yaes-company-jedi-setup ()
+  (defun company-jedi-setup ()
     "Setup company-jedi."
     (setq-local company-backends
                 (append
                  '(company-jedi company-files)
                  company-backends)))
-  (add-hook 'python-mode-hook #'yaes-company-jedi-setup))
+  (add-hook 'python-mode-hook #'company-jedi-setup))
 
 ;;;; TODO: consider elpy
 
