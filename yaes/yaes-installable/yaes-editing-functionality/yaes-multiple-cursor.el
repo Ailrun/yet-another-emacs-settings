@@ -6,7 +6,11 @@
 
 (require 'req-package)
 
-(req-package phi-search)
+(req-package phi-search
+  :demand
+  :bind
+  (("C-s" . phi-search)
+   ("C-r" . phi-search-backward)))
 
 (req-package multiple-cursors
   :require (cl-lib phi-search)
