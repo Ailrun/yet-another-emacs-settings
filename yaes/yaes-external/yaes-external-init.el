@@ -4,6 +4,7 @@
 ;;;
 ;;; Code:
 (require 'f)
+(require 'req-package)
 
 (defconst yaes-external-dir
   (f-dirname (f-this-file)))
@@ -15,11 +16,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defconst yaes-pg-load-path (f-join yaes-external-dir "ProofGeneral/generic"))
 
-(if (file-directory-p yaes-pg-load-path)
-    (add-to-list 'load-path yaes-pg-load-path))
-(if (require 'proof-site nil t)
-    (setq proof-assistants '(coq))
-  (message "Can't Find Installed Proof General!"))
+(push yaes-pg-load-path load-path)
+
+(req-package proof-site
+  :if (file-directory-p yaes-pg-load-path)
+  :ensure nil
+  :mode
+  ("\\.v\\'" . coq-mode)
+  :defines (proof-assistants)
+  :config
+  (setq proof-assistants '(coq)))
 
 (provide 'yaes-external-init)
 ;;; yaes-external-init.el ends here

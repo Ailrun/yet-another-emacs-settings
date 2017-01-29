@@ -12,16 +12,24 @@
   ("\\.py[3w]?" . python-mode))
 
 (req-package python-environment
+  :if (executable-find "virtualenv")
   :require (python deferred))
 
 (req-package jedi-core
-  :if (version<= "24" emacs-version)
-  :require (epc python-environment cl-lib))
+  :if (and
+       (version<= "24" emacs-version)
+       (executable-find "python")
+       (executable-find "virtualenv"))
+  :require (epc python-environment cl-lib)
+  :defer t)
 
 (req-package jedi
-  :if (version<= "24" emacs-version)
-  :require (python jedi-core auto-complete)
-  :commands (jedi:setup)
+  :if (and
+       (version<= "24" emacs-version)
+       (executable-find "python")
+       (executable-find "virtualenv"))
+  :require (python auto-complete)
+  :commands (jedi:install-server jedi:setup)
   :init
   (add-hook 'python-mode-hook #'jedi:setup)
   :config
@@ -29,8 +37,11 @@
   (jedi:install-server))
 
 (req-package company-jedi
-  :if (version<= "24" emacs-version)
-  :require (cl-lib company jedi-core)
+  :if (and
+       (version<= "24" emacs-version)
+       (executable-find "python")
+       (executable-find "virtualenv"))
+  :require (cl-lib company)
   :functions (comapny-jedi-setup)
   :commands (company-jedi-setup)
   :init

@@ -8,16 +8,14 @@
 (require 'req-package)
 
 (defvar-local yaes-coq-coqtop-path (executable-find "coqtop"))
+(defvar-local yaes-coq-emacs-lisp-path "")
 
 (if yaes-coq-coqtop-path
     (progn
-      (eval-and-compile
-        (defun yaes-coq-emacs-lisp-path ()
-          (f-join (f-dirname (f-dirname yaes-coq-coqtop-path)) "emacs")))
-
+      (setq yaes-coq-emacs-lisp-path
+            (f-join (f-dirname (f-dirname yaes-coq-coqtop-path)) "emacs"))
+      (push yaes-coq-emacs-lisp-path load-path)
       (req-package coq-inferior
-        :force t
-        :load-path (lambda () (list (yaes-coq-emacs-lisp-path)))
         :ensure nil
         :commands (run-coq))))
 
