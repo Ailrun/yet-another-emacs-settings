@@ -23,8 +23,6 @@
 
 (req-package company-math
   :require (company math-symbol-lists)
-  :functions (yaes-company-math-setup)
-  :commands (yaes-company-math-setup)
   :init
   (defun yaes-company-math-setup ()
     "Setup company-math."

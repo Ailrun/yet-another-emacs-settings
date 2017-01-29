@@ -30,14 +30,15 @@
         ("C-x C-;" . coq-commenter-comment-proof-to-cursor)
         ("C-'" . coq-commenter-uncomment-proof-in-region)
         ("C-x C-'" . coq-commenter-uncomment-proof-in-buffer))
-  :config
+  :init
   (add-hook 'coq-mode-hook #'coq-commenter-mode))
 
 (req-package company-coq
   :require (company-math company yasnippet dash cl-lib)
   :commands (company-coq-mode)
   :init
-  (add-hook 'coq-mode-hook #'company-coq-mode))
+  (add-hook 'coq-mode-hook (lambda()
+                             (company-coq-mode t))))
 
 (provide 'yaes-coq)
 ;;; yaes-coq.el ends here
