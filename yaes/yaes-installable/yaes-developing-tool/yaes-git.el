@@ -19,8 +19,5 @@
   :bind
   (("C-x v S" . magit-status)))
 
-(req-package ibuffer-git
-  :require (ibuffer))
-
 (provide 'yaes-git)
 ;;; yaes-git.el ends here
