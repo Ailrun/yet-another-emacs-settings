@@ -13,7 +13,6 @@
   :init
   (eval-after-load "multiple-cursors-core"
     '(progn
-       ()
        (define-key mc/keymap (kbd "<return>") nil)
        (define-key mc/keymap (kbd "C-j") 'multiple-cursors-mode)))
   :bind
