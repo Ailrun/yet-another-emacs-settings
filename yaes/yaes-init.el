@@ -49,6 +49,10 @@
 (setq use-package-always-ensure t)
 (setq use-package-always-pin ''melpa)
 
+(when init-file-debug
+  (req-package--log-enable-debugging)
+  (req-package--log-enable-messaging))
+
 (yaes-install-required-package 'f)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
