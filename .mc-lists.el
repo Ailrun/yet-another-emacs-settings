@@ -4,7 +4,9 @@
 (setq mc/cmds-to-run-for-all
       '(
         electric-newline-and-maybe-indent
+        org-end-of-line
         org-self-insert-command
+        org-yank
         ))
 
 (setq mc/cmds-to-run-once
