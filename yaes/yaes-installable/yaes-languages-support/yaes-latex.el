@@ -24,14 +24,14 @@
 (req-package company-math
   :require (company math-symbol-lists)
   :init
-  (defun yaes-company-math-setup ()
+  (defun company-math-setup ()
     "Setup company-math."
     (setq-local company-backends
                 (append
                  '(company-math-symbols-latex)
                  company-backends)))
-  (add-hook 'LaTeX-mode-hook #'yaes-company-math-setup)
-  (add-hook 'latex-mode-hook #'yaes-company-math-setup))
+  (add-hook 'LaTeX-mode-hook #'company-math-setup)
+  (add-hook 'latex-mode-hook #'company-math-setup))
 
 (req-package latex-extra
   :require (auctex cl-lib)

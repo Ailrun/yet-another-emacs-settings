@@ -19,7 +19,7 @@
     :tag "Major modes for linum disabling."
     :group 'linum)
   (defun linum-on ()
-    "When nlinum is running globally, disable line number in modes defined in `linum-disabled-modes-list'."
+    "When linum is running globally, disable line number in modes defined in `linum-disabled-modes-list'."
     (unless (or
              (minibufferp)
              (member major-mode linum-disabled-modes-list))

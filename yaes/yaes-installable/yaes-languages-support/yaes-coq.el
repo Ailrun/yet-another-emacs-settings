@@ -4,6 +4,7 @@
 ;;;
 ;;; Code:
 
+(require 'f)
 (require 'req-package)
 
 (defvar-local yaes-coq-coqtop-path (executable-find "coqtop"))

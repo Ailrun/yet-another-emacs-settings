@@ -17,25 +17,25 @@
 
 (req-package company-shell
   :require (company dash cl-lib)
-  :functions (yaes-company-shell-fish-init
-              yaes-company-shell-sh-init)
-  :commands (yaes-company-shell-fish-init
-             yaes-company-shell-sh-init)
+  :functions (company-shell-fish-init
+              company-shell-sh-init)
+  :commands (company-shell-fish-init
+             company-shell-sh-init)
   :init
-  (defun yaes-company-shell-fish-init ()
+  (defun company-shell-fish-init ()
     "Company-shell setup."
     (setq-local company-backends
                 (append
                  '(company-shell company-fish-shell)
                  company-backends)))
-  (defun yaes-company-shell-sh-init ()
+  (defun company-shell-sh-init ()
     "Company-shell setup."
     (setq-local company-backends
                 (append
                  '(company-shell)
                  company-backends)))
-  (add-hook 'fish-mode-hook #'yaes-company-shell-fish-init)
-  (add-hook 'sh-mode-hook #'yaes-company-shell-sh-init))
+  (add-hook 'fish-mode-hook #'company-shell-fish-init)
+  (add-hook 'sh-mode-hook #'company-shell-sh-init))
 
 (provide 'yaes-shell-script)
 ;;; yaes-shell-script.el ends here
