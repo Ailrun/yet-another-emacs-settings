@@ -55,6 +55,9 @@
 
 (yaes-install-required-package 'f)
 
+(when init-file-debug
+  (print (current-time-string)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
 ;;;; Vanilla Emacs settings
@@ -149,12 +152,21 @@ Those are installable via package manager.")
 
 (unintern 'yaes-installable-dir nil)
 
+(when init-file-debug
+  (print (current-time-string)))
+
 (req-package-finish)
+
+(when init-file-debug
+  (print (current-time-string)))
 
 (if (require 'yasnippet nil t)
     (progn
       (yas-recompile-all)
       (yas-reload-all)))
+
+(when init-file-debug
+  (print (current-time-string)))
 
 ;; Function for unbound symbols
 (mapatoms (lambda (symbol)
