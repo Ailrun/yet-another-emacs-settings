@@ -23,6 +23,8 @@
 
 (req-package company-math
   :require (company math-symbol-lists)
+  ;; :functions (company-math-setup)
+  ;; :commands (company-math-setup)
   :init
   (defun company-math-setup ()
     "Setup company-math."
