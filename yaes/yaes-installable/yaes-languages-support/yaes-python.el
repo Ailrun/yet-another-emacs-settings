@@ -21,20 +21,23 @@
        (executable-find "python")
        (executable-find "virtualenv"))
   :require (epc python-environment cl-lib)
-  :defer t)
-
-(req-package jedi
-  :if (and
-       (version<= "24" emacs-version)
-       (executable-find "python")
-       (executable-find "virtualenv"))
-  :require (python auto-complete)
-  :commands (jedi:install-server jedi:setup)
-  :init
-  (add-hook 'python-mode-hook #'jedi:setup)
+  :commands (jedi:install-server)
   :config
   (setq jedi:complete-on-dot t)
   (jedi:install-server))
+
+;; (req-package jedi
+;;   :if (and
+;;        (version<= "24" emacs-version)
+;;        (executable-find "python")
+;;        (executable-find "virtualenv"))
+;;   :require (python auto-complete)
+;;   :commands (jedi:install-server jedi:setup)
+;;   :init
+;;   (add-hook 'python-mode-hook #'jedi:setup)
+;;   :config
+;;   (setq jedi:complete-on-dot t)
+;;   (jedi:install-server))
 
 (req-package company-jedi
   :if (and
