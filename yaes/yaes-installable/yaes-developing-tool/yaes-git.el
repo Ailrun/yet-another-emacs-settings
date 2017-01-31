@@ -6,13 +6,9 @@
 
 (require 'req-package)
 
-(req-package magit-popup
-  :if (version<= "24.4" emacs-version)
-  :require (async dash))
-
 (req-package magit
   :if (version<= "24.4" emacs-version)
-  :require (async dash with-editor git-commit magit-popup)
+  :require (async dash)
   :config
   (setenv "GIT_ASKPASS" "git-gui--askpass")
   (setenv "SSH_ASKPASS" "git-gui--askpass")

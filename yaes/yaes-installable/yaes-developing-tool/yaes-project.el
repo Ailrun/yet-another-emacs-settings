@@ -7,7 +7,6 @@
 (require 'req-package)
 
 (req-package projectile
-  :require (pkg-info)
   :config
   (setq projectile-indexing-method 'native)
   (setq projectile-mode-line '(:eval

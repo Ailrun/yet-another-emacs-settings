@@ -8,7 +8,7 @@
 
 (req-package flycheck
   :if (version<= "24.3" emacs-version)
-  :require (dash pkg-info let-alist seq)
+  :require (dash let-alist seq)
   :config
   (global-flycheck-mode t))
 

@@ -13,7 +13,7 @@
 
 (req-package python-environment
   :if (executable-find "virtualenv")
-  :require (python deferred))
+  :require (python))
 
 (req-package jedi-core
   :if (and

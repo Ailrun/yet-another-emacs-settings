@@ -20,7 +20,7 @@
   ("\\.slim\\'" . slim-mode))
 
 (req-package company-web
-  :require (company dash cl-lib web-completion-data)
+  :require (company dash cl-lib)
   :functions (company-web-html-init
               company-web-jade-init
               company-web-slim-init)
@@ -48,7 +48,6 @@
   (add-hook 'slim-mode-hook #'company-web-slim-init))
 
 (req-package ac-html-bootstrap
-  :require (web-completion-data)
   :commands (company-web-bootstrap+
              company-web-fa+)
   :init

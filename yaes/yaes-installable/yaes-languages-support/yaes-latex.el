@@ -22,7 +22,7 @@
   (add-hook 'latex-mode-hook #'company-auctex-init))
 
 (req-package company-math
-  :require (company math-symbol-lists)
+  :require (company)
   ;; :functions (company-math-setup)
   ;; :commands (company-math-setup)
   :init
