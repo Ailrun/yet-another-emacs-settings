@@ -15,5 +15,13 @@
   :bind
   (("C-x v S" . magit-status)))
 
+(req-package magithub
+  :if (and
+       (version<= "24.4" emacs-version)
+       (executable-find "hub"))
+  :require (magit)
+  :config
+  (magithub-feature-autoinject t))
+
 (provide 'yaes-git)
 ;;; yaes-git.el ends here
