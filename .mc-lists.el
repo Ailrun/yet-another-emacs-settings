@@ -4,14 +4,18 @@
 (setq mc/cmds-to-run-for-all
       '(
         beginning-of-buffer
+        downcase-region
         electric-newline-and-maybe-indent
         org-end-of-line
         org-self-insert-command
         org-yank
-        smex
+        kill-region
+        typescript-insert-and-indent
+        yas-expand
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        smex
         undo-tree-visualize
         ))
