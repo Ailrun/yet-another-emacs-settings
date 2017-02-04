@@ -101,7 +101,7 @@
 
 ;;;; Load all files in the packages directory
 (req-package load-dir
-             :loader :elpa
+  :loader :elpa
   :force t
   :init (progn
           (setq load-dir-loaded '())))
