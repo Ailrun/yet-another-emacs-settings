@@ -36,12 +36,16 @@
 
 (req-package ibuffer-tramp
   :require (ibuffer ibuffer-vc tramp)
+  :commands (ibuffer-tramp-generate-filter-groups-by-tramp-connection)
   :init
   (add-hook 'ibuffer-hook
             (lambda ()
-              (nconc
-               ibuffer-filter-groups
-               (ibuffer-tramp-generate-filter-groups-by-tramp-connection)))))
+              (setq ibuffer-filter-groups
+                    (append
+                     ibuffer-filter-groups
+                     (ibuffer-tramp-generate-filter-groups-by-tramp-connection)))
+              (ibuffer-update nil t))
+            t))
 
 (provide 'yaes-ibuffer)
 ;;; yaes-ibuffer.el ends here
