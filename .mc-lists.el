@@ -3,10 +3,12 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        beginning-of-buffer
         electric-newline-and-maybe-indent
         org-end-of-line
         org-self-insert-command
         org-yank
+        smex
         ))
 
 (setq mc/cmds-to-run-once
