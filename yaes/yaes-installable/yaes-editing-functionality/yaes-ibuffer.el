@@ -34,5 +34,14 @@
                       " "
                       filename-and-process)))
 
+(req-package ibuffer-tramp
+  :require (ibuffer ibuffer-vc tramp)
+  :init
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (nconc
+               ibuffer-filter-groups
+               (ibuffer-tramp-generate-filter-groups-by-tramp-connection)))))
+
 (provide 'yaes-ibuffer)
 ;;; yaes-ibuffer.el ends here
