@@ -8,6 +8,7 @@
 
 (req-package python
   :if (executable-find "python")
+  :loader :built-in
   :mode
   ("\\.py[3w]?" . python-mode))
 
@@ -21,7 +22,9 @@
        (executable-find "python")
        (executable-find "virtualenv"))
   :require (epc python-environment cl-lib)
-  :commands (jedi:install-server)
+  :commands (jedi-mode jedi:install-server)
+  :init
+  (add-hook 'python-mode-hook #'jedi-mode)
   :config
   (setq jedi:complete-on-dot t)
   (jedi:install-server))
