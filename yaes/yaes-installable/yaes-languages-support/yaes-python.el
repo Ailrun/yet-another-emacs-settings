@@ -8,7 +8,7 @@
 
 (req-package python
   :if (executable-find "python")
-  :loader :built-in
+  :pin gnu
   :mode
   ("\\.py[3w]?" . python-mode))
 
