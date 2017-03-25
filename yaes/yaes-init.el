@@ -85,9 +85,18 @@
    (setq default-directory
          (concat (getenv "USERPROFILE") "\\Documents/"))))
 
+;;;; tab settings
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
+
+;;;; keybinding for windows moving
 (windmove-default-keybindings)
+
+;;;; initial screen size
+(set-frame-parameter nil 'fullscreen 'maximized)
+
+;;;; remote access
+(setq enable-remote-dir-locals t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
