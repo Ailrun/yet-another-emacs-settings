@@ -17,7 +17,6 @@
  '(("marmalade" . "https://marmalade-repo.org/packages/")
    ("melpa" . "https://melpa.org/packages/")
    ("melpa-stable" . "https://stable.melpa.org/packages/")
-   ("elpa" . "http://tromey.com/elpa/")
    ("org" . "http://orgmode.org/elpa/")
    ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
 
