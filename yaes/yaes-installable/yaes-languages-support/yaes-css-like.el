@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package css-mode
+  :ensure nil
   :mode
   ("\\.css\\'" . css-mode)
   :config

@@ -12,16 +12,18 @@
 
 (require 'package)
 
-(nconc
- package-archives
- '(("marmalade" . "https://marmalade-repo.org/packages/")
-   ("melpa" . "https://melpa.org/packages/")
-   ("melpa-stable" . "https://stable.melpa.org/packages/")
-   ("org" . "http://orgmode.org/elpa/")
-   ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
+(defvar yaes-package-archives
+  '(("sunrise" . "http://joseito.republika.pl/sunrise-commander/")
+    ("org" . "http://orgmode.org/elpa/")
+    ("marmalade" . "https://marmalade-repo.org/packages/")
+    ("melpa-stable" . "https://stable.melpa.org/packages/")
+    ("melpa" . "https://melpa.org/packages/")))
+
+(dolist (archive yaes-package-archives)
+  (add-to-list 'package-archives archive))
 
 ;; ;;;; Do I really need to support emacs23?
-;; (yaes-max-version-do 24 -1
+;; (when (version< emacs-version "24")
 ;; 		     (add-to-list
 ;; 		      'package-archives
 ;; 		      '("gnu" . "https://elpa.gnu.org/packages/")))
@@ -43,16 +45,18 @@
       (require package))))
 
 (yaes-install-required-package 'use-package)
-(yaes-install-required-package 'req-package)
 
 (setq use-package-always-ensure t)
 (setq use-package-always-pin ''melpa)
+
+(use-package req-package)
 
 (when init-file-debug
   (req-package--log-enable-debugging)
   (req-package--log-enable-messaging))
 
-(yaes-install-required-package 'f)
+(req-package f
+  :force t)
 
 (when init-file-debug
   (print (current-time-string)))
@@ -109,7 +113,7 @@
 
 ;;;; Load all files in the packages directory
 (req-package load-dir
-  :loader :elpa
+  :pin gnu
   :force t
   :init (progn
           (setq load-dir-loaded '())))
