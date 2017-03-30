@@ -12,17 +12,18 @@
 
 (require 'package)
 
-(nconc
- package-archives
- '(("marmalade" . "https://marmalade-repo.org/packages/")
-   ("melpa" . "https://melpa.org/packages/")
-   ("melpa-stable" . "https://stable.melpa.org/packages/")
-   ("elpa" . "http://tromey.com/elpa/")
-   ("org" . "http://orgmode.org/elpa/")
-   ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
+(defvar yaes-package-archives
+  '(("sunrise" . "http://joseito.republika.pl/sunrise-commander/")
+    ("org" . "http://orgmode.org/elpa/")
+    ("marmalade" . "https://marmalade-repo.org/packages/")
+    ("melpa-stable" . "https://stable.melpa.org/packages/")
+    ("melpa" . "https://melpa.org/packages/")))
+
+(dolist (archive yaes-package-archives)
+  (add-to-list 'package-archives archive))
 
 ;; ;;;; Do I really need to support emacs23?
-;; (yaes-max-version-do 24 -1
+;; (when (version< emacs-version "24")
 ;; 		     (add-to-list
 ;; 		      'package-archives
 ;; 		      '("gnu" . "https://elpa.gnu.org/packages/")))
@@ -44,12 +45,21 @@
       (require package))))
 
 (yaes-install-required-package 'use-package)
-(yaes-install-required-package 'req-package)
 
 (setq use-package-always-ensure t)
 (setq use-package-always-pin ''melpa)
 
-(yaes-install-required-package 'f)
+(use-package req-package)
+
+(when init-file-debug
+  (req-package--log-enable-debugging)
+  (req-package--log-enable-messaging))
+
+(req-package f
+  :force t)
+
+(when init-file-debug
+  (print (current-time-string)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
@@ -78,9 +88,18 @@
    (setq default-directory
          (concat (getenv "USERPROFILE") "\\Documents/"))))
 
+;;;; tab settings
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
+
+;;;; keybinding for windows moving
 (windmove-default-keybindings)
+
+;;;; initial screen size
+(set-frame-parameter nil 'fullscreen 'maximized)
+
+;;;; remote access
+(setq enable-remote-dir-locals t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
@@ -94,10 +113,25 @@
 
 ;;;; Load all files in the packages directory
 (req-package load-dir
-             :loader :elpa
+  :pin gnu
   :force t
   :init (progn
           (setq load-dir-loaded '())))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; YAES external package loading
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defconst yaes-external-dir
+  (f-join yaes-dir "yaes-external")
+  "YAES external package directory.")
+
+(load-dir-one yaes-external-dir)
+;;;; yaes-external-dir is already deleted
+
+(unintern 'yaes-external-dir nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
@@ -130,32 +164,26 @@ Those are installable via package manager.")
 
 (unintern 'yaes-installable-dir nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;
-;;;; YAES external package loading
-;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defconst yaes-external-dir
-  (f-join yaes-dir "yaes-external")
-  "YAES external package directory.")
-
-(load-dir-one yaes-external-dir)
-;;;; yaes-external-dir is already deleted
-
-(unintern 'yaes-external-dir nil)
+(when init-file-debug
+  (print (current-time-string)))
 
 (req-package-finish)
+
+(when init-file-debug
+  (print (current-time-string)))
 
 (if (require 'yasnippet nil t)
     (progn
       (yas-recompile-all)
       (yas-reload-all)))
 
+(when init-file-debug
+  (print (current-time-string)))
+
 ;; Function for unbound symbols
 (mapatoms (lambda (symbol)
 	    (if (string-prefix-p "yaes-" (symbol-name symbol))
-		(unintern symbol nil))))
+            (unintern symbol nil))))
 
 (provide 'yaes-init)
 ;;; yaes-init.el ends here

@@ -30,9 +30,9 @@
   :if (version<= "24" emacs-version)
   :commands (smex smex-major-mode-commands)
   :bind
-  ("M-x" . smex)
-  ("M-X" . smex-major-mode-commands)
-  ("C-c C-c M-x" . execute-extended-command))
+  (("M-x" . smex)
+   ("M-X" . smex-major-mode-commands)
+   ("C-c C-c M-x" . execute-extended-command)))
 
 (provide 'yaes-ido)
 ;;; yaes-ido.el ends here

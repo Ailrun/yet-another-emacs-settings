@@ -8,7 +8,9 @@
 
 (req-package typescript-mode
   :mode
-  ("\\.ts\\'" . typescript-mode))
+  ("\\.ts\\'" . typescript-mode)
+  :config
+  (setq typescript-indent-level 2))
 
 (req-package tide
   :if (executable-find "node")
@@ -19,6 +21,8 @@
     "tide mode setup."
     (interactive)
     (tide-setup)
+    (if (eq system-type "windows-nt")
+        (setq flycheck-typescript-tslint-executable "tslint.cmd"))
     (flycheck-mode t)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
     (eldoc-mode t)

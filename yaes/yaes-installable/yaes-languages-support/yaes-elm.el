@@ -13,12 +13,12 @@
   :mode
   ("\\.elm\\'" . elm-mode)
   :init
-  (defun yaes-elm-mode-init ()
-    (setq-local company-backends
-                (append
-                 '(company-elm)
-                 company-backends)))
-  (add-hook 'elm-mode-hook #'yaes-elm-mode-init))
+  (add-hook 'elm-mode-hook
+            (lambda ()
+              (setq-local company-backends
+                          (append
+                           '(company-elm)
+                           company-backends)))))
 
 (req-package flycheck-elm
   :if (version<= "24.4" emacs-version)

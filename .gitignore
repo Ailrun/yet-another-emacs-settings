@@ -2,12 +2,18 @@
 
 # yaes package
 !/yaes/
-
-# default init file
 !/init.el
 
-# Makefile
-!Makefile
+!/README.md
+
+# Git file
+!/.gitignore
+
+# emacs project
+!/.projectile
+
+# multicursor setting
+!/.mc-lists.el
 
 # emacs binary compiled files
 *.elc

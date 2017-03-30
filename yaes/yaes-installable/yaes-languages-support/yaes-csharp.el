@@ -15,7 +15,7 @@
        (version<= "24.3" emacs-version)
        (executable-find "curl")
        (executable-find "OmniSharp"))
-  :require (json flycheck dash auto-complete popup csharp-mode cl-lib s)
+  :require (json flycheck dash csharp-mode cl-lib s)
   :commands (omnisharp-mode)
   :init
   (add-hook 'csharp-mode-hook #'omnisharp-mode))
