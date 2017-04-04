@@ -13,8 +13,7 @@
 (require 'package)
 
 (defvar yaes-package-archives
-  '(("elpa" . "http://tromey.com/elpa/")
-    ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")
+  '(("sunrise" . "http://joseito.republika.pl/sunrise-commander/")
     ("org" . "http://orgmode.org/elpa/")
     ("marmalade" . "https://marmalade-repo.org/packages/")
     ("melpa-stable" . "https://stable.melpa.org/packages/")
@@ -89,9 +88,18 @@
    (setq default-directory
          (concat (getenv "USERPROFILE") "\\Documents/"))))
 
+;;;; tab settings
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
+
+;;;; keybinding for windows moving
 (windmove-default-keybindings)
+
+;;;; initial screen size
+(set-frame-parameter nil 'fullscreen 'maximized)
+
+;;;; remote access
+(setq enable-remote-dir-locals t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;

@@ -4,14 +4,19 @@
 (setq mc/cmds-to-run-for-all
       '(
         beginning-of-buffer
+        comment-dwim
         downcase-region
         electric-newline-and-maybe-indent
         end-of-buffer
+        iedit-mode
         indent-for-tab-command
         kill-region
+        org-cycle
         org-end-of-line
+        org-return
         org-self-insert-command
         org-yank
+        sgml-slash
         typescript-insert-and-indent
         yas-expand
         ))
@@ -20,5 +25,6 @@
       '(
         overwrite-mode
         smex
+        toggle-korean-input-method
         undo-tree-visualize
         ))
