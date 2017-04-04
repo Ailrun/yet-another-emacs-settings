@@ -6,16 +6,19 @@
         beginning-of-buffer
         downcase-region
         electric-newline-and-maybe-indent
+        end-of-buffer
+        indent-for-tab-command
+        kill-region
         org-end-of-line
         org-self-insert-command
         org-yank
-        kill-region
         typescript-insert-and-indent
         yas-expand
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        overwrite-mode
         smex
         undo-tree-visualize
         ))
