@@ -9,10 +9,10 @@
 (defun yaes-font-setting (font face &optional attr)
   "If FONT is available, change FACE to use FONT with ATTR.
 If FONT is not available, change FACE with ATTR."
-  (if (not (null window-system))
+  (if window-system
       (let ((set-face-args `(,face nil)))
         (when (x-list-fonts font)
-          (nconc set-face-args `(:font ,font)))
+          (nconc set-face-args `(:family ,font)))
         (when attr
           (nconc set-face-args attr))
         (apply 'set-face-attribute set-face-args))))
@@ -21,6 +21,7 @@ If FONT is not available, change FACE with ATTR."
 ;;;;
 (yaes-font-setting "Consolas" 'fixed-pitch)
 (yaes-font-setting "Anonymous Pro" 'default '(:height 110))
+(set-fontset-font t 'hangul (font-spec :family "NanumGothicCoding"))
 
 (provide 'yaes-font)
 ;;; yaes-font.el ends here
