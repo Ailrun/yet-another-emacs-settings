@@ -3,6 +3,9 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        LaTeX-babel-insert-hyphen
+        LaTeX-insert-left-brace
+        TeX-insert-backslash
         beginning-of-buffer
         comment-dwim
         downcase-region
@@ -11,19 +14,27 @@
         iedit-mode
         indent-for-tab-command
         kill-region
+        markdown-outdent-or-delete
         org-cycle
         org-end-of-line
         org-return
         org-self-insert-command
         org-yank
+        phi-search
         sgml-slash
         typescript-insert-and-indent
+        upcase-region
+        yaml-electric-backspace
         yas-expand
         ))
 
 (setq mc/cmds-to-run-once
       '(
         overwrite-mode
+        iedit-switch-to-mc-mode
+        mouse-buffer-menu
+        next-buffer
+        previous-buffer
         smex
         toggle-korean-input-method
         undo-tree-visualize
