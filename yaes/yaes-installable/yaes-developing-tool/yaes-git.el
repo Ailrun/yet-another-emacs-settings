@@ -15,13 +15,18 @@
   :bind
   (("C-x v S" . magit-status)))
 
-(req-package magithub
-  :if (and
-       (version<= "24.4" emacs-version)
-       (executable-find "hub"))
-  :require (magit)
-  :config
-  (magithub-feature-autoinject t))
+;;;; This package is too slow
+;; (req-package magithub
+;;   :if (and
+;;        (version<= "24.4" emacs-version)
+;;        (executable-find "hub"))
+;;   :require (magit)
+;;   :after (magit)
+;;   :config
+;;   (setq magithub-api-timeout 5)
+;;   (setq magithub-preferred-remote-method 'clone_url)
+;;   (set-face-attribute 'magithub-label-face nil :box nil)
+;;   (magithub-feature-autoinject t))
 
 (provide 'yaes-git)
 ;;; yaes-git.el ends here
