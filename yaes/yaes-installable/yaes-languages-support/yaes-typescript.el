@@ -8,7 +8,7 @@
 
 (req-package typescript-mode
   :mode
-  ("\\.ts\\'" . typescript-mode)
+  ("\\.tsx?\\'" . typescript-mode)
   :config
   (setq typescript-indent-level 2))
 
@@ -16,6 +16,7 @@
   :if (executable-find "node")
   :require (dash flycheck typescript-mode cl-lib)
   :commands (tide-setup)
+  :diminish tide-mode
   :init
   (defun setup-tide-mode ()
     "tide mode setup."
