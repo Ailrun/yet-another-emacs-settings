@@ -19,6 +19,13 @@
   :mode
   ("\\.slim\\'" . slim-mode))
 
+(req-package emmet-mode
+  :init
+  (add-hook 'sgml-mode-hook #'emmet-mode)
+  (add-hook 'css-mode-hook #'emmet-mode)
+  :config
+  (setq emmet-self-closing-tag-style " /"))
+
 (req-package company-web
   :require (company dash cl-lib)
   :functions (company-web-html-init
