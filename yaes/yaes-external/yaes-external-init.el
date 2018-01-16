@@ -27,5 +27,12 @@
   :config
   (setq proof-assistants '(coq)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; JDEE (Java Development Environment for Emacs)
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defconst yaes-jdee-server-dir (f-join yaes-external-dir "JDEE/target"))
+
 (provide 'yaes-external-init)
 ;;; yaes-external-init.el ends here
