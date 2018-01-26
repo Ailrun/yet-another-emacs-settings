@@ -4,6 +4,7 @@
 ;;;
 ;;; Code:
 
+(require 'f)
 (require 'req-package)
 
 (defconst yaes-yasnippet-dir
