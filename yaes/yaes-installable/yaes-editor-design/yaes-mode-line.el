@@ -6,6 +6,9 @@
 
 (require 'req-package)
 
+(req-package diminish
+  :force t)
+
 (req-package rich-minority
   :require (cl-lib)
   :diminish rich-minority-mode
