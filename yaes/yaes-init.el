@@ -12,6 +12,11 @@
 
 (require 'package)
 
+(let ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                   (not (gnutls-available-p)))))
+  (if no-ssl
+      (error "SSL is not available.  Please install `gnutls' package")))
+
 (defvar yaes-package-archives
   '(("sunrise" . "http://joseito.republika.pl/sunrise-commander/")
     ("org" . "http://orgmode.org/elpa/")
