@@ -64,6 +64,9 @@
 
 (req-package f
   :force t)
+(req-package exec-path-from-shell
+  :force t
+  :config (exec-path-from-shell-initialize))
 
 (when init-file-debug
   (print (current-time-string)))
