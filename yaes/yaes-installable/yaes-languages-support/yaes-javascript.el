@@ -58,7 +58,9 @@
 ;;   :require (flycheck))
 
 (req-package tern
-  :if (version<= "24" emacs-version)
+  :if (and
+       (version<= "24" emacs-version)
+       (executable-find "tern"))
   :require (json)
   :commands (tern-mode)
   :init
