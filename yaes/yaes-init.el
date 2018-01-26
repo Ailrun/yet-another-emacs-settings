@@ -18,11 +18,13 @@
       (error "SSL is not available.  Please install `gnutls' package")))
 
 (defvar yaes-package-archives
-  '(("sunrise" . "http://joseito.republika.pl/sunrise-commander/")
-    ("org" . "http://orgmode.org/elpa/")
+  '(
+    ;; ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")
+    ("org" . "https://orgmode.org/elpa/")
     ("marmalade" . "https://marmalade-repo.org/packages/")
     ("melpa-stable" . "https://stable.melpa.org/packages/")
-    ("melpa" . "https://melpa.org/packages/")))
+    ("melpa" . "https://melpa.org/packages/")
+    ))
 
 (dolist (archive yaes-package-archives)
   (add-to-list 'package-archives archive))
