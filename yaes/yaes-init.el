@@ -29,12 +29,6 @@
 (dolist (archive yaes-package-archives)
   (add-to-list 'package-archives archive))
 
-;; ;;;; Do I really need to support emacs23?
-;; (when (version< emacs-version "24")
-;; 		     (add-to-list
-;; 		      'package-archives
-;; 		      '("gnu" . "https://elpa.gnu.org/packages/")))
-
 (package-initialize)
 
 (defun yaes-install-required-package (package)
