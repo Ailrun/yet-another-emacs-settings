@@ -54,7 +54,7 @@
 (yaes-install-required-package 'use-package)
 
 (setq use-package-always-ensure t)
-(setq use-package-always-pin ''melpa)
+;; (setq use-package-always-pin ''melpa)
 
 (use-package req-package)
 
@@ -120,7 +120,6 @@
 
 ;;;; Load all files in the packages directory
 (req-package load-dir
-  :pin gnu
   :force t
   :init (progn
           (setq load-dir-loaded '())))
