@@ -74,15 +74,14 @@ Listed in alpabetical order.
   - [x] Haskell package default setting
   - [x] HTML-like package default setting
   - [x] Java package default setting
-  - [ ] JavaScript package default setting
+  - [x] JavaScript package default setting
   - [x] LaTeX package default setting
   - [ ] Less package default setting
   - [x] Markdown package default setting
-  - [ ] Node.js package default setting
+  - [x] Node.js package default setting
   - [ ] PHP package default setting
   - [x] Project support default seeting
   - [x] Python package default setting
-  - [ ] Sass package default setting
   - [ ] SCSS package default setting
 - Middle Priority
   - [ ] CoffeeScript package default setting
