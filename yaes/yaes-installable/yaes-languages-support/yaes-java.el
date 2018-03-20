@@ -6,14 +6,16 @@
 
 (require 'req-package)
 
+;; Todo:
+;; Let's try Meghanada
+(setq-default jdee-server-dir yaes-jdee-server-dir)
+
 (req-package jdee
   :if (and
        (version<= "24.3" emacs-version)
        (file-directory-p yaes-jdee-server-dir))
   :require (flycheck memoize dash)
-  :commands (jdee-mode)
-  :config
-  (setq jdee-server-dir yaes-jdee-server-dir))
+  :commands (jdee-mode))
 
 (req-package mvn
   :if (executable-find "mvn")
