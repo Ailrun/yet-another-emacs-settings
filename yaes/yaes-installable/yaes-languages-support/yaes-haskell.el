@@ -12,7 +12,11 @@
   ("\\.l?hs\\'" . haskell-mode)
   :interpreter
   ("ghci" . haskell-mode)
-  ("stack ghci" . haskell-mode))
+  ("stack ghci" . haskell-mode)
+  :init
+  (add-hook 'haskell-mode-hook #'haskell-indent-mode)
+  :config
+  (setq-default haskell-indent-offset 2))
 
 (req-package intero
   :if (and

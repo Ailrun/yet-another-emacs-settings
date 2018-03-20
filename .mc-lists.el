@@ -11,6 +11,7 @@
         downcase-region
         electric-newline-and-maybe-indent
         end-of-buffer
+        haskell-indentation-newline-and-indent
         iedit-mode
         indent-for-tab-command
         kill-region
