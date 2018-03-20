@@ -7,6 +7,7 @@
 (require 'req-package)
 
 (req-package scala-mode
+  :require (ensime)
   :mode
   ("\\.scala\\'" . scala-mode))
 
