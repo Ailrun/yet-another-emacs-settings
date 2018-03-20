@@ -14,6 +14,7 @@
         iedit-mode
         indent-for-tab-command
         kill-region
+        markdown-electric-backquote
         markdown-outdent-or-delete
         org-cycle
         org-end-of-line

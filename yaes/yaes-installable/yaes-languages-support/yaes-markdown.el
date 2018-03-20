@@ -24,7 +24,7 @@
 
 (req-package markdown-toc
   :require (s dash markdown-mode)
-  :commands (markdown-toc-generate-toc)
+  :commands (markdown-toc-generate-toc markdown-toc-refresh-toc)
   :init
   (defun markdown-imenu-create-index ()
     "Create and return an imenu index alist for the current buffer.
