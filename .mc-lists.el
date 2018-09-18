@@ -6,6 +6,8 @@
         LaTeX-babel-insert-hyphen
         LaTeX-insert-left-brace
         TeX-insert-backslash
+        TeX-insert-sub-or-superscript
+        anzu-query-replace
         beginning-of-buffer
         comment-dwim
         downcase-region
@@ -15,7 +17,9 @@
         iedit-mode
         indent-for-tab-command
         kill-region
+        markdown-cycle
         markdown-electric-backquote
+        markdown-enter-key
         markdown-outdent-or-delete
         org-cycle
         org-end-of-line
@@ -24,18 +28,22 @@
         org-yank
         phi-search
         sgml-slash
+        typescript-insert-and-autoconvert-to-template
         typescript-insert-and-indent
         upcase-region
         yaml-electric-backspace
+        yaml-electric-dash-and-dot
         yas-expand
         ))
 
 (setq mc/cmds-to-run-once
       '(
-        overwrite-mode
+        ido-find-file
         iedit-switch-to-mc-mode
+        kill-sentence
         mouse-buffer-menu
         next-buffer
+        overwrite-mode
         previous-buffer
         smex
         toggle-korean-input-method
