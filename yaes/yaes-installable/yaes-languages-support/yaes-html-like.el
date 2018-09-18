@@ -10,10 +10,10 @@
   :mode
   ("\\.html\\'" . html-mode))
 
-(req-package jade-mode
+(req-package pug-mode
   :mode
-  ("\\.jade\\'" . jade-mode)
-  ("\\.styl\\'" . sws-mode))
+  ("\\.jade\\'" . pug-mode)
+  ("\\.pug\\'" . pug-mode))
 
 (req-package slim-mode
   :mode
