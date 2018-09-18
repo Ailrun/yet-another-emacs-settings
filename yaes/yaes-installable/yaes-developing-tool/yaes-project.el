@@ -8,6 +8,7 @@
 
 (req-package projectile
   :config
+  (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
   (setq projectile-indexing-method 'native)
   (setq projectile-mode-line '(:eval
                                (if (file-remote-p default-directory)
