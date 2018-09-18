@@ -14,6 +14,7 @@
   :if (and (version<= "24.1" emacs-version))
   :mode
   ("\\.js\\'" . js2-mode)
+  ("\\.mjs\\'" . js2-mode)
   ("\\.jsx\\'" . js2-jsx-mode)
   :interpreter
   ("node" . js2-mode)
