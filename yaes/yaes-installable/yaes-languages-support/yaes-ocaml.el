@@ -15,7 +15,7 @@
 
 (req-package merlin
   :if (executable-find "ocamlmerlin")
-  :require (tuareg)
+  :require (iedit tuareg)
   :functions (yaes-merlin-setup)
   :commands (merlin-mode)
   :init
