@@ -1,5 +1,10 @@
-+/yaes/
-+/yaes/yaes-external/
--/yaes/yaes-external/ProofGeneral
-
+-/auto-save-list/
+-/.cache/
+-/.cask/
+-/elpa/
+-/image-dired/
+-/.python-environments/
+-/semanticdb/
+-/url/
 -*~
+-/yaes/yaes-external/
