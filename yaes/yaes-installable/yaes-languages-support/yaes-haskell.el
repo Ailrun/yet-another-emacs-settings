@@ -28,7 +28,8 @@
   (add-hook 'haskell-mode-hook #'intero-mode)
   :config
   (setq-default intero-repl-no-load nil)
-  (setq-default setq-default intero-repl-no-load nil))
+  (print (find 'intero flycheck-checkers))
+  (flycheck-add-next-checker 'intero 'haskell-hlint))
 
 (req-package haskell-snippets
   :require (yasnippet cl-lib))
