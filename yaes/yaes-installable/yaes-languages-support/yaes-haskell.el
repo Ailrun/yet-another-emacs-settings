@@ -13,8 +13,6 @@
   :interpreter
   ("ghci" . haskell-mode)
   ("stack ghci" . haskell-mode)
-  :init
-  (add-hook 'haskell-mode-hook #'haskell-indent-mode)
   :config
   (setq-default haskell-indent-offset 2))
 
@@ -28,7 +26,6 @@
   (add-hook 'haskell-mode-hook #'intero-mode)
   :config
   (setq-default intero-repl-no-load nil)
-  (print (find 'intero flycheck-checkers))
   (flycheck-add-next-checker 'intero 'haskell-hlint))
 
 (req-package haskell-snippets
