@@ -45,6 +45,7 @@
         next-buffer
         overwrite-mode
         previous-buffer
+        scroll-left
         smex
         toggle-korean-input-method
         undo-tree-visualize
