@@ -12,20 +12,6 @@
   :config
   (setenv "GIT_ASKPASS" "git-gui--askpass")
   (setenv "SSH_ASKPASS" "git-gui--askpass")
-
-  (magit-define-popup-switch 'magit-log-popup
-    ?s "Always sort by date" "--date-order")
-
-  (magit-define-popup-option 'magit-am-popup
-    ?S "Sign using gpg" "--gpg-sign=" 'magit-read-gpg-secret-key)
-  (magit-define-popup-option 'magit-cherry-pick-popup
-    ?S "Sign using gpg" "--gpg-sign=" 'magit-read-gpg-secret-key)
-  (magit-define-popup-option 'magit-merge-popup
-    ?S "Sign using gpg" "--gpg-sign=" 'magit-read-gpg-secret-key)
-  (magit-define-popup-option 'magit-pull-popup
-    ?S "Sign using gpg" "--gpg-sign=" 'magit-read-gpg-secret-key)
-  (magit-define-popup-option 'magit-rebase-popup
-    ?S "Sign using gpg" "--gpg-sign=" 'magit-read-gpg-secret-key)
   :bind
   (("C-x v S" . magit-status)))
 

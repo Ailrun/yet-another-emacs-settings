@@ -15,6 +15,11 @@
 # multicursor setting
 !/.mc-lists.el
 
+# transient setting
+!/transient/
+/transient/*
+!/transient/levels.el
+
 # emacs binary compiled files
 *.elc
 
