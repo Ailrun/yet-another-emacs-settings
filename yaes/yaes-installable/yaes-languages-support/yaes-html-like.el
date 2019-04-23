@@ -6,9 +6,9 @@
 
 (require 'req-package)
 
-(req-package sgml-mode
+(req-package web-mode
   :mode
-  ("\\.html\\'" . html-mode))
+  ("\\.html\\'" . web-mode))
 
 (req-package pug-mode
   :mode
