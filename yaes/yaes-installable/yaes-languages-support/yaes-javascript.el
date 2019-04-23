@@ -20,8 +20,7 @@
   ("node" . js2-mode)
   ("node" . js2-jsx-mode)
   :config
-  (setq-default js-indent-level 2)
-  (setq-default js2-bounce-indent-p t))
+  (setq-default js-indent-level 2))
 
 ;; ;; These 3 packages are too slow
 
