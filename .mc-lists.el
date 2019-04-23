@@ -13,9 +13,13 @@
         downcase-region
         electric-newline-and-maybe-indent
         end-of-buffer
+        haskell-indentation-common-electric-command
+        haskell-indentation-indent-backwards
         haskell-indentation-newline-and-indent
         iedit-mode
         indent-for-tab-command
+        js2-indent-bounce
+        js2-indent-bounce-backward
         kill-region
         markdown-cycle
         markdown-electric-backquote
