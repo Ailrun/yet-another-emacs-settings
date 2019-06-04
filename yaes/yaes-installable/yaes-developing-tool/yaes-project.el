@@ -9,12 +9,12 @@
 (req-package projectile
   :config
   (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-  (setq projectile-indexing-method 'native)
-  (setq projectile-mode-line '(:eval
-                               (if (file-remote-p default-directory)
-                                   " Prj"
-                                 (format " [%s]"
-                                         (projectile-project-name)))))
+  (setq projectile-indexing-method 'alien)
+  (setq projectile-mode-line-function (lambda ()
+                                        (if (file-remote-p default-directory)
+                                            " Prj"
+                                          (format " [%s]"
+                                                  (projectile-project-name)))))
   (projectile-global-mode t))
 
 (req-package perspective
