@@ -6,8 +6,7 @@
 
 (require 'req-package)
 
-(req-package caml
-  :defer t)
+(req-package caml)
 
 (req-package tuareg
   :require (caml)
@@ -18,6 +17,7 @@
   :require (iedit tuareg)
   :functions (yaes-merlin-setup)
   :commands (merlin-mode)
+  :diminish (merlin-mode)
   :init
   (defun yaes-merlin-setup ()
     "Merlin setup."
