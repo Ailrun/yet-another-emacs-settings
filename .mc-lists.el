@@ -9,6 +9,11 @@
         TeX-insert-sub-or-superscript
         anzu-query-replace
         beginning-of-buffer
+        c-electric-brace
+        c-electric-paren
+        c-electric-semi&comma
+        c-electric-star
+        c-indent-line-or-region
         comment-dwim
         downcase-region
         electric-newline-and-maybe-indent
@@ -32,6 +37,8 @@
         org-yank
         phi-search
         sgml-slash
+        sh-assignment
+        sp-remove-active-pair-overlay
         typescript-insert-and-autoconvert-to-template
         typescript-insert-and-indent
         upcase-region
@@ -46,6 +53,7 @@
         iedit-switch-to-mc-mode
         kill-sentence
         mouse-buffer-menu
+        mouse-set-region
         next-buffer
         overwrite-mode
         previous-buffer
