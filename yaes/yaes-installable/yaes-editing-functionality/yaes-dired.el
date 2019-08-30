@@ -6,6 +6,14 @@
 
 (require 'req-package)
 
+(req-package ls-lisp
+  :ensure nil
+  :demand t
+  :init
+  (setq ls-lisp-dirs-first t)
+  (setq ls-lisp-UCA-like-collation nil)
+  (setq ls-lisp-use-string-collate nil))
+
 (req-package dired-x
   :ensure nil
   :demand t
