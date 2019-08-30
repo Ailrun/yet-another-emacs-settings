@@ -8,6 +8,8 @@
 
 (req-package projectile
   :config
+  (setq projectile-cache-file (expand-file-name (concat "projectile-" os-name ".cache") user-emacs-directory))
+  (setq projectile-known-projects-file (expand-file-name (concat "projectile-" os-name "-bookmarks.eld") user-emacs-directory))
   (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
   (setq projectile-indexing-method 'alien)
   (setq projectile-mode-line-function (lambda ()

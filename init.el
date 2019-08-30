@@ -8,7 +8,17 @@
 ;; However, in this setting package initialization is done by other file.
 ;; (package-initialize)
 
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(defvar os-name "")
+
+(cond
+ ((memq system-type '(windows-nt ms-dos))
+  (setq os-name "windows"))
+ ((memq system-type '(darwin))
+  (setq os-name "mac"))
+ ((memq system-type '(gnu/linux))
+  (setq os-name "linux"))
+ )
+(setq custom-file (expand-file-name (concat "custom-" os-name ".el") user-emacs-directory))
 (when (file-exists-p custom-file)
   (load custom-file))
 
