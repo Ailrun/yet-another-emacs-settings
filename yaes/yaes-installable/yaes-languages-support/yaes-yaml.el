@@ -9,7 +9,7 @@
 (req-package yaml-mode
   :if (version<= "24.1" emacs-version)
   :mode
-  ("\\.yml\\'" . yaml-mode))
+  ("\\.ya?ml\\'" . yaml-mode))
 
 (provide 'yaes-yaml)
 ;;; yaes-yaml.el ends here
