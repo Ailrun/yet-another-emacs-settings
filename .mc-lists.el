@@ -10,8 +10,9 @@
         anzu-query-replace
         beginning-of-buffer
         c-electric-brace
-        c-electric-paren
+        c-electric-pound
         c-electric-semi&comma
+        c-electric-slash
         c-electric-star
         c-indent-line-or-region
         comment-dwim
