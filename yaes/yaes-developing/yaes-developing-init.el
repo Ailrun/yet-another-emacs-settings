@@ -17,6 +17,11 @@
 
 (mapc 'load-dir-one yaes-developing-packages)
 
+(req-package llvm-mode
+  :ensure nil
+  :mode
+  ("\\.ll\\'" . llvm-mode))
+
 (unintern 'yaes-developing-dir nil)
 (unintern 'yaes-developing-packages nil)
 
