@@ -10,6 +10,7 @@
   :require (dash cl-lib)
   :diminish smartparens-mode
   :config
+  (setq sp-escape-quotes-after-insert nil)
   (sp-with-modes '(coq-mode)
                  (sp-local-pair "'" nil :actions nil))
   (smartparens-global-mode t))
