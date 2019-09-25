@@ -12,6 +12,7 @@
   :init
   (setq ls-lisp-dirs-first t)
   (setq ls-lisp-UCA-like-collation nil)
+  (setq ls-lisp-use-insert-directory-program nil)
   (setq ls-lisp-use-string-collate nil))
 
 (req-package dired-x
