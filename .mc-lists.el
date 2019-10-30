@@ -44,6 +44,7 @@
         typescript-insert-and-indent
         upcase-region
         yaml-electric-backspace
+        yaml-electric-bar-and-angle
         yaml-electric-dash-and-dot
         yas-expand
         ))
