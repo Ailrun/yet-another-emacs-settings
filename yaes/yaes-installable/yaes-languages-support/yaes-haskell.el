@@ -18,17 +18,10 @@
   :config
   (setq-default haskell-indent-offset 2))
 
-(req-package intero
-  :if (and
-       (version<= "24.3" emacs-version)
-       (executable-find "stack"))
-  :require (flycheck company haskell-mode)
-  :commands (intero-mode)
+(req-package lsp-haskell
+  :require (haskell-mode)
   :init
-  (add-hook 'haskell-mode-hook #'intero-mode)
-  :config
-  (setq-default intero-repl-no-load nil)
-  (flycheck-add-next-checker 'intero 'haskell-hlint))
+  (add-hook 'haskell-mode-hook #'lsp))
 
 (req-package haskell-snippets
   :require (yasnippet cl-lib))
