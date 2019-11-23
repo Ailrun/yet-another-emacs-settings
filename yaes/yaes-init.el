@@ -105,6 +105,9 @@
 ;;;; remote access
 (setq enable-remote-dir-locals t)
 
+;;;; backup files
+(setq make-backup-files nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
 ;;;; YAES directory settings
