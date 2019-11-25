@@ -17,7 +17,9 @@
   :if (version<= "25.1" emacs-version)
   :require (dash dash-functional lsp-mode markdown-mode)
   :commands (lsp-ui-mode)
-  :init (add-hook 'lsp-mode-hook #'lsp-ui-mode))
+  :init (add-hook 'lsp-mode-hook #'lsp-ui-mode)
+  :config
+  (setq lsp-ui-doc-alignment 'window))
 
 (req-package company-lsp
   :if (version<= "25.1" emacs-version)
