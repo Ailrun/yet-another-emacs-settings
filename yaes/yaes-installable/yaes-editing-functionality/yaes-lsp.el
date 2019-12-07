@@ -19,7 +19,8 @@
   :commands (lsp-ui-mode)
   :init (add-hook 'lsp-mode-hook #'lsp-ui-mode)
   :config
-  (setq lsp-ui-doc-alignment 'window))
+  (setq lsp-ui-doc-alignment 'window)
+  (setq lsp-ui-doc-position 'top))
 
 (req-package company-lsp
   :if (version<= "25.1" emacs-version)
