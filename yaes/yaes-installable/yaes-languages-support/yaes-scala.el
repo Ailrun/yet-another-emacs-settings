@@ -7,9 +7,10 @@
 (require 'req-package)
 
 (req-package scala-mode
-  :require (ensime)
   :mode
-  ("\\.scala\\'" . scala-mode))
+  ("\\.scala\\'" . scala-mode)
+  :init
+  (add-hook 'scala-mode-hook #'lsp))
 
 (req-package sbt-mode
   :if (and
@@ -20,10 +21,6 @@
    'minibuffer-complete-word
    'self-insert-command
    minibuffer-local-completion-map))
-
-(req-package ensime
-  :require (scala-mode sbt-mode yasnippet company dash s popup)
-  :commands (ensime))
 
 (provide 'yaes-scala)
 ;;; yaes-scala.el ends here
