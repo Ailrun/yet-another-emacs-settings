@@ -12,7 +12,9 @@
   ("\\.sty\\'" . LaTeX-mode)
   ("\\.tikz\\'" . LaTeX-mode)
   :init
-  (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8))
+  (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8)
+  :config
+  (setq TeX-parse-self t))
 
 (req-package company-auctex
   :require (yasnippet company auctex)
