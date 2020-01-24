@@ -10,7 +10,10 @@
 
 (req-package tuareg
   :require (caml)
-  :mode ("\\.ml[iylp]?\\'" . tuareg-mode))
+  :mode ("\\.ml[iylp]?\\'" . tuareg-mode)
+  :init
+  (when (executable-find "ocamllsp")
+    (add-hook 'tuareg-mode-hook #'lsp)))
 
 (req-package merlin
   :if (executable-find "ocamlmerlin")
@@ -26,7 +29,7 @@
 (req-package flycheck-ocaml
   :require (flycheck merlin)
   :functions (flycheck-ocaml-setup)
-  :config
+  :init
   (add-hook 'tuareg-mode-hook #'flycheck-ocaml-setup)
   (add-hook 'caml-mode-hook #'flycheck-ocaml-setup))
 
