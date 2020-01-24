@@ -37,6 +37,7 @@
         org-self-insert-command
         org-yank
         phi-search
+        purescript-indentation-delete-backward-char
         sgml-slash
         sh-assignment
         sp-remove-active-pair-overlay
