@@ -12,7 +12,10 @@
   :config
   (setq sp-escape-quotes-after-insert nil)
   (sp-with-modes '(coq-mode)
-                 (sp-local-pair "'" nil :actions nil))
+    (sp-local-pair "'" nil :actions nil))
+  (sp-with-modes '(lean-mode)
+    (sp-local-pair "⟨" "⟩")
+    (sp-local-pair "‹" "›"))
   (smartparens-global-mode t))
 
 (req-package smartparens-config
