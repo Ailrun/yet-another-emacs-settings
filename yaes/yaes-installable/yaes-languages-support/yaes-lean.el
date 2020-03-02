@@ -8,10 +8,13 @@
 
 (req-package lean-mode
   :if (version<= "24.3" emacs-version)
+  :require (flycheck)
   :mode
   ("\\.lean\\'" . lean-mode)
   :interpreter
-  ("lean" . lean-mode))
+  ("lean" . lean-mode)
+  :init
+  (setq-default lean-message-boxes-enabledp t))
 
 (req-package company-lean
   :if (version<= "24.3" emacs-version)
