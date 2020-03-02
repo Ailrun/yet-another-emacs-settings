@@ -64,4 +64,5 @@
         smex
         toggle-korean-input-method
         undo-tree-visualize
+        wdired-finish-edit
         ))

@@ -6,14 +6,17 @@
 
 (require 'req-package)
 
+(req-package dired
+  :ensure nil
+  :demand t
+  :init
+  (setq dired-listing-switches "-alv --group-directories-first"))
+
 (req-package ls-lisp
   :ensure nil
   :demand t
   :init
-  (setq ls-lisp-dirs-first t)
-  (setq ls-lisp-UCA-like-collation nil)
-  (setq ls-lisp-use-insert-directory-program nil)
-  (setq ls-lisp-use-string-collate nil))
+  (setq ls-lisp-use-insert-directory-program t))
 
 (req-package dired-x
   :ensure nil
