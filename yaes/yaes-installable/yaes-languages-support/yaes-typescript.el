@@ -26,6 +26,7 @@
         (setq flycheck-typescript-tslint-executable "tslint.cmd"))
     (flycheck-mode t)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
     (eldoc-mode t)
     (tide-hl-identifier-mode t)
     (company-mode t))
