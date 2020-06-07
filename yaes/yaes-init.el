@@ -108,6 +108,12 @@
 ;;;; backup files
 (setq make-backup-files nil)
 
+;;;; Do GC less
+(setq gc-cons-threshold 100000000)
+
+;;;; Read more bytes per chunk
+(setq read-process-output-max (* 1024 1024)) ;; 1MB
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
 ;;;; YAES directory settings
