@@ -62,6 +62,7 @@
         previous-buffer
         scroll-left
         smex
+        toggle-frame-fullscreen
         toggle-korean-input-method
         undo-tree-visualize
         wdired-finish-edit
