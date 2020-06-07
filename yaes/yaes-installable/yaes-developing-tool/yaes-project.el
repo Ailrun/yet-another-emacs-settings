@@ -20,7 +20,7 @@
   (projectile-global-mode t))
 
 (req-package perspective
-  :require (cl cl-lib)
+  :require (cl-lib)
   :config
   (persp-mode t))
 
