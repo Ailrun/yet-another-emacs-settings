@@ -21,7 +21,9 @@
 (req-package lsp-haskell
   :require (haskell-mode)
   :init
-  (add-hook 'haskell-mode-hook #'lsp))
+  (add-hook 'haskell-mode-hook #'lsp)
+  :config
+  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
 (req-package haskell-snippets
   :require (yasnippet cl-lib))
