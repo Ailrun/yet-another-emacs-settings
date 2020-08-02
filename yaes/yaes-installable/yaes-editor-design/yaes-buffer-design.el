@@ -17,7 +17,8 @@
       eshell-mode shell-mode
       dired-mode
       doc-view-mode
-      epresent-mode)
+      epresent-mode
+      xwidget-webkit-mode)
     "List of modes disabled when global linum mode is on"
     :type '(repeat (sexp :tag "Major mode"))
     :tag "Major modes for linum disabling."
