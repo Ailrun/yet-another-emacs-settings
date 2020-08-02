@@ -11,6 +11,23 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
+;;;; Agda
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(if (executable-find "agda-mode")
+    (progn
+      (defconst yaes-agda-load-path (file-name-directory (shell-command-to-string "agda-mode locate")))
+
+      (push yaes-agda-load-path load-path)
+
+      (req-package agda2
+        :ensure nil
+        :mode
+        ("\\.l?agda\\'" . agda2-mode))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
 ;;;; Proof General
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
