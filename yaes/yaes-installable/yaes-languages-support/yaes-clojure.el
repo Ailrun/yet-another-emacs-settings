@@ -21,12 +21,6 @@
   (:map clojure-mode-map
         ("C-c M-j" . cider-jack-in)))
 
-(req-package typed-clojure-mode
-  :require (clojure-mode)
-  :commands (typed-clojure-mode)
-  :init
-  (add-hook 'clojure-mode-hook #'typed-clojure-mode))
-
 (req-package flycheck-clojure
   :if (version<= "24" emacs-version)
   :require (flycheck)

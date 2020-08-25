@@ -22,10 +22,5 @@
   (setq lsp-ui-doc-alignment 'window)
   (setq lsp-ui-doc-position 'top))
 
-(req-package company-lsp
-  :if (version<= "25.1" emacs-version)
-  :require (lsp-mode company s dash)
-  :config (push 'company-lsp company-backends))
-
 (provide 'yaes-lsp)
 ;;; yaes-lsp.el ends here

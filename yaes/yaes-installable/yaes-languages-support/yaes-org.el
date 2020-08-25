@@ -22,8 +22,7 @@
                                  (emacs-lisp . t)
                                  (haskell . t)
                                  (makefile . t)
-                                 (org . t)
-                                 (scala . t))))
+                                 (org . t))))
 
 (req-package org-bullets
   :require (org)

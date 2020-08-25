@@ -71,24 +71,5 @@
             (lambda ()
               (tern-mode t))))
 
-(req-package company-tern
-  :require (company)
-  :commands (company-tern)
-  :init
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (setq-local company-backends
-                          (append
-                           '(company-tern)
-                           company-backends))))
-  (add-hook 'js2-jsx-mode-hook
-            (lambda ()
-              (setq-local company-backends
-                          (append
-                           '(company-tern)
-                           company-backends))))
-  :config
-  (setq company-tern-property-marker " !!"))
-
 (provide 'yaes-javascript)
 ;;; yaes-javascript.el ends here
