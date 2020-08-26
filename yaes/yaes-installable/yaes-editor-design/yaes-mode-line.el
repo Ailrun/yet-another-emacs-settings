@@ -31,10 +31,9 @@
      (":YAES:yaes-installable" ":YAES-I:")
      (":YAES:yaes-developing" ":YAES-D:")
      (":YAES:yaes-external" ":YAES-E:")))
-  (setq sml/use-projectile-p nil)
   (setq sml/shorten-directory t)
   (setq sml/name-width 20)
-  (setq sml/theme nil)
+  (setq sml/theme 'respectful)
   (sml/setup))
 
 (provide 'yaes-mode-line)
