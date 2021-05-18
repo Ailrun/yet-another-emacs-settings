@@ -22,6 +22,12 @@
   :mode
   ("\\.ll\\'" . llvm-mode))
 
+(req-package tutch-mode
+  :ensure nil
+  :mode
+  ("\\.tut\\'" . tutch-mode)
+  ("\\.req\\'" . tutch-mode))
+
 (unintern 'yaes-developing-dir nil)
 (unintern 'yaes-developing-packages nil)
 
