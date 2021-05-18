@@ -7,6 +7,7 @@
         LaTeX-insert-left-brace
         TeX-insert-backslash
         TeX-insert-sub-or-superscript
+        TeX-newline
         anzu-query-replace
         beginning-of-buffer
         c-electric-brace
@@ -52,9 +53,11 @@
 
 (setq mc/cmds-to-run-once
       '(
+        handle-switch-frame
         ido-find-file
         iedit-switch-to-mc-mode
         kill-sentence
+        lsp-ui-doc--handle-mouse-movement
         mouse-buffer-menu
         mouse-set-region
         next-buffer
