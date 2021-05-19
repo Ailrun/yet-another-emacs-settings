@@ -6,13 +6,13 @@
 
 (require 'req-package)
 
-(req-package linum
+(req-package display-line-numbers
   :pin gnu
-  :require (hlinum)
   :config
-  (global-linum-mode t)
-  (setq linum-format "%4d")
-  (defcustom linum-disabled-modes-list
+  (global-display-line-numbers-mode)
+  ;; (setq linum-format "%4d")
+  (face-spec-set 'line-number-current-line '((t :inherit (isearch default))))
+  (defcustom display-line-numbers-disabled-modes-list
     '(help-mode customize-mode
       eshell-mode shell-mode
       dired-mode
@@ -22,18 +22,13 @@
     "List of modes disabled when global linum mode is on"
     :type '(repeat (sexp :tag "Major mode"))
     :tag "Major modes for linum disabling."
-    :group 'linum)
-  (defun linum-on ()
-    "When linum is running globally, disable line number in modes defined in `linum-disabled-modes-list'."
+    :group 'display-line-numbers)
+  (defun display-line-numbers--turn-on ()
+    "When display-line-numbers is running globally, disable line number in modes defined in `display-line-numbers-disabled-modes-list'."
     (unless (or
              (minibufferp)
-             (member major-mode linum-disabled-modes-list))
-      (linum-mode t))))
-
-(req-package hlinum
-  :require (cl-lib)
-  :config
-  (hlinum-activate))
+             (member major-mode display-line-numbers-disabled-modes-list))
+      (display-line-numbers-mode))))
 
 
 (req-package whitespace
