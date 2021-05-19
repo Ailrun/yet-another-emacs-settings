@@ -8,10 +8,12 @@
 
 (req-package scala-mode
   :mode
-  ("\\.scala\\'" . scala-mode)
-  :init
-  (if (executable-find "metals-emacs")
-      (add-hook 'scala-mode-hook #'lsp)))
+  ("\\.scala\\'" . scala-mode))
+
+(req-package lsp-metals
+  :if (executable-find "metals-emacs")
+  :config
+  (add-hook 'scala-mode-hook #'lsp))
 
 (req-package sbt-mode
   :if (and
