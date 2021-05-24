@@ -15,6 +15,11 @@
   (when (executable-find "ocamllsp")
     (add-hook 'tuareg-mode-hook #'lsp)))
 
+(req-package dune
+  :if (executable-find "dune")
+  :mode (("dune" . dune-mode)
+         ("dune-project" . dune-mode)))
+
 (req-package merlin
   :if (executable-find "ocamlmerlin")
   :require (iedit tuareg)
