@@ -24,6 +24,7 @@
         haskell-indentation-indent-backwards
         haskell-indentation-newline-and-indent
         iedit-mode
+        ignore
         indent-for-tab-command
         js2-indent-bounce
         js2-indent-bounce-backward
