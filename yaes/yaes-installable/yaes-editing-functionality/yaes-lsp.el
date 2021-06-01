@@ -10,8 +10,11 @@
   :if (version<= "25.1" emacs-version)
   :require (dash dash-functional f ht spinner markdown-mode)
   :commands (lsp)
+  :diminish lsp-lens-mode
+  :init (add-hook 'dired-mode-hook #'lsp-dired-mode)
   :config
-  (setq lsp-prefer-flymake nil))
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-modeline-code-actions-segments '(icon)))
 
 (req-package lsp-ui
   :if (version<= "25.1" emacs-version)
