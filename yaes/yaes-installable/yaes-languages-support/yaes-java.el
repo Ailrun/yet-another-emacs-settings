@@ -6,23 +6,28 @@
 
 (require 'req-package)
 
-;; Todo:
-;; Let's try Meghanada
-(setq-default jdee-server-dir yaes-jdee-server-dir)
+;; ;; Todo:
+;; ;; Let's try Meghanada
+;; (setq-default jdee-server-dir yaes-jdee-server-dir)
 
-(req-package jdee
-  :if (and
-       (version<= "24.3" emacs-version)
-       (file-directory-p yaes-jdee-server-dir))
-  :require (flycheck memoize dash)
-  :commands (jdee-mode))
+;; (req-package jdee
+;;   :if (and
+;;        (version<= "24.3" emacs-version)
+;;        (file-directory-p yaes-jdee-server-dir))
+;;   :require (flycheck memoize dash)
+;;   :commands (jdee-mode))
+
+(req-package lsp-java
+  :require (lsp-mode)
+  :init
+  (add-hook 'java-mode-hook #'lsp))
 
 (req-package mvn
   :if (executable-find "mvn")
   :commands (mvn mvn-compile mvn-clean mvn-test))
 
-(req-package java-snippets
-  :require (yasnippet))
+;; (req-package java-snippets
+;;   :require (yasnippet))
 
 (provide 'yaes-java)
 ;;; yaes-java.el ends here

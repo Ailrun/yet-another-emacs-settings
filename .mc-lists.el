@@ -31,11 +31,13 @@
         markdown-electric-backquote
         markdown-enter-key
         markdown-outdent-or-delete
+        nxml-electric-slash
         org-cycle
         org-end-of-line
         org-return
         org-self-insert-command
         org-yank
+        pg-protected-undo
         phi-search
         purescript-indentation-delete-backward-char
         sgml-slash
@@ -52,9 +54,14 @@
 
 (setq mc/cmds-to-run-once
       '(
+        TeX-newline
+        company-coq-maybe-exit-snippet
+        dap-tooltip-mouse-motion
         ido-find-file
         iedit-switch-to-mc-mode
+        ignore
         kill-sentence
+        lsp-signature-activate
         mouse-buffer-menu
         mouse-set-region
         next-buffer
