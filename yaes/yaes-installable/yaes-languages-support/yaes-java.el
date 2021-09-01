@@ -6,8 +6,12 @@
 
 (require 'req-package)
 
-;; ;; Todo:
-;; ;; Let's try Meghanada
+(req-package lsp-java
+  :init
+  (add-hook 'java-mode-hook #'lsp))
+
+;; Todo:
+;; Let's try Meghanada
 ;; (setq-default jdee-server-dir yaes-jdee-server-dir)
 
 ;; (req-package jdee
@@ -17,14 +21,9 @@
 ;;   :require (flycheck memoize dash)
 ;;   :commands (jdee-mode))
 
-(req-package lsp-java
-  :require (lsp-mode)
-  :init
-  (add-hook 'java-mode-hook #'lsp))
-
-(req-package mvn
-  :if (executable-find "mvn")
-  :commands (mvn mvn-compile mvn-clean mvn-test))
+;; (req-package mvn
+;;   :if (executable-find "mvn")
+;;   :commands (mvn mvn-compile mvn-clean mvn-test))
 
 ;; (req-package java-snippets
 ;;   :require (yasnippet))

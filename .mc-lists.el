@@ -7,6 +7,7 @@
         LaTeX-insert-left-brace
         TeX-insert-backslash
         TeX-insert-sub-or-superscript
+        TeX-newline
         anzu-query-replace
         beginning-of-buffer
         c-electric-brace
@@ -23,6 +24,7 @@
         haskell-indentation-indent-backwards
         haskell-indentation-newline-and-indent
         iedit-mode
+        ignore
         indent-for-tab-command
         js2-indent-bounce
         js2-indent-bounce-backward
@@ -57,11 +59,13 @@
         TeX-newline
         company-coq-maybe-exit-snippet
         dap-tooltip-mouse-motion
+        handle-switch-frame
         ido-find-file
         iedit-switch-to-mc-mode
         ignore
         kill-sentence
         lsp-signature-activate
+        lsp-ui-doc--handle-mouse-movement
         mouse-buffer-menu
         mouse-set-region
         next-buffer
