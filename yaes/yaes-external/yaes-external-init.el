@@ -24,7 +24,9 @@
       (req-package agda2
         :ensure nil
         :mode
-        ("\\.l?agda\\'" . agda2-mode))))
+        ("\\.l?agda\\'" . agda2-mode)
+        :config
+        (setq agda2-highlight-level 'non-interactive))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;

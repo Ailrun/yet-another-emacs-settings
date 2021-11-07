@@ -55,12 +55,12 @@
 
 ;; (req-package latex-pretty-symbols)
 
-(req-package reftex
-  :diminish reftex-mode
-  :commands (reftex-mode)
-  :init
-  (add-hook 'LaTeX-mode-hook #'reftex-mode)
-  (add-hook 'latex-mode-hook #'reftex-mode))
+;; (req-package reftex
+;;   :diminish reftex-mode
+;;   :commands (reftex-mode)
+;;   :init
+;;   (add-hook 'LaTeX-mode-hook #'reftex-mode)
+;;   (add-hook 'latex-mode-hook #'reftex-mode))
 
 (req-package lsp-latex
   :require (tex-mode)

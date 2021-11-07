@@ -17,6 +17,7 @@
         c-electric-star
         c-indent-line-or-region
         comment-dwim
+        company-coq-maybe-exit-snippet
         downcase-region
         electric-newline-and-maybe-indent
         end-of-buffer
@@ -45,9 +46,12 @@
         sgml-slash
         sh-assignment
         sp-remove-active-pair-overlay
+        sp-wrap-cancel
         typescript-insert-and-autoconvert-to-template
         typescript-insert-and-indent
         upcase-region
+        wdired--self-insert
+        wdired-capitalize-word
         yaml-electric-backspace
         yaml-electric-bar-and-angle
         yaml-electric-dash-and-dot
@@ -59,13 +63,17 @@
         TeX-newline
         company-coq-maybe-exit-snippet
         dap-tooltip-mouse-motion
+        agda2-load
+        dired-toggle-read-only
         handle-switch-frame
         ido-find-file
+        ido-switch-buffer
         iedit-switch-to-mc-mode
         ignore
         kill-sentence
         lsp-signature-activate
         lsp-ui-doc--handle-mouse-movement
+        magit-status
         mouse-buffer-menu
         mouse-set-region
         next-buffer
