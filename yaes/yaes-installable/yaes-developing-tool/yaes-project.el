@@ -7,14 +7,15 @@
 (require 'req-package)
 
 (req-package projectile
-  :init
-  (setq projectile-mode-line-prefix " Prj")
+  :custom
+  (projectile-mode-line-prefix " Prj")
+  (projectile-cache-file (expand-file-name (concat "projectile-" os-name ".cache") user-emacs-directory))
+  (projectile-known-projects-file (expand-file-name (concat "projectile-" os-name "-bookmarks.eld") user-emacs-directory))
+  (projectile-indexing-method 'alien)
+  (projectile-mode-line-function (lambda () " Prj"))
+  (persp-mode-prefix-key (kbd "C-c M-p"))
   :config
-  (setq projectile-cache-file (expand-file-name (concat "projectile-" os-name ".cache") user-emacs-directory))
-  (setq projectile-known-projects-file (expand-file-name (concat "projectile-" os-name "-bookmarks.eld") user-emacs-directory))
   (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-  (setq projectile-indexing-method 'alien)
-  (setq projectile-mode-line-function (lambda () " Prj"))
   (projectile-global-mode t))
 
 (req-package perspective
