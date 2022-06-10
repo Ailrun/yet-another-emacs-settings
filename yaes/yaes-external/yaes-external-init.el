@@ -25,8 +25,8 @@
         :ensure nil
         :mode
         ("\\.l?agda\\'" . agda2-mode)
-        :config
-        (setq agda2-highlight-level 'non-interactive))))
+        :custom
+        (agda2-highlight-level 'non-interactive))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
@@ -43,8 +43,8 @@
   :mode
   ("\\.v\\'" . coq-mode)
   :defines (proof-assistants)
-  :config
-  (setq proof-assistants '(coq)))
+  :custom
+  (proof-assistants '(coq)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;

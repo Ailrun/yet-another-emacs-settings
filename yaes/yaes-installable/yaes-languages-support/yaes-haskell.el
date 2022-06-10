@@ -15,15 +15,15 @@
   ("stack ghci" . haskell-mode)
   :init
   (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
-  :config
-  (setq-default haskell-indent-offset 2))
+  :custom
+  (haskell-indent-offset 2))
 
 (req-package lsp-haskell
   :require (haskell-mode)
   :init
   (add-hook 'haskell-mode-hook #'lsp)
-  :config
-  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+  :custom
+  (lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
 (req-package haskell-snippets
   :require (yasnippet cl-lib))

@@ -12,10 +12,10 @@
   ("\\.purs\\'" . purescript-mode)
   :init
   (add-hook 'purescript-mode-hook #'turn-on-purescript-indentation)
-  :config
-  (setq purescript-indentation-delete-indentation nil)
-  (setq purescript-indentation-delete-backward-indentation nil)
-  (setq purescript-indent-spaces 2))
+  :custom
+  (purescript-indentation-delete-indentation nil)
+  (purescript-indentation-delete-backward-indentation nil)
+  (purescript-indent-spaces 2))
 
 (req-package psc-ide
   :if (version<= "25" emacs-version)

@@ -11,7 +11,8 @@
   :require (dash let-alist seq)
   :config
   (global-flycheck-mode t)
-  (setq-default flycheck-emacs-lisp-load-path 'inherit))
+  :custom
+  (flycheck-emacs-lisp-load-path 'inherit))
 
 (req-package flycheck-pos-tip
   :if (version<= "24.1" emacs-version)

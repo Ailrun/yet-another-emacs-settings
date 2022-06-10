@@ -15,8 +15,8 @@
   :mode
   ("\\.md\\'" . gfm-mode)
   ("\\.markdown\\'" . markdown-mode)
-  :init
-  (setq markdown-command yaes-markdown-command))
+  :custom
+  (markdown-command yaes-markdown-command))
 
 (req-package flymd
   :require (markdown-mode cl-lib)
@@ -73,8 +73,8 @@ See `imenu-create-index-function' and `imenu--index-alist' for details."
                   (setq cur-alist alist))
                 (setq cur-level level))))))
         (cdr root))))
-  :config
-  (setq markdown-toc-header-toc-title "## Table of Contents ##"))
+  :custom
+  (markdown-toc-header-toc-title "## Table of Contents ##"))
 
 (provide 'yaes-markdown)
 ;;; yaes-markdown.el ends here

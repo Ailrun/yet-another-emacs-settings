@@ -11,8 +11,8 @@
   ("\\.tsx?\\'" . typescript-mode)
   :init
   (add-hook 'typescript-mode-hook #'lsp)
-  :config
-  (setq typescript-indent-level 2))
+  :custom
+  (typescript-indent-level 2))
 
 ;; (req-package tide
 ;;   :if (executable-find "node")

@@ -10,8 +10,8 @@
   :require (outline)
   :mode
   ("\\.org\\'" . org-mode)
-  :init
-  (setq org-replace-disputed-keys t)
+  :custom
+  (org-replace-disputed-keys t)
   :config
   (add-hook 'org-mode-hook
             (lambda ()

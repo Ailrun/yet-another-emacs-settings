@@ -13,8 +13,8 @@
   ("\\.lean\\'" . lean-mode)
   :interpreter
   ("lean" . lean-mode)
-  :init
-  (setq-default lean-message-boxes-enabledp t))
+  :custom
+  (lean-message-boxes-enabledp t))
 
 (req-package company-lean
   :if (version<= "24.3" emacs-version)

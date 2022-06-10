@@ -28,23 +28,17 @@
 ;;   (set-face-attribute 'magithub-label-face nil :box nil)
 ;;   (magithub-feature-autoinject t))
 
-(req-package gitconfig-mode
+(req-package git-modes
   :mode
   ("/\\.gitattributes\\'" . gitattributes-mode)
   ("/info/attributes\\'" . gitattributes-mode)
-  ("/git/attributes\\'" . gitattributes-mode))
-
-(req-package gitconfig-mode
-  :mode
+  ("/git/attributes\\'" . gitattributes-mode)
   ("/\\.gitconfig\\'" . gitconfig-mode)
   ("/\\.git/config\\'" . gitconfig-mode)
   ("/modules/.*/config\\'" . gitconfig-mode)
   ("/git/config\\'" . gitconfig-mode)
   ("/\\.gitmodules\\'" . gitconfig-mode)
-  ("/etc/gitconfig\\'" . gitconfig-mode))
-
-(req-package gitignore-mode
-  :mode
+  ("/etc/gitconfig\\'" . gitconfig-mode)
   ("/\\.gitignore\\'" . gitignore-mode)
   ("/info/exclude\\'" . gitignore-mode)
   ("/git/ignore\\'" . gitignore-mode))

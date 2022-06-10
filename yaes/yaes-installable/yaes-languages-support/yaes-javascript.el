@@ -19,8 +19,8 @@
   :interpreter
   ("node" . js2-mode)
   ("node" . js2-jsx-mode)
-  :config
-  (setq-default js-indent-level 2))
+  :custom
+  (js-indent-level 2))
 
 ;; ;; These 3 packages are too slow
 

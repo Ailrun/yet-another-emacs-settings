@@ -12,11 +12,12 @@
 
 (req-package yasnippet
   :diminish yas-minor-mode
+  :custom
+  (yas-prompt-functions
+   '(yas-ido-prompt
+     yas-dropdown-prompt
+     yas-completing-prompt))
   :config
-  (setq-default yas-prompt-functions
-                '(yas-ido-prompt
-                  yas-dropdown-prompt
-                  yas-completing-prompt))
   (when (null (f-dir? yaes-yasnippet-dir))
     (f-mkdir yaes-yasnippet-dir))
   (yas-global-mode t))

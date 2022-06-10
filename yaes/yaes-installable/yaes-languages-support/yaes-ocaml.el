@@ -28,8 +28,8 @@
   :init
   (add-hook 'tuareg-mode-hook #'merlin-mode)
   (add-hook 'caml-mode-hook #'merlin-mode)
-  :config
-  (setq merlin-error-after-save nil))
+  :custom
+  (merlin-error-after-save nil))
 
 (req-package flycheck-ocaml
   :require (flycheck merlin)

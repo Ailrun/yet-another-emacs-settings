@@ -10,8 +10,8 @@
   :ensure nil
   :mode
   ("\\.css\\'" . css-mode)
-  :config
-  (setq css-indent-level 2))
+  :custom
+  (css-indent-level 2))
 
 (req-package scss-mode
   :mode

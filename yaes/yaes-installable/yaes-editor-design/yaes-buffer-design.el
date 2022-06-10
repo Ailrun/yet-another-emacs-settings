@@ -42,15 +42,15 @@
 
 (req-package whitespace
   ;; required emacs version : any
-  :config
-  (setq whitespace-style '(face empty lines-tail trailing))
-  (setq whitespace-global-modes
-        '(not
-          LaTeX-mode
-          latex-mode
-          markdown-mode
-          org-mode
-          shell-mode)))
+  :custom
+  (whitespace-style '(face empty lines-tail trailing))
+  (whitespace-global-modes
+   '(not
+     LaTeX-mode
+     latex-mode
+     markdown-mode
+     org-mode
+     shell-mode)))
 
 (provide 'yaes-buffer-design)
 ;;; yaes-buffer-design.el ends here

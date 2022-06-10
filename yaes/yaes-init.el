@@ -92,11 +92,6 @@
    (setq default-directory
          (concat (getenv "USERPROFILE") "\\Documents/"))))
 
-;;;; Fix macOS issue of directory listing
-;;;;
-(when (eq system-type 'darwin)
- (setq insert-directory-program "gls"))
-
 ;;;; tab settings
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)

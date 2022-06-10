@@ -18,11 +18,15 @@
 (req-package smart-mode-line
   :if (version<= "24.3" emacs-version)
   :require (rich-minority)
+  :custom
+  (sml/line-number-format "%4l")
+  (sml/position-percentage-format nil)
+  (sml/shorten-directory t)
+  (sml/name-width 20)
+  (sml/theme 'respectful)
   :config
   (line-number-mode t)
   (column-number-mode t)
-  (setq sml/line-number-format "%4l")
-  (setq sml/position-percentage-format nil)
   (nconc
    sml/replacer-regexp-list
    '((".*/\\.emacs\\.d/" ":ED:")
@@ -31,9 +35,6 @@
      (":YAES:yaes-installable" ":YAES-I:")
      (":YAES:yaes-developing" ":YAES-D:")
      (":YAES:yaes-external" ":YAES-E:")))
-  (setq sml/shorten-directory t)
-  (setq sml/name-width 20)
-  (setq sml/theme 'respectful)
   (sml/setup))
 
 (provide 'yaes-mode-line)

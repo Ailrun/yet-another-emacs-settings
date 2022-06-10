@@ -9,8 +9,9 @@
 (req-package smartparens
   :require (dash cl-lib)
   :diminish smartparens-mode
+  :custom
+  (sp-escape-quotes-after-insert nil)
   :config
-  (setq sp-escape-quotes-after-insert nil)
   (sp-with-modes '(coq-mode)
     (sp-local-pair "'" nil :actions nil))
   (sp-with-modes '(lean-mode)

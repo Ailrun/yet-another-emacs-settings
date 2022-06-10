@@ -13,8 +13,8 @@
   ("\\.tikz\\'" . LaTeX-mode)
   :init
   (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8)
-  :config
-  (setq TeX-parse-self t))
+  :custom
+  (TeX-parse-self t))
 
 ;; (req-package company-auctex
 ;;   :require (yasnippet company auctex)
@@ -67,9 +67,9 @@
   :init
   (add-hook 'LaTeX-mode-hook #'lsp)
   (add-hook 'latex-mode-hook #'lsp)
-  :config
-  (setq lsp-latex-forward-search-executable "okular")
-  (setq lsp-latex-forward-search-args '("--unique" "file:%p#src:%l%f")))
+  :custom
+  (lsp-latex-forward-search-executable "okular")
+  (lsp-latex-forward-search-args '("--unique" "file:%p#src:%l%f")))
 
 (provide 'yaes-latex)
 ;;; yaes-latex.el ends here

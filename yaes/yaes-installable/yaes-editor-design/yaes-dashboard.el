@@ -26,17 +26,18 @@
 
 (req-package dashboard
   :require (page-break-lines all-the-icons)
+  :custom
+  (dashboard-startup-banner 'logo)
+  (dashboard-items
+   '((projects . 5)
+     (recents . 20)))
+  (dashboard-center-content t)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-set-navigator t)
+  (dashboard-page-separator "\n\f\f\n")
   :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner 'logo)
-  (setq dashboard-items
-        '((projects . 5)
-          (recents . 20)))
-  (setq dashboard-center-content t)
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-set-navigator t)
-  (setq dashboard-page-separator "\n\f\f\n"))
+  (dashboard-setup-startup-hook))
 
 (provide 'yaes-dashboard)
 ;;; yaes-dashboard.el ends here

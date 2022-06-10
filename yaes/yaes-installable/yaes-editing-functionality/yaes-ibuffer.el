@@ -7,8 +7,8 @@
 (require 'req-package)
 
 (req-package ibuffer
-  :config
-  (setq ibuffer-use-other-window t)
+  :custom
+  (ibuffer-use-other-window t)
   :bind
   (("C-x C-b" . ibuffer)))
 
