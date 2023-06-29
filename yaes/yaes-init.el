@@ -72,7 +72,11 @@
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;; Language settings ( for Korean )
+;;;; Start Daemon
+;;;; (This is required for LaTeX inverse search)
+(server-start)
+
+;;;; Language settings (for Korean)
 ;;;;
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
