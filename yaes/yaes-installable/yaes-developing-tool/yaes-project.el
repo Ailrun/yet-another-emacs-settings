@@ -20,6 +20,8 @@
 
 (req-package perspective
   :require (cl-lib)
+  :init
+  (setq persp-mode-prefix-key (kbd "C-c M-p"))
   :config
   (persp-mode t))
 

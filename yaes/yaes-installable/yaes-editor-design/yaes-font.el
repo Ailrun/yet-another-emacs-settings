@@ -19,8 +19,9 @@ If FONT is not available, change FACE with ATTR."
 
 ;;;; Font settings
 ;;;;
-(yaes-font-setting "Mononoki" 'fixed-pitch)
-(yaes-font-setting "Mononoki" 'default '(:height 110))
+;; (yaes-font-setting "Consolas" 'fixed-pitch)
+(yaes-font-setting "JuliaMono" 'default '(:height 110))
+;; (yaes-font-setting "Mononoki" 'default '(:height 110))
 (set-fontset-font t 'hangul (font-spec :family "NanumGothicCoding"))
 
 (provide 'yaes-font)

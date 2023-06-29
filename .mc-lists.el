@@ -6,6 +6,7 @@
         LaTeX-babel-insert-hyphen
         LaTeX-insert-left-brace
         TeX-insert-backslash
+        TeX-insert-dollar
         TeX-insert-sub-or-superscript
         TeX-newline
         anzu-query-replace
@@ -21,6 +22,7 @@
         downcase-region
         electric-newline-and-maybe-indent
         end-of-buffer
+        eri-indent-reverse
         haskell-indentation-common-electric-command
         haskell-indentation-indent-backwards
         haskell-indentation-newline-and-indent
@@ -52,6 +54,7 @@
         upcase-region
         wdired--self-insert
         wdired-capitalize-word
+        wdired-upcase-word
         yaml-electric-backspace
         yaml-electric-bar-and-angle
         yaml-electric-dash-and-dot
@@ -61,9 +64,9 @@
 (setq mc/cmds-to-run-once
       '(
         TeX-newline
+        agda2-load
         company-coq-maybe-exit-snippet
         dap-tooltip-mouse-motion
-        agda2-load
         dired-toggle-read-only
         handle-switch-frame
         ido-find-file
@@ -71,6 +74,7 @@
         iedit-switch-to-mc-mode
         ignore
         kill-sentence
+        lsp-latex-build
         lsp-signature-activate
         lsp-ui-doc--handle-mouse-movement
         magit-status

@@ -23,7 +23,8 @@
   :init (add-hook 'lsp-mode-hook #'lsp-ui-mode)
   :custom
   (lsp-ui-doc-alignment 'window)
-  (lsp-ui-doc-position 'top))
+  (lsp-ui-doc-position 'top)
+  (lsp-ui-doc-show-with-cursor t))
 
 (provide 'yaes-lsp)
 ;;; yaes-lsp.el ends here
