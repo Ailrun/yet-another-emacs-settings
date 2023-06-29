@@ -24,11 +24,6 @@
 
 (defconst init-file-path (expand-file-name "init.el" user-emacs-directory))
 
-(global-set-key (kbd "C-x ! C-c")
-		(lambda ()
-		  (interactive)
-		  (save-buffers-kill-emacs)))
-
 (defconst yaes-init-path (expand-file-name "yaes/yaes-init.el" user-emacs-directory))
 (load yaes-init-path)
 

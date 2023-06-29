@@ -76,6 +76,11 @@
 ;;;; (This is required for LaTeX inverse search)
 (server-start)
 
+(global-set-key (kbd "C-x ! C-c")
+		(lambda ()
+		  (interactive)
+		  (save-buffers-kill-emacs)))
+
 ;;;; Language settings (for Korean)
 ;;;;
 (set-language-environment "Korean")
