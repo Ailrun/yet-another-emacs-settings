@@ -87,6 +87,7 @@
 ;;;;
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
+(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 ;;;; Default directory of windows
 ;;;;
@@ -105,7 +106,8 @@
 (windmove-default-keybindings)
 
 ;;;; initial screen size
-(set-frame-parameter nil 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized)) 
+;; (set-frame-parameter nil 'fullscreen 'maximized)
 
 ;;;; remote access
 (setq enable-remote-dir-locals t)
