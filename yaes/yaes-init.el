@@ -204,10 +204,10 @@ Those are installable via package manager.")
 (when init-file-debug
   (print (current-time-string)))
 
-;; Function for unbound symbols
-(mapatoms (lambda (symbol)
-	    (if (string-prefix-p "yaes-" (symbol-name symbol))
-            (unintern symbol nil))))
+;; ;; Function for unbound symbols
+;; (mapatoms (lambda (symbol)
+;; 	    (if (string-prefix-p "yaes-" (symbol-name symbol))
+;;             (unintern symbol nil))))
 
 (provide 'yaes-init)
 ;;; yaes-init.el ends here
