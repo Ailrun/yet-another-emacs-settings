@@ -53,5 +53,37 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defconst yaes-jdee-server-dir (f-join yaes-external-dir "JDEE/target"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
+;;;; Isar Mode
+;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defconst yaes-isar-mode-load-path (f-join yaes-external-dir "isar-mode"))
+(defconst yaes-lsp-isar-load-path (f-join yaes-external-dir "lsp-isar"))
+
+(push yaes-isar-mode-load-path load-path)
+(push yaes-lsp-isar-load-path load-path)
+
+(req-package isar-mode
+  :if (file-directory-p yaes-isar-mode-load-path)
+  :ensure nil
+  :mode
+  ("\\.thy\\'" . isar-mode))
+
+(req-package session-async
+  :if (and (file-directory-p yaes-isar-mode-load-path)
+           (file-directory-p yaes-lsp-isar-load-path))
+  :ensure t)
+
+(req-package lsp-isar
+  :require (session-async isar-mode)
+  :if (and (file-directory-p yaes-isar-mode-load-path)
+           (file-directory-p yaes-lsp-isar-load-path))
+  :ensure nil
+  :init
+  (add-hook 'isar-mode-hook #'lsp-isar-define-client-and-start)
+  :custom
+  (lsp-isar-path-to-isabelle (f-parent (f-parent (executable-find "isabelle")))))
+
 (provide 'yaes-external-init)
 ;;; yaes-external-init.el ends here
