@@ -20,6 +20,7 @@
     (sp-local-pair "⟦" "⟧")
     (sp-local-pair "⟪" "⟫")
     (sp-local-pair "⦇" "⦈")
+    (sp-local-pair "⦅" "⦆")
     (sp-local-pair "⦃" "⦄"))
   (sp-with-modes '(lean-mode)
     (sp-local-pair "⟨" "⟩")
