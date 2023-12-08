@@ -9,8 +9,7 @@
 (req-package fsharp-mode
   :if (and
        (version<= "24" emacs-version)
-       (executable-find yaes-fsharp-interpreter)
-       (executable-find yaes-fsharp-compiler))
+       (executable-find "dotnet"))
   :require (company company-quickhelp popup pos-tip s dash flycheck)
   :mode
   ("\\.fs[iylx]?\\'" . fsharp-mode)
