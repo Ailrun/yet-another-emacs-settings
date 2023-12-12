@@ -66,6 +66,7 @@
         TeX-newline
         agda2-load
         company-coq-maybe-exit-snippet
+        dap-mode-mouse-set-clear-breakpoint
         dap-tooltip-mouse-motion
         dired-toggle-read-only
         handle-switch-frame
@@ -73,12 +74,15 @@
         ido-switch-buffer
         iedit-switch-to-mc-mode
         ignore
+        ignore-preserving-kill-region
         kill-sentence
         lsp-latex-build
         lsp-signature-activate
         lsp-ui-doc--handle-mouse-movement
         magit-status
         mouse-buffer-menu
+        mouse-drag-vertical-line
+        mouse-select-window
         mouse-set-region
         next-buffer
         overwrite-mode

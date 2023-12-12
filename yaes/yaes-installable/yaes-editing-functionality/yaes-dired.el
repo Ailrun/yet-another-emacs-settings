@@ -27,6 +27,7 @@
   :demand t
   :custom
   (dired-omit-files "^\\.?#\\|^\\.$")
+  (dired-omit-extensions (append '(".glob" ".vo" ".vok" ".vos" ".vio") dired-omit-extensions))
   :config
   (add-hook 'dired-mode-hook #'dired-omit-mode))
 
