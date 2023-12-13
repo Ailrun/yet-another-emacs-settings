@@ -26,7 +26,7 @@
   :ensure nil
   :demand t
   :custom
-  (dired-omit-files "^\\.?#\\|^\\.$")
+  (dired-omit-files "^\\.?#\\|^\\.$|^.lia.cache$")
   :config
   (add-hook 'dired-mode-hook #'dired-omit-mode)
   (custom-set-variables
