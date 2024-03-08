@@ -65,7 +65,6 @@
       '(
         TeX-newline
         agda2-load
-        company-coq-maybe-exit-snippet
         dap-mode-mouse-set-clear-breakpoint
         dap-tooltip-mouse-motion
         dired-toggle-read-only
