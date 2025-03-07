@@ -27,10 +27,9 @@
   :demand t
   :custom
   (dired-omit-files "^\\.?#\\|^\\.$|^.lia.cache$")
+  (dired-omit-extensions '(".glob" ".vo" ".vok" ".vos" ".vio"))
   :config
-  (add-hook 'dired-mode-hook #'dired-omit-mode)
-  (custom-set-variables
-   `(dired-omit-extensions '(".glob" ".vo" ".vok" ".vos" ".vio"))))
+  (add-hook 'dired-mode-hook #'dired-omit-mode))
 
 (provide 'yaes-dired)
 ;;; yaes-dired.el ends here

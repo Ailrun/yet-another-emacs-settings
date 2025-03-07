@@ -10,7 +10,8 @@
   "If FONT is available, change FACE to use FONT with ATTR.
 If FONT is not available, change FACE with ATTR."
   (let ((set-face-args `(,face nil)))
-    (when (x-list-fonts font)
+    (when (and window-system
+               (x-list-fonts font))
       (nconc set-face-args `(:family ,font)))
     (when attr
       (nconc set-face-args attr))

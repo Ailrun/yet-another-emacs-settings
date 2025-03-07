@@ -19,6 +19,7 @@
         c-indent-line-or-region
         comment-dwim
         company-coq-maybe-exit-snippet
+        coq-terminator-insert
         downcase-region
         electric-newline-and-maybe-indent
         end-of-buffer
@@ -39,6 +40,7 @@
         nxml-electric-slash
         org-cycle
         org-end-of-line
+        org-force-self-insert
         org-return
         org-self-insert-command
         org-yank
@@ -86,6 +88,7 @@
         next-buffer
         overwrite-mode
         previous-buffer
+        proof-goto-point
         scroll-left
         smex
         toggle-frame-fullscreen

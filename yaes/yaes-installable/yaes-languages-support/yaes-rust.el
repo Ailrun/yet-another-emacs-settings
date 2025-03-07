@@ -8,12 +8,14 @@
 
 (req-package rust-mode
   :mode
-  ("\\.rs\\'" . rust-mode))
-
-(req-package racer
-  :require (rust-mode dash s f pos-tip)
+  ("\\.rs\\'" . rust-mode)
   :init
-  (add-hook 'rust-mode-hook #'racer-mode))
+  (add-hook 'rust-mode-hook #'lsp))
+
+;; (req-package racer
+;;   :require (rust-mode dash s f pos-tip)
+;;   :init
+;;   (add-hook 'rust-mode-hook #'racer-mode))
 
 (req-package flycheck-rust
   :require (rust-mode flycheck dash seq let-alist)
