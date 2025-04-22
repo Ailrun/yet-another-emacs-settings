@@ -20,6 +20,7 @@
   ("\\.slim\\'" . slim-mode))
 
 (req-package emmet-mode
+  :commands emmet-mode
   :init
   (add-hook 'sgml-mode-hook #'emmet-mode)
   (add-hook 'css-mode-hook #'emmet-mode)

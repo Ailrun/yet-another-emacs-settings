@@ -22,13 +22,13 @@
 
 (req-package flycheck-elm
   :if (version<= "24.4" emacs-version)
-  :require (flycheck)
+  :require (elm-mode flycheck)
   :commands (flycheck-elm-setup)
   :init
   (add-hook 'elm-mode-hook #'flycheck-elm-setup))
 
 (req-package elm-yasnippets
-  :require (yasnippet))
+  :require (elm-mode yasnippet))
 
 (provide 'yaes-elm)
 ;;; yaes-elm.el ends here

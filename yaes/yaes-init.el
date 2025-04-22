@@ -55,12 +55,10 @@
   (req-package--log-enable-debugging)
   (req-package--log-enable-messaging))
 
-(req-package f
-  :force t)
+(use-package f)
 
 (if (null (memq system-type '(windows-nt ms-dos)))
-    (req-package exec-path-from-shell
-      :force t
+    (use-package exec-path-from-shell
       :config (exec-path-from-shell-initialize)))
 
 (when init-file-debug
@@ -137,8 +135,7 @@
   "YAES base directory.")
 
 ;;;; Load all files in the packages directory
-(req-package load-dir
-  :force t
+(use-package load-dir
   :init (progn
           (setq load-dir-loaded '())))
 

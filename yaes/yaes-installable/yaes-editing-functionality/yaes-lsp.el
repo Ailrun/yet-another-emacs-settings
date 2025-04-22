@@ -4,23 +4,23 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package lsp-mode
+(use-package lsp-mode
   :if (version<= "25.1" emacs-version)
-  :require (dash dash-functional f ht spinner markdown-mode)
+  :after (dash f ht spinner markdown-mode lv)
   :commands (lsp)
   :diminish (lsp-mode lsp-lens-mode)
-  :init (add-hook 'dired-mode-hook #'lsp-dired-mode)
+  :hook
+  (dired-mode . lsp-dired-mode)
   :custom
   (lsp-prefer-flymake nil)
   (lsp-modeline-code-actions-segments '(icon)))
 
-(req-package lsp-ui
+(use-package lsp-ui
   :if (version<= "25.1" emacs-version)
-  :require (dash dash-functional lsp-mode markdown-mode)
-  :commands (lsp-ui-mode)
-  :init (add-hook 'lsp-mode-hook #'lsp-ui-mode)
+  :after (dash lsp-mode markdown-mode)
+  :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-alignment 'window)
   (lsp-ui-doc-position 'top)

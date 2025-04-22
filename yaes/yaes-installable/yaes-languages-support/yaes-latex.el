@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package auctex
+(use-package auctex
   :mode
   ("\\.tex\\'" . LaTeX-mode)
   ("\\.sty\\'" . LaTeX-mode)
@@ -16,14 +16,14 @@
   :custom
   (TeX-parse-self t))
 
-;; (req-package company-auctex
+;; (use-package company-auctex
 ;;   :require (yasnippet company auctex)
 ;;   :commands (company-auctex-init)
 ;;   :config
 ;;   (add-hook 'LaTeX-mode-hook #'company-auctex-init)
 ;;   (add-hook 'latex-mode-hook #'company-auctex-init))
 
-;; (req-package company-math
+;; (use-package company-math
 ;;   :require (company)
 ;;   ;; :functions (company-math-setup)
 ;;   ;; :commands (company-math-setup)
@@ -37,15 +37,15 @@
 ;;   (add-hook 'LaTeX-mode-hook #'company-math-setup)
 ;;   (add-hook 'latex-mode-hook #'company-math-setup))
 
-(req-package latex-extra
-  :require (auctex cl-lib)
+(use-package latex-extra
+  :after (auctex)
+  :commands latex-extra-mode
   :diminish latex-extra-mode
-  :commands (latex-extra-mode)
   :init
   (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
   (add-hook 'latex-mode-hook #'latex-extra-mode))
 
-;; (req-package tex-mode
+;; (use-package tex-mode
 ;;   :mode
 ;;   ("\\.tex\\'" . latex-mode)
 ;;   ("\\.sty\\'" . latex-mode)
@@ -53,20 +53,20 @@
 ;;   :init
 ;;   (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8))
 
-;; (req-package latex-pretty-symbols)
+;; (use-package latex-pretty-symbols)
 
-;; (req-package reftex
+;; (use-package reftex
 ;;   :diminish reftex-mode
 ;;   :commands (reftex-mode)
 ;;   :init
 ;;   (add-hook 'LaTeX-mode-hook #'reftex-mode)
 ;;   (add-hook 'latex-mode-hook #'reftex-mode))
 
-(req-package lsp-latex
-  :require (tex-mode)
-  :init
-  (add-hook 'LaTeX-mode-hook #'lsp)
-  (add-hook 'latex-mode-hook #'lsp)
+(use-package lsp-latex
+  :after (auctex)
+  :hook
+  (LaTeX-mode . lsp)
+  (latex-mode . lsp)
   :custom
   (lsp-latex-forward-search-executable "okular")
   (lsp-latex-forward-search-args '("--unique" "file:%p#src:%l%f")))

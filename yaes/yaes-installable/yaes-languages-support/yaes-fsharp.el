@@ -4,13 +4,13 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package fsharp-mode
+(use-package fsharp-mode
   :if (and
        (version<= "24" emacs-version)
        (executable-find "dotnet"))
-  :require (company company-quickhelp popup pos-tip s dash flycheck)
+  :after (lsp s dash flycheck)
   :mode
   ("\\.fs[iylx]?\\'" . fsharp-mode)
   :interpreter

@@ -4,22 +4,22 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package flycheck
+(use-package flycheck
   :if (version<= "24.3" emacs-version)
-  :require (dash let-alist seq)
+  :after (dash let-alist seq)
   :config
   (global-flycheck-mode t)
   :custom
   (flycheck-emacs-lisp-load-path 'inherit))
 
-(req-package flycheck-pos-tip
+(use-package flycheck-pos-tip
   :if (version<= "24.1" emacs-version)
-  :require (flycheck pos-tip)
+  :after (flycheck pos-tip)
   :diminish flycheck-pos-tip-mode
-  :config
-  (flycheck-pos-tip-mode t))
+  :hook
+  (flycheck . flycheck-pos-tip-mode))
 
 (provide 'yaes-flycheck)
 ;;; yaes-flycheck.el ends here

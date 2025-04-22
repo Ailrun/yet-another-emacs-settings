@@ -4,29 +4,45 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package haskell-mode
+(use-package haskell-mode
   :if (version<= "24.3" emacs-version)
-  :mode
-  ("\\.l?hs\\'" . haskell-mode)
   :interpreter
   ("ghci" . haskell-mode)
   ("stack ghci" . haskell-mode)
-  :init
-  (add-hook 'haskell-mode-hook #'haskell-indentation-mode)
+  :hook
+  (haskell-mode . haskell-indentation-mode)
   :custom
   (haskell-indent-offset 2))
 
-(req-package lsp-haskell
-  :require (haskell-mode)
+(use-package haskell-cabal
+  :if (version<= "24.3" emacs-version)
+  :ensure haskell-mode
+  :defer t
+  :config
+  (require 'haskell-mode))
+
+(use-package lsp-haskell
+  :after (:any haskell-mode haskell-cabal)
+  :hook
+  (haskell-mode . lsp)
+  (haskell-literate-mode . lsp)
+  (haskell-cabal-mode . lsp)
   :init
-  (add-hook 'haskell-mode-hook #'lsp)
+  (add-hook 'lsp-after-initialize-hook
+            #'(lambda ()
+                (add-to-list 'lsp--formatting-indent-alist '(haskell-mode . haskell-indentation-layout-offset))
+                (add-to-list 'lsp--formatting-indent-alist '(haskell-literate-mode . haskell-indentation-layout-offset))
+                (add-to-list 'lsp--formatting-indent-alist '(haskell-cabal-mode . haskell-indentation-layout-offset))
+                (lsp--set-configuration
+                 '(:haskell (:cabalFormattingProvider "cabal-fmt"))
+                 )))
   :custom
   (lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
-(req-package haskell-snippets
-  :require (yasnippet cl-lib))
+(use-package haskell-snippets
+  :after (:all yasnippet cl-lib (:any haskell-mode haskell-cabal)))
 
 (provide 'yaes-haskell)
 ;;; yaes-haskell.el ends here

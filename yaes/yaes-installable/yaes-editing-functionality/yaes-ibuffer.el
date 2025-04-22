@@ -4,23 +4,22 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package ibuffer
+(use-package ibuffer
   :custom
   (ibuffer-use-other-window t)
   :bind
   (("C-x C-b" . ibuffer)))
 
-(req-package ibuffer-vc
-  :require (ibuffer cl-lib)
+(use-package ibuffer-vc
+  :after (ibuffer)
   :commands (ibuffer-vc-set-filter-groups-by-vc-root)
-  :init
-  (add-hook 'ibuffer-hook
-            (lambda ()
-              (ibuffer-vc-set-filter-groups-by-vc-root)
-              (unless (eq ibuffer-sorting-mode 'alphabetic)
-                (ibuffer-do-sort-by-alphabetic))))
+  :hook
+  (ibuffer . (lambda ()
+               (ibuffer-vc-set-filter-groups-by-vc-root)
+               (unless (eq ibuffer-sorting-mode 'alphabetic)
+                 (ibuffer-do-sort-by-alphabetic))))
   :config
   (add-to-list 'ibuffer-formats
                '(mark modified read-only vc-status-mini " "
@@ -34,17 +33,17 @@
                       " "
                       filename-and-process)))
 
-(req-package ibuffer-tramp
-  :require (ibuffer ibuffer-vc tramp)
+(use-package ibuffer-tramp
+  :after (ibuffer ibuffer-vc tramp)
   :commands (ibuffer-tramp-generate-filter-groups-by-tramp-connection)
   :init
   (add-hook 'ibuffer-hook
-            (lambda ()
-              (setq ibuffer-filter-groups
-                    (append
-                     ibuffer-filter-groups
-                     (ibuffer-tramp-generate-filter-groups-by-tramp-connection)))
-              (ibuffer-update nil t))
+            #'(lambda ()
+                (setq ibuffer-filter-groups
+                      (append
+                       ibuffer-filter-groups
+                       (ibuffer-tramp-generate-filter-groups-by-tramp-connection)))
+                (ibuffer-update nil t))
             t))
 
 (provide 'yaes-ibuffer)

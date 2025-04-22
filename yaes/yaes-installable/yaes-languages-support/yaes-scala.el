@@ -4,21 +4,23 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package scala-mode
+(use-package scala-mode
   :mode
   ("\\.scala\\'" . scala-mode))
 
-(req-package lsp-metals
+(use-package lsp-metals
   :if (executable-find "metals-emacs")
+  :after (scala-mode)
   :config
   (add-hook 'scala-mode-hook #'lsp))
 
-(req-package sbt-mode
+(use-package sbt-mode
   :if (and
        (version<= "24.4" emacs-version)
        (executable-find "sbt"))
+  :commands sbt-start sbt-command
   :config
   (substitute-key-definition
    'minibuffer-complete-word

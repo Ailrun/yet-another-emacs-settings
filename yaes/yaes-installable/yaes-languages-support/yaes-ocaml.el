@@ -4,25 +4,26 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package caml)
+(use-package caml
+  :defer t)
 
-(req-package tuareg
-  :require (caml)
+(use-package tuareg
+  :after (caml)
   :mode ("\\.ml[iylp]?\\'" . tuareg-mode)
   :init
   (when (executable-find "ocamllsp")
     (add-hook 'tuareg-mode-hook #'lsp)))
 
-(req-package dune
+(use-package dune
   :if (executable-find "dune")
   :mode (("dune" . dune-mode)
          ("dune-project" . dune-mode)))
 
-(req-package merlin
+(use-package merlin
   :if (executable-find "ocamlmerlin")
-  :require (iedit tuareg)
+  :after (tuareg)
   :commands (merlin-mode)
   :diminish (merlin-mode)
   :init
@@ -31,8 +32,8 @@
   :custom
   (merlin-error-after-save nil))
 
-(req-package flycheck-ocaml
-  :require (flycheck merlin)
+(use-package flycheck-ocaml
+  :after (flycheck merlin)
   :functions (flycheck-ocaml-setup)
   :init
   (add-hook 'tuareg-mode-hook #'flycheck-ocaml-setup)

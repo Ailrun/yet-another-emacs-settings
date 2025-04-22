@@ -4,9 +4,10 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package lsp-java
+(use-package lsp-java
+  :after (java-mode)
   :init
   (add-hook 'java-mode-hook #'lsp))
 

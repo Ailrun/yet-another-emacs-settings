@@ -20,7 +20,7 @@
         :commands (run-coq))))
 
 (req-package coq-commenter
-  :require (dash s cl-lib)
+  :require (dash s)
   :commands (coq-commenter-mode)
   :diminish coq-commenter-mode
   :bind
@@ -33,7 +33,7 @@
   (add-hook 'coq-mode-hook #'coq-commenter-mode))
 
 (req-package company-coq
-  :require (company-math company yasnippet dash cl-lib)
+  :require (company yasnippet dash)
   :commands (company-coq-mode)
   :init
   (add-hook 'coq-mode-hook (lambda()

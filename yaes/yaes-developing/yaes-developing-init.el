@@ -6,6 +6,7 @@
 
 (require 'f)
 (require 'load-dir)
+(require 'use-package)
 
 (defconst yaes-developing-dir
   (f-dirname (f-this-file))
@@ -17,12 +18,12 @@
 
 (mapc 'load-dir-one yaes-developing-packages)
 
-(req-package llvm-mode
+(use-package llvm-mode
   :ensure nil
   :mode
   ("\\.ll\\'" . llvm-mode))
 
-(req-package tutch-mode
+(use-package tutch-mode
   :ensure nil
   :mode
   ("\\.tut\\'" . tutch-mode)

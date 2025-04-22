@@ -4,9 +4,10 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package shell-here)
+(use-package shell-here
+  :defer t)
 
 (provide 'yaes-shell)
 ;;; yaes-shell.el ends here
