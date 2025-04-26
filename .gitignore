@@ -20,6 +20,9 @@
 /transient/*
 !/transient/levels.el
 
+# Ltex dictionary
+!/lsp-ltex-plus
+
 # emacs binary compiled files
 *.elc
 

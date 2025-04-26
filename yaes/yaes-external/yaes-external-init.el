@@ -49,10 +49,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
-;;;; JDEE (Java Development Environment for Emacs)
+;;;; lsp-ltex-plus
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defconst yaes-jdee-server-dir (f-join yaes-external-dir "JDEE/target"))
+(defconst yaes-lsp-ltex-plus-dir (f-join yaes-external-dir "lsp-ltex-plus"))
+
+(push yaes-lsp-ltex-plus-dir load-path)
+
+(use-package lsp-ltex-plus
+  :after (lsp)
+  :ensure nil
+  :commands lsp)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;

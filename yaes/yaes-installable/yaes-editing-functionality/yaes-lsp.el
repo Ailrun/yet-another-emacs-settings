@@ -9,7 +9,7 @@
 (use-package lsp-mode
   :if (version<= "25.1" emacs-version)
   :after (markdown-mode)
-  :commands (lsp)
+  :commands (lsp lsp-deferred)
   :diminish (lsp-mode lsp-lens-mode)
   :hook
   (dired-mode . lsp-dired-mode)

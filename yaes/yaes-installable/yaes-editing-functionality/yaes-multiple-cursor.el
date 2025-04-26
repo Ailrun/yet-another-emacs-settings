@@ -7,6 +7,7 @@
 (require 'use-package)
 
 (use-package phi-search
+  :demand t
   :bind
   ("C-s" . phi-search)
   ("C-r" . phi-search-backward))

@@ -8,8 +8,8 @@
 
 (use-package lsp-java
   :after (java-mode)
-  :init
-  (add-hook 'java-mode-hook #'lsp))
+  :hook
+  (java-mode . lsp))
 
 ;; Todo:
 ;; Let's try Meghanada

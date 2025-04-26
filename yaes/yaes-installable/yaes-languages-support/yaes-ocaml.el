@@ -18,26 +18,27 @@
 
 (use-package dune
   :if (executable-find "dune")
-  :mode (("dune" . dune-mode)
-         ("dune-project" . dune-mode)))
+  :mode
+  ("dune" . dune-mode)
+  ("dune-project" . dune-mode))
 
 (use-package merlin
   :if (executable-find "ocamlmerlin")
   :after (tuareg)
   :commands (merlin-mode)
   :diminish (merlin-mode)
-  :init
-  (add-hook 'tuareg-mode-hook #'merlin-mode)
-  (add-hook 'caml-mode-hook #'merlin-mode)
+  :hook
+  (tuareg-mode-hook . merlin-mode)
+  (caml-mode-hook . merlin-mode)
   :custom
   (merlin-error-after-save nil))
 
 (use-package flycheck-ocaml
   :after (flycheck merlin)
   :functions (flycheck-ocaml-setup)
-  :init
-  (add-hook 'tuareg-mode-hook #'flycheck-ocaml-setup)
-  (add-hook 'caml-mode-hook #'flycheck-ocaml-setup))
+  :hook
+  (tuareg-mode-hook . flycheck-ocaml-setup)
+  (caml-mode-hook . flycheck-ocaml-setup))
 
 (provide 'yaes-ocaml)
 ;;; yaes-ocaml.el ends here

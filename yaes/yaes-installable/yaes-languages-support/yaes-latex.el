@@ -39,7 +39,7 @@
 
 (use-package latex-extra
   :after (auctex)
-  :diminish latex-extra-mode
+  :diminish (latex-extra-mode)
   :hook
   (LaTeX-mode . latex-extra-mode)
   (latex-mode . latex-extra-mode))
@@ -63,9 +63,12 @@
 
 (use-package lsp-latex
   :after (auctex)
+  :commands lsp
   :hook
   (LaTeX-mode . lsp)
   (latex-mode . lsp)
+  (bibtex-mode . lsp)
+  (bibtex-style-mode . lsp)
   :custom
   (lsp-latex-forward-search-executable "okular")
   (lsp-latex-forward-search-args '("--unique" "file:%p#src:%l%f")))
