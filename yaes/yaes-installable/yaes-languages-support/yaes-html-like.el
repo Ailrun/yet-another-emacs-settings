@@ -4,33 +4,33 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package web-mode
+(use-package web-mode
   :mode
   ("\\.html\\'" . web-mode))
 
-(req-package pug-mode
+(use-package pug-mode
   :mode
   ("\\.jade\\'" . pug-mode)
   ("\\.pug\\'" . pug-mode))
 
-(req-package slim-mode
+(use-package slim-mode
   :mode
   ("\\.slim\\'" . slim-mode))
 
-(req-package emmet-mode
+(use-package emmet-mode
   :commands emmet-mode
-  :init
-  (add-hook 'sgml-mode-hook #'emmet-mode)
-  (add-hook 'css-mode-hook #'emmet-mode)
+  :hook
+  (sgml-mode . emmet-mode)
+  (css-mode . emmet-mode)
   :custom
   (emmet-indentation 2)
   (emmet-self-closing-tag-style " /")
   (emmet-move-cursor-between-quotes t))
 
-(req-package company-web
-  :require (company dash cl-lib)
+(use-package company-web
+  :after (company)
   :functions (company-web-html-init
               company-web-jade-init
               company-web-slim-init)
@@ -53,9 +53,10 @@
                 (append
                  '(company-web-slim)
                  company-backends)))
-  (add-hook 'html-mode-hook #'company-web-html-init)
-  (add-hook 'jade-mode-hook #'company-web-jade-init)
-  (add-hook 'slim-mode-hook #'company-web-slim-init))
+  :hook
+  (html-mode . company-web-html-init)
+  (jade-mode . company-web-jade-init)
+  (slim-mode . company-web-slim-init))
 
 (provide 'yaes-html-like)
 ;;; yaes-html-like.el ends here

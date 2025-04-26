@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package purescript-mode
+(use-package purescript-mode
   :if (version<= "24" emacs-version)
   :mode
   ("\\.purs\\'" . purescript-mode)
@@ -17,12 +17,11 @@
   (purescript-indentation-delete-backward-indentation nil)
   (purescript-indent-spaces 2))
 
-(req-package psc-ide
+(use-package psc-ide
   :if (version<= "25" emacs-version)
-  :require (purescript-mode company flycheck)
-  :commands (psc-ide-mode)
-  :init
-  (add-hook 'purescript-mode-hook #'psc-ide-mode))
+  :after (purescript-mode company flycheck)
+  :hook
+  (purescript-mode . psc-ide-mode))
 
 (provide 'yaes-purescript)
 ;;; yaes-purescript.el ends here

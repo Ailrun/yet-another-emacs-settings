@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package yaml-mode
+(use-package yaml-mode
   :if (version<= "24.1" emacs-version)
   :mode
   ("\\.ya?ml\\'" . yaml-mode))

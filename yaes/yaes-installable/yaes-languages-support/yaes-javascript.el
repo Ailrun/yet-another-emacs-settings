@@ -4,13 +4,13 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package json-mode
+(use-package json-mode
   :mode
   ("\\.json\\'" . json-mode))
 
-(req-package js2-mode
+(use-package js2-mode
   :if (and (version<= "24.1" emacs-version))
   :mode
   ("\\.js\\'" . js2-mode)
@@ -24,7 +24,7 @@
 
 ;; ;; These 3 packages are too slow
 
-;; (req-package flow-minor-mode
+;; (use-package flow-minor-mode
 ;;   :if (and (version<= "25.1" emacs-version)
 ;;            (executable-find "flow"))
 ;;   :require (web-mode)
@@ -33,7 +33,7 @@
 ;;   (add-hook 'js2-mode-hook #'flow-minor-mode)
 ;;   (add-hook 'js2-jsx-mode-hook #'flow-minor-mode))
 
-;; (req-package company-flow
+;; (use-package company-flow
 ;;   :if (and (version<= "25.1" emacs-version)
 ;;            (executable-find "flow"))
 ;;   :require (company)
@@ -52,24 +52,19 @@
 ;;                            '(company-flow)
 ;;                            company-backends)))))
 
-;; (req-package flycheck-flow
+;; (use-package flycheck-flow
 ;;   :if (and (version<= "25.1" emacs-version)
 ;;            (executable-find "flow"))
 ;;   :require (flycheck))
 
-(req-package tern
+(use-package tern
   :if (and
        (version<= "24" emacs-version)
        (executable-find "tern"))
-  :require (json)
-  :commands (tern-mode)
-  :init
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (tern-mode t)))
-  (add-hook 'js2-jsx-mode-hook
-            (lambda ()
-              (tern-mode t))))
+  :after (json)
+  :hook
+  (js2-mode . tern-mode)
+  (js2-jsx-mode . tern-mode))
 
 (provide 'yaes-javascript)
 ;;; yaes-javascript.el ends here

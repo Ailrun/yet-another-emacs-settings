@@ -4,20 +4,18 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package diminish
-  :force t)
+(use-package diminish)
 
-(req-package rich-minority
-  :require (cl-lib)
+(use-package rich-minority
   :diminish rich-minority-mode
   :config
   (rich-minority-mode t))
 
-(req-package smart-mode-line
+(use-package smart-mode-line
   :if (version<= "24.3" emacs-version)
-  :require (rich-minority)
+  :after (rich-minority)
   :custom
   (sml/line-number-format "%4l")
   (sml/position-percentage-format nil)

@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package undo-tree
+(use-package undo-tree
   :diminish undo-tree-mode
   :custom
   (global-undo-tree-mode t)

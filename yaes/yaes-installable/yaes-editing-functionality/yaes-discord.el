@@ -4,15 +4,16 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package elcord
+(use-package elcord
   :if (version<= "25.1" emacs-version)
   :demand t
   :diminish elcord-mode
+  :custom
+  (elcord-display-buffer-details . nil)
   :config
-  (setq elcord-display-buffer-details nil)
-  (elcord-mode))
+  (elcord-mode t))
 
 (provide 'yaes-discord)
 ;;; yaes-discord.el ends here

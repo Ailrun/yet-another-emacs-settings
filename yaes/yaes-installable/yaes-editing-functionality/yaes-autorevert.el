@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package autorevert
+(use-package autorevert
   :diminish auto-revert-mode
   :config
   (global-auto-revert-mode t))

@@ -4,23 +4,19 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package fish-mode
+(use-package fish-mode
   :if (version<= "24" emacs-version)
   :mode
   ("\\.fish\\'" . fish-mode))
 
-(req-package sh-script
+(use-package sh-script
   :mode
   ("\\.\\(ba\\|t?c\\)sh\\'" . sh-mode))
 
-(req-package company-shell
-  :require (company dash cl-lib)
-  :functions (company-shell-fish-init
-              company-shell-sh-init)
-  :commands (company-shell-fish-init
-             company-shell-sh-init)
+(use-package company-shell
+  :after (company)
   :init
   (defun company-shell-fish-init ()
     "Company-shell setup."
@@ -34,8 +30,9 @@
                 (append
                  '(company-shell)
                  company-backends)))
-  (add-hook 'fish-mode-hook #'company-shell-fish-init)
-  (add-hook 'sh-mode-hook #'company-shell-sh-init))
+  :hook
+  (fish-mode . company-shell-fish-init)
+  (sh-mode . company-shell-sh-init))
 
 (provide 'yaes-shell-script)
 ;;; yaes-shell-script.el ends here

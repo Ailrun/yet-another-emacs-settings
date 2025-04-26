@@ -5,7 +5,7 @@
 ;;; Code:
 
 (require 'f)
-(require 'req-package)
+(require 'use-package)
 
 (defvar-local yaes-coq-coqtop-path (executable-find "coqtop"))
 (defvar-local yaes-coq-emacs-lisp-path "")
@@ -15,13 +15,13 @@
       (setq yaes-coq-emacs-lisp-path
             (f-join (f-dirname (f-dirname yaes-coq-coqtop-path)) "emacs"))
       (push yaes-coq-emacs-lisp-path load-path)
-      (req-package coq-inferior
+      (use-package coq-inferior
         :ensure nil
         :commands (run-coq))))
 
-(req-package coq-commenter
-  :require (dash s)
-  :commands (coq-commenter-mode)
+(use-package coq-commenter
+  :defines coq-mode-map
+  :after (proof-general)
   :diminish coq-commenter-mode
   :bind
   (:map coq-mode-map
@@ -29,15 +29,13 @@
         ("C-x C-;" . coq-commenter-comment-proof-to-cursor)
         ("C-'" . coq-commenter-uncomment-proof-in-region)
         ("C-x C-'" . coq-commenter-uncomment-proof-in-buffer))
-  :init
-  (add-hook 'coq-mode-hook #'coq-commenter-mode))
+  :hook
+  (coq-mode . coq-commenter-mode))
 
-(req-package company-coq
-  :require (company yasnippet dash)
-  :commands (company-coq-mode)
-  :init
-  (add-hook 'coq-mode-hook (lambda()
-                             (company-coq-mode t))))
+(use-package company-coq
+  :after (company yasnippet)
+  :hook
+  (coq-mode . company-coq-mode))
 
 (provide 'yaes-coq)
 ;;; yaes-coq.el ends here

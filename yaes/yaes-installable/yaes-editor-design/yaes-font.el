@@ -4,8 +4,6 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
-
 (defun yaes-set-font (font face &optional attr)
   "If FONT is available, change FACE to use FONT with ATTR.
 If FONT is not available, change FACE with ATTR."
@@ -20,12 +18,14 @@ If FONT is not available, change FACE with ATTR."
 ;;;; Font settings
 ;;;;
 (defun yaes-font-config ()
+  "Config fonts."
   ;; (yaes-set-font "Consolas" 'fixed-pitch)
   (yaes-set-font "JuliaMono" 'default '(:height 110))
   ;; (yaes-set-font "Mononoki" 'default '(:height 110))
   (set-fontset-font t 'hangul (font-spec :family "NanumGothicCoding")))
 
 (defun yaes-font-hook ()
+  "Config fonts as a hook."
   (yaes-font-config)
   (remove-hook 'server-after-make-frame-hook #'yaes-font-hook))
 

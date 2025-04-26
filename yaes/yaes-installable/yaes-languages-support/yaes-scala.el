@@ -13,8 +13,8 @@
 (use-package lsp-metals
   :if (executable-find "metals-emacs")
   :after (scala-mode)
-  :config
-  (add-hook 'scala-mode-hook #'lsp))
+  :hook
+  (scala-mode . lsp))
 
 (use-package sbt-mode
   :if (and

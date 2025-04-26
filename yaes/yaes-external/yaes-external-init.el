@@ -4,7 +4,7 @@
 ;;;
 ;;; Code:
 (require 'f)
-(require 'req-package)
+(require 'use-package)
 
 (defconst yaes-external-dir
   (f-dirname (f-this-file)))
@@ -21,7 +21,8 @@
 
       (push yaes-agda-load-path load-path)
 
-      (req-package agda2
+      (use-package agda2
+        :if (file-directory-p yaes-agda-load-path)
         :ensure nil
         :mode
         ("\\.l?agda\\'" . agda2-mode)
@@ -33,11 +34,11 @@
 ;;;; Proof General
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defconst yaes-pg-load-path (f-join yaes-external-dir "ProofGeneral/generic"))
+(defconst yaes-pg-load-path (f-join yaes-external-dir "ProofGeneral"))
 
 (push yaes-pg-load-path load-path)
 
-(req-package proof-site
+(use-package proof-general
   :if (file-directory-p yaes-pg-load-path)
   :ensure nil
   :mode
@@ -64,24 +65,25 @@
 (push yaes-isar-mode-load-path load-path)
 (push yaes-lsp-isar-load-path load-path)
 
-(req-package isar-mode
+(use-package isar-mode
   :if (file-directory-p yaes-isar-mode-load-path)
   :ensure nil
   :mode
   ("\\.thy\\'" . isar-mode))
 
-(req-package session-async
+(use-package session-async
   :if (and (file-directory-p yaes-isar-mode-load-path)
            (file-directory-p yaes-lsp-isar-load-path))
-  :ensure t)
+  :ensure t
+  :defer t)
 
-(req-package lsp-isar
-  :require (session-async isar-mode)
+(use-package lsp-isar
+  :after (isar-mode)
   :if (and (file-directory-p yaes-isar-mode-load-path)
            (file-directory-p yaes-lsp-isar-load-path))
   :ensure nil
-  :init
-  (add-hook 'isar-mode-hook #'lsp-isar-define-client-and-start)
+  :hook
+  (isar-mode . lsp-isar-define-client-and-start)
   :custom
   (lsp-isar-path-to-isabelle (f-parent (f-parent (executable-find "isabelle")))))
 

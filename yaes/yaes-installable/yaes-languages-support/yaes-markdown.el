@@ -4,11 +4,11 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
 (defconst yaes-markdown-command "markdown")
 
-(req-package markdown-mode
+(use-package markdown-mode
   :if (and
        (version<= "24" emacs-version)
        (executable-find yaes-markdown-command))
@@ -18,12 +18,13 @@
   :custom
   (markdown-command yaes-markdown-command))
 
-(req-package flymd
-  :require (markdown-mode cl-lib)
+(use-package flymd
+  :after (markdown-mode)
   :commands (flymd-flyit))
 
-(req-package markdown-toc
-  :require (s dash markdown-mode)
+(use-package markdown-toc
+  :functions markdown-code-block-at-point
+  :after (markdown-mode)
   :commands (markdown-toc-generate-toc markdown-toc-refresh-toc)
   :init
   (defun markdown-imenu-create-index ()

@@ -4,11 +4,10 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package paradox
-  :if (version<= "24.4" emacs-version)
-  :require (seq let-alist spinner hydra))
+(use-package paradox
+  :if (version<= "24.4" emacs-version))
 
 (provide 'yaes-package)
 ;;; yaes-package.el ends here

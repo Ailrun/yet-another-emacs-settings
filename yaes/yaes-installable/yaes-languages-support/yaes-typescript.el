@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package typescript-mode
+(use-package typescript-mode
   :mode
   ("\\.tsx?\\'" . typescript-mode)
   :init

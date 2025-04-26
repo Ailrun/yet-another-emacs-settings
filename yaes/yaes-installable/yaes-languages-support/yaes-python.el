@@ -4,18 +4,18 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package python
+(use-package python
   :if (executable-find "python")
   :pin gnu
   :mode
   ("\\.py[3w]?" . python-mode))
 
-(req-package lsp-python-ms
-  :require (python)
-  :init
-  (add-hook 'python-mode-hook #'lsp))
+(use-package lsp-python-ms
+  :after (python)
+  :hook
+  (python-mode . lsp))
 
 (provide 'yaes-python)
 ;;; yaes-python.el ends here

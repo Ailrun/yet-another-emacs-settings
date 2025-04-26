@@ -4,16 +4,16 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package css-mode
+(use-package css-mode
   :ensure nil
   :mode
   ("\\.css\\'" . css-mode)
   :custom
   (css-indent-level 2))
 
-(req-package scss-mode
+(use-package scss-mode
   :mode
   ("\\.scss\\'" . scss-mode))
 

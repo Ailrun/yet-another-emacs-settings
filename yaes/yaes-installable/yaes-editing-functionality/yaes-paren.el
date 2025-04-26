@@ -4,10 +4,10 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package smartparens
-  :require (dash cl-lib)
+(use-package smartparens
+  :functions sp-local-pair
   :diminish smartparens-mode
   :custom
   (sp-escape-quotes-after-insert nil)
@@ -27,13 +27,13 @@
     (sp-local-pair "‹" "›"))
   (smartparens-global-mode t))
 
-(req-package smartparens-config
+(use-package smartparens-config
   :ensure smartparens
-  :require (smartparens)
+  :after (smartparens)
   :config
   (eval-after-load 'auctex '(require 'smartparens-latex)))
 
-(req-package highlight-parentheses
+(use-package highlight-parentheses
   :diminish highlight-parentheses-mode
   :config
   (global-highlight-parentheses-mode t))

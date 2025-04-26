@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package abbrev
+(use-package abbrev
   :ensure nil
   :demand t
   :diminish abbrev-mode)

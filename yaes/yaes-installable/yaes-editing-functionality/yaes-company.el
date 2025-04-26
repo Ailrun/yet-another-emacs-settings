@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package company
+(use-package company
   :demand t
   :diminish company-mode
   :bind

@@ -5,12 +5,12 @@
 ;;; Code:
 
 (require 'f)
-(require 'req-package)
+(require 'use-package)
 
 (defconst yaes-yasnippet-dir
   (f-join user-emacs-directory "snippets"))
 
-(req-package yasnippet
+(use-package yasnippet
   :diminish yas-minor-mode
   :custom
   (yas-prompt-functions

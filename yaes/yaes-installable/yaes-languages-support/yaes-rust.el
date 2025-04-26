@@ -4,23 +4,23 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package rust-mode
+(use-package rust-mode
   :mode
   ("\\.rs\\'" . rust-mode)
   :init
   (add-hook 'rust-mode-hook #'lsp))
 
-;; (req-package racer
+;; (use-package racer
 ;;   :require (rust-mode dash s f pos-tip)
 ;;   :init
 ;;   (add-hook 'rust-mode-hook #'racer-mode))
 
-(req-package flycheck-rust
-  :require (rust-mode flycheck dash seq let-alist)
-  :init
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(use-package flycheck-rust
+  :after (rust-mode flycheck)
+  :hook
+  (flycheck-mode . flycheck-rust-setup))
 
 (provide 'yaes-rust)
 ;;; yaes-rust.el ends here

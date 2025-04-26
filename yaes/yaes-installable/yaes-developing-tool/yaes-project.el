@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package projectile
+(use-package projectile
   :custom
   (projectile-mode-line-prefix " Prj")
   (projectile-cache-file (expand-file-name (concat "projectile-" os-name ".cache") user-emacs-directory))
@@ -16,17 +16,17 @@
   (persp-mode-prefix-key (kbd "C-c M-p"))
   :config
   (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-  (projectile-global-mode t))
+  :config
+  (projectile-mode t))
 
-(req-package perspective
-  :require (cl-lib)
-  :init
-  (setq persp-mode-prefix-key (kbd "C-c M-p"))
+(use-package perspective
+  :custom
+  (persp-mode-prefix-key (kbd "C-c M-p"))
   :config
   (persp-mode t))
 
-(req-package persp-projectile
-  :require (perspective projectile cl-lib))
+(use-package persp-projectile
+  :after (perspective projectile))
 
 (provide 'yaes-project)
 ;;; yaes-project.el ends here

@@ -4,26 +4,22 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package eldoc
+(use-package eldoc
   :diminish eldoc-mode
-  :commands (eldoc-mode)
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
-  (add-hook 'lisp-interaction-mode-hook #'eldoc-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode))
+  :hook
+  (emacs-lisp-mode . eldoc-mode)
+  (lisp-interaction-mode . eldoc-mode)
+  (eval-expression-minibuffer-setup . eldoc-mode))
 
-(req-package auto-compile
+(use-package auto-compile
   :if (version<= "24.3" emacs-version)
-  :require (dash packed)
   :diminish auto-compile-on-save-mode
-  :commands (auto-compile-on-save-mode)
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'auto-compile-on-save-mode))
+  :hook
+  (emacs-lisp-mode . auto-compile-on-save-mode))
 
-(req-package elisp-refs
-  :require (dash f list-utils loop s)
+(use-package elisp-refs
   :commands (elisp-refs-function
              elisp-refs-macro
              elisp-refs-variable

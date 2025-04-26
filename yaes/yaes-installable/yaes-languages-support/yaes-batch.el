@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package bat-mode
+(use-package bat-mode
   :if (version<= "24.4" emacs-version)
   :mode ("\\.bat\\'" . bat-mode))
 

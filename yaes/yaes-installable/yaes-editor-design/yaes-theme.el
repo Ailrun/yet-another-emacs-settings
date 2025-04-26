@@ -4,9 +4,9 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package boron-theme
+(use-package boron-theme
   :if (version<= "24.0" emacs-version)
   :config
   (load-theme 'boron t))

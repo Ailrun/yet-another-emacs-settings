@@ -10,7 +10,7 @@
   :if (and
        (version<= "24" emacs-version)
        (executable-find "dotnet"))
-  :after (lsp s dash flycheck)
+  :after (lsp flycheck)
   :mode
   ("\\.fs[iylx]?\\'" . fsharp-mode)
   :interpreter

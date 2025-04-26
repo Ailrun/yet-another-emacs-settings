@@ -8,7 +8,6 @@
 
 (use-package flycheck
   :if (version<= "24.3" emacs-version)
-  :after (dash let-alist seq)
   :config
   (global-flycheck-mode t)
   :custom
@@ -16,7 +15,7 @@
 
 (use-package flycheck-pos-tip
   :if (version<= "24.1" emacs-version)
-  :after (flycheck pos-tip)
+  :after (flycheck)
   :diminish flycheck-pos-tip-mode
   :hook
   (flycheck . flycheck-pos-tip-mode))

@@ -4,16 +4,15 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package magit
+(use-package magit
   :if (version<= "24.4" emacs-version)
-  :require (async dash)
   :config
   (setenv "GIT_ASKPASS" "git-gui--askpass")
   (setenv "SSH_ASKPASS" "git-gui--askpass")
   :bind
-  (("C-x v S" . magit-status)))
+  ("C-x v S" . magit-status))
 
 ;;;; This package is too slow
 ;; (req-package magithub
@@ -28,7 +27,7 @@
 ;;   (set-face-attribute 'magithub-label-face nil :box nil)
 ;;   (magithub-feature-autoinject t))
 
-(req-package git-modes
+(use-package git-modes
   :mode
   ("/\\.gitattributes\\'" . gitattributes-mode)
   ("/info/attributes\\'" . gitattributes-mode)

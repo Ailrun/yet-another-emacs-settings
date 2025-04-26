@@ -10,10 +10,11 @@
   :custom
   (ibuffer-use-other-window t)
   :bind
-  (("C-x C-b" . ibuffer)))
+  ("C-x C-b" . ibuffer))
 
 (use-package ibuffer-vc
   :after (ibuffer)
+  :functions ibuffer-do-sort-by-alphabetic
   :commands (ibuffer-vc-set-filter-groups-by-vc-root)
   :hook
   (ibuffer . (lambda ()
@@ -34,7 +35,8 @@
                       filename-and-process)))
 
 (use-package ibuffer-tramp
-  :after (ibuffer ibuffer-vc tramp)
+  :after (ibuffer ibuffer-vc)
+  :functions (ibuffer-update)
   :commands (ibuffer-tramp-generate-filter-groups-by-tramp-connection)
   :init
   (add-hook 'ibuffer-hook

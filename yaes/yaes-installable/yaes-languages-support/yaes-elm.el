@@ -4,12 +4,12 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package elm-mode
+(use-package elm-mode
   :if (and
        (version<= "24" emacs-version))
-  :require (f let-alist s company flycheck)
+  :after (company flycheck)
   :mode
   ("\\.elm\\'" . elm-mode)
   :init
@@ -20,15 +20,15 @@
                            '(company-elm)
                            company-backends)))))
 
-(req-package flycheck-elm
+(use-package flycheck-elm
   :if (version<= "24.4" emacs-version)
-  :require (elm-mode flycheck)
-  :commands (flycheck-elm-setup)
-  :init
-  (add-hook 'elm-mode-hook #'flycheck-elm-setup))
+  :after (elm-mode flycheck)
+  :hook
+  (elm-mode . flycheck-elm-setup))
 
-(req-package elm-yasnippets
-  :require (elm-mode yasnippet))
+(use-package elm-yasnippets
+  :after (elm-mode yasnippet)
+  :demand t)
 
 (provide 'yaes-elm)
 ;;; yaes-elm.el ends here

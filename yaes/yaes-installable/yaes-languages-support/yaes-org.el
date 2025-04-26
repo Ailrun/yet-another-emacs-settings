@@ -4,10 +4,10 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package org
-  :require (outline)
+(use-package org
+  :functions pcomplete-completions-at-point
   :mode
   ("\\.org\\'" . org-mode)
   :custom
@@ -24,27 +24,26 @@
                                  (makefile . t)
                                  (org . t))))
 
-(req-package org-bullets
-  :require (org)
+(use-package org-bullets
+  :after (org)
   :functions (org-bullets-mode)
   :commands (org-bullets-mode)
   :init
   (add-hook 'org-mode-hook #'org-bullets-mode))
 
-(req-package ox-ioslide
+(use-package ox-ioslide
   :if (version<= "24.1" emacs-version)
-  :require (org cl-lib f makey)
+  :after (org)
   :commands (org-ioslide-export-as-html
              org-ioslide-export-to-html))
 
-(req-package ox-ioslide-helper
+(use-package ox-ioslide-helper
   :ensure ox-ioslide
-  :require (ox-ioslide)
+  :after (ox-ioslide)
   :commands (ioslide:helper))
 
-(req-package epresent
-  :require (org)
-  :commands (epresent-run)
+(use-package epresent
+  :after (org)
   :bind
   (:map org-mode-map
         ("C-S-p" . epresent-run)))

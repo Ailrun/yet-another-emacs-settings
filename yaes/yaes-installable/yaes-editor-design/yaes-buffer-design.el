@@ -4,12 +4,13 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package display-line-numbers
+(use-package display-line-numbers
   :pin gnu
+  :defines (display-line-numbers-disabled-modes display-line-numbers-disabled-buffer-names)
   :config
-  (global-display-line-numbers-mode)
+  (global-display-line-numbers-mode t)
   ;; (setq linum-format "%4d")
   (face-spec-set 'line-number-current-line '((t :inherit (isearch default))))
   (defcustom display-line-numbers-disabled-buffer-names
@@ -31,16 +32,17 @@
     :group 'display-line-numbers)
   (defun display-line-numbers--turn-on ()
     "When display-line-numbers is running globally,
-     disable line number in modes defined in `display-line-numbers-disabled-modes'
-     and in buffers whose names are in `display-line-numbers-disabled-buffer-names'."
+     disable line number in modes defined in
+     `display-line-numbers-disabled-modes'
+     and in buffers whose names are in
+     `display-line-numbers-disabled-buffer-names'."
     (unless (or
              (minibufferp)
              (member major-mode display-line-numbers-disabled-modes)
              (member (buffer-name (current-buffer)) display-line-numbers-disabled-buffer-names))
       (display-line-numbers-mode))))
 
-
-(req-package whitespace
+(use-package whitespace
   ;; required emacs version : any
   :custom
   (whitespace-style '(face empty lines-tail trailing))

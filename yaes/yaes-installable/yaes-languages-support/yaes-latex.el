@@ -39,11 +39,10 @@
 
 (use-package latex-extra
   :after (auctex)
-  :commands latex-extra-mode
   :diminish latex-extra-mode
-  :init
-  (add-hook 'LaTeX-mode-hook #'latex-extra-mode)
-  (add-hook 'latex-mode-hook #'latex-extra-mode))
+  :hook
+  (LaTeX-mode . latex-extra-mode)
+  (latex-mode . latex-extra-mode))
 
 ;; (use-package tex-mode
 ;;   :mode

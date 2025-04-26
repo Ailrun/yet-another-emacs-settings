@@ -8,7 +8,7 @@
 
 (use-package lsp-mode
   :if (version<= "25.1" emacs-version)
-  :after (dash f ht spinner markdown-mode lv)
+  :after (markdown-mode)
   :commands (lsp)
   :diminish (lsp-mode lsp-lens-mode)
   :hook
@@ -19,7 +19,7 @@
 
 (use-package lsp-ui
   :if (version<= "25.1" emacs-version)
-  :after (dash lsp-mode markdown-mode)
+  :after (lsp-mode markdown-mode)
   :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-alignment 'window)

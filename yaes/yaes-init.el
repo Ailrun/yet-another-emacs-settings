@@ -49,11 +49,8 @@
 (setq use-package-always-ensure t)
 ;; (setq use-package-always-pin ''melpa)
 
-(use-package req-package)
-
 (when init-file-debug
-  (req-package--log-enable-debugging)
-  (req-package--log-enable-messaging))
+  (setq use-package-compute-statistics t))
 
 (use-package f)
 
@@ -97,7 +94,7 @@
 (when (eq system-type 'windows-nt)
  (setq-default default-directory
                (concat (getenv "USERPROFILE") "\\Documents/"))
- (when (eq (buffer-name) "*scratch*")
+ (when (equal (buffer-name) "*scratch*")
    (setq default-directory
          (concat (getenv "USERPROFILE") "\\Documents/"))))
 
@@ -109,7 +106,7 @@
 (windmove-default-keybindings)
 
 ;;;; initial screen size
-(add-to-list 'default-frame-alist '(fullscreen . maximized)) 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; (set-frame-parameter nil 'fullscreen 'maximized)
 
 ;;;; remote access
@@ -187,8 +184,6 @@ Those are installable via package manager.")
 
 (when init-file-debug
   (print (current-time-string)))
-
-(req-package-finish)
 
 (when init-file-debug
   (print (current-time-string)))

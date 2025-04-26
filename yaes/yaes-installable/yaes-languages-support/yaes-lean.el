@@ -4,11 +4,11 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package lean-mode
+(use-package lean-mode
   :if (version<= "24.3" emacs-version)
-  :require (flycheck)
+  :after (flycheck)
   :mode
   ("\\.lean\\'" . lean-mode)
   :interpreter
@@ -16,12 +16,11 @@
   :custom
   (lean-message-boxes-enabledp t))
 
-(req-package company-lean
+(use-package company-lean
   :if (version<= "24.3" emacs-version)
-  :require (company lean-mode)
-  :functions (company-lean-hook)
-  :init
-  (add-hook 'lean-mode-hook #'company-lean-hook))
+  :after (company lean-mode)
+  :hook
+  (lean-mode . company-lean-hook))
 
 (provide 'yaes-lean)
 ;;; yaes-lean.el ends here

@@ -4,12 +4,11 @@
 ;;;
 ;;; Code:
 
-(require 'req-package)
+(require 'use-package)
 
-(req-package objc-font-lock
-  :commands (objc-font-lock-mode)
-  :init
-  (add-hook 'objc-mode-hook #'objc-font-lock-mode))
+(use-package objc-font-lock
+  :hook
+  (objc-mode . objc-font-lock-mode))
 
 (provide 'yaes-objective-c)
 ;;; yaes-objective-c.el ends here

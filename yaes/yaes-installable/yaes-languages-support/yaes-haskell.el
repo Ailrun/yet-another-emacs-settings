@@ -24,6 +24,7 @@
   (require 'haskell-mode))
 
 (use-package lsp-haskell
+  :functions lsp--set-configuration
   :after (:any haskell-mode haskell-cabal)
   :hook
   (haskell-mode . lsp)
@@ -42,7 +43,7 @@
   (lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
 
 (use-package haskell-snippets
-  :after (:all yasnippet cl-lib (:any haskell-mode haskell-cabal)))
+  :after (:all yasnippet (:any haskell-mode haskell-cabal)))
 
 (provide 'yaes-haskell)
 ;;; yaes-haskell.el ends here
