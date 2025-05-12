@@ -33,6 +33,8 @@
         js2-indent-bounce
         js2-indent-bounce-backward
         kill-region
+        kill-sentence
+        latex/beginning-of-line
         markdown-cycle
         markdown-electric-backquote
         markdown-enter-key
@@ -49,6 +51,7 @@
         purescript-indentation-delete-backward-char
         sgml-slash
         sh-assignment
+        sp-forward-sexp
         sp-remove-active-pair-overlay
         sp-wrap-cancel
         typescript-insert-and-autoconvert-to-template
@@ -65,7 +68,6 @@
 
 (setq mc/cmds-to-run-once
       '(
-        TeX-newline
         agda2-load
         dap-mode-mouse-set-clear-breakpoint
         dap-tooltip-mouse-motion
@@ -76,7 +78,6 @@
         iedit-switch-to-mc-mode
         ignore
         ignore-preserving-kill-region
-        kill-sentence
         lsp-latex-build
         lsp-signature-activate
         lsp-ui-doc--handle-mouse-movement
