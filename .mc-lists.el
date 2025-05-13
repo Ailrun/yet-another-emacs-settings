@@ -17,6 +17,7 @@
         c-electric-slash
         c-electric-star
         c-indent-line-or-region
+        capitalize-region
         comment-dwim
         company-coq-maybe-exit-snippet
         coq-terminator-insert
@@ -35,6 +36,7 @@
         kill-region
         kill-sentence
         latex/beginning-of-line
+        markdown-beginning-of-line
         markdown-cycle
         markdown-electric-backquote
         markdown-enter-key
