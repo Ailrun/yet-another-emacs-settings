@@ -26,5 +26,12 @@
   (lsp-ui-doc-position 'top)
   (lsp-ui-doc-show-with-cursor t))
 
+(use-package lsp-origami
+  :after (lsp-mode)
+  :commands (lsp-origami-mode lsp-origami-try-enable)
+  :diminish (lsp-origami-mode)
+  :hook
+  (lsp-after-open . lsp-origami-try-enable))
+
 (provide 'yaes-lsp)
 ;;; yaes-lsp.el ends here
