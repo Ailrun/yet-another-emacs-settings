@@ -10,6 +10,10 @@
 (defvar-local yaes-coq-coqtop-path (executable-find "coqtop"))
 (defvar-local yaes-coq-emacs-lisp-path "")
 
+(use-package proof-general
+  :mode
+  ("\\.v\\'" . coq-mode))
+
 (if yaes-coq-coqtop-path
     (progn
       (setq yaes-coq-emacs-lisp-path

@@ -31,24 +31,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
-;;;; Proof General
-;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defconst yaes-pg-load-path (f-join yaes-external-dir "ProofGeneral"))
-
-(push yaes-pg-load-path load-path)
-
-(use-package proof-general
-  :if (file-directory-p yaes-pg-load-path)
-  :ensure nil
-  :mode
-  ("\\.v\\'" . coq-mode)
-  :defines (proof-assistants)
-  :custom
-  (proof-assistants '(coq)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;
 ;;;; lsp-ltex-plus
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
