@@ -8,8 +8,11 @@
 
 (use-package beluga-mode
   :if (version<= "24.4" emacs-version)
-  :mode ("\\.elf\\'" . beluga-mode)
-        ("\\.bel\\'" . beluga-mode))
+  :mode
+  ("\\.elf\\'" . beluga-mode)
+  ("\\.bel\\'" . beluga-mode)
+  :custom
+  (beluga-mode-prefix-key . "\C-c \C-b"))
 
 (provide 'yaes-beluga)
 ;;; yaes-beluga.el ends here
