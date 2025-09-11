@@ -12,7 +12,7 @@
   ("\\.elf\\'" . beluga-mode)
   ("\\.bel\\'" . beluga-mode)
   :custom
-  (beluga-mode-prefix-key . "\C-c \C-b"))
+  (beluga-mode-prefix-key "\C-c\C-b"))
 
 (provide 'yaes-beluga)
 ;;; yaes-beluga.el ends here
