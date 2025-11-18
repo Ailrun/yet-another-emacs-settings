@@ -11,6 +11,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'shortdoc)
+
+;; To avoid a wrong compile result of lsp-related packages
+(setenv "LSP_USE_PLISTS" "true")
+
 (require 'package)
 
 (let ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -41,6 +45,12 @@
 (if (null (memq system-type '(windows-nt ms-dos)))
     (use-package exec-path-from-shell
       :config (exec-path-from-shell-initialize)))
+
+;; To avoid a wrong compile result of lsp-related packages
+;;
+;; Repeated as exec-path-from-shell-initialize can change
+;; the environment values.
+(setenv "LSP_USE_PLISTS" "true")
 
 (when init-file-debug
   (print (current-time-string)))

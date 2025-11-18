@@ -84,6 +84,7 @@
         lsp-signature-activate
         lsp-ui-doc--handle-mouse-movement
         magit-status
+        mc--insert-number-and-increase
         mouse-buffer-menu
         mouse-drag-vertical-line
         mouse-select-window
