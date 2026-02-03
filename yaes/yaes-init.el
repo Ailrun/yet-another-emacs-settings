@@ -30,22 +30,6 @@
 
 (package-initialize)
 
-(defun yaes-install-required-package (package)
-  "Install and require for new PACKAGE, and only require for old PACKAGE."
-  (when (null (require package nil t))
-    (progn
-      (let* ((ARCHIVES (if (null package-archive-contents)
-                           (progn
-                             (package-refresh-contents)
-                             package-archive-contents)
-                         package-archive-contents))
-             (AVAIL (assoc package ARCHIVES)))
-        (when AVAIL
-          (package-install package)))
-      (require package))))
-
-(yaes-install-required-package 'use-package)
-
 (setq use-package-always-ensure t)
 ;; (setq use-package-always-pin ''melpa)
 
