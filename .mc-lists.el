@@ -73,6 +73,9 @@
         agda2-load
         dap-mode-mouse-set-clear-breakpoint
         dap-tooltip-mouse-motion
+        dired-find-file
+        dired-next-line
+        dired-previous-line
         dired-toggle-read-only
         handle-switch-frame
         ido-find-file

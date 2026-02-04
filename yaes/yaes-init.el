@@ -10,6 +10,11 @@
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(customize-set-variable
+ 'native-comp-async-report-warnings-errors
+ 'silent
+ "Hide (usually) useless warnings")
+
 (require 'shortdoc)
 
 ;; To avoid a wrong compile result of lsp-related packages
