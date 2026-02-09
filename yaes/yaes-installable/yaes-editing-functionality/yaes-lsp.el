@@ -9,14 +9,18 @@
 (use-package lsp-mode
   :if (version<= "25.1" emacs-version)
   :after (markdown-mode)
+  :functions (lsp-booster--advice-json-parse lsp-booster--advice-final-command)
   :commands (lsp lsp-deferred)
   :diminish (lsp-mode lsp-lens-mode)
   :hook
   (dired-mode . lsp-dired-mode)
   :custom
   (lsp-prefer-flymake nil)
+  (lsp-lens-enable t)
   (lsp-modeline-code-actions-segments '(icon))
-  :config
+  (lsp-semantic-tokens-enable t)
+  (lsp-semantic-tokens-honor-refresh-requests t)
+  :init
   (defun lsp-booster--advice-json-parse (old-fn &rest args)
     "Try to parse bytecode instead of json."
     (or
@@ -25,12 +29,6 @@
          (when (byte-code-function-p bytecode)
            (funcall bytecode))))
      (apply old-fn args)))
-  (advice-add (if (progn (require 'json)
-                         (fboundp 'json-parse-buffer))
-                  'json-parse-buffer
-                'json-read)
-              :around
-              #'lsp-booster--advice-json-parse)
   (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
     "Prepend emacs-lsp-booster command to lsp CMD."
     (let ((orig-result (funcall old-fn cmd test?)))
@@ -45,6 +43,13 @@
             (message "Using emacs-lsp-booster for %s!" orig-result)
             (cons "emacs-lsp-booster" orig-result))
         orig-result)))
+  :config
+  (advice-add (if (progn (require 'json)
+                         (fboundp 'json-parse-buffer))
+                  'json-parse-buffer
+                'json-read)
+              :around
+              #'lsp-booster--advice-json-parse)
   (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command))
 
 (use-package lsp-ui
@@ -54,7 +59,8 @@
   :custom
   (lsp-ui-doc-alignment 'window)
   (lsp-ui-doc-position 'top)
-  (lsp-ui-doc-show-with-cursor t))
+  (lsp-ui-doc-show-with-cursor t)
+  (lsp-ui-sideline-enable nil))
 
 (use-package lsp-origami
   :after (lsp-mode)

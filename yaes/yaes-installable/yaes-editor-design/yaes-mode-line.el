@@ -22,9 +22,9 @@
   (sml/shorten-directory t)
   (sml/name-width 20)
   (sml/theme 'respectful)
-  :config
   (line-number-mode t)
   (column-number-mode t)
+  :config
   (nconc
    sml/replacer-regexp-list
    '((".*/\\.emacs\\.d/" ":ED:")

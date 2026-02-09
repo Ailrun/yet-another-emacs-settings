@@ -14,7 +14,7 @@
 
 (use-package ibuffer-vc
   :after (ibuffer)
-  :functions ibuffer-do-sort-by-alphabetic
+  :functions (ibuffer-do-sort-by-alphabetic)
   :commands (ibuffer-vc-set-filter-groups-by-vc-root)
   :hook
   (ibuffer . (lambda ()

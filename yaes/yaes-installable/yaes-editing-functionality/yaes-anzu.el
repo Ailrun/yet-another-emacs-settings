@@ -13,7 +13,7 @@
   :bind
   ("M-%" . anzu-query-replace)
   ("C-M-%" . anzu-query-replace-regexp)
-  :config
+  :custom
   (global-anzu-mode t))
 
 (provide 'yaes-anzu)

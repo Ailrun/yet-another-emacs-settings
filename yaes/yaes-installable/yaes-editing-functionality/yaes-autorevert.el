@@ -8,7 +8,7 @@
 
 (use-package autorevert
   :diminish auto-revert-mode
-  :config
+  :custom
   (global-auto-revert-mode t))
 
 (provide 'yaes-autorevert)

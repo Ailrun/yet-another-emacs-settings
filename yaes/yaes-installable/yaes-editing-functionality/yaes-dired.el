@@ -14,7 +14,7 @@
   :config
   ;;;; Fix macOS issue of directory listing
   (when (eq system-type 'darwin)
-   (setq insert-directory-program "gls")))
+    (customize-set-variable 'insert-directory-program "gls")))
 
 (use-package ls-lisp
   :ensure nil

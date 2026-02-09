@@ -14,19 +14,6 @@
   :bind
   ("C-x v S" . magit-status))
 
-;;;; This package is too slow
-;; (req-package magithub
-;;   :if (and
-;;        (version<= "24.4" emacs-version)
-;;        (executable-find "hub"))
-;;   :require (magit)
-;;   :after (magit)
-;;   :config
-;;   (setq magithub-api-timeout 5)
-;;   (setq magithub-preferred-remote-method 'clone_url)
-;;   (set-face-attribute 'magithub-label-face nil :box nil)
-;;   (magithub-feature-autoinject t))
-
 (use-package git-modes
   :mode
   ("/\\.gitattributes\\'" . gitattributes-mode)

@@ -7,10 +7,11 @@
 (require 'use-package)
 
 (use-package smartparens
-  :functions sp-local-pair
+  :functions (sp-local-pair)
   :diminish smartparens-mode
   :custom
   (sp-escape-quotes-after-insert nil)
+  (smartparens-global-mode t)
   :config
   (sp-with-modes '(coq-mode)
     (sp-local-pair "'" nil :actions nil))
@@ -24,18 +25,15 @@
     (sp-local-pair "⦃" "⦄"))
   (sp-with-modes '(lean-mode)
     (sp-local-pair "⟨" "⟩")
-    (sp-local-pair "‹" "›"))
-  (smartparens-global-mode t))
+    (sp-local-pair "‹" "›")))
 
 (use-package smartparens-config
   :ensure smartparens
-  :after (smartparens)
-  :config
-  (eval-after-load 'auctex '(require 'smartparens-latex)))
+  :after (smartparens))
 
 (use-package highlight-parentheses
   :diminish highlight-parentheses-mode
-  :config
+  :custom
   (global-highlight-parentheses-mode t))
 
 (provide 'yaes-paren)

@@ -8,23 +8,25 @@
 
 (use-package ido
   :functions ido-everywhere
-  :config
-  (ido-mode t)
-  (ido-everywhere))
+  :custom
+  (ido-mode 'both)
+  (ido-everywhere t))
 
 (use-package ido-completing-read+
   :if (version<= "24.1" emacs-version)
+  :custom
+  (ido-ubiquitous-mode t)
   :config
   (setcar ido-cr+-nil-def-alternate-behavior-list
-          "\\`describe-\\(function\\|variable\\|package\\)\\'")
-  (ido-ubiquitous-mode t))
+          "\\`describe-\\(function\\|variable\\|package\\)\\'"))
 
 (use-package ido-yes-or-no
   :after (ido-completing-read+)
+  :custom
+  (ido-yes-or-no-mode t)
   :config
   (add-to-list 'ido-cr+-nil-def-alternate-behavior-list
-               'ido-yes-or-no-mode-p)
-  (ido-yes-or-no-mode t))
+               'ido-yes-or-no-mode-p))
 
 (use-package smex
   :if (version<= "24" emacs-version)

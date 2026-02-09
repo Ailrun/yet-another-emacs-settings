@@ -13,9 +13,7 @@
   (projectile-known-projects-file (expand-file-name (concat "projectile-" os-name "-bookmarks.eld") user-emacs-directory))
   (projectile-indexing-method 'alien)
   (projectile-mode-line-function (lambda () " Prj"))
-  (persp-mode-prefix-key (kbd "C-c M-p"))
-  :config
-  (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
+  (projectile-keymap-prefix (kbd "C-c C-p"))
   :config
   (projectile-mode t))
 

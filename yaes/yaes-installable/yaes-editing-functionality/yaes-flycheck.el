@@ -8,10 +8,10 @@
 
 (use-package flycheck
   :if (version<= "24.3" emacs-version)
-  :config
-  (global-flycheck-mode t)
   :custom
-  (flycheck-emacs-lisp-load-path 'inherit))
+  (global-flycheck-mode t)
+  (flycheck-emacs-lisp-load-path 'inherit)
+  (flycheck-checker-error-threshold 10000))
 
 (use-package flycheck-pos-tip
   :if (version<= "24.1" emacs-version)

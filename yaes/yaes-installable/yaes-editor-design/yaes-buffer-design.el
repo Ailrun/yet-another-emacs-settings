@@ -9,8 +9,9 @@
 (use-package display-line-numbers
   :pin gnu
   :defines (display-line-numbers-disabled-modes display-line-numbers-disabled-buffer-names)
-  :config
+  :custom
   (global-display-line-numbers-mode t)
+  :config
   ;; (setq linum-format "%4d")
   (face-spec-set 'line-number-current-line '((t :inherit (isearch default))))
   (defcustom display-line-numbers-disabled-buffer-names

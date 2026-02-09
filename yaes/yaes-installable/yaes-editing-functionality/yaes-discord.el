@@ -11,8 +11,7 @@
   :demand t
   :diminish elcord-mode
   :custom
-  (elcord-display-buffer-details . nil)
-  :config
+  (elcord-display-buffer-details nil)
   (elcord-mode t))
 
 (provide 'yaes-discord)

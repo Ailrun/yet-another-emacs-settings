@@ -17,10 +17,10 @@
    '(yas-ido-prompt
      yas-dropdown-prompt
      yas-completing-prompt))
+  (yas-global-mode t)
   :config
   (when (null (f-dir? yaes-yasnippet-dir))
-    (f-mkdir yaes-yasnippet-dir))
-  (yas-global-mode t))
+    (f-mkdir yaes-yasnippet-dir)))
 
 (provide 'yaes-yasnippet)
 ;;; yaes-yasnippet.el ends here

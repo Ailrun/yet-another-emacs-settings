@@ -40,7 +40,10 @@
                  '(:haskell (:cabalFormattingProvider "cabal-fmt"))
                  )))
   :custom
-  (lsp-haskell-process-path-hie "haskell-language-server-wrapper"))
+  (lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+  (lsp-haskell-formatting-provider "stylish-haskell")
+  (lsp-haskell-plugin-semantic-tokens-global-on t)
+  (lsp-haskell-plugin-stan-global-on nil))
 
 (use-package haskell-snippets
   :after (:all yasnippet (:any haskell-mode haskell-cabal)))

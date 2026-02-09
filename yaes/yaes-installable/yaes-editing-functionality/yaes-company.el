@@ -12,7 +12,7 @@
   :bind
   (:map company-mode-map
         ("C-<tab>" . company-complete))
-  :config
+  :custom
   (global-company-mode t))
 
 (provide 'yaes-company)

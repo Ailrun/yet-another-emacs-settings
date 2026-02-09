@@ -20,7 +20,8 @@
   ("node" . js2-mode)
   ("node" . js2-jsx-mode)
   :custom
-  (js-indent-level 2))
+  (js-indent-level 2)
+  (js2-bounce-indent-p t))
 
 ;; ;; These 3 packages are too slow
 

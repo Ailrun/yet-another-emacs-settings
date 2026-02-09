@@ -28,8 +28,7 @@
       (error "SSL is not available.  Please install `gnutls' package")))
 
 (defvar yaes-package-archives
-  '(
-    ("org" . "https://orgmode.org/elpa/")
+  '(("org" . "https://orgmode.org/elpa/")
     ("melpa-stable" . "https://stable.melpa.org/packages/")
     ("melpa" . "https://melpa.org/packages/")
     ))
@@ -39,13 +38,16 @@
 
 (package-initialize)
 
-(setq use-package-always-ensure t)
-;; (setq use-package-always-pin ''melpa)
+
+(customize-set-variable 'use-package-always-ensure t
+                        "Install any required packages")
 
 (when init-file-debug
-  (setq use-package-compute-statistics t))
+  (customize-set-variable 'use-package-compute-statistics t
+                          "Print statistics for profiling"))
 
-(use-package f)
+(use-package f
+  :functions (f-join f-dirname f-this-file))
 
 (if (null (memq system-type '(windows-nt ms-dos)))
     (use-package exec-path-from-shell
@@ -84,22 +86,22 @@
 
 ;;;; Get rid of starting things
 ;;;;
-(setq inhibit-splash-screen t)
-(setq inhibit-startup-message t)
-(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+(customize-set-variable 'inhibit-splash-screen t)
+(customize-set-variable 'inhibit-startup-message t)
+(customize-set-variable 'initial-buffer-choice #'(lambda () (get-buffer-create "*dashboard*")))
 
 ;;;; Default directory of windows
 ;;;;
 (when (eq system-type 'windows-nt)
  (setq-default default-directory
                (concat (getenv "USERPROFILE") "\\Documents/"))
- (when (equal (buffer-name) "*scratch*")
+ (when (member (buffer-name) '("*scratch*" "*dashboard*"))
    (setq default-directory
          (concat (getenv "USERPROFILE") "\\Documents/"))))
 
 ;;;; tab settings
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
+(customize-set-variable 'tab-width 4)
+(customize-set-variable 'indent-tabs-mode nil)
 
 ;;;; keybinding for windows moving
 (windmove-default-keybindings)
@@ -109,13 +111,13 @@
 ;; (set-frame-parameter nil 'fullscreen 'maximized)
 
 ;;;; remote access
-(setq enable-remote-dir-locals t)
+(customize-set-variable 'enable-remote-dir-locals t)
 
 ;;;; backup files
-(setq make-backup-files nil)
+(customize-set-variable 'make-backup-files nil)
 
 ;;;; Do GC less
-(setq gc-cons-threshold 100000000)
+(customize-set-variable 'gc-cons-threshold 100000000)
 
 ;;;; Read more bytes per chunk
 (setq read-process-output-max (* 1024 1024)) ;; 1MB
@@ -132,8 +134,8 @@
 
 ;;;; Load all files in the packages directory
 (use-package load-dir
-  :init (progn
-          (setq load-dir-loaded '())))
+  :functions (load-dir-one)
+  :init (setq load-dir-loaded '()))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;
