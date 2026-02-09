@@ -6,8 +6,7 @@
 
 (require 'use-package)
 
-(use-package epkg
-  :if (version<= "28.1" emacs-version))
+;; Currently there's nothing here
 
 (provide 'yaes-package)
 ;;; yaes-package.el ends here
