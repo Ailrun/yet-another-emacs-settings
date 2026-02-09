@@ -6,8 +6,8 @@
 
 (require 'use-package)
 
-(use-package paradox
-  :if (version<= "24.4" emacs-version))
+(use-package epkg
+  :if (version<= "28.1" emacs-version))
 
 (provide 'yaes-package)
 ;;; yaes-package.el ends here
