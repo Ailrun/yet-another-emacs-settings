@@ -7,9 +7,10 @@
 (require 'use-package)
 
 (use-package lean4-mode
-  :if (version<= "24.3" emacs-version)
+  :if (version<= "29.1" emacs-version)
   :vc (:url "https://github.com/leanprover-community/lean4-mode.git"
-            :rev :last-release)
+            :rev :last-release
+            :doc lean4-mode.texi)
   :mode
   ("\\.lean\\'" . lean4-mode)
   :interpreter
