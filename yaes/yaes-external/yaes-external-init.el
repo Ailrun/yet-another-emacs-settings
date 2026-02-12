@@ -15,9 +15,9 @@
 ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(if (executable-find "agda-mode")
+(if (executable-find "agda")
     (progn
-      (defconst yaes-agda-load-path (file-name-directory (shell-command-to-string "agda-mode locate")))
+      (defconst yaes-agda-load-path (file-name-directory (shell-command-to-string "agda-mode --emacs-mode locate")))
 
       (push yaes-agda-load-path load-path)
 
@@ -27,7 +27,8 @@
         :mode
         ("\\.l?agda\\'" . agda2-mode)
         :custom
-        (agda2-highlight-level 'non-interactive))))
+        (agda2-highlight-level 'interactive)
+        (agda2-program-args '("+RTS" "-N16" "-RTS")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;

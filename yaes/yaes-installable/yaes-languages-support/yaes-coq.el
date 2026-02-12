@@ -12,7 +12,9 @@
 
 (use-package proof-general
   :mode
-  ("\\.v\\'" . coq-mode))
+  ("\\.v\\'" . coq-mode)
+  :custom
+  (proof-three-window-mode-policy 'hybrid))
 
 (if yaes-coq-coqtop-path
     (progn

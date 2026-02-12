@@ -41,6 +41,8 @@
 
 (customize-set-variable 'use-package-always-ensure t
                         "Install any required packages")
+(customize-set-variable 'use-package-verbose 'debug
+                        "Report debug-level information if needed")
 
 (when init-file-debug
   (customize-set-variable 'use-package-compute-statistics t
@@ -100,27 +102,38 @@
          (concat (getenv "USERPROFILE") "\\Documents/"))))
 
 ;;;; tab settings
+;;;;
 (customize-set-variable 'tab-width 4)
 (customize-set-variable 'indent-tabs-mode nil)
 
 ;;;; keybinding for windows moving
+;;;;
 (windmove-default-keybindings)
 
 ;;;; initial screen size
+;;;;
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; (set-frame-parameter nil 'fullscreen 'maximized)
 
-;;;; remote access
-(customize-set-variable 'enable-remote-dir-locals t)
+;;;; Other settings
+;;;;
+(customize-set-variable 'enable-remote-dir-locals t
+                        "Use dir-locals for remote")
 
-;;;; backup files
-(customize-set-variable 'make-backup-files nil)
+(customize-set-variable 'make-backup-files nil
+                        "Disable backup files")
 
-;;;; Do GC less
-(customize-set-variable 'gc-cons-threshold 100000000)
+(customize-set-variable 'gc-cons-threshold 100000000
+                        "Do GC less for better perp")
 
 ;;;; Read more bytes per chunk
 (setq read-process-output-max (* 1024 1024)) ;; 1MB
+
+(customize-set-variable 'doc-view-resolution 200
+                        "Improve doc-view resolution")
+
+(customize-set-variable 'ring-bell-function 'ignore
+                        "Disable noisy rings")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;

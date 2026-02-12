@@ -14,52 +14,19 @@
   :init
   (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8)
   :custom
-  (TeX-parse-self t))
-
-;; (use-package company-auctex
-;;   :require (yasnippet company auctex)
-;;   :commands (company-auctex-init)
-;;   :config
-;;   (add-hook 'LaTeX-mode-hook #'company-auctex-init)
-;;   (add-hook 'latex-mode-hook #'company-auctex-init))
-
-;; (use-package company-math
-;;   :require (company)
-;;   ;; :functions (company-math-setup)
-;;   ;; :commands (company-math-setup)
-;;   :init
-;;   (defun company-math-setup ()
-;;     "Setup company-math."
-;;     (setq-local company-backends
-;;                 (append
-;;                  '(company-math-symbols-latex)
-;;                  company-backends)))
-;;   (add-hook 'LaTeX-mode-hook #'company-math-setup)
-;;   (add-hook 'latex-mode-hook #'company-math-setup))
+  (TeX-parse-self t)
+  (TeX-view-program-selection
+   '(((output-dvi has-no-display-manager) "dvi2tty")
+     ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi")
+     (output-pdf "xdg-open") (output-html "xdg-open"))))
 
 (use-package latex-extra
   :after (auctex)
+  :commands latex-extra-mode
   :diminish (latex-extra-mode)
   :hook
   (LaTeX-mode . latex-extra-mode)
   (latex-mode . latex-extra-mode))
-
-;; (use-package tex-mode
-;;   :mode
-;;   ("\\.tex\\'" . latex-mode)
-;;   ("\\.sty\\'" . latex-mode)
-;;   ("\\.tikz\\'" . latex-mode)
-;;   :init
-;;   (modify-coding-system-alist 'file "\\.tex\\'" 'utf-8))
-
-;; (use-package latex-pretty-symbols)
-
-;; (use-package reftex
-;;   :diminish reftex-mode
-;;   :commands (reftex-mode)
-;;   :init
-;;   (add-hook 'LaTeX-mode-hook #'reftex-mode)
-;;   (add-hook 'latex-mode-hook #'reftex-mode))
 
 (use-package lsp-latex
   :after (auctex)
@@ -70,6 +37,7 @@
   (bibtex-mode . lsp)
   (bibtex-style-mode . lsp)
   :custom
+  (lsp-latex-build-args '("-interaction=nonstopmode" "-synctex=1" "%f"))
   (lsp-latex-forward-search-executable "okular")
   (lsp-latex-forward-search-args '("--unique" "file:%p#src:%l%f")))
 
