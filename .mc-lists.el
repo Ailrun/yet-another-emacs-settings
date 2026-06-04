@@ -36,6 +36,7 @@
         kill-region
         kill-sentence
         latex/beginning-of-line
+        lean4-tab-indent
         markdown-beginning-of-line
         markdown-cycle
         markdown-electric-backquote
