@@ -17,7 +17,12 @@
 
 (if (executable-find "agda")
     (progn
-      (defconst yaes-agda-load-path (file-name-directory (shell-command-to-string "agda-mode --emacs-mode locate")))
+      (defconst yaes-agda-load-path
+        (file-name-directory
+         (shell-command-to-string
+          (if (version<= "2.8.0" (shell-command-to-string "agda --numeric-version"))
+              "agda --emacs-mode locate"
+            "agda-mode locate"))))
 
       (push yaes-agda-load-path load-path)
 
