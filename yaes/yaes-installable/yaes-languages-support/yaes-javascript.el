@@ -39,19 +39,17 @@
 ;;            (executable-find "flow"))
 ;;   :require (company)
 ;;   :commands (company-flow)
-;;   :init
-;;   (add-hook 'js2-mode-hook
-;;             (lambda ()
-;;               (setq-local company-backends
-;;                           (append
-;;                            '(company-flow)
-;;                            company-backends))))
-;;   (add-hook 'js2-jsx-mode-hook
-;;             (lambda ()
-;;               (setq-local company-backends
-;;                           (append
-;;                            '(company-flow)
-;;                            company-backends)))))
+;;   :hook
+;;   (js2-mode . (lambda ()
+;;                 (setq-local company-backends
+;;                             (append
+;;                              '(company-flow)
+;;                              company-backends))))
+;;   (js2-jsx-mode . (lambda ()
+;;                     (setq-local company-backends
+;;                                 (append
+;;                                  '(company-flow)
+;;                                  company-backends)))))
 
 ;; (use-package flycheck-flow
 ;;   :if (and (version<= "25.1" emacs-version)

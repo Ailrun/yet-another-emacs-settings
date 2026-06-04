@@ -12,11 +12,11 @@
   ("\\.org\\'" . org-mode)
   :custom
   (org-replace-disputed-keys t)
+  :hook
+  (org-mode . (lambda ()
+                (add-hook 'completion-at-point-functions
+                          #'pcomplete-completions-at-point nil t)))
   :config
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook 'completion-at-point-functions
-                        #'pcomplete-completions-at-point nil t)))
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((coq . t)
                                  (emacs-lisp . t)

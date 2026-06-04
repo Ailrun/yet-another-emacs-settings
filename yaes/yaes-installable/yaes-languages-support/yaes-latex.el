@@ -26,7 +26,10 @@
   :diminish (latex-extra-mode)
   :hook
   (LaTeX-mode . latex-extra-mode)
-  (latex-mode . latex-extra-mode))
+  (latex-mode . latex-extra-mode)
+  (latex-extra-mode . (lambda ()
+                        (define-key latex-extra-mode-map "" nil)
+                        (define-key latex-extra-mode-map "" nil))))
 
 (use-package lsp-latex
   :after (auctex)

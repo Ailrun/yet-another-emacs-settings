@@ -12,13 +12,12 @@
   :after (company flycheck)
   :mode
   ("\\.elm\\'" . elm-mode)
-  :init
-  (add-hook 'elm-mode-hook
-            (lambda ()
-              (setq-local company-backends
-                          (append
-                           '(company-elm)
-                           company-backends)))))
+  :hook
+  (elm-mode . (lambda ()
+                (setq-local company-backends
+                            (append
+                             '(company-elm)
+                             company-backends)))))
 
 (use-package flycheck-elm
   :if (version<= "24.4" emacs-version)
