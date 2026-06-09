@@ -20,7 +20,7 @@
       (defconst yaes-agda-load-path
         (file-name-directory
          (shell-command-to-string
-          (if (version<= "2.8.0" (shell-command-to-string "agda --numeric-version"))
+          (if (version<= "2.8.0" (substring (string-trim (shell-command-to-string "agda --numeric-version")) 0 5))
               "agda --emacs-mode locate"
             "agda-mode locate"))))
 
