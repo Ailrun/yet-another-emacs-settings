@@ -24,6 +24,7 @@
         downcase-region
         electric-newline-and-maybe-indent
         end-of-buffer
+        eri-indent
         eri-indent-reverse
         haskell-indentation-common-electric-command
         haskell-indentation-indent-backwards
