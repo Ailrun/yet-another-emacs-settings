@@ -9,6 +9,9 @@
         TeX-insert-dollar
         TeX-insert-sub-or-superscript
         TeX-newline
+        agda2-next-goal
+        agda2-previous-goal
+        agda2-refine
         anzu-query-replace
         beginning-of-buffer
         c-electric-brace
