@@ -1,4 +1,4 @@
-;;; yaes-theme --- theme package setting of yaes
+;;; yaes-theme --- theme package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

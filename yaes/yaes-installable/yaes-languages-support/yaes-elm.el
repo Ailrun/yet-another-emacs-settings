@@ -1,4 +1,4 @@
-;;; yaes-elm --- Elm related package setting of yaes
+;;; yaes-elm --- Elm related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

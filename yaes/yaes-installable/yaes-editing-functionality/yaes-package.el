@@ -1,4 +1,4 @@
-;;; yaes-package --- package manage related package setting of yaes
+;;; yaes-package --- package manage related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

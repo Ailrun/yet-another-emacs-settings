@@ -1,4 +1,4 @@
-;;; yaes-font --- font setting of yaes
+;;; yaes-font --- font setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

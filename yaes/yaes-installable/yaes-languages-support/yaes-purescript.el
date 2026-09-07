@@ -1,4 +1,4 @@
-;;; yaes-purescript --- Purescript related package setting of yaes
+;;; yaes-purescript --- Purescript related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

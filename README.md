@@ -20,8 +20,6 @@ There are **Yet Another Emacs Settings** you should try.
 ![](https://img.shields.io/badge/Version-0.02.00-lightgrey.svg?style=flat)
 ![](https://img.shields.io/badge/Status-Alpha-yellow.svg?style=flat)
 
-*THIS REPO IS ON ALPHA. IF YOU USE THIS, THERE MIGHT BE SOME ISSUES.*
-
 ## Description ##
 *Emacs* (with *elpa*) has so many packages in it. Therefore new users of *Emacs* will be confused by mountain of packages and bury *Emacs* for good.
 
@@ -56,53 +54,45 @@ Will be added ASAP.
 
 ## Status ##
 
-Objects to Alpha~Beta.
-
 Listed in alpabetical order.
 
 - Necessary
-  - [x] Default package bootstrapping using f, use-package, req-package
-  - [x] Elisp package default setting
+  - [x] Default package bootstrapping using elpaca, f, use-package
+  - [x] Elisp package settings
+  - [x] Language server protocol package settings
 - High Priority
-  - [x] Bash Shell script package default setting
-  - [x] Batch script package default setting
-  - [ ] C/C++ package default setting
-  - [ ] CSS package default setting
-  - [x] Elm package default setting
-  - [x] Fish Shell script package default setting
-  - [x] Git/GitHub package default setting
-  - [x] Haskell package default setting
-  - [x] HTML-like package default setting
-  - [x] Java package default setting
-  - [x] JavaScript package default setting
-  - [x] LaTeX package default setting
-  - [ ] Less package default setting
-  - [x] Markdown package default setting
-  - [x] Node.js package default setting
-  - [ ] PHP package default setting
+  - [x] Bash Shell script package settings
+  - [x] Batch script package settings
+  - [x] Fish Shell script package settings
+  - [x] Git/GitHub package settings
+  - [x] Haskell package settings
+  - [x] HTML-like package settings
+  - [x] Java package settings
+  - [x] JavaScript package settings
+  - [x] LaTeX package settings
+  - [x] Markdown package settings
+  - [x] Node.js package settings
+  - [x] OCaml package settings
   - [x] Project support default seeting
-  - [x] Python package default setting
-  - [ ] SCSS package default setting
+  - [x] Python package settings
+  - [x] TypeScript package settings
 - Middle Priority
-  - [ ] CoffeeScript package default setting
-  - [ ] Database package default setting
-  - [ ] Go package default setting
-  - [x] OCaml package default setting
-  - [x] Org package default setting
-  - [ ] Rust package default setting
-  - [x] Scala package default setting
-  - [ ] Scheme package default setting
-  - [x] TypeScript package default setting
+  - [ ] Go package settings
+  - [ ] Org package settings
+  - [x] Rust package settings
+  - [x] Scala package settings
+  - [ ] Scheme package settings
 - Low Priority
-  - [ ] Android package default setting
-  - [x] C# package default setting
-  - [x] F# package default setting
-  - [ ] Lisp package default setting
-  - [x] Obj-C package default setting
-  - [ ] Prolog package default setting
-  - [ ] R package default setting
-  - [ ] Ruby package default setting
-  - [ ] Swift package default setting
+  - [ ] Android package settings
+  - [x] C# package settings
+  - [ ] Database package settings
+  - [x] Elm package settings
+  - [x] F# package settings
+  - [ ] Lisp package settings
+  - [x] Obj-C package settings
+  - [ ] R package settings
+  - [ ] Ruby package settings
+  - [ ] Swift package settings
 
 ## Author ##
-Junyoung Clare Jang ( Github : Ailrun@github.com, Email : jjc9310@gmail.com )
+Junyoung Clare Jang (@Ailrun)

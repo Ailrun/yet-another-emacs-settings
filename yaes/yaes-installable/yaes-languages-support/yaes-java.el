@@ -1,4 +1,4 @@
-;;; yaes-java --- Java related package setting of yaes
+;;; yaes-java --- Java related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

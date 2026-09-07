@@ -1,4 +1,4 @@
-;;; yaes-filetree --- filetree related package setting of yaes
+;;; yaes-filetree --- filetree related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

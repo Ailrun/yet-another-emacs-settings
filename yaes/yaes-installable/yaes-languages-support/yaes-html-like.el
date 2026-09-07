@@ -1,4 +1,4 @@
-;;; yaes-html-like --- HTML-like language related package setting of yaes
+;;; yaes-html-like --- HTML-like language related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

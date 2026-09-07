@@ -1,4 +1,4 @@
-;; LLVM coding style guidelines in emacs
+;; LLVM coding style guidelines in emacs -*- lexical-binding: t -*-
 ;; Maintainer: LLVM Team, http://llvm.org/
 
 (defun llvm-lineup-statement (langelem)

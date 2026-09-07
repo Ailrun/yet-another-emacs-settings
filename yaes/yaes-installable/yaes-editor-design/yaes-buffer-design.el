@@ -1,4 +1,4 @@
-;;; yaes-buffer-design --- buffer design package setting of yaes
+;;; yaes-buffer-design --- buffer design package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -7,7 +7,7 @@
 (require 'use-package)
 
 (use-package display-line-numbers
-  :pin gnu
+  :ensure nil
   :defines (display-line-numbers-disabled-modes display-line-numbers-disabled-buffer-names)
   :custom
   (global-display-line-numbers-mode t)
@@ -44,7 +44,7 @@
       (display-line-numbers-mode))))
 
 (use-package whitespace
-  ;; required emacs version : any
+  :ensure nil
   :custom
   (whitespace-style '(face empty lines-tail trailing))
   (whitespace-global-modes

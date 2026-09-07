@@ -1,4 +1,4 @@
-;;; yaes-paren --- parentheses related package setting of yaes
+;;; yaes-paren --- parentheses related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -28,7 +28,7 @@
     (sp-local-pair "‹" "›")))
 
 (use-package smartparens-config
-  :ensure smartparens
+  :ensure nil
   :after (smartparens))
 
 (use-package highlight-parentheses

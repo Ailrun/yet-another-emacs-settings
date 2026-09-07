@@ -1,4 +1,4 @@
-;;; yaes-lsp --- Language Server Protocol related package setting of yaes
+;;; yaes-lsp --- Language Server Protocol related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

@@ -1,4 +1,4 @@
-;;; yaes-flycheck --- flycheck related package setting of yaes
+;;; yaes-flycheck --- flycheck related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

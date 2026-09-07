@@ -1,4 +1,4 @@
-;;; yaes-coq --- Coq related package setting of yaes
+;;; yaes-coq --- Coq related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

@@ -35,52 +35,38 @@
         (agda2-highlight-level 'interactive)
         (agda2-program-args '("+RTS" "-N16" "-RTS")))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;
-;;;; lsp-ltex-plus
-;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defconst yaes-lsp-ltex-plus-dir (f-join yaes-external-dir "lsp-ltex-plus"))
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;;;
+;; ;;;; Isar Mode
+;; ;;;;
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (defconst yaes-isar-mode-load-path (f-join yaes-external-dir "isar-mode"))
+;; (defconst yaes-lsp-isar-load-path (f-join yaes-external-dir "lsp-isar"))
 
-(push yaes-lsp-ltex-plus-dir load-path)
+;; (push yaes-isar-mode-load-path load-path)
+;; (push yaes-lsp-isar-load-path load-path)
 
-(use-package lsp-ltex-plus
-  :after (lsp)
-  :ensure nil
-  :commands lsp)
+;; (use-package isar-mode
+;;   :if (file-directory-p yaes-isar-mode-load-path)
+;;   :ensure nil
+;;   :mode
+;;   ("\\.thy\\'" . isar-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;
-;;;; Isar Mode
-;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defconst yaes-isar-mode-load-path (f-join yaes-external-dir "isar-mode"))
-(defconst yaes-lsp-isar-load-path (f-join yaes-external-dir "lsp-isar"))
+;; (use-package session-async
+;;   :if (and (file-directory-p yaes-isar-mode-load-path)
+;;            (file-directory-p yaes-lsp-isar-load-path))
+;;   :ensure t
+;;   :defer t)
 
-(push yaes-isar-mode-load-path load-path)
-(push yaes-lsp-isar-load-path load-path)
-
-(use-package isar-mode
-  :if (file-directory-p yaes-isar-mode-load-path)
-  :ensure nil
-  :mode
-  ("\\.thy\\'" . isar-mode))
-
-(use-package session-async
-  :if (and (file-directory-p yaes-isar-mode-load-path)
-           (file-directory-p yaes-lsp-isar-load-path))
-  :ensure t
-  :defer t)
-
-(use-package lsp-isar
-  :after (isar-mode)
-  :if (and (file-directory-p yaes-isar-mode-load-path)
-           (file-directory-p yaes-lsp-isar-load-path))
-  :ensure nil
-  :hook
-  (isar-mode . lsp-isar-define-client-and-start)
-  :custom
-  (lsp-isar-path-to-isabelle (f-parent (f-parent (executable-find "isabelle")))))
+;; (use-package lsp-isar
+;;   :after (isar-mode)
+;;   :if (and (file-directory-p yaes-isar-mode-load-path)
+;;            (file-directory-p yaes-lsp-isar-load-path))
+;;   :ensure nil
+;;   :hook
+;;   (isar-mode . lsp-isar-define-client-and-start)
+;;   :custom
+;;   (lsp-isar-path-to-isabelle (f-parent (f-parent (executable-find "isabelle")))))
 
 (provide 'yaes-external-init)
 ;;; yaes-external-init.el ends here

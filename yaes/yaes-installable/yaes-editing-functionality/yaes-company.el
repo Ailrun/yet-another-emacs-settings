@@ -1,4 +1,4 @@
-;;; yaes-company --- company related package setting of yaes
+;;; yaes-company --- company related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

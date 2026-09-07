@@ -1,4 +1,4 @@
-;;; yaes-dashboard --- startup screen of yaes
+;;; yaes-dashboard --- startup screen of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

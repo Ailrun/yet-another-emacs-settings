@@ -1,4 +1,4 @@
-;;; yaes-python --- Python related package setting of yaes
+;;; yaes-python --- Python related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -8,7 +8,7 @@
 
 (use-package python
   :if (executable-find "python")
-  :pin gnu
+  :ensure nil
   :mode
   ("\\.py[3w]?" . python-mode))
 

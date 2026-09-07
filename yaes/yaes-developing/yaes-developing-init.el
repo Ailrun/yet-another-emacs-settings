@@ -1,4 +1,4 @@
-;;; yaes-developing-init --- initializations of under-developing packages of yaes
+;;; yaes-developing-init --- initializations of under-developing packages of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

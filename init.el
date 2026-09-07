@@ -1,4 +1,4 @@
-;;; init --- init file of clare
+;;; init --- Emacs init file of Clare Jang -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

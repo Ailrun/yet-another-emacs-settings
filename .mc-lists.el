@@ -44,6 +44,7 @@
         markdown-beginning-of-line
         markdown-cycle
         markdown-electric-backquote
+        markdown-end-of-line
         markdown-enter-key
         markdown-outdent-or-delete
         nxml-electric-slash

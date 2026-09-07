@@ -1,4 +1,4 @@
-;;; yaes-rust --- Rust related package settings of yaes
+;;; yaes-rust --- Rust related package settings of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

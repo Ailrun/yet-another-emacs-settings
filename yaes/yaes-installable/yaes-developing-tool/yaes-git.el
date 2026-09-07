@@ -1,10 +1,12 @@
-;;; yaes-git --- git related package setting of yaes
+;;; yaes-git --- git related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
 ;;; Code:
 
 (require 'use-package)
+
+(use-package transient)
 
 (use-package magit
   :if (version<= "24.4" emacs-version)

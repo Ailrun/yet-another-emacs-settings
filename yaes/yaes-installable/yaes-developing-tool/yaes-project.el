@@ -1,4 +1,4 @@
-;;; yaes-project --- project management related package setting of yaes
+;;; yaes-project --- project management related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

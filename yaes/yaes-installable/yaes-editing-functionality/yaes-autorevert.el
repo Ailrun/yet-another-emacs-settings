@@ -1,4 +1,4 @@
-;;; yaes-autorevert --- autorevert related package setting of yaes
+;;; yaes-autorevert --- autorevert related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -7,6 +7,7 @@
 (require 'use-package)
 
 (use-package autorevert
+  :ensure nil
   :diminish auto-revert-mode
   :custom
   (global-auto-revert-mode t))

@@ -1,4 +1,4 @@
-;;; yaes-css-like --- CSS-like language related package setting of yaes
+;;; yaes-css-like --- CSS-like language related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

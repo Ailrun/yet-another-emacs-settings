@@ -1,4 +1,4 @@
-;;; yaes-shell-script --- Shell Script related package setting of yaes
+;;; yaes-shell-script --- Shell Script related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -12,6 +12,7 @@
   ("\\.fish\\'" . fish-mode))
 
 (use-package sh-script
+  :ensure nil
   :mode
   ("\\.\\(ba\\|t?c\\)sh\\'" . sh-mode))
 

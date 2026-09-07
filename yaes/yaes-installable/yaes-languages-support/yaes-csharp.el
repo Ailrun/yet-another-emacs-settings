@@ -1,4 +1,4 @@
-;;; yaes-csharp --- C# related package setting of yaes
+;;; yaes-csharp --- C# related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

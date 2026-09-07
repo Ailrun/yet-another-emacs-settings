@@ -1,4 +1,4 @@
-;;; yaes-clojure --- Clojure related package setting of yaes
+;;; yaes-clojure --- Clojure related package setting of yaes -*- lexical-binding: t -*-
 
 ;;; Commentary:
 

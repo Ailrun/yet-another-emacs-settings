@@ -1,4 +1,4 @@
-;;; tutch-mode --- Major mode for Tutch proof assistant
+;;; tutch-mode --- Major mode for Tutch proof assistant -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

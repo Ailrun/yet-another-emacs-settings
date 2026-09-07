@@ -1,4 +1,4 @@
-;;; yaes-multiple-cursor --- multiple-cursor related package setting of yaes
+;;; yaes-multiple-cursor --- multiple-cursor related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

@@ -1,4 +1,4 @@
-;;; yaes-dired --- dired related package setting of yaes
+;;; yaes-dired --- dired related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

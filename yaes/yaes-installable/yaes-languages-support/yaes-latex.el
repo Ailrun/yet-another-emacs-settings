@@ -1,4 +1,4 @@
-;;; yaes-latex --- LaTeX related package setting of yaes
+;;; yaes-latex --- LaTeX related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

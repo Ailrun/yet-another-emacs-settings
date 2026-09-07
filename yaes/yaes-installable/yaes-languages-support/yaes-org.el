@@ -1,4 +1,4 @@
-;;; yaes-org --- org mode related package setting of yaes
+;;; yaes-org --- org mode related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -38,7 +38,7 @@
              org-ioslide-export-to-html))
 
 (use-package ox-ioslide-helper
-  :ensure ox-ioslide
+  :ensure nil
   :after (ox-ioslide)
   :commands (ioslide:helper))
 

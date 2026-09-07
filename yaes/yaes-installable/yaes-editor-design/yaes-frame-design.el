@@ -1,4 +1,4 @@
-;;; yaes-frame-design --- frame design package setting of yaes
+;;; yaes-frame-design --- frame design package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

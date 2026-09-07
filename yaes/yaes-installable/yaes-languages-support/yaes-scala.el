@@ -1,4 +1,4 @@
-;;; yaes-scala --- Scala related package setting of yaes
+;;; yaes-scala --- Scala related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

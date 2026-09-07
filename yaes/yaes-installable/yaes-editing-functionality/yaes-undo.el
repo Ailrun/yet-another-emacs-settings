@@ -1,4 +1,4 @@
-;;; yaes-undo --- undo related package setting of yaes
+;;; yaes-undo --- undo related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

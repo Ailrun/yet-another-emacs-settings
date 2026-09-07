@@ -1,4 +1,4 @@
-;;; yaes-shell --- shell related package setting of yaes
+;;; yaes-shell --- shell related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

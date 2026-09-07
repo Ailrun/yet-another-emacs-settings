@@ -1,4 +1,4 @@
-;;; yaes-ido --- ido related package setting of yaes
+;;; yaes-ido --- ido related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -7,6 +7,7 @@
 (require 'use-package)
 
 (use-package ido
+  :ensure nil
   :functions ido-everywhere
   :custom
   (ido-mode 'both)

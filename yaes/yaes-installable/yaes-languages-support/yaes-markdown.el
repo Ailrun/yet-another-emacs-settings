@@ -1,4 +1,4 @@
-;;; yaes-markdown --- MarkDown related package setting of yaes
+;;; yaes-markdown --- MarkDown related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

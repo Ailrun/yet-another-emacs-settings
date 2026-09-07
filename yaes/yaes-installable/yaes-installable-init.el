@@ -1,4 +1,4 @@
-;;; yaes-installable-init --- initializations of installable packages of yaes
+;;; yaes-installable-init --- initializations of installable packages of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

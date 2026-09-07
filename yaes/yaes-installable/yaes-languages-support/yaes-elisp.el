@@ -1,4 +1,4 @@
-;;; yaes-elisp --- Elisp related package setting of yaes
+;;; yaes-elisp --- Elisp related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -7,6 +7,7 @@
 (require 'use-package)
 
 (use-package eldoc
+  :ensure nil
   :diminish eldoc-mode
   :hook
   (emacs-lisp-mode . eldoc-mode)

@@ -1,4 +1,4 @@
-;;; yaes-mode-line --- mode line related package setting of yaes
+;;; yaes-mode-line --- mode line related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

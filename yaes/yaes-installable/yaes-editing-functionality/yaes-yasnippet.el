@@ -1,4 +1,4 @@
-;;; yaes-yasnippet --- yasnippet related package setting of yaes
+;;; yaes-yasnippet --- yasnippet related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

@@ -1,4 +1,4 @@
-;;; yaes-tag --- tagging related package setting of yaes
+;;; yaes-tag --- tagging related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

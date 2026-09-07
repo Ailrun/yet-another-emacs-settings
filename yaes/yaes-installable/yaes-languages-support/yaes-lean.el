@@ -1,4 +1,4 @@
-;;; yaes-lean --- Leanprover related package setting of yaes
+;;; yaes-lean --- Leanprover related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

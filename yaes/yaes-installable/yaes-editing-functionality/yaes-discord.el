@@ -1,4 +1,4 @@
-;;; yaes-discord --- discord related package setting of yaes
+;;; yaes-discord --- discord related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

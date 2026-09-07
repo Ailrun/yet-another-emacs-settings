@@ -1,4 +1,4 @@
-;;; yaes-haskell --- Haskell related package setting of yaes
+;;; yaes-haskell --- Haskell related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -14,12 +14,15 @@
   :hook
   (haskell-mode . haskell-indentation-mode)
   :custom
-  (haskell-indent-offset 2))
+  (haskell-indent-offset 2)
+  :config
+  (require 'haskell-cabal-mode))
 
 (use-package haskell-cabal
   :if (version<= "24.3" emacs-version)
-  :ensure haskell-mode
-  :defer t
+  :ensure nil
+  :after (haskell-mode)
+  :commands (haskell-cabal-mode)
   :config
   (require 'haskell-mode))
 

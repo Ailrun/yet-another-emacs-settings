@@ -1,4 +1,4 @@
-;;; yaes-ibuffer --- buffer listing related package setting of yaes
+;;; yaes-ibuffer --- buffer listing related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -7,6 +7,7 @@
 (require 'use-package)
 
 (use-package ibuffer
+  :ensure nil
   :custom
   (ibuffer-use-other-window t)
   :bind

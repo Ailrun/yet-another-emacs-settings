@@ -1,4 +1,4 @@
-;;; yaes-batch --- Windows batch script related package setting of yaes
+;;; yaes-batch --- Windows batch script related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
@@ -8,6 +8,7 @@
 
 (use-package bat-mode
   :if (version<= "24.4" emacs-version)
+  :ensure nil
   :mode ("\\.bat\\'" . bat-mode))
 
 (provide 'yaes-batch)

@@ -1,4 +1,4 @@
-;;; yaes-anzu --- anzu related package setting of yaes
+;;; yaes-anzu --- anzu related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;

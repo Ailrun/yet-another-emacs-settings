@@ -1,4 +1,4 @@
-;;; yaes-javascript --- JavaScript related package setting of yaes
+;;; yaes-javascript --- JavaScript related package setting of yaes -*- lexical-binding: t -*-
 ;;;
 ;;; Commentary:
 ;;;
