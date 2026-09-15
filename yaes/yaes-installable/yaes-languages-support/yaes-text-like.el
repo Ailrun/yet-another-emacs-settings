@@ -1,4 +1,4 @@
-;;; yaes-text-like --- Text-like file editing for yaes
+;;; yaes-text-like --- Text-like file editing for yaes -*- lexical-binding: t; -*-
 ;;;
 ;;; Commentary:
 ;;;

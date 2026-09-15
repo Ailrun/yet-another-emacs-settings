@@ -1,4 +1,4 @@
-;;; yaes-external-init --- initializations of external packages of yaes
+;;; yaes-external-init --- initializations of external packages of yaes -*- lexical-binding: t; -*-
 ;;;
 ;;; Commentary:
 ;;;

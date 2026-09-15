@@ -9,9 +9,7 @@
 (use-package diminish)
 
 (use-package rich-minority
-  :diminish rich-minority-mode
-  :config
-  (rich-minority-mode t))
+  :diminish rich-minority-mode)
 
 (use-package smart-mode-line
   :if (version<= "24.3" emacs-version)

@@ -3,6 +3,7 @@
 # yaes package
 !/yaes/
 !/init.el
+!/early-init.el
 
 !/README.md
 
